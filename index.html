@@ -1,26 +1,150 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>SHIMOSUWA-LAB</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #f3f4f6;
-    }
-    h1 {
-      font-size: 32px;
-      color: #333;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHIMOSUWA LAB</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  text-align: center;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.card {
+  background: white;
+  color: #333;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.title {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+.desc {
+  font-size: 0.9rem;
+}
+
+.footer {
+  margin-top: 40px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+</style>
+
 </head>
+
 <body>
-  <h1>ここはすすむの下諏訪ラボのページです</h1>
-  <img src="6373.jpg">
+
+<div class="container">
+
+  <h1>🚀 SHIMOSUWA LAB</h1>
+  <p class="subtitle">
+    さわって遊べるプログラミングの世界へようこそ
+  </p>
+
+  <p>
+    ここにあるのは、<br>
+    「AIと一緒に作ったサンプルプログラム」です。<br><br>
+    👉 クリックして、実際に遊んでみよう！
+  </p>
+
+  <div class="grid">
+
+    <a href="01_counter_game.html">
+      <div class="card">
+        <div class="title">🎯 クリックゲーム</div>
+        <div class="desc">10秒でどれだけクリックできる？</div>
+      </div>
+    </a>
+
+    <a href="02_paint_app.html">
+      <div class="card">
+        <div class="title">🎨 お絵かきアプリ</div>
+        <div class="desc">自由に絵を描いてみよう</div>
+      </div>
+    </a>
+
+    <a href="03_omikuji.html">
+      <div class="card">
+        <div class="title">🔮 おみくじ</div>
+        <div class="desc">今日の運勢は？</div>
+      </div>
+    </a>
+
+    <a href="04_quiz_game.html">
+      <div class="card">
+        <div class="title">🧠 クイズゲーム</div>
+        <div class="desc">3択クイズに挑戦！</div>
+      </div>
+    </a>
+
+    <a href="05_reaction_test.html">
+      <div class="card">
+        <div class="title">🕹️ 反射神経テスト</div>
+        <div class="desc">どれくらい速く反応できる？</div>
+      </div>
+    </a>
+
+    <a href="06_simple_chatbot.html">
+      <div class="card">
+        <div class="title">💬 チャットボット</div>
+        <div class="desc">AIと話してみよう</div>
+      </div>
+    </a>
+
+    <a href="07_slide_puzzle.html">
+      <div class="card">
+        <div class="title">🧩 パズル</div>
+        <div class="desc">数字を並べ替えよう</div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="footer">
+    SHIMOSUWA LAB / Programming with AI
+  </div>
+
+</div>
+
 </body>
 </html>
