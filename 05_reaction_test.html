@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>反射神経テスト</title>
+<style>
+  body { font-family: sans-serif; text-align: center; background: #f3f3f3; padding: 30px; margin: 0; }
+  #box {
+    width: min(90vw, 500px);
+    height: 300px;
+    margin: 20px auto;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    color: white;
+    user-select: none;
+    cursor: pointer;
+    background: #777;
+    box-shadow: 0 10px 30px rgba(0,0,0,.15);
+  }
+  button { padding: 12px 20px; font-size: 1rem; border: none; border-radius: 12px; background: #4f8cff; color: white; cursor: pointer; }
+</style>
+</head>
+<body>
+  <h1>🕹️ 反射神経テスト</h1>
+  <p>スタート後、色が緑に変わったらすぐクリック！</p>
+  <button id="startBtn">スタート</button>
+  <div id="box">ここに注目</div>
+  <p id="result"></p>
+
+<script>
+const startBtn = document.getElementById("startBtn");
+const box = document.getElementById("box");
+const result = document.getElementById("result");
+
+let startTime = 0;
+let waiting = false;
+let ready = false;
+let timeoutId = null;
+
+startBtn.addEventListener("click", () => {
+  clearTimeout(timeoutId);
+  waiting = true;
+  ready = false;
+  result.textContent = "";
+  box.style.background = "#c0392b";
+  box.textContent = "まだクリックしないで！";
+  const delay = Math.random() * 3000 + 2000;
+  timeoutId = setTimeout(() => {
+    waiting = false;
+    ready = true;
+    startTime = Date.now();
+    box.style.background = "#27ae60";
+    box.textContent = "今だ！クリック！";
+  }, delay);
+});
+
+box.addEventListener("click", () => {
+  if (waiting) {
+    clearTimeout(timeoutId);
+    waiting = false;
+    box.style.background = "#777";
+    box.textContent = "フライング！";
+    result.textContent = "早すぎ！ もう一度チャレンジ。";
+  } else if (ready) {
+    const reaction = Date.now() - startTime;
+    ready = false;
+    box.style.background = "#777";
+    box.textContent = "測定完了";
+    result.textContent = `反応時間: ${reaction} ms`;
+  }
+});
+</script>
+</body>
+</html>

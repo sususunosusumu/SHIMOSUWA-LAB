@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>スライドパズル</title>
+<style>
+  body { font-family: sans-serif; text-align: center; background: #fffdf5; margin: 0; padding: 24px; }
+  h1 { margin-bottom: 8px; }
+  #board {
+    width: 312px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 6px;
+  }
+  .tile {
+    width: 100px;
+    height: 100px;
+    border-radius: 14px;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    background: #ffd166;
+  }
+  .empty {
+    background: #eee;
+    cursor: default;
+  }
+  button.control { padding: 10px 18px; font-size: 1rem; border: none; border-radius: 12px; background: #4f8cff; color: white; cursor: pointer; }
+</style>
+</head>
+<body>
+  <h1>🧩 スライドパズル</h1>
+  <p>数字を1〜8の順に並べよう！</p>
+  <button class="control" id="shuffleBtn">シャッフル</button>
+  <div id="board"></div>
+  <p id="message"></p>
+
+<script>
+let tiles = [1,2,3,4,5,6,7,8,0];
+const board = document.getElementById("board");
+const message = document.getElementById("message");
+
+function render() {
+  board.innerHTML = "";
+  tiles.forEach((num, index) => {
+    const btn = document.createElement("button");
+    btn.className = "tile";
+    if (num === 0) {
+      btn.classList.add("empty");
+      btn.textContent = "";
+    } else {
+      btn.textContent = num;
+      btn.onclick = () => move(index);
+    }
+    board.appendChild(btn);
+  });
+  if (isSolved()) {
+    message.textContent = "🎉 完成！おめでとう！";
+  } else {
+    message.textContent = "";
+  }
+}
+
+function move(index) {
+  const empty = tiles.indexOf(0);
+  const neighbors = [empty - 1, empty + 1, empty - 3, empty + 3];
+
+  const sameRowLeft = empty % 3 !== 0 && index === empty - 1;
+  const sameRowRight = empty % 3 !== 2 && index === empty + 1;
+  const upDown = index === empty - 3 || index === empty + 3;
+
+  if (sameRowLeft || sameRowRight || upDown) {
+    [tiles[index], tiles[empty]] = [tiles[empty], tiles[index]];
+    render();
+  }
+}
+
+function shuffle() {
+  for (let i = 0; i < 200; i++) {
+    const empty = tiles.indexOf(0);
+    const candidates = [];
+    if (empty % 3 !== 0) candidates.push(empty - 1);
+    if (empty % 3 !== 2) candidates.push(empty + 1);
+    if (empty - 3 >= 0) candidates.push(empty - 3);
+    if (empty + 3 < 9) candidates.push(empty + 3);
+    const target = candidates[Math.floor(Math.random() * candidates.length)];
+    [tiles[target], tiles[empty]] = [tiles[empty], tiles[target]];
+  }
+  if (isSolved()) shuffle();
+  render();
+}
+
+function isSolved() {
+  return tiles.join(",") === "1,2,3,4,5,6,7,8,0";
+}
+
+document.getElementById("shuffleBtn").addEventListener("click", shuffle);
+render();
+</script>
+</body>
+</html>

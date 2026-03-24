@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>おみくじアプリ</title>
+<style>
+  body { font-family: sans-serif; background: linear-gradient(135deg,#ffe29f,#ffa99f); text-align: center; padding: 40px; margin: 0; }
+  .card { background: rgba(255,255,255,.9); max-width: 500px; margin: 0 auto; padding: 28px; border-radius: 24px; box-shadow: 0 12px 30px rgba(0,0,0,.12); }
+  #result { font-size: 3rem; margin: 24px 0 8px; }
+  #comment { font-size: 1.2rem; min-height: 2em; }
+  button { font-size: 1.2rem; padding: 14px 24px; border: none; border-radius: 14px; background: #ff6b6b; color: white; cursor: pointer; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>🔮 今日のおみくじ</h1>
+    <p>ボタンを押して、今日の運勢を見てみよう！</p>
+    <div id="result">？</div>
+    <div id="comment">まだ引いていません</div>
+    <br><br>
+    <button id="drawBtn">おみくじを引く</button>
+  </div>
+
+<script>
+const fortunes = [
+  { name: "大吉", comment: "今日はチャレンジするといいことがありそう！" },
+  { name: "中吉", comment: "コツコツやると実力アップ！" },
+  { name: "小吉", comment: "笑顔でいると運が味方するよ。" },
+  { name: "吉", comment: "落ち着いてやればうまくいく日。" },
+  { name: "末吉", comment: "あせらず、ゆっくり進もう。" },
+  { name: "凶", comment: "今日は無理せず慎重にいこう。" }
+];
+
+document.getElementById("drawBtn").addEventListener("click", () => {
+  const item = fortunes[Math.floor(Math.random() * fortunes.length)];
+  document.getElementById("result").textContent = item.name;
+  document.getElementById("comment").textContent = item.comment;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>3択クイズゲーム</title>
+<style>
+  body { font-family: sans-serif; background: #eef6ff; margin: 0; padding: 30px; text-align: center; }
+  .card { max-width: 650px; margin: 0 auto; background: #fff; border-radius: 20px; padding: 26px; box-shadow: 0 10px 30px rgba(0,0,0,.08); }
+  .choice { display: block; width: 100%; margin: 10px 0; padding: 14px; font-size: 1rem; border: none; border-radius: 14px; background: #dfeeff; cursor: pointer; }
+  #nextBtn { margin-top: 16px; padding: 12px 20px; border: none; border-radius: 12px; background: #4f8cff; color: #fff; cursor: pointer; display:none; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>🧠 3択クイズゲーム</h1>
+  <p id="status"></p>
+  <h2 id="question">問題</h2>
+  <div id="choices"></div>
+  <p id="result"></p>
+  <button id="nextBtn">次へ</button>
+</div>
+
+<script>
+const quizData = [
+  { q: "富士山がある都道府県に近いのは？", choices: ["長野県", "静岡県", "北海道"], answer: 1 },
+  { q: "1年は何ヶ月？", choices: ["10ヶ月", "12ヶ月", "14ヶ月"], answer: 1 },
+  { q: "HTMLは主に何を作る？", choices: ["Webページ", "パン", "自転車"], answer: 0 }
+];
+
+let current = 0;
+let score = 0;
+
+const statusEl = document.getElementById("status");
+const qEl = document.getElementById("question");
+const choicesEl = document.getElementById("choices");
+const resultEl = document.getElementById("result");
+const nextBtn = document.getElementById("nextBtn");
+
+function showQuestion() {
+  resultEl.textContent = "";
+  nextBtn.style.display = "none";
+  const item = quizData[current];
+  statusEl.textContent = `問題 ${current + 1} / ${quizData.length}　　得点: ${score}`;
+  qEl.textContent = item.q;
+  choicesEl.innerHTML = "";
+  item.choices.forEach((choice, index) => {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.textContent = choice;
+    btn.onclick = () => checkAnswer(index);
+    choicesEl.appendChild(btn);
+  });
+}
+
+function checkAnswer(index) {
+  const item = quizData[current];
+  const buttons = document.querySelectorAll(".choice");
+  buttons.forEach(btn => btn.disabled = true);
+
+  if (index === item.answer) {
+    resultEl.textContent = "⭕ 正解！";
+    score++;
+  } else {
+    resultEl.textContent = `❌ 不正解！ 正解は「${item.choices[item.answer]}」`;
+  }
+  nextBtn.style.display = "inline-block";
+}
+
+nextBtn.addEventListener("click", () => {
+  current++;
+  if (current < quizData.length) {
+    showQuestion();
+  } else {
+    qEl.textContent = "クイズ終了！";
+    choicesEl.innerHTML = "";
+    resultEl.textContent = `最終スコア: ${score} / ${quizData.length}`;
+    nextBtn.style.display = "none";
+    statusEl.textContent = "おつかれさまでした！";
+  }
+});
+
+showQuestion();
+</script>
+</body>
+</html>
