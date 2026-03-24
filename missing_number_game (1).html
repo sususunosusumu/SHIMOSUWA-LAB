@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>キラキラ！ない数字を見つけろ！2人対戦版</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Hiragino Kaku Gothic ProN", sans-serif;
+      background: linear-gradient(180deg, #ffe4f1 0%, #e0f2fe 45%, #fef9c3 100%);
+      color: #1f2937;
+    }
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #ff5fa2, #7c3aed, #0ea5e9);
+      color: white;
+      border-radius: 26px;
+      padding: 22px;
+      box-shadow: 0 18px 40px rgba(124, 58, 237, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+    }
+    .hero::before {
+      width: 180px;
+      height: 180px;
+      top: -50px;
+      right: -30px;
+    }
+    .hero::after {
+      width: 120px;
+      height: 120px;
+      bottom: -25px;
+      left: -20px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      position: relative;
+      z-index: 1;
+    }
+    .lead {
+      margin: 0;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+      font-size: 16px;
+    }
+    .panel {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.09);
+      margin-top: 18px;
+      border: 2px solid rgba(255,255,255,0.7);
+    }
+    .section-title {
+      margin: 0 0 12px;
+      font-size: 22px;
+      color: #6d28d9;
+    }
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      align-items: end;
+    }
+    label {
+      display: block;
+      font-size: 14px;
+      color: #374151;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+    select, input[type="text"], button {
+      width: 100%;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 16px;
+    }
+    select, input[type="text"] {
+      border: 2px solid #d8b4fe;
+      background: white;
+    }
+    button {
+      cursor: pointer;
+      border: none;
+      color: #fff;
+      font-weight: 800;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+    }
+    button:hover {
+      transform: translateY(-2px) scale(1.01);
+      opacity: 0.96;
+    }
+    .btn-start { background: linear-gradient(135deg, #10b981, #14b8a6); }
+    .btn-sub { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+    .btn-danger { background: linear-gradient(135deg, #ef4444, #f97316); }
+    .mode-boxes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .mode-box {
+      background: linear-gradient(135deg, #fdf2f8, #eef2ff);
+      border: 2px solid #ddd6fe;
+      border-radius: 18px;
+      padding: 14px;
+    }
+    .mode-box strong {
+      display: block;
+      color: #7c3aed;
+      margin-bottom: 6px;
+      font-size: 17px;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .stat {
+      background: linear-gradient(135deg, #ffffff, #eff6ff);
+      border: 2px solid #bfdbfe;
+      border-radius: 18px;
+      padding: 12px;
+    }
+    .stat .label {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+    .stat .value {
+      font-size: 26px;
+      font-weight: 900;
+      color: #1d4ed8;
+    }
+    .battle-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .player-card {
+      border-radius: 20px;
+      padding: 16px;
+      color: white;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.14);
+    }
+    .p1 { background: linear-gradient(135deg, #ec4899, #f97316); }
+    .p2 { background: linear-gradient(135deg, #0ea5e9, #22c55e); }
+    .player-card h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+    .player-score {
+      font-size: 34px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .turn-indicator {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 900;
+      color: #7c3aed;
+    }
+    .board {
+      display: grid;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .cell {
+      background: linear-gradient(135deg, #ffffff, #f8fafc);
+      border: 2px solid #cbd5e1;
+      border-radius: 14px;
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 900;
+      user-select: none;
+      box-shadow: inset 0 -3px 0 rgba(0,0,0,0.04);
+    }
+    .cell.hidden-number {
+      background: linear-gradient(135deg, #fde68a, #f9a8d4);
+      color: transparent;
+      border-style: dashed;
+      border-color: #f97316;
+      position: relative;
+    }
+    .cell.hidden-number::after {
+      content: "？";
+      color: white;
+      font-size: 26px;
+      text-shadow: 0 2px 0 rgba(0,0,0,0.18);
+    }
+    .answer-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .message {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      font-weight: 900;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      font-size: 17px;
+    }
+    .ok {
+      background: #ecfdf5;
+      color: #166534;
+      border: 2px solid #86efac;
+    }
+    .ng {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 2px solid #fca5a5;
+    }
+    .info {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 2px solid #93c5fd;
+    }
+    .history {
+      margin-top: 16px;
+      font-size: 15px;
+      line-height: 1.8;
+      color: #374151;
+      font-weight: 700;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .chip {
+      background: linear-gradient(135deg, #c4b5fd, #93c5fd);
+      color: #111827;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-weight: 900;
+      box-shadow: 0 4px 10px rgba(99, 102, 241, 0.18);
+    }
+    .winner-box {
+      display: none;
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #fef3c7, #fde68a, #f9a8d4);
+      font-size: 26px;
+      font-weight: 900;
+      text-align: center;
+      color: #7c2d12;
+      box-shadow: 0 14px 28px rgba(245, 158, 11, 0.2);
+    }
+    .footer-note {
+      margin-top: 14px;
+      color: #4b5563;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    @media (max-width: 820px) {
+      .battle-stats { grid-template-columns: 1fr; }
+      .answer-row { grid-template-columns: 1fr; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>🌟 キラキラ！ない数字を見つけろ！ 🌟</h1>
+      <p class="lead">
+        画面の中から、消えている数字を見つけよう！<br>
+        ひとりでも遊べるし、2人で交代しながら対戦もできます。速く・正確に見つけた人がすごい！
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2 class="section-title">🎮 ゲームの設定</h2>
+      <div class="controls">
+        <div>
+          <label for="gameMode">ゲームモード</label>
+          <select id="gameMode">
+            <option value="solo" selected>1人モード</option>
+            <option value="battle">2人対戦モード</option>
+          </select>
+        </div>
+        <div>
+          <label for="maxNumber">最大の数字</label>
+          <select id="maxNumber">
+            <option value="10">1〜10</option>
+            <option value="20" selected>1〜20</option>
+            <option value="30">1〜30</option>
+            <option value="40">1〜40</option>
+            <option value="50">1〜50</option>
+            <option value="60">1〜60</option>
+            <option value="70">1〜70</option>
+            <option value="80">1〜80</option>
+            <option value="90">1〜90</option>
+            <option value="100">1〜100</option>
+          </select>
+        </div>
+        <div>
+          <label for="missingCount">消える数字の数</label>
+          <select id="missingCount">
+            <option value="1">1個</option>
+            <option value="2">2個</option>
+            <option value="3">3個</option>
+            <option value="5" selected>5個</option>
+            <option value="10">10個</option>
+          </select>
+        </div>
+        <div>
+          <label>&nbsp;</label>
+          <button id="startBtn" class="btn-start">ゲーム開始</button>
+        </div>
+        <div>
+          <label>&nbsp;</label>
+          <button id="showAnswerBtn" class="btn-sub">答えを見る</button>
+        </div>
+        <div>
+          <label>&nbsp;</label>
+          <button id="resetBtn" class="btn-danger">リセット</button>
+        </div>
+      </div>
+
+      <div class="mode-boxes">
+        <div class="mode-box">
+          <strong>1人モード</strong>
+          ない数字を全部見つけるまでの時間を競います。
+        </div>
+        <div class="mode-box">
+          <strong>2人対戦モード</strong>
+          プレイヤー1とプレイヤー2が交代で答えます。正解すると1点、最後に点数が多い人の勝ちです。
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="label">⏱ 経過時間</div>
+          <div class="value" id="timeValue">0.0秒</div>
+        </div>
+        <div class="stat">
+          <div class="label">✅ 正解数</div>
+          <div class="value"><span id="correctCount">0</span>/<span id="targetCount">0</span></div>
+        </div>
+        <div class="stat">
+          <div class="label">🔍 残り</div>
+          <div class="value" id="remainCount">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">❌ ミス</div>
+          <div class="value" id="missCount">0</div>
+        </div>
+      </div>
+
+      <div class="battle-stats" id="battleStats" style="display:none;">
+        <div class="player-card p1">
+          <h3>プレイヤー1</h3>
+          <div class="player-score" id="player1Score">0点</div>
+          <div id="player1Status">がんばれ！</div>
+        </div>
+        <div class="player-card p2">
+          <h3>プレイヤー2</h3>
+          <div class="player-score" id="player2Score">0点</div>
+          <div id="player2Status">がんばれ！</div>
+        </div>
+      </div>
+
+      <div class="turn-indicator" id="turnIndicator" style="display:none;">今の番：プレイヤー1</div>
+
+      <div class="board" id="board"></div>
+
+      <div class="answer-row">
+        <input type="text" id="answerInput" placeholder="ない数字を入力（例: 15）" />
+        <button id="submitBtn" class="btn-sub">入力する</button>
+        <button id="passBtn" class="btn-danger">パス</button>
+      </div>
+
+      <div class="message info" id="message">「ゲーム開始」を押すとスタートします。</div>
+
+      <div class="history">
+        🌈 見つけた数字
+        <div class="chips" id="foundList"></div>
+      </div>
+
+      <div class="winner-box" id="winnerBox"></div>
+
+      <div class="footer-note">
+        Enterキーでも答えられます。2人対戦では、正解でも不正解でも番が交代します。<br>
+        教室で使うなら、1人モードで練習 → 2人対戦で本番、という流れが盛り上がります。
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const gameModeEl = document.getElementById('gameMode');
+    const maxNumberEl = document.getElementById('maxNumber');
+    const missingCountEl = document.getElementById('missingCount');
+    const startBtn = document.getElementById('startBtn');
+    const showAnswerBtn = document.getElementById('showAnswerBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const boardEl = document.getElementById('board');
+    const answerInput = document.getElementById('answerInput');
+    const submitBtn = document.getElementById('submitBtn');
+    const passBtn = document.getElementById('passBtn');
+    const messageEl = document.getElementById('message');
+    const timeValueEl = document.getElementById('timeValue');
+    const correctCountEl = document.getElementById('correctCount');
+    const targetCountEl = document.getElementById('targetCount');
+    const remainCountEl = document.getElementById('remainCount');
+    const missCountEl = document.getElementById('missCount');
+    const foundListEl = document.getElementById('foundList');
+    const battleStatsEl = document.getElementById('battleStats');
+    const turnIndicatorEl = document.getElementById('turnIndicator');
+    const player1ScoreEl = document.getElementById('player1Score');
+    const player2ScoreEl = document.getElementById('player2Score');
+    const player1StatusEl = document.getElementById('player1Status');
+    const player2StatusEl = document.getElementById('player2Status');
+    const winnerBoxEl = document.getElementById('winnerBox');
+
+    let numbers = [];
+    let hiddenNumbers = [];
+    let foundNumbers = [];
+    let misses = 0;
+    let startTime = null;
+    let timerId = null;
+    let playing = false;
+    let mode = 'solo';
+    let currentPlayer = 1;
+    let playerScores = { 1: 0, 2: 0 };
+
+    function shuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function pickHiddenNumbers(max, count) {
+      const all = Array.from({ length: max }, (_, i) => i + 1);
+      return shuffle(all).slice(0, count).sort((a, b) => a - b);
+    }
+
+    function setBoardColumns(max) {
+      let cols = 5;
+      if (max <= 20) cols = 5;
+      else if (max <= 40) cols = 6;
+      else if (max <= 60) cols = 8;
+      else cols = 10;
+      boardEl.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    }
+
+    function renderBoard() {
+      const max = Number(maxNumberEl.value);
+      setBoardColumns(max);
+      boardEl.innerHTML = '';
+
+      numbers.forEach(num => {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+
+        if (hiddenNumbers.includes(num) && !foundNumbers.includes(num)) {
+          cell.classList.add('hidden-number');
+          cell.dataset.num = num;
+        } else {
+          cell.textContent = num;
+          if (hiddenNumbers.includes(num) && foundNumbers.includes(num)) {
+            cell.style.background = 'linear-gradient(135deg, #bbf7d0, #86efac)';
+            cell.style.borderColor = '#22c55e';
+            cell.style.color = '#166534';
+          }
+        }
+
+        boardEl.appendChild(cell);
+      });
+    }
+
+    function updateStats() {
+      correctCountEl.textContent = foundNumbers.length;
+      targetCountEl.textContent = hiddenNumbers.length;
+      remainCountEl.textContent = hiddenNumbers.length - foundNumbers.length;
+      missCountEl.textContent = misses;
+      player1ScoreEl.textContent = `${playerScores[1]}点`;
+      player2ScoreEl.textContent = `${playerScores[2]}点`;
+    }
+
+    function renderFoundList() {
+      foundListEl.innerHTML = '';
+      foundNumbers.slice().sort((a, b) => a - b).forEach(num => {
+        const chip = document.createElement('span');
+        chip.className = 'chip';
+        chip.textContent = num;
+        foundListEl.appendChild(chip);
+      });
+    }
+
+    function setMessage(text, type) {
+      messageEl.textContent = text;
+      messageEl.className = `message ${type}`;
+    }
+
+    function updateTimer() {
+      if (!playing || !startTime) return;
+      const sec = (Date.now() - startTime) / 1000;
+      timeValueEl.textContent = sec.toFixed(1) + '秒';
+    }
+
+    function stopTimer() {
+      if (timerId) {
+        clearInterval(timerId);
+        timerId = null;
+      }
+    }
+
+    function updateModeUI() {
+      mode = gameModeEl.value;
+      const battle = mode === 'battle';
+      battleStatsEl.style.display = battle ? 'grid' : 'none';
+      turnIndicatorEl.style.display = battle ? 'block' : 'none';
+      passBtn.style.display = battle ? 'block' : 'none';
+      if (battle) updateTurnIndicator();
+    }
+
+    function updateTurnIndicator() {
+      if (mode !== 'battle') return;
+      turnIndicatorEl.textContent = `今の番：プレイヤー${currentPlayer}`;
+      player1StatusEl.textContent = currentPlayer === 1 ? '今の番です！' : '相手の番です';
+      player2StatusEl.textContent = currentPlayer === 2 ? '今の番です！' : '相手の番です';
+    }
+
+    function nextTurn() {
+      if (mode !== 'battle') return;
+      currentPlayer = currentPlayer === 1 ? 2 : 1;
+      updateTurnIndicator();
+    }
+
+    function startGame() {
+      const max = Number(maxNumberEl.value);
+      let missingCount = Number(missingCountEl.value);
+      mode = gameModeEl.value;
+
+      if (missingCount >= max) {
+        missingCount = Math.max(1, max - 1);
+        missingCountEl.value = String(missingCount);
+      }
+
+      hiddenNumbers = pickHiddenNumbers(max, missingCount);
+      foundNumbers = [];
+      misses = 0;
+      playerScores = { 1: 0, 2: 0 };
+      currentPlayer = 1;
+      numbers = shuffle(Array.from({ length: max }, (_, i) => i + 1));
+      startTime = Date.now();
+      playing = true;
+      winnerBoxEl.style.display = 'none';
+      winnerBoxEl.textContent = '';
+
+      stopTimer();
+      timerId = setInterval(updateTimer, 100);
+
+      updateModeUI();
+      renderBoard();
+      renderFoundList();
+      updateStats();
+      updateTimer();
+      answerInput.value = '';
+      answerInput.focus();
+      setMessage(mode === 'battle'
+        ? '2人対戦スタート！ プレイヤー1から始めます。'
+        : 'スタート！ ない数字を見つけて入力してください。', 'info');
+    }
+
+    function finishGame() {
+      playing = false;
+      stopTimer();
+      updateTimer();
+      const sec = ((Date.now() - startTime) / 1000).toFixed(1);
+
+      if (mode === 'solo') {
+        setMessage(`クリア！ ${hiddenNumbers.length}個すべて見つけました。タイムは ${sec} 秒です。`, 'ok');
+      } else {
+        let result = '引き分け！🤝';
+        if (playerScores[1] > playerScores[2]) result = 'プレイヤー1の勝ち！🏆';
+        if (playerScores[2] > playerScores[1]) result = 'プレイヤー2の勝ち！🏆';
+        setMessage(`対戦終了！ プレイヤー1: ${playerScores[1]}点 / プレイヤー2: ${playerScores[2]}点`, 'ok');
+        winnerBoxEl.textContent = result;
+        winnerBoxEl.style.display = 'block';
+      }
+    }
+
+    function submitAnswer() {
+      if (!playing) {
+        setMessage('先に「ゲーム開始」を押してください。', 'ng');
+        return;
+      }
+
+      const value = answerInput.value.trim();
+      const num = Number(value);
+
+      if (!value || !Number.isInteger(num)) {
+        setMessage('数字を1つ入力してください。', 'ng');
+        answerInput.focus();
+        return;
+      }
+
+      const max = Number(maxNumberEl.value);
+      if (num < 1 || num > max) {
+        setMessage(`1〜${max}の数字を入力してください。`, 'ng');
+        answerInput.select();
+        return;
+      }
+
+      if (foundNumbers.includes(num)) {
+        setMessage(`${num} はもう見つけています。`, 'ng');
+        answerInput.select();
+        return;
+      }
+
+      if (hiddenNumbers.includes(num)) {
+        foundNumbers.push(num);
+        if (mode === 'battle') playerScores[currentPlayer] += 1;
+        renderFoundList();
+        renderBoard();
+        updateStats();
+        setMessage(`正解！ ${num} は表示されていない数字です。`, 'ok');
+
+        if (foundNumbers.length === hiddenNumbers.length) {
+          finishGame();
+        } else if (mode === 'battle') {
+          nextTurn();
+        }
+      } else {
+        misses++;
+        updateStats();
+        setMessage(`ブブー！ ${num} はあります。もう一度探してみよう。`, 'ng');
+        if (mode === 'battle') nextTurn();
+      }
+
+      answerInput.value = '';
+      answerInput.focus();
+    }
+
+    function passTurn() {
+      if (!playing || mode !== 'battle') return;
+      setMessage(`プレイヤー${currentPlayer}はパスしました。`, 'info');
+      nextTurn();
+      answerInput.focus();
+    }
+
+    function resetGame() {
+      playing = false;
+      stopTimer();
+      numbers = [];
+      hiddenNumbers = [];
+      foundNumbers = [];
+      misses = 0;
+      currentPlayer = 1;
+      playerScores = { 1: 0, 2: 0 };
+      startTime = null;
+      boardEl.innerHTML = '';
+      foundListEl.innerHTML = '';
+      timeValueEl.textContent = '0.0秒';
+      winnerBoxEl.style.display = 'none';
+      winnerBoxEl.textContent = '';
+      updateStats();
+      updateModeUI();
+      answerInput.value = '';
+      setMessage('「ゲーム開始」を押すとスタートします。', 'info');
+    }
+
+    function showAnswers() {
+      if (hiddenNumbers.length === 0) {
+        setMessage('まだゲームが始まっていません。', 'ng');
+        return;
+      }
+      setMessage(`答え：${hiddenNumbers.join(', ')}`, 'info');
+    }
+
+    startBtn.addEventListener('click', startGame);
+    submitBtn.addEventListener('click', submitAnswer);
+    resetBtn.addEventListener('click', resetGame);
+    showAnswerBtn.addEventListener('click', showAnswers);
+    passBtn.addEventListener('click', passTurn);
+    gameModeEl.addEventListener('change', updateModeUI);
+    answerInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') submitAnswer();
+    });
+
+    updateModeUI();
+    updateStats();
+  </script>
+</body>
+</html>
