@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shimosuwa Creative Lab | 参加者募集</title>
+  <meta name="description" content="Shimosuwa Creative Lab 参加者募集ページ。やってみたいを、かたちにする。その一歩を、自分で。" />
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg2: #0d1b2a;
+      --panel: rgba(255,255,255,0.08);
+      --panel2: rgba(255,255,255,0.06);
+      --line: rgba(255,255,255,0.12);
+      --text: #eef4ff;
+      --muted: #b8c6db;
+      --soft: #dcecff;
+      --accent: #7dd3fc;
+      --accent2: #c4b5fd;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius: 26px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 15%, rgba(125,211,252,.18), transparent 28%),
+        radial-gradient(circle at 88% 10%, rgba(196,181,253,.16), transparent 28%),
+        linear-gradient(180deg, #06101d 0%, #0a1524 50%, #0e1c2d 100%);
+      line-height: 1.75;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0 1px, transparent 1px 120px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0 1px, transparent 1px 120px);
+      mask-image: linear-gradient(180deg, rgba(0,0,0,1), rgba(0,0,0,.45), rgba(0,0,0,1));
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.2fr .85fr;
+      gap: 34px;
+      width: 100%;
+      align-items: center;
+      padding: 56px 0;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      color: var(--soft);
+      font-size: 14px;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 14px rgba(125,211,252,.8);
+    }
+    h1 {
+      margin: 18px 0 10px;
+      font-size: clamp(40px, 7vw, 78px);
+      line-height: 1.02;
+      letter-spacing: -.03em;
+    }
+    .hero-sub {
+      font-size: clamp(18px, 2vw, 24px);
+      color: var(--soft);
+      margin-top: 10px;
+    }
+    .hero-copy {
+      max-width: 720px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      font-weight: 700;
+      transition: transform .18s ease, background .18s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn.primary {
+      background: linear-gradient(135deg, rgba(125,211,252,.26), rgba(196,181,253,.23));
+    }
+    .btn.secondary {
+      background: rgba(255,255,255,.06);
+    }
+
+    .hero-card {
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      right: -40px;
+      top: -40px;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(125,211,252,.28), transparent 62%);
+      pointer-events: none;
+    }
+    .hero-card h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+    .meta-list { display: grid; gap: 14px; margin-top: 18px; }
+    .meta-item {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .meta-item:last-child { border-bottom: none; }
+    .meta-label { color: var(--muted); font-size: 14px; }
+    .meta-value { font-weight: 700; }
+    .meta-note { color: var(--muted); font-size: 13px; font-weight: 400; margin-top: 4px; }
+
+    main { padding-bottom: 80px; }
+    section { margin-top: 34px; }
+    .section-card { padding: 30px; }
+    .section-head { margin-bottom: 20px; }
+    .section-head h3 {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 34px);
+      line-height: 1.15;
+    }
+    .section-head p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .feature {
+      padding: 22px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .num {
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(125,211,252,.24), rgba(196,181,253,.24));
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .feature h4 { margin: 0 0 8px; font-size: 20px; }
+    .feature p { margin: 0; color: var(--muted); font-size: 15px; }
+
+    .adult-note {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-left: 3px solid rgba(125,211,252,.55);
+      border-radius: 0 16px 16px 0;
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+    }
+    .adult-note strong { color: var(--text); }
+
+    .req-grid, .sample-grid, .program-grid, .apply-grid {
+      display: grid;
+      gap: 16px;
+    }
+    .req-grid { grid-template-columns: repeat(2, 1fr); }
+    .program-grid { grid-template-columns: repeat(2, 1fr); }
+    .apply-grid { grid-template-columns: repeat(2, 1fr); }
+    .sample-grid { grid-template-columns: repeat(3, 1fr); }
+
+    .card {
+      padding: 20px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .card h4 { margin: 0 0 8px; font-size: 18px; }
+    .card p { margin: 0; color: var(--muted); }
+
+    .list {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .list li {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      color: var(--muted);
+    }
+    .list strong { color: var(--text); }
+
+    .inline-link {
+      display: block;
+      margin-top: 10px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px dashed rgba(255,255,255,.18);
+      background: rgba(255,255,255,.03);
+      font-weight: 700;
+      word-break: break-all;
+    }
+    .small { margin-top: 10px; color: var(--muted); font-size: 13px; }
+
+    .footer {
+      margin-top: 40px;
+      padding: 24px 0 40px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .hero { min-height: auto; }
+      .hero-inner,
+      .grid-4,
+      .req-grid,
+      .program-grid,
+      .apply-grid,
+      .sample-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .section-card, .hero-card { padding: 22px; }
+      .meta-item { grid-template-columns: 1fr; gap: 4px; }
+      .cta-row { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <div class="eyebrow">Shimosuwa Creative Lab</div>
+        <h1>やってみたいを、<br>かたちにする。</h1>
+        <div class="hero-sub">その一歩を、自分で。</div>
+        <p class="hero-copy">
+          Shimosuwa Creative Lab は、子どもたちが自分で考え、つくり、試しながら、
+          新しい世界へ一歩踏み出すための小さな創造の場です。<br>
+          見るだけだったものを、自分でつくる側へ。<br>
+          AIやデジタルツールも使いながら、「やってみたい」を実際の形に変えていきます。
+        </p>
+        <div class="cta-row">
+          <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfPle-aidQCRKUvQ7w-qayl-i3efI5qZyfUVa97v9Rq3pjKiQ/viewform" target="_blank" rel="noopener noreferrer">Googleフォームから申し込む</a>
+          <a class="btn secondary" href="#overview">募集概要を見る</a>
+        </div>
+      </div>
+
+      <aside class="glass hero-card">
+        <h2>4月 参加者募集</h2>
+        <p style="margin:0;color:var(--muted)">まずは少人数で、安心して取り組める形から始めます。</p>
+        <div class="meta-list">
+          <div class="meta-item">
+            <div class="meta-label">開催時期</div>
+            <div class="meta-value">4月
+              <div class="meta-note">詳細日程は後日ご案内</div>
+            </div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">定員</div>
+            <div class="meta-value">3名（少人数制）</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">会場</div>
+            <div class="meta-value">〇〇公会場</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">受講時間</div>
+            <div class="meta-value">90分
+              <div class="meta-note">40分＋休憩10分＋40分</div>
+            </div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">受講料</div>
+            <div class="meta-value">無料</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section>
+      <div class="glass section-card">
+        <div class="section-head">
+          <h3>この教室で育てる力</h3>
+          <p>この教室では、難しい知識を詰め込むことよりも、自分で考え、自分で試し、自分の手で形にしていく感覚を大切にしています。</p>
+        </div>
+        <div class="grid-4">
+          <div class="feature">
+            <div class="num">01</div>
+            <h4>考える力</h4>
+            <p>やりたいことを、自分で見つけて考える力を育てます。</p>
+          </div>
+          <div class="feature">
+            <div class="num">02</div>
+            <h4>つくる力</h4>
+            <p>アイデアを、実際に作品や形として表現していきます。</p>
+          </div>
+          <div class="feature">
+            <div class="num">03</div>
+            <h4>伝える力</h4>
+            <p>自分の考えを言葉にし、AIも使いながら伝わる形に整理していきます。</p>
+          </div>
+          <div class="feature">
+            <div class="num">04</div>
+            <h4>やってみる力</h4>
+            <p>できるかどうかよりも、まずやってみる姿勢を大切にします。</p>
+          </div>
+        </div>
+        <div class="adult-note">
+          <strong>保護者の方へ</strong><br>
+          この教室では、単に作るだけでなく、わからないことやできないことに出会ったときに、
+          自分で考え、試し、工夫していく経験も大切にしています。
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="glass section-card">
+        <div class="section-head">
+          <h3>この教室で実際に何を作るの？</h3>
+          <p>この教室では、<strong>HTMLファイル1つで動く小さなゲームやアプリ</strong>を、AIを使いながら自分で作ります。難しいプログラムを最初から書くのではなく、作りたいものを言葉にして、AIに伝え、少しずつ形にしていきます。完成した作品は、実際にWebで見られる形で公開します。</p>
+        </div>
+        <div class="program-grid">
+          <div class="card">
+            <h4>作るもののイメージ</h4>
+            <p>カウンターゲーム、クイズ、簡単なおみくじ、反応速度ゲーム、ミニチャットボットなど、HTMLひとつで動く作品を作ります。</p>
+          </div>
+          <div class="card">
+            <h4>AIをどう使うの？</h4>
+            <p>「こういうものを作りたい」をAIに伝え、画面や動きのアイデア、プログラムの形を一緒に考えながら作っていきます。</p>
+          </div>
+          <div class="card">
+            <h4>作るだけで終わらない</h4>
+            <p>できあがった作品は、自分だけのWebページとして公開し、他の人にも見てもらえる形にします。</p>
+          </div>
+          <div class="card">
+            <h4>少人数で丁寧に進める</h4>
+            <p>今回は3名募集。わからないところを確認しながら、自分のペースで一つずつ作っていける形にします。</p>
+          </div>
+        </div>
+          <div class="card">
+            <h4>AIを使った発想づくり</h4>
+            <p>AIを道具として使いながら、自分の考えを整理し、形にしていきます。</p>
+          </div>
+          <div class="card">
+            <h4>小さく試して形にする</h4>
+            <p>難しいものを最初から目指すのではなく、できるサイズで一つずつ形にします。</p>
+          </div>
+          <div class="card">
+            <h4>作品を公開する</h4>
+            <p>完成したプログラムはWebに掲載し、いろんな人に見てもらえる形にしていきます。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview">
+      <div class="glass section-card">
+        <div class="section-head">
+          <h3>受講にあたって必要なもの</h3>
+          <p>参加前に必要な準備を、わかりやすく整理しています。最初から全部そろっていなくても大丈夫なように考えています。</p>
+        </div>
+        <div class="req-grid">
+          <ul class="list">
+            <li><strong>パソコンをご持参ください。</strong><br>インターネットに接続できるパソコンであれば大丈夫です。</li>
+            <li><strong>インターネット環境はこちらで準備します。</strong><br>会場で接続できるようにします。</li>
+            <li><strong>AIを使うためのアカウントを使用します。</strong><br>すでにアカウントをお持ちであれば、そのまま使えます。</li>
+          </ul>
+          <ul class="list">
+            <li><strong>アカウント作成にはメールアドレスが必要です。</strong><br>保護者の方のメールアドレスをご使用いただく想定です。</li>
+            <li><strong>保護者同席をおすすめします。</strong><br>アカウント作成から一緒に行う場合も安心です。</li>
+            <li><strong>受講料は無料です。</strong><br>まずは気軽に体験していただける形で実施します。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="glass section-card">
+        <div class="section-head">
+          <h3>募集概要</h3>
+          <p>まずは小さく、丁寧に始めるための募集です。</p>
+        </div>
+        <div class="req-grid">
+          <div class="card">
+            <h4>開催情報</h4>
+            <ul class="list">
+              <li><strong>開催時期：</strong>4月</li>
+              <li><strong>会場：</strong>〇〇公会場</li>
+              <li><strong>受講時間：</strong>90分（40分＋休憩10分＋40分）</li>
+              <li><strong>定員：</strong>3名</li>
+              <li><strong>受講料：</strong>無料</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>応募方法</h4>
+            <p>Googleフォームからお申し込みいただく形を想定しています。フォームURLとお問い合わせ先は、実際の運用時に差し替えて使えます。</p>
+            <a class="inline-link" href="https://docs.google.com/forms/d/e/1FAIpQLSfPle-aidQCRKUvQ7w-qayl-i3efI5qZyfUVa97v9Rq3pjKiQ/viewform" target="_blank" rel="noopener noreferrer">https://docs.google.com/forms/d/e/1FAIpQLSfPle-aidQCRKUvQ7w-qayl-i3efI5qZyfUVa97v9Rq3pjKiQ/viewform</a>
+            <a class="inline-link" href="mailto:farm@lucky-bright.com">farm@lucky-bright.com</a>
+            <div class="small">※ フォームURL・メールアドレスは実際のものに差し替えて使用</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="glass section-card">
+        <div class="section-head">
+          <h3>サンプル作品</h3>
+          <p>実際にこの教室で目指すイメージに近いサンプルです。いずれも、HTMLファイル1つで動く小さなゲームやアプリです。</p>
+        </div>
+        <div class="sample-grid">
+          <a class="card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/01_counter_game.html" target="_blank" rel="noopener noreferrer">
+            <h4>01 Counter Game</h4>
+            <p>数を増やして遊ぶシンプルなカウンターゲーム</p>
+          </a>
+          <a class="card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/02_paint_app.html" target="_blank" rel="noopener noreferrer">
+            <h4>02 Paint App</h4>
+            <p>自分で描いて楽しめるお絵かきアプリ</p>
+          </a>
+          <a class="card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/03_omikuji.html" target="_blank" rel="noopener noreferrer">
+            <h4>03 Omikuji</h4>
+            <p>ボタンを押すと結果が出るおみくじアプリ</p>
+          </a>
+          <a class="card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/04_quiz_game.html" target="_blank" rel="noopener noreferrer">
+            <h4>04 Quiz Game</h4>
+            <p>問題に答えて遊べるミニクイズゲーム</p>
+          </a>
+          <a class="card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/05_reaction_test.html" target="_blank" rel="noopener noreferrer">
+            <h4>05 Reaction Test</h4>
+            <p>反応の速さを試せるシンプルなゲーム</p>
+          </a>
+          <a class="card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/06_simple_chatbot.html" target="_blank" rel="noopener noreferrer">
+            <h4>06 Simple Chatbot</h4>
+            <p>簡単な受け答えができるミニチャットボット</p>
+          </a>
+          <a class="card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/07_slide_puzzle.html" target="_blank" rel="noopener noreferrer">
+            <h4>07 Slide Puzzle</h4>
+            <p>並べ替えて遊ぶスライドパズル</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">© Shimosuwa Creative Lab</div>
+  </main>
+</body>
+</html>
