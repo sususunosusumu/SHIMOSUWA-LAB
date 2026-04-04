@@ -4,320 +4,487 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shimosuwa Creative Lab | 参加者募集</title>
-  <meta name="description" content="AIを使ったプログラミング教室。下諏訪で、子どもたちが自分のアイデアをアプリやゲームとして形にする90分。" />
+  <meta name="description" content="下諏訪で開催する、AIを使ってゲームやアプリを作る子ども向け少人数教室の募集ページです。" />
   <style>
     :root{
-      --bg:#f7f8fc;
+      --bg:#f7f9fc;
+      --bg-soft:#eef4ff;
       --card:#ffffff;
-      --text:#1e2430;
-      --sub:#5d6678;
-      --line:#e5e9f2;
-      --accent:#2d6cdf;
-      --accent-dark:#1e53b8;
-      --soft:#edf4ff;
-      --warm:#fff7ec;
-      --shadow:0 12px 32px rgba(22,30,50,.08);
-      --radius:22px;
-      --max:1080px;
+      --text:#1f2937;
+      --sub:#6b7280;
+      --line:#e5e7eb;
+      --accent:#2563eb;
+      --accent-dark:#1d4ed8;
+      --accent-soft:#eff6ff;
+      --dark:#0f172a;
+      --shadow:0 10px 28px rgba(15,23,42,0.06);
+      --radius:20px;
     }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+    *{box-sizing:border-box;}
+
+    html{
+      scroll-behavior:smooth;
+    }
+
     body{
       margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic","Noto Sans JP",sans-serif;
+      font-family:"Segoe UI","Hiragino Sans","Yu Gothic UI","Yu Gothic",sans-serif;
+      background:var(--bg);
       color:var(--text);
-      background:linear-gradient(180deg,#f5f8ff 0%, #f8fafc 100%);
-      line-height:1.75;
+      line-height:1.8;
     }
 
     a{
       color:var(--accent);
       text-decoration:none;
     }
+
     a:hover{
       text-decoration:underline;
     }
 
     .wrap{
-      width:min(var(--max), calc(100% - 32px));
+      width:min(1100px, calc(100% - 32px));
       margin:0 auto;
     }
 
     .hero{
-      padding:72px 0 40px;
+      background:
+        radial-gradient(circle at top right, rgba(37,99,235,0.12), transparent 28%),
+        linear-gradient(180deg, #f4f8ff 0%, #f7f9fc 100%);
+      padding:88px 0 64px;
     }
 
-    .hero-box{
-      background:
-        radial-gradient(circle at top right, rgba(45,108,223,.12), transparent 30%),
-        radial-gradient(circle at left bottom, rgba(45,108,223,.08), transparent 28%),
-        #fff;
-      border:1px solid #edf1f7;
-      border-radius:32px;
-      box-shadow:var(--shadow);
-      padding:48px 28px;
+    .hero-inner{
+      max-width:860px;
     }
 
     .eyebrow{
       display:inline-block;
-      font-size:13px;
-      font-weight:700;
-      letter-spacing:.08em;
-      color:var(--accent);
-      background:var(--soft);
-      padding:8px 12px;
+      padding:6px 12px;
       border-radius:999px;
+      background:var(--accent-soft);
+      color:var(--accent);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.04em;
       margin-bottom:18px;
     }
 
     h1{
-      font-size:clamp(32px, 6vw, 58px);
-      line-height:1.15;
-      letter-spacing:.01em;
-      margin:0 0 18px;
+      margin:0;
+      font-size:clamp(38px, 7vw, 72px);
+      line-height:1.08;
+      letter-spacing:-0.02em;
     }
 
-    .lead{
-      font-size:clamp(16px, 2.4vw, 20px);
+    .hero-sub{
+      margin-top:18px;
+      font-size:clamp(16px, 2.3vw, 20px);
+      color:#374151;
+      max-width:760px;
+    }
+
+    .hero-text{
+      margin-top:18px;
+      font-size:15px;
       color:var(--sub);
-      margin:0 0 26px;
-      max-width:820px;
+      max-width:760px;
     }
 
-    .hero-copy{
-      font-size:16px;
-      color:var(--sub);
-      max-width:860px;
-      margin-bottom:28px;
-    }
-
-    .cta-row{
+    .hero-actions{
       display:flex;
       flex-wrap:wrap;
-      gap:14px;
-      margin-top:24px;
+      gap:12px;
+      margin-top:28px;
     }
 
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:14px 20px;
-      border-radius:999px;
+      gap:8px;
+      min-height:48px;
+      padding:0 20px;
+      border-radius:12px;
       font-weight:700;
-      transition:.2s ease;
-      border:1px solid transparent;
+      text-decoration:none;
+      transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .btn:hover{
+      text-decoration:none;
+      transform:translateY(-2px);
     }
 
     .btn-primary{
       background:var(--accent);
       color:#fff;
+      box-shadow:0 10px 20px rgba(37,99,235,0.22);
     }
 
     .btn-primary:hover{
       background:var(--accent-dark);
-      text-decoration:none;
-      transform:translateY(-1px);
     }
 
     .btn-secondary{
       background:#fff;
-      color:var(--accent);
-      border-color:#d6e4ff;
-    }
-
-    .btn-secondary:hover{
-      background:#f8fbff;
-      text-decoration:none;
-      transform:translateY(-1px);
+      color:var(--text);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
     }
 
     .section{
-      padding:22px 0 56px;
+      padding:64px 0;
     }
 
-    .grid{
-      display:grid;
-      gap:20px;
+    .section-title{
+      margin:0 0 10px;
+      font-size:clamp(26px, 4vw, 36px);
+      line-height:1.25;
+    }
+
+    .section-lead{
+      margin:0 0 26px;
+      color:var(--sub);
+      font-size:15px;
+      max-width:840px;
     }
 
     .info-grid{
+      display:grid;
       grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:18px;
     }
 
-    .card{
+    .info-card{
       background:var(--card);
       border:1px solid var(--line);
       border-radius:var(--radius);
+      padding:22px;
       box-shadow:var(--shadow);
-      padding:24px;
     }
 
-    .card h2{
-      margin:0 0 12px;
-      font-size:24px;
-      line-height:1.3;
+    .info-card h3{
+      margin:0 0 6px;
+      font-size:15px;
+      color:var(--sub);
+      font-weight:700;
     }
 
-    .card h3{
-      margin:0 0 8px;
+    .info-card p{
+      margin:0;
       font-size:18px;
-      line-height:1.4;
+      font-weight:700;
+      line-height:1.6;
     }
 
-    .meta{
+    .skills-grid{
       display:grid;
-      grid-template-columns:130px 1fr;
-      gap:12px 16px;
+      grid-template-columns:repeat(4, minmax(0, 1fr));
+      gap:16px;
       margin-top:8px;
     }
 
-    .meta dt{
-      font-weight:700;
-      color:#334155;
+    .skill-card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:22px 18px;
+      box-shadow:var(--shadow);
     }
 
-    .meta dd{
-      margin:0;
-      color:var(--text);
-    }
-
-    .notice{
-      margin-top:16px;
-      padding:14px 16px;
-      border-radius:16px;
-      background:var(--warm);
-      border:1px solid #ffe2b8;
-      color:#6b4e1f;
-      font-size:15px;
-    }
-
-    .strong-link{
-      font-weight:700;
-      word-break:break-word;
-    }
-
-    .features{
-      grid-template-columns:repeat(4, minmax(0,1fr));
-    }
-
-    .feature-num{
-      display:inline-flex;
-      width:38px;
-      height:38px;
-      align-items:center;
-      justify-content:center;
-      border-radius:50%;
-      background:var(--soft);
+    .skill-no{
+      font-size:12px;
       color:var(--accent);
       font-weight:800;
-      margin-bottom:12px;
+      letter-spacing:.08em;
+      margin-bottom:8px;
     }
 
-    .feature p{
+    .skill-card h3{
+      margin:0 0 8px;
+      font-size:18px;
+    }
+
+    .skill-card p{
       margin:0;
+      font-size:14px;
       color:var(--sub);
-      font-size:15px;
     }
 
-    .list{
+    .text-card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:24px;
+      box-shadow:var(--shadow);
+    }
+
+    .text-card p{
+      margin:0;
+      font-size:15px;
+      color:#374151;
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:20px;
+    }
+
+    .subcards{
+      display:grid;
+      gap:16px;
+    }
+
+    .subcard{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:20px;
+      box-shadow:var(--shadow);
+    }
+
+    .subcard h3{
+      margin:0 0 8px;
+      font-size:18px;
+    }
+
+    .subcard p{
+      margin:0;
+      font-size:14px;
+      color:var(--sub);
+    }
+
+    .checklist{
       margin:0;
       padding-left:1.2em;
     }
 
-    .list li{
-      margin:8px 0;
+    .checklist li{
+      margin:10px 0;
     }
 
-    .apply-box{
-      border:2px solid #d9e6ff;
-      background:linear-gradient(180deg,#f7fbff 0%, #ffffff 100%);
+    .summary-list{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:24px;
+      box-shadow:var(--shadow);
     }
 
-    .apply-box p{
-      margin:0 0 12px;
+    .summary-list ul{
+      margin:0;
+      padding-left:1.2em;
     }
 
-    .small{
+    .summary-list li{
+      margin:10px 0;
+      font-size:15px;
+    }
+
+    .samples-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:16px;
+    }
+
+    .sample-card{
+      display:block;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px 18px 16px;
+      box-shadow:var(--shadow);
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      color:inherit;
+    }
+
+    .sample-card:hover{
+      transform:translateY(-3px);
+      text-decoration:none;
+      border-color:#c7d2fe;
+      box-shadow:0 14px 30px rgba(15,23,42,0.08);
+    }
+
+    .sample-number{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:34px;
+      height:34px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      color:var(--accent);
+      font-weight:800;
+      font-size:13px;
+      margin-bottom:10px;
+    }
+
+    .sample-card h3{
+      margin:0 0 6px;
+      font-size:18px;
+    }
+
+    .sample-card p{
+      margin:0;
       font-size:14px;
       color:var(--sub);
     }
 
-    .samples{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0,1fr));
-      gap:14px;
-      margin-top:12px;
+    .tools-section{
+      background:linear-gradient(180deg, #f3f7ff 0%, #eef4ff 100%);
+      border-top:1px solid #dbe5f2;
+      border-bottom:1px solid #dbe5f2;
     }
 
-    .sample{
-      display:block;
-      padding:16px 18px;
-      border-radius:18px;
+    .tools-intro{
+      background:#ffffffcc;
       border:1px solid var(--line);
+      border-radius:20px;
+      padding:20px 22px;
+      box-shadow:var(--shadow);
+      margin-bottom:20px;
+    }
+
+    .tools-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:18px;
+    }
+
+    .tool-card{
       background:#fff;
-      color:var(--text);
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:22px;
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+
+    .tool-card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 14px 30px rgba(15,23,42,0.08);
+    }
+
+    .tool-icon{
+      width:56px;
+      height:56px;
+      border-radius:16px;
+      background:var(--accent-soft);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:28px;
+    }
+
+    .tool-card h3{
+      margin:0;
+      font-size:20px;
+    }
+
+    .tool-card p{
+      margin:0;
+      font-size:14px;
+      color:var(--sub);
+    }
+
+    .tool-link{
+      margin-top:auto;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
       font-weight:700;
     }
 
-    .sample span{
-      display:block;
-      font-weight:500;
-      color:var(--sub);
-      margin-top:4px;
-      font-size:14px;
+    .contact-box{
+      margin-top:24px;
+      background:var(--dark);
+      color:#fff;
+      border-radius:20px;
+      padding:24px;
     }
 
-    .sample:hover{
-      text-decoration:none;
-      border-color:#cfe0ff;
-      background:#fbfdff;
+    .contact-box p{
+      margin:0 0 10px;
+      color:#dbe4f0;
+    }
+
+    .contact-box a{
+      color:#fff;
+      text-decoration:underline;
     }
 
     footer{
-      padding:20px 0 48px;
-      color:var(--sub);
-      font-size:14px;
+      padding:32px 0 56px;
       text-align:center;
+      font-size:13px;
+      color:var(--sub);
     }
 
-    @media (max-width: 900px){
+    @media (max-width: 980px){
+      .skills-grid,
+      .tools-grid{
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+      }
+
+      .two-col{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 720px){
+      .hero{
+        padding:72px 0 52px;
+      }
+
       .info-grid,
-      .features,
-      .samples{
+      .samples-grid,
+      .skills-grid,
+      .tools-grid{
         grid-template-columns:1fr;
       }
 
-      .meta{
-        grid-template-columns:1fr;
-        gap:4px 0;
+      .section{
+        padding:52px 0;
       }
 
-      .hero-box{
-        padding:34px 22px;
+      .btn{
+        width:100%;
+      }
+
+      .hero-actions{
+        flex-direction:column;
       }
     }
   </style>
 </head>
 <body>
+
   <header class="hero">
     <div class="wrap">
-      <div class="hero-box">
+      <div class="hero-inner">
         <div class="eyebrow">Shimosuwa Creative Lab</div>
         <h1>やってみたいを、<br>かたちにする。</h1>
-        <p class="lead">
+        <p class="hero-sub">その一歩を、自分で。</p>
+        <p class="hero-text">
           ゲームやアプリを、自分で考えて、AIを使って、自分の作品として公開する。
           「見るだけ」だった世界から、「自分でつくる側」へ踏み出す90分です。
         </p>
-        <p class="hero-copy">
+        <p class="hero-text">
           Shimosuwa Creative Lab は、子どもたちが自分で考え、つくり、試しながら、
-          新しい世界へ一歩踏み出すための小さな創造の場です。<br>
+          新しい世界へ一歩踏み出すための小さな創造の場です。
           AIやデジタルツールを使いながら、「こういうものを作りたい」を言葉にし、
           少しずつ形にしていきます。
         </p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfPle-aidQCRKUvQ7w-qayl-i3efI5qZyfUVa97v9Rq3pjKiQ/viewform" target="_blank" rel="noopener noreferrer">申し込みフォームへ</a>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfPle-aidQCRKUvQ7w-qayl-i3efI5qZyfUVa97v9Rq3pjKiQ/viewform" target="_blank" rel="noopener noreferrer">申し込みはこちら</a>
           <a class="btn btn-secondary" href="#overview">募集概要を見る</a>
         </div>
       </div>
@@ -325,100 +492,28 @@
   </header>
 
   <main>
-    <section class="section" id="overview">
-      <div class="wrap">
-        <div class="grid info-grid">
-          <article class="card">
-            <h2>4月 参加者募集</h2>
-            <p>少人数で、安心して取り組める形で行います。</p>
-
-            <dl class="meta">
-              <dt>開催日</dt>
-              <dd>4月19日（日曜日）</dd>
-
-              <dt>開始時間</dt>
-              <dd><strong>13:30開始</strong></dd>
-
-              <dt>時間</dt>
-              <dd>13:30〜15:00（90分）</dd>
-
-              <dt>会場</dt>
-              <dd>
-                下諏訪まちづくり協働サポートセンター<br>
-                <a class="strong-link" href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000646/index.html" target="_blank" rel="noopener noreferrer">
-                  会場案内・地図はこちら
-                </a>
-              </dd>
-
-              <dt>対象</dt>
-              <dd>小学5年生〜中学生・高校生</dd>
-
-              <dt>保護者</dt>
-              <dd>同伴推奨</dd>
-
-              <dt>定員</dt>
-              <dd><strong>3名</strong></dd>
-
-              <dt>受講料</dt>
-              <dd>無料</dd>
-            </dl>
-
-            <div class="notice">
-              お車でお越しの方は、<strong>下諏訪総合文化センター駐車場</strong>をご利用いただけます。
-            </div>
-          </article>
-
-          <article class="card apply-box">
-            <h2>応募方法</h2>
-            <p>
-              参加をご希望の方は、<strong>下の申し込みフォームからご応募ください。</strong><br>
-              少人数開催のため、定員に達し次第締め切ります。
-            </p>
-
-            <div class="cta-row">
-              <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfPle-aidQCRKUvQ7w-qayl-i3efI5qZyfUVa97v9Rq3pjKiQ/viewform" target="_blank" rel="noopener noreferrer">
-                申し込みフォームを開く
-              </a>
-            </div>
-
-            <p class="small" style="margin-top:16px;">
-              お問い合わせ：<a href="mailto:farm@lucky-bright.com">farm@lucky-bright.com</a>
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
 
     <section class="section">
       <div class="wrap">
-        <div class="card">
-          <h2>この教室で育てる力</h2>
-          <p>
-            この教室では、難しい知識を詰め込むことよりも、
-            自分で考え、自分で試し、自分の手で形にしていく感覚を大切にしています。
-          </p>
+        <h2 class="section-title">4月 参加者募集</h2>
+        <p class="section-lead">少人数で、安心して取り組める形で行います。</p>
 
-          <div class="grid features" style="margin-top:20px;">
-            <div class="feature">
-              <div class="feature-num">01</div>
-              <h3>考える力</h3>
-              <p>やりたいことを、自分で見つけて考える力を育てます。</p>
-            </div>
-            <div class="feature">
-              <div class="feature-num">02</div>
-              <h3>つくる力</h3>
-              <p>アイデアを、実際に作品や形として表現していきます。</p>
-            </div>
-            <div class="feature">
-              <div class="feature-num">03</div>
-              <h3>伝える力</h3>
-              <p>自分の考えを言葉にし、AIも使いながら伝わる形に整理していきます。</p>
-            </div>
-            <div class="feature">
-              <div class="feature-num">04</div>
-              <h3>やってみる力</h3>
-              <p>できるかどうかよりも、まずやってみる姿勢を大切にします。</p>
-            </div>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3>開催日</h3>
+            <p>4月19日（日曜日）<br>13:30〜15:00（90分）</p>
+          </div>
+          <div class="info-card">
+            <h3>会場</h3>
+            <p>下諏訪まちづくり協働サポートセンター<br>下諏訪文化センター駐車場横<br>（〒393-0087 下諏訪町西鷹野町4611-77）</p>
+          </div>
+          <div class="info-card">
+            <h3>対象</h3>
+            <p>小学5年生〜中学生・高校生<br>保護者同伴推奨</p>
+          </div>
+          <div class="info-card">
+            <h3>定員・受講料</h3>
+            <p>定員 3名<br>受講料 無料</p>
           </div>
         </div>
       </div>
@@ -426,132 +521,235 @@
 
     <section class="section">
       <div class="wrap">
-        <div class="grid info-grid">
-          <article class="card">
-            <h2>この教室で実際に何を作るの？</h2>
-            <p>
-              この教室では、<strong>HTMLファイル1つで動く小さなゲームやアプリ</strong>を、
-              AIを使いながら自分で作ります。
-              難しいプログラムを最初から書くのではなく、
-              作りたいものを言葉にして、AIに伝え、少しずつ形にしていきます。
-              完成した作品は、実際にWebで見られる形で公開します。
-            </p>
+        <h2 class="section-title">この教室で育てる力</h2>
+        <p class="section-lead">
+          難しい知識を詰め込むことよりも、自分で考え、自分で試し、自分の手で形にしていく感覚を大切にしています。
+        </p>
 
-            <h3>作るもののイメージ</h3>
-            <p>
-              カウンターゲーム、クイズ、簡単なおみくじ、反応速度ゲーム、
-              ミニチャットボットなど、HTMLひとつで動く作品を作ります。
-            </p>
-
-            <h3>AIをどう使うの？</h3>
-            <p>
-              「こういうものを作りたい」をAIに伝え、
-              画面や動きのアイデア、プログラムの形を一緒に考えながら作っていきます。
-            </p>
-
-            <h3>作るだけで終わらない</h3>
-            <p>
-              できあがった作品は、自分だけのWebページとして公開し、
-              他の人にも見てもらえる形にします。
-            </p>
-          </article>
-
-          <article class="card">
-            <h2>受講にあたって必要なもの</h2>
-            <ul class="list">
-              <li><strong>パソコンをご持参ください。</strong> インターネットに接続できるパソコンであれば大丈夫です。</li>
-              <li><strong>インターネット環境はこちらで準備します。</strong> 会場で接続できるようにします。</li>
-              <li><strong>メールアドレスをご用意ください。</strong> 普段使っているもの、または保護者の方のメールアドレスでも大丈夫です。</li>
-              <li><strong>AIを使うためのアカウントを使用します。</strong> すでにお持ちであれば、そのまま使えます。</li>
-              <li><strong>保護者同伴をおすすめします。</strong> アカウント作成から一緒に行う場合も安心です。</li>
-              <li><strong>受講料は無料です。</strong> まずは気軽に体験していただける形で実施します。</li>
-            </ul>
-          </article>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-no">01</div>
+            <h3>考える力</h3>
+            <p>やりたいことを、自分で見つけて考える力を育てます。</p>
+          </div>
+          <div class="skill-card">
+            <div class="skill-no">02</div>
+            <h3>つくる力</h3>
+            <p>アイデアを、実際に作品や形として表現していきます。</p>
+          </div>
+          <div class="skill-card">
+            <div class="skill-no">03</div>
+            <h3>伝える力</h3>
+            <p>自分の考えを言葉にし、AIも使いながら伝わる形に整理していきます。</p>
+          </div>
+          <div class="skill-card">
+            <div class="skill-no">04</div>
+            <h3>やってみる力</h3>
+            <p>できるかどうかよりも、まずやってみる姿勢を大切にします。</p>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section">
       <div class="wrap">
-        <div class="card">
-          <h2>サンプル作品</h2>
+        <div class="text-card">
+          <h2 class="section-title" style="margin-top:0;">保護者の方へ</h2>
           <p>
-            実際にこの教室で目指すイメージに近いサンプルです。いずれも、
-            HTMLファイル1つで動く小さなゲームやアプリです。
+            この教室では、単に作るだけでなく、わからないことやできないことに出会ったときに、
+            自分で考え、試し、工夫していく経験も大切にしています。
           </p>
-
-<div class="samples">
-  <a class="sample" href="sample/01_counter_game.html" target="_blank" rel="noopener noreferrer">
-    01 Counter Game
-    <span>数を増やして遊ぶシンプルなカウンターゲーム</span>
-  </a>
-
-  <a class="sample" href="sample/02_paint_app.html" target="_blank" rel="noopener noreferrer">
-    02 Paint App
-    <span>自分で描いて楽しめるお絵かきアプリ</span>
-  </a>
-
-  <a class="sample" href="sample/03_omikuji.html" target="_blank" rel="noopener noreferrer">
-    03 Omikuji
-    <span>ボタンを押すと結果が出るおみくじアプリ</span>
-  </a>
-
-  <a class="sample" href="sample/04_quiz_game.html" target="_blank" rel="noopener noreferrer">
-    04 Quiz Game
-    <span>問題に答えて遊べるミニクイズゲーム</span>
-  </a>
-
-  <a class="sample" href="sample/05_reaction_test.html" target="_blank" rel="noopener noreferrer">
-    05 Reaction Test
-    <span>反応の速さを試せるシンプルなゲーム</span>
-  </a>
-
-  <a class="sample" href="sample/06_simple_chatbot.html" target="_blank" rel="noopener noreferrer">
-    06 Simple Chatbot
-    <span>簡単な受け答えができるミニチャットボット</span>
-  </a>
-
-  <a class="sample" href="sample/07_slide_puzzle.html" target="_blank" rel="noopener noreferrer">
-    07 Slide Puzzle
-    <span>スライドして揃えるパズルゲーム</span>
-  </a>
-
-  <a class="sample" href="sample/08_motion_app.html" target="_blank" rel="noopener noreferrer">
-    08 Motion app
-    <span>ボールを投げる</span>
-  </a>
-</div>
         </div>
       </div>
     </section>
 
+    <section class="section">
+      <div class="wrap">
+        <h2 class="section-title">この教室で実際に何を作るの？</h2>
+        <p class="section-lead">
+          HTMLファイル1つで動く小さなゲームやアプリを、AIを使いながら自分で作ります。
+          難しいプログラムを最初から書くのではなく、作りたいものを言葉にして、AIに伝え、少しずつ形にしていきます。
+          完成した作品は、実際にWebで見られる形で公開します。
+        </p>
 
-<section style="text-align:center; padding:60px 20px; background:#ffffff;">
-  <h2 style="font-size:24px; margin-bottom:10px;">
-    みんなの作品を見る
-  </h2>
-  <p style="color:#666; font-size:14px; margin-bottom:20px;">
-    教室で生まれたアイデアたち
-  </p>
-  <a href="gallery.html" target="_blank" style="
-    display:inline-block;
-    padding:12px 24px;
-    background:#333;
-    color:#fff;
-    text-decoration:none;
-    border-radius:8px;
-    transition:0.2s;
-  ">
-    作品ギャラリーへ
-  </a>
-</section>
+        <div class="two-col">
+          <div class="subcards">
+            <div class="subcard">
+              <h3>作るもののイメージ</h3>
+              <p>カウンターゲーム、クイズ、簡単なおみくじ、反応速度ゲーム、ミニチャットボットなど、HTMLひとつで動く作品を作ります。</p>
+            </div>
+            <div class="subcard">
+              <h3>AIをどう使うの？</h3>
+              <p>「こういうものを作りたい」をAIに伝え、画面や動きのアイデア、プログラムの形を一緒に考えながら作っていきます。</p>
+            </div>
+            <div class="subcard">
+              <h3>作るだけで終わらない</h3>
+              <p>できあがった作品は、自分だけのWebページとして公開し、他の人にも見てもらえる形にします。</p>
+            </div>
+            <div class="subcard">
+              <h3>少人数で丁寧に進める</h3>
+              <p>今回は3名募集。わからないところを確認しながら、自分のペースで一つずつ作っていける形にします。</p>
+            </div>
+          </div>
 
-  
-    </main>
+          <div class="summary-list">
+            <h3 style="margin-top:0;">受講にあたって必要なもの</h3>
+            <ul class="checklist">
+              <li>パソコンをご持参ください。インターネットに接続できるパソコンであれば大丈夫です。</li>
+              <li>インターネット環境はこちらで準備します。会場で接続できるようにします。</li>
+              <li>メールアドレスをご用意ください。普段使っているメールアドレス、または保護者のメールアドレスをご利用ください。</li>
+              <li>AIを使うためのアカウントを使用します。すでにアカウントをお持ちであれば、そのまま使えます。</li>
+              <li>保護者同伴をおすすめします。アカウント作成から一緒に行う場合も安心です。</li>
+              <li>受講料は無料です。まずは気軽に体験していただける形で実施します。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="overview">
+      <div class="wrap">
+        <h2 class="section-title">募集概要</h2>
+        <p class="section-lead">まずは小さく、丁寧に始めるための募集です。</p>
+
+        <div class="two-col">
+          <div class="summary-list">
+            <h3 style="margin-top:0;">開催情報</h3>
+            <ul>
+              <li>開催日：4月19日（日曜日）</li>
+              <li>時間：13:30〜15:00（90分）</li>
+              <li>会場：下諏訪まちづくり協働サポートセンター 下諏訪文化センター駐車場横（〒393-0087 下諏訪町西鷹野町4611-77）</li>
+              <li>対象：小学5年生〜中学生・高校生</li>
+              <li>保護者：同伴推奨</li>
+              <li>定員：3名</li>
+              <li>受講料：無料</li>
+            </ul>
+          </div>
+
+          <div class="summary-list">
+            <h3 style="margin-top:0;">応募方法</h3>
+            <p style="margin-top:0;">
+              Googleフォームからお申し込みください。定員に達し次第、受付を終了します。
+            </p>
+            <p style="margin:18px 0 0;">
+              <a class="btn btn-primary" style="display:inline-flex; width:auto;" href="https://docs.google.com/forms/d/e/1FAIpQLSfPle-aidQCRKUvQ7w-qayl-i3efI5qZyfUVa97v9Rq3pjKiQ/viewform" target="_blank" rel="noopener noreferrer">Googleフォームで申し込む</a>
+            </p>
+            <p style="margin:16px 0 0;">
+              お問い合わせ：<a href="mailto:farm@lucky-bright.com">farm@lucky-bright.com</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2 class="section-title">サンプル作品</h2>
+        <p class="section-lead">
+          実際にこの教室で目指すイメージに近いサンプルです。いずれも、HTMLファイル1つで動く小さなゲームやアプリです。
+        </p>
+
+        <div class="samples-grid">
+          <a class="sample-card" href="sample/counter-game.html" target="_blank" rel="noopener noreferrer">
+            <div class="sample-number">01</div>
+            <h3>Counter Game</h3>
+            <p>数を増やして遊ぶシンプルなカウンターゲーム</p>
+          </a>
+
+          <a class="sample-card" href="sample/paint-app.html" target="_blank" rel="noopener noreferrer">
+            <div class="sample-number">02</div>
+            <h3>Paint App</h3>
+            <p>自分で描いて楽しめるお絵かきアプリ</p>
+          </a>
+
+          <a class="sample-card" href="sample/omikuji.html" target="_blank" rel="noopener noreferrer">
+            <div class="sample-number">03</div>
+            <h3>Omikuji</h3>
+            <p>ボタンを押すと結果が出るおみくじアプリ</p>
+          </a>
+
+          <a class="sample-card" href="sample/quiz-game.html" target="_blank" rel="noopener noreferrer">
+            <div class="sample-number">04</div>
+            <h3>Quiz Game</h3>
+            <p>問題に答えて遊べるミニクイズゲーム</p>
+          </a>
+
+          <a class="sample-card" href="sample/reaction-test.html" target="_blank" rel="noopener noreferrer">
+            <div class="sample-number">05</div>
+            <h3>Reaction Test</h3>
+            <p>反応の速さを試せるシンプルなゲーム</p>
+          </a>
+
+          <a class="sample-card" href="sample/simple-chatbot.html" target="_blank" rel="noopener noreferrer">
+            <div class="sample-number">06</div>
+            <h3>Simple Chatbot</h3>
+            <p>簡単な受け答えができるミニチャットボット</p>
+          </a>
+
+          <a class="sample-card" href="sample/slide-puzzle.html" target="_blank" rel="noopener noreferrer">
+            <div class="sample-number">07</div>
+            <h3>Slide Puzzle</h3>
+            <p>並べ替えて遊ぶスライドパズル</p>
+          </a>
+
+          <a class="sample-card" href="gallery.html" target="_blank" rel="noopener noreferrer">
+            <div class="sample-number">★</div>
+            <h3>みんなの作品ギャラリー</h3>
+            <p>教室で生まれた作品を見られるページ</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section tools-section">
+      <div class="wrap">
+        <h2 class="section-title">教室で使うページ</h2>
+        <p class="section-lead">
+          ここから下は、実際に教室が始まってから使うためのページです。
+          「どのAIを使うか」「どうやってアプリを作るか」「ニックネームをどう決めるか」を、すぐ見られるようにしています。
+        </p>
+
+        <div class="tools-intro">
+          教室の中で迷わないように、必要なページをまとめています。必要になったときに、このページから開いて使ってください。
+        </div>
+
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-icon">🤖</div>
+            <h3>AIツール紹介</h3>
+            <p>
+              ChatGPT や Gemini など、言葉でアプリ作りを手伝ってくれるAIを比較して見られるページです。
+              それぞれの特徴や向いている使い方を整理しています。
+            </p>
+            <a class="tool-link" href="ai-tools.html" target="_blank" rel="noopener noreferrer">ai-tools.html を開く →</a>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">🛠️</div>
+            <h3>AIでアプリを作る手順</h3>
+            <p>
+              AIを選ぶところから、HTMLファイルとして保存し、ブラウザで動かしてみるところまでの具体的な流れをまとめたページです。
+            </p>
+            <a class="tool-link" href="how-to-make-app.html" target="_blank" rel="noopener noreferrer">how-to-make-app.html を開く →</a>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">🏷️</div>
+            <h3>ニックネームを選ぶ</h3>
+            <p>
+              教室ではニックネームで参加します。選びやすいヒントを一覧で見ながら、自分に合う名前を見つけられるページです。
+            </p>
+            <a class="tool-link" href="nickname.html" target="_blank" rel="noopener noreferrer">nickname.html を開く →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
   <footer>
-    <div class="wrap">
-      © Shimosuwa Creative Lab
-    </div>
+    © Shimosuwa Creative Lab
   </footer>
+
 </body>
 </html>
