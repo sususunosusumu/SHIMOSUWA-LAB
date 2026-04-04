@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ニックネームを選ぼう</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  background: #f7f9fc;
+  color: #333;
+}
+
+header {
+  text-align: center;
+  padding: 50px 20px 20px;
+}
+
+header h1 {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 14px;
+  color: #666;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.card {
+  background: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  background: #eef5ff;
+}
+
+.copied {
+  background: #d1f5d3 !important;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  font-size: 12px;
+  color: #999;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+  <h1>ニックネームを選ぼう</h1>
+  <p>気に入った名前をクリックするとコピーできます</p>
+</header>
+
+<div class="container">
+  <div class="grid" id="nicknameGrid"></div>
+</div>
+
+<footer>
+  SHIMOSUWA LAB
+</footer>
+
+<script>
+const names = [
+
+"ソラ","ミズキ","カイト","ユウ","ハル","レン","アオ","ヒナ","ナツ","リク",
+"ツバサ","ココ","サクラ","ユキ","ミナト","ヒカル","メイ","リン","シオン","カナタ",
+
+"ブルー","グリーン","レッド","スカイ","サン","ムーン","スター","クラウド","レイン","スノー",
+"フォレスト","リーフ","ウィンド","オーシャン","フレイム","サンダー","シャドウ","ライト","ミスト","ストーム",
+
+"ねこまる","うさぴょん","もふもふ","ぴよぴよ","ころころ","ふわり","ぽてと","みるく","くるみ","ましゅまろ",
+"ぷりん","いちご","もも","ちょこ","あめ","ゼリー","ぱんだ","こあら","らびっと","ひよこ",
+
+"ブレイズ","ゼロ","アルファ","オメガ","レイヴン","ナイト","ファントム","ギア","クロス","エッジ",
+"スパーク","フェニックス","レオン","ヴァイス","ストライカー","ハンター","ドラゴン","ウルフ","タイタン","ネクサス",
+
+"レベル1","ボス","ミニボス","プレイヤーX","チャレンジャー","スキルマスター","EXP","クリア","リスタート","セーブ",
+"ロード","スピードラン","バグハンター","コマンド","コンボ","マップ","クエスト","アイテム","パワーアップ","ステージ1",
+
+"カレー","ラーメン","ピザ","すし","たこやき","からあげ","おにぎり","パン","ハンバーガー","ポテト",
+"アイス","ドーナツ","チョコ","クッキー","ケーキ","オムライス","スパゲティ","やきそば","うどん","そば",
+
+"ライオン","トラ","パンダ","キツネ","オオカミ","ウサギ","ネコ","イヌ","クマ","カエル",
+"フクロウ","タカ","ペンギン","シャチ","イルカ","サメ","カメ","ワシ","コウモリ","シカ",
+
+"コード","バイト","ビット","AIくん","データ","ロボ","ハック","バグ","デバッグ","プログラマー",
+"エンジニア","サーバー","クラウド","ネット","アプリ","HTML","CSS","JS","Python","Git",
+
+"なぞの人","しらない人","だれか","ひみつ","???","無名","通りすがり","影","観察者","旅人",
+
+"ダッシュ","スピード","ジャンプ","スライド","フライ","ターボ","アクセル","ブースト","ラッシュ","スプリント",
+
+"ギャラクシー","コスモ","ネビュラ","オービット","ロケット","スペース","マーズ","ユニバース",
+
+"のんびり","まったり","ぐだぐだ","ぼーっと","ふわふわ","ゆらゆら","ごろごろ","ぽけー",
+
+"天才（仮）","まだ初心者","バグ多め","途中です","未完成","たぶんOK","なんとかなる","考え中",
+
+"風","空","光","影","雷","火","水","月","星","雪",
+
+"K","M","S","T","R","X","Z","Q","Y","L",
+
+"つくる人","アイデアマン","ひらめき","クリエイター","デザイナー","発明家","チャレンジャー",
+
+"スマイル","ハッピー","ラッキー","ミラクル","ドリーム","ワクワク","キラキラ",
+
+"001","777","999","NoName","Unknown","Player","Hero","Legend",
+
+"ネオ","オリジン","フューチャー","リンク","スイッチ","ビジョン","フロー","シグナル","コネクト",
+
+"ひとしずく","きらり","ひかり","そよかぜ","さざなみ","あかり","つばさ","はじまり","これから",
+
+"START","GO","TRY","MAKE","BUILD","CREATE","PLAY","YOU"
+
+];
+
+const grid = document.getElementById("nicknameGrid");
+
+names.forEach(name => {
+  const div = document.createElement("div");
+  div.className = "card";
+  div.innerText = name;
+
+  div.onclick = () => {
+    navigator.clipboard.writeText(name);
+    div.classList.add("copied");
+    setTimeout(() => div.classList.remove("copied"), 500);
+  };
+
+  grid.appendChild(div);
+});
+</script>
+
+</body>
+</html>
