@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIでアプリをつくろう | SHIMOSUWA LAB</title>
+  <style>
+    :root{
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --text:#1f2937;
+      --sub:#6b7280;
+      --line:#e5e7eb;
+      --accent:#2563eb;
+      --accent2:#0f172a;
+      --good:#16a34a;
+      --warn:#d97706;
+      --soft:#eff6ff;
+    }
+
+    *{box-sizing:border-box;}
+
+    body{
+      margin:0;
+      font-family:"Segoe UI","Hiragino Sans","Yu Gothic UI",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.7;
+    }
+
+    header{
+      padding:72px 20px 40px;
+      text-align:center;
+      background:linear-gradient(180deg,#eef4ff 0%, #f6f8fb 100%);
+    }
+
+    header h1{
+      margin:0 0 14px;
+      font-size:clamp(28px,4vw,42px);
+      line-height:1.25;
+    }
+
+    header p{
+      max-width:820px;
+      margin:0 auto;
+      color:var(--sub);
+      font-size:15px;
+    }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:24px 20px 80px;
+    }
+
+    .lead-box{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:22px;
+      margin-bottom:24px;
+      box-shadow:0 8px 24px rgba(15,23,42,0.04);
+    }
+
+    .lead-box h2{
+      margin:0 0 10px;
+      font-size:22px;
+    }
+
+    .lead-box p{
+      margin:0;
+      color:var(--sub);
+      font-size:14px;
+    }
+
+    .top-picks{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:16px;
+      margin:20px 0 30px;
+    }
+
+    .pick{
+      background:linear-gradient(180deg,#ffffff 0%, #f8fbff 100%);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:18px;
+      box-shadow:0 8px 24px rgba(15,23,42,0.04);
+    }
+
+    .pick .badge{
+      display:inline-block;
+      font-size:12px;
+      padding:4px 10px;
+      border-radius:999px;
+      background:var(--soft);
+      color:var(--accent);
+      font-weight:700;
+      margin-bottom:10px;
+    }
+
+    .pick h3{
+      margin:0 0 8px;
+      font-size:20px;
+    }
+
+    .pick p{
+      margin:0;
+      font-size:14px;
+      color:var(--sub);
+    }
+
+    .section-title{
+      margin:38px 0 14px;
+      font-size:24px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:18px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:20px;
+      box-shadow:0 8px 24px rgba(15,23,42,0.04);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .card-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .card h3{
+      margin:0;
+      font-size:22px;
+    }
+
+    .tag{
+      white-space:nowrap;
+      font-size:12px;
+      font-weight:700;
+      border-radius:999px;
+      padding:5px 10px;
+      background:#f3f4f6;
+      color:#374151;
+    }
+
+    .tag.good{
+      background:#ecfdf3;
+      color:var(--good);
+    }
+
+    .tag.warn{
+      background:#fff7ed;
+      color:var(--warn);
+    }
+
+    .meta{
+      font-size:13px;
+      color:var(--sub);
+    }
+
+    .desc{
+      font-size:14px;
+      color:#374151;
+    }
+
+    .point{
+      border-top:1px solid var(--line);
+      padding-top:12px;
+      font-size:14px;
+    }
+
+    .point strong{
+      display:block;
+      margin-bottom:4px;
+      font-size:14px;
+    }
+
+    .score{
+      display:grid;
+      grid-template-columns:130px 1fr;
+      gap:8px 12px;
+      align-items:center;
+      font-size:14px;
+      margin-top:2px;
+    }
+
+    .bar{
+      height:10px;
+      background:#e5e7eb;
+      border-radius:999px;
+      overflow:hidden;
+    }
+
+    .fill{
+      height:100%;
+      border-radius:999px;
+      background:linear-gradient(90deg,#60a5fa,#2563eb);
+    }
+
+    .summary{
+      margin-top:34px;
+      background:#0f172a;
+      color:white;
+      border-radius:20px;
+      padding:24px;
+    }
+
+    .summary h2{
+      margin:0 0 14px;
+      font-size:24px;
+    }
+
+    .summary-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:16px;
+    }
+
+    .summary-card{
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.12);
+      border-radius:14px;
+      padding:16px;
+    }
+
+    .summary-card h3{
+      margin:0 0 8px;
+      font-size:18px;
+    }
+
+    .summary-card p{
+      margin:0;
+      font-size:14px;
+      color:#dbe4f0;
+    }
+
+    footer{
+      text-align:center;
+      padding:34px 20px 60px;
+      color:var(--sub);
+      font-size:12px;
+    }
+
+    @media (max-width:640px){
+      .score{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AIでアプリをつくろう</h1>
+    <p>
+      言葉で伝えるだけで、HTMLファイル1つのミニアプリやWebページを作れる時代です。
+      ここでは、そうしたことが実際にやりやすいAIツールを、わかりやすく整理しています。
+    </p>
+  </header>
+
+  <main class="wrap">
+    <section class="lead-box">
+      <h2>このページの見方</h2>
+      <p>
+        「使いやすさ」「1ファイルHTMLとの相性」「デザインの強さ」「初心者向きか」を中心に見ています。
+        教室で最初に使うなら ChatGPT、比較体験なら Claude、開発寄りなら Cursor や Copilot、
+        見た目重視なら v0、ブラウザ上で完結しやすいのは Replit という整理です。
+      </p>
+    </section>
+
+    <section class="top-picks">
+      <div class="pick">
+        <div class="badge">いちばんおすすめ</div>
+        <h3>ChatGPT</h3>
+        <p>日本語で指示しやすく、HTML・CSS・JavaScriptを1つにまとめた形で出してもらいやすい。</p>
+      </div>
+      <div class="pick">
+        <div class="badge">比較におすすめ</div>
+        <h3>Claude</h3>
+        <p>長めのコードや整理が得意。落ち着いた構成で、見通しの良いコードになりやすい。</p>
+      </div>
+      <div class="pick">
+        <div class="badge">見た目重視</div>
+        <h3>v0</h3>
+        <p>きれいなUIを作るのが得意。ただしHTML1枚より、React系の構成に寄りやすい。</p>
+      </div>
+    </section>
+
+    <h2 class="section-title">ツール一覧</h2>
+
+    <section class="grid">
+
+      <article class="card">
+        <div class="card-head">
+          <h3>ChatGPT</h3>
+          <span class="tag good">教室向き</span>
+        </div>
+        <div class="meta">自然言語で仕様を伝え、HTML/CSS/JavaScriptのコード生成や修正を会話で進めやすいタイプ</div>
+        <div class="desc">
+          「こんなゲームを作って」「ボタンを丸くして」「1つのHTMLにまとめて」といった指示がしやすく、
+          初心者にも扱いやすいのが強みです。
+        </div>
+        <div class="point">
+          <strong>強み</strong>
+          日本語でのやり取りがしやすい / 修正依頼がしやすい / 1ファイルHTMLにまとめやすい
+        </div>
+        <div class="point">
+          <strong>注意点</strong>
+          ときどきコードの細かいミスがある / 複雑な仕様では何回か直す前提
+        </div>
+        <div class="score">
+          <div>教室での使いやすさ</div><div class="bar"><div class="fill" style="width:96%"></div></div>
+          <div>1ファイルHTML向き</div><div class="bar"><div class="fill" style="width:95%"></div></div>
+          <div>デザイン力</div><div class="bar"><div class="fill" style="width:78%"></div></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>Claude</h3>
+          <span class="tag good">比較向き</span>
+        </div>
+        <div class="meta">Artifacts でコードやWebデザインを専用表示しながら進めやすいタイプ</div>
+        <div class="desc">
+          説明が丁寧で、構造が整ったコードになりやすいです。長いコードや整理された出力が得意で、
+          「落ち着いた職人タイプ」という感じです。
+        </div>
+        <div class="point">
+          <strong>強み</strong>
+          コード整理がうまい / 長めの出力に強い / Artifactsで見やすい
+        </div>
+        <div class="point">
+          <strong>注意点</strong>
+          教室では少し説明がまじめ寄り / 日本語での体感はChatGPTの方が軽快に感じる場面もある
+        </div>
+        <div class="score">
+          <div>教室での使いやすさ</div><div class="bar"><div class="fill" style="width:86%"></div></div>
+          <div>1ファイルHTML向き</div><div class="bar"><div class="fill" style="width:90%"></div></div>
+          <div>デザイン力</div><div class="bar"><div class="fill" style="width:82%"></div></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>Gemini Code Assist</h3>
+          <span class="tag">開発学習向き</span>
+        </div>
+        <div class="meta">Googleの開発支援系。自然言語でコーディング支援を受けるのに向くタイプ</div>
+        <div class="desc">
+          「AIにコードを書かせる」こと自体はできますが、教室で会話中心に見せるなら、
+          ChatGPTやClaudeの方がわかりやすい場面が多いです。
+        </div>
+        <div class="point">
+          <strong>強み</strong>
+          Google系の開発支援として今後も有力 / 個人向け無料枠がある
+        </div>
+        <div class="point">
+          <strong>注意点</strong>
+          “アプリを会話でどんどん作る体験”は専用チャットAIほど直感的ではない
+        </div>
+        <div class="score">
+          <div>教室での使いやすさ</div><div class="bar"><div class="fill" style="width:68%"></div></div>
+          <div>1ファイルHTML向き</div><div class="bar"><div class="fill" style="width:76%"></div></div>
+          <div>デザイン力</div><div class="bar"><div class="fill" style="width:64%"></div></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>GitHub Copilot</h3>
+          <span class="tag warn">開発者向き</span>
+        </div>
+        <div class="meta">IDEの中で自然言語コメントやチャットからコード補完・生成を行うタイプ</div>
+        <div class="desc">
+          実務ではかなり強いですが、初心者がいきなり触るには少し専門的です。
+          「会話してそのままHTML完成」より、「コードを書く人を助けるAI」に近いです。
+        </div>
+        <div class="point">
+          <strong>強み</strong>
+          実務レベルで強い / 補完が速い / IDE連携が豊富
+        </div>
+        <div class="point">
+          <strong>注意点</strong>
+          教室で最初に使うには難しめ / エディタの操作も必要
+        </div>
+        <div class="score">
+          <div>教室での使いやすさ</div><div class="bar"><div class="fill" style="width:48%"></div></div>
+          <div>1ファイルHTML向き</div><div class="bar"><div class="fill" style="width:70%"></div></div>
+          <div>デザイン力</div><div class="bar"><div class="fill" style="width:58%"></div></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>Replit Agent</h3>
+          <span class="tag">ブラウザ完結向き</span>
+        </div>
+        <div class="meta">自然言語でアプリやサイトを作り、実行・共有までブラウザで進めやすいタイプ</div>
+        <div class="desc">
+          ブラウザだけで作り始めやすいのが魅力です。作るだけでなく、
+          そのまま動かして公開まで持っていきやすい流れがあります。
+        </div>
+        <div class="point">
+          <strong>強み</strong>
+          ブラウザで完結しやすい / 作ってすぐ試せる / 公開の流れまでつながる
+        </div>
+        <div class="point">
+          <strong>注意点</strong>
+          日本語中心の教室だとChatGPTほど自然ではない場面もある
+        </div>
+        <div class="score">
+          <div>教室での使いやすさ</div><div class="bar"><div class="fill" style="width:74%"></div></div>
+          <div>1ファイルHTML向き</div><div class="bar"><div class="fill" style="width:78%"></div></div>
+          <div>デザイン力</div><div class="bar"><div class="fill" style="width:72%"></div></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>Cursor</h3>
+          <span class="tag warn">上級者向き</span>
+        </div>
+        <div class="meta">AIエージェントと一緒にソフトウェアを作るIDE寄りの開発環境</div>
+        <div class="desc">
+          かなり強力ですが、教室の入口としては少し重いです。
+          「本格的に開発していく人が使う世界」に近く、将来用として紹介するのはありです。
+        </div>
+        <div class="point">
+          <strong>強み</strong>
+          エージェント型開発が強い / 本格開発に向く / 長い修正にも強い
+        </div>
+        <div class="point">
+          <strong>注意点</strong>
+          初心者にはオーバースペック / まずはChatGPTの方が入りやすい
+        </div>
+        <div class="score">
+          <div>教室での使いやすさ</div><div class="bar"><div class="fill" style="width:40%"></div></div>
+          <div>1ファイルHTML向き</div><div class="bar"><div class="fill" style="width:72%"></div></div>
+          <div>デザイン力</div><div class="bar"><div class="fill" style="width:66%"></div></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>v0</h3>
+          <span class="tag">UI特化</span>
+        </div>
+        <div class="meta">テキストからUIやアプリ画面を作るのが得意な、見た目重視タイプ</div>
+        <div class="desc">
+          デザイン面はかなり強いです。ただし、出力はReactやTailwind寄りになりやすく、
+          「HTML1枚だけで完結」にこだわる教室には少しズレることがあります。
+        </div>
+        <div class="point">
+          <strong>強み</strong>
+          UIがきれい / 画面づくりが速い / 見た目の完成度が高い
+        </div>
+        <div class="point">
+          <strong>注意点</strong>
+          1ファイルHTML教材とは相性がやや弱い / 開発構成が少し本格寄り
+        </div>
+        <div class="score">
+          <div>教室での使いやすさ</div><div class="bar"><div class="fill" style="width:62%"></div></div>
+          <div>1ファイルHTML向き</div><div class="bar"><div class="fill" style="width:46%"></div></div>
+          <div>デザイン力</div><div class="bar"><div class="fill" style="width:96%"></div></div>
+        </div>
+      </article>
+
+    </section>
+
+    <section class="summary">
+      <h2>結論</h2>
+      <div class="summary-grid">
+        <div class="summary-card">
+          <h3>まず使うなら</h3>
+          <p>ChatGPT。日本語で伝えやすく、1つのHTMLにまとめやすいので教室との相性がとても良いです。</p>
+        </div>
+        <div class="summary-card">
+          <h3>比較するなら</h3>
+          <p>Claude。ChatGPTと並べて見せると、AIごとの出力の違いが体験できます。</p>
+        </div>
+        <div class="summary-card">
+          <h3>見た目重視なら</h3>
+          <p>v0。きれいな画面づくりを見せる用途には強いですが、教材としてはやや開発寄りです。</p>
+        </div>
+        <div class="summary-card">
+          <h3>将来の発展先</h3>
+          <p>Copilot、Cursor、Replit。作るだけでなく、本格的に開発していく方向に進めます。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    SHIMOSUWA LAB
+  </footer>
+</body>
+</html>
