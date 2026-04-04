@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>子どもたちの作品ギャラリー | SHIMOSUWA LAB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      background: #f7f9fc;
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 30px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .desc {
+      font-size: 13px;
+      color: #777;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      font-size: 12px;
+      color: #999;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>小さなクリエイターたちの作品集</h1>
+  <p>AIと一緒に生まれたアイデアたち</p>
+</header>
+
+<div class="container">
+  <div class="grid">
+
+    <!-- ▼ここに作品を追加していく -->
+    <a class="card" href="sample/sample1.html" target="_blank">
+      <div class="title">電卓アプリ</div>
+      <div class="desc">はじめて作った計算ツール</div>
+    </a>
+
+    <a class="card" href="sample/sample2.html" target="_blank">
+      <div class="title">数字あてゲーム</div>
+      <div class="desc">ランダムな数字を当てるゲーム</div>
+    </a>
+
+    <a class="card" href="sample/sample3.html" target="_blank">
+      <div class="title">タイマーアプリ</div>
+      <div class="desc">時間を測るシンプルなツール</div>
+    </a>
+
+    <!-- ▲ここまで -->
+
+  </div>
+</div>
+
+<footer>
+  SHIMOSUWA LAB
+</footer>
+
+</body>
+</html>
