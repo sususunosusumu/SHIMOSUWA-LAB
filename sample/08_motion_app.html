@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ボールの軌跡シミュレーター（重力・サイズ・重さ切替）</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+      background: linear-gradient(180deg, #eef7ff 0%, #f8fbff 100%);
+      color: #1f2937;
+    }
+    .wrap {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+    }
+    .lead {
+      margin: 0 0 24px;
+      color: #4b5563;
+      line-height: 1.7;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 390px 1fr;
+      gap: 20px;
+    }
+    .panel, .canvas-card {
+      background: rgba(255,255,255,0.95);
+      border: 1px solid #dbeafe;
+      border-radius: 22px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+    .panel { padding: 20px; }
+    .canvas-card { padding: 16px; }
+    .section-title {
+      font-size: 1.05rem;
+      margin: 0 0 14px;
+      font-weight: 700;
+    }
+    .field { margin-bottom: 16px; }
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    input[type="number"], select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      font-size: 1rem;
+      background: #fff;
+    }
+    input[type="range"] {
+      width: 100%;
+      margin-top: 8px;
+    }
+    .value-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.94rem;
+      color: #475569;
+      margin-top: 6px;
+    }
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+    }
+    .primary { background: #2563eb; color: #fff; }
+    .secondary { background: #e2e8f0; color: #1e293b; }
+    .results {
+      margin-top: 20px;
+      display: grid;
+      gap: 10px;
+    }
+    .result-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+    .result-label {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 4px;
+    }
+    .result-value {
+      font-size: 1.22rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .mini-card {
+      margin-top: 10px;
+      padding: 12px 14px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 14px;
+      color: #1e3a8a;
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+    .formula, .note {
+      margin-top: 14px;
+      font-size: 0.92rem;
+      color: #475569;
+      line-height: 1.7;
+    }
+    .formula {
+      padding: 12px 14px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 14px;
+      color: #1e3a8a;
+    }
+    .subtle {
+      color: #64748b;
+      font-size: 0.88rem;
+      margin-top: 6px;
+      line-height: 1.6;
+    }
+    canvas {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: linear-gradient(180deg, #d7efff 0%, #f4fbff 64%, #dff3d6 64%, #cfeabf 100%);
+      border-radius: 18px;
+      border: 1px solid #bfdbfe;
+    }
+    .pill-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 0.82rem;
+      border: 1px solid #c7d2fe;
+    }
+    @media (max-width: 1000px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>ボールの軌跡シミュレーター</h1>
+    <p class="lead">
+      打ち出し角度、初速、風、重力、ボールの大きさや重さを変えながら、飛び方の違いを学べるアプリです。
+      月や火星で投げたらどうなるか、軽い球と重い球で何が変わるかも見られます。
+    </p>
+
+    <div class="grid">
+      <section class="panel">
+        <h2 class="section-title">条件を入力</h2>
+
+        <div class="field">
+          <label for="angle">打ち出し角度（度）</label>
+          <input type="number" id="angle" min="1" max="89" step="1" value="45" />
+          <input type="range" id="angleRange" min="1" max="89" step="1" value="45" />
+          <div class="value-row"><span>低い</span><span id="angleView">45°</span><span>高い</span></div>
+        </div>
+
+        <div class="field">
+          <label for="speed">初速（km/h）</label>
+          <input type="number" id="speed" min="1" max="300" step="1" value="72" />
+          <input type="range" id="speedRange" min="1" max="300" step="1" value="72" />
+          <div class="value-row"><span>遅い</span><span id="speedView">72 km/h</span><span>速い</span></div>
+        </div>
+
+        <div class="field">
+          <label for="gravityPreset">重力プリセット</label>
+          <select id="gravityPreset">
+            <option value="earth">地球（9.8 m/s²）</option>
+            <option value="moon">月（1.62 m/s²）</option>
+            <option value="mars">火星（3.71 m/s²）</option>
+            <option value="custom">カスタム</option>
+          </select>
+          <div class="pill-row">
+            <span class="pill">地球 9.8</span>
+            <span class="pill">月 1.62</span>
+            <span class="pill">火星 3.71</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="gravityValue">重力値（m/s²）</label>
+          <input type="number" id="gravityValue" min="0.1" max="30" step="0.01" value="9.8" />
+          <div class="subtle">プリセットを選ぶと自動で数値が入ります。カスタムにすると自由に変更できます。</div>
+        </div>
+
+        <div class="field">
+          <label for="windType">風向き</label>
+          <select id="windType">
+            <option value="tail">追い風</option>
+            <option value="head">向かい風</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="windSpeed">風速（m/s）</label>
+          <input type="number" id="windSpeed" min="0" max="50" step="1" value="5" />
+          <input type="range" id="windSpeedRange" min="0" max="50" step="1" value="5" />
+          <div class="value-row"><span>弱い</span><span id="windView">5 m/s</span><span>強い</span></div>
+        </div>
+
+        <div class="field">
+          <label for="sizePreset">ボールの大きさ</label>
+          <select id="sizePreset">
+            <option value="marble">パチンコ玉サイズ</option>
+            <option value="tennis">テニスボールサイズ</option>
+            <option value="baseball" selected>野球ボールサイズ</option>
+            <option value="soccer">サッカーボールサイズ</option>
+            <option value="big">もっと大きいボール</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="massPreset">ボールの重さ</label>
+          <select id="massPreset">
+            <option value="light">軽い球（50 g）</option>
+            <option value="tennis">テニスボール（58 g）</option>
+            <option value="baseball" selected>野球ボール（145 g）</option>
+            <option value="soccer">サッカーボール（430 g）</option>
+            <option value="heavy">重い球（1,000 g）</option>
+          </select>
+          <div class="subtle">同じ初速でも、重さが大きいほど空気抵抗の影響を受けにくくなるようにしています。</div>
+        </div>
+
+        <div class="buttons">
+          <button class="primary" id="simulateBtn">アニメーション再生</button>
+          <button class="secondary" id="resetBtn">初期値に戻す</button>
+        </div>
+
+        <div class="results">
+          <div class="result-box">
+            <div class="result-label">到達距離</div>
+            <div class="result-value" id="rangeResult">- m</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">最高到達点</div>
+            <div class="result-value" id="maxHeightResult">- m</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">飛行時間</div>
+            <div class="result-value" id="timeResult">- 秒</div>
+          </div>
+        </div>
+
+        <div class="mini-card" id="currentInfo">
+          現在の条件がここに表示されます。
+        </div>
+
+        <div class="formula">
+          この版では、重力・風・空気抵抗・球の大きさ・球の重さを反映した簡易モデルを使っています。<br>
+          サイズが大きいほど空気抵抗を受けやすく、重いほど同じ抵抗でも減速しにくい、という関係を学習向けに表現しています。
+        </div>
+      </section>
+
+      <section class="canvas-card">
+        <canvas id="simCanvas" width="860" height="520"></canvas>
+        <div class="note">
+          青い線が軌跡、赤い点が最高点、オレンジの点が着地点です。グラフには到達距離と最高到達点の目安線も表示します。<br>
+          ボールの見た目サイズも選択に応じて変わります。
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const PLANET_GRAVITY = {
+      earth: 9.8,
+      moon: 1.62,
+      mars: 3.71
+    };
+
+    const SIZE_DATA = {
+      marble: { label: 'パチンコ玉サイズ', radiusM: 0.008, drawRadius: 5, kind: 'plain' },
+      tennis: { label: 'テニスボールサイズ', radiusM: 0.033, drawRadius: 8, kind: 'tennis' },
+      baseball: { label: '野球ボールサイズ', radiusM: 0.037, drawRadius: 10, kind: 'baseball' },
+      soccer: { label: 'サッカーボールサイズ', radiusM: 0.11, drawRadius: 16, kind: 'soccer' },
+      big: { label: 'もっと大きいボール', radiusM: 0.18, drawRadius: 22, kind: 'big' }
+    };
+
+    const MASS_DATA = {
+      light: { label: '軽い球', massKg: 0.05 },
+      tennis: { label: 'テニスボール', massKg: 0.058 },
+      baseball: { label: '野球ボール', massKg: 0.145 },
+      soccer: { label: 'サッカーボール', massKg: 0.43 },
+      heavy: { label: '重い球', massKg: 1.0 }
+    };
+
+    const AIR_DENSITY = 1.225;
+    const DRAG_COEFF = 0.47;
+    const DT = 0.02;
+
+    const angleInput = document.getElementById('angle');
+    const angleRange = document.getElementById('angleRange');
+    const speedInput = document.getElementById('speed');
+    const speedRange = document.getElementById('speedRange');
+    const gravityPreset = document.getElementById('gravityPreset');
+    const gravityValue = document.getElementById('gravityValue');
+    const windType = document.getElementById('windType');
+    const windSpeed = document.getElementById('windSpeed');
+    const windSpeedRange = document.getElementById('windSpeedRange');
+    const sizePreset = document.getElementById('sizePreset');
+    const massPreset = document.getElementById('massPreset');
+
+    const angleView = document.getElementById('angleView');
+    const speedView = document.getElementById('speedView');
+    const windView = document.getElementById('windView');
+    const rangeResult = document.getElementById('rangeResult');
+    const maxHeightResult = document.getElementById('maxHeightResult');
+    const timeResult = document.getElementById('timeResult');
+    const currentInfo = document.getElementById('currentInfo');
+
+    const canvas = document.getElementById('simCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let latestSim = null;
+    let animationFrameId = null;
+    let animationIndex = 0;
+
+    function updateLabels() {
+      angleView.textContent = `${angleInput.value}°`;
+      speedView.textContent = `${speedInput.value} km/h`;
+      windView.textContent = `${windSpeed.value} m/s`;
+    }
+
+    function syncInputs(source, target) {
+      target.value = source.value;
+      updateLabels();
+      prepareAndDraw(false);
+    }
+
+    function applyGravityPreset() {
+      const value = gravityPreset.value;
+      if (value !== 'custom') {
+        gravityValue.value = PLANET_GRAVITY[value];
+      }
+      prepareAndDraw(false);
+    }
+
+    function getCurrentSettings() {
+      const angle = Math.max(1, Math.min(89, Number(angleInput.value) || 45));
+      const speedKmh = Math.max(1, Number(speedInput.value) || 72);
+      const gravity = Math.max(0.1, Math.min(30, Number(gravityValue.value) || 9.8));
+      const wind = Math.max(0, Math.min(50, Number(windSpeed.value) || 0));
+      const direction = windType.value;
+      const size = SIZE_DATA[sizePreset.value];
+      const mass = MASS_DATA[massPreset.value];
+      return { angle, speedKmh, gravity, wind, direction, size, mass };
+    }
+
+    function simulateProjectile(settings) {
+      const angleRad = settings.angle * Math.PI / 180;
+      const v0 = settings.speedKmh / 3.6;
+      let vx = v0 * Math.cos(angleRad);
+      let vy = v0 * Math.sin(angleRad);
+      const wind = settings.direction === 'tail' ? settings.wind : -settings.wind;
+      const area = Math.PI * settings.size.radiusM * settings.size.radiusM;
+      const dragFactor = (0.5 * AIR_DENSITY * DRAG_COEFF * area) / settings.mass.massKg;
+
+      let x = 0;
+      let y = 0;
+      let t = 0;
+      let maxHeight = 0;
+      let xAtMaxHeight = 0;
+      const points = [{ x: 0, y: 0, t: 0 }];
+
+      while (t < 120) {
+        const relVx = vx - wind;
+        const relVy = vy;
+        const relSpeed = Math.sqrt(relVx * relVx + relVy * relVy);
+
+        const ax = -dragFactor * relSpeed * relVx;
+        const ay = -settings.gravity - dragFactor * relSpeed * relVy;
+
+        vx += ax * DT;
+        vy += ay * DT;
+        x += vx * DT;
+        y += vy * DT;
+        t += DT;
+
+        if (y > maxHeight) {
+          maxHeight = y;
+          xAtMaxHeight = x;
+        }
+
+        if (y >= 0) {
+          points.push({ x, y, t });
+        }
+
+        if (y < 0 && points.length >= 2) {
+          const p1 = points[points.length - 2];
+          const p2 = points[points.length - 1];
+          const ratio = p1.y / (p1.y - y);
+          const landX = p1.x + (x - p1.x) * ratio;
+          const landT = p1.t + (t - p1.t) * ratio;
+          points[points.length - 1] = { x: landX, y: 0, t: landT };
+          return { points, range: landX, maxHeight, flightTime: landT, xPeak: xAtMaxHeight, settings };
+        }
+      }
+
+      return {
+        points,
+        range: points[points.length - 1].x,
+        maxHeight,
+        flightTime: points[points.length - 1].t,
+        xPeak: xAtMaxHeight,
+        settings
+      };
+    }
+
+    function drawBase(maxX, maxY) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const margin = 64;
+      const groundY = canvas.height - 60;
+      const drawWidth = canvas.width - margin - 30;
+      const drawHeight = groundY - 24;
+
+      ctx.fillStyle = '#8b6a4c';
+      ctx.fillRect(0, groundY, canvas.width, canvas.height - groundY);
+
+      ctx.strokeStyle = '#475569';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(margin, groundY);
+      ctx.lineTo(canvas.width - 30, groundY);
+      ctx.moveTo(margin, groundY);
+      ctx.lineTo(margin, 24);
+      ctx.stroke();
+
+      ctx.fillStyle = '#334155';
+      ctx.font = '14px sans-serif';
+      ctx.fillText('距離 x（m）', canvas.width - 110, groundY - 10);
+      ctx.fillText('高さ y（m）', margin - 8, 20);
+
+      const xTicks = 5;
+      const yTicks = 5;
+      for (let i = 0; i <= xTicks; i++) {
+        const x = margin + (drawWidth * i / xTicks);
+        ctx.strokeStyle = 'rgba(100,116,139,0.22)';
+        ctx.beginPath();
+        ctx.moveTo(x, groundY);
+        ctx.lineTo(x, 24);
+        ctx.stroke();
+        ctx.fillStyle = '#475569';
+        ctx.fillText((maxX * i / xTicks).toFixed(1), x - 10, groundY + 20);
+      }
+      for (let i = 0; i <= yTicks; i++) {
+        const y = groundY - (drawHeight * i / yTicks);
+        ctx.strokeStyle = 'rgba(100,116,139,0.22)';
+        ctx.beginPath();
+        ctx.moveTo(margin, y);
+        ctx.lineTo(canvas.width - 30, y);
+        ctx.stroke();
+        ctx.fillStyle = '#475569';
+        ctx.fillText((maxY * i / yTicks).toFixed(1), 8, y + 4);
+      }
+
+      return { margin, groundY, drawWidth, drawHeight };
+    }
+
+    function drawBall(x, y, ball) {
+      const r = ball.drawRadius;
+      ctx.save();
+
+      if (ball.kind === 'baseball') {
+        ctx.fillStyle = '#fffaf5';
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#d1d5db';
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+        ctx.strokeStyle = '#c53030';
+        ctx.lineWidth = 1.1;
+        ctx.beginPath();
+        ctx.arc(x - 3, y, r * 0.7, -1.1, 1.1);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(x + 3, y, r * 0.7, 2.04, 4.24);
+        ctx.stroke();
+      } else if (ball.kind === 'tennis') {
+        ctx.fillStyle = '#d9f99d';
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(x - 2, y, r * 0.72, -1.2, 1.2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(x + 2, y, r * 0.72, 1.94, 4.34);
+        ctx.stroke();
+      } else if (ball.kind === 'soccer') {
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#111827';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.fillStyle = '#111827';
+        ctx.beginPath();
+        ctx.arc(x, y, r * 0.28, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (ball.kind === 'big') {
+        ctx.fillStyle = '#fca5a5';
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#be123c';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      } else {
+        ctx.fillStyle = '#9ca3af';
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    function renderScene(progressIndex = null) {
+      if (!latestSim) return;
+      const { points, range, maxHeight, flightTime, xPeak, settings } = latestSim;
+      const maxX = Math.max(range * 1.15, 10);
+      const maxY = Math.max(maxHeight * 1.35, 5);
+      const { margin, groundY, drawWidth, drawHeight } = drawBase(maxX, maxY);
+
+      const toCanvasX = x => margin + (x / maxX) * drawWidth;
+      const toCanvasY = y => groundY - (y / maxY) * drawHeight;
+
+      const visibleCount = progressIndex === null ? points.length : Math.max(1, progressIndex + 1);
+      const visiblePoints = points.slice(0, visibleCount);
+      const lastPoint = visiblePoints[visiblePoints.length - 1];
+      const peakPoint = points.reduce((best, p) => p.y > best.y ? p : best, points[0]);
+
+      ctx.save();
+      ctx.strokeStyle = '#2563eb';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      visiblePoints.forEach((p, i) => {
+        const cx = toCanvasX(p.x);
+        const cy = toCanvasY(p.y);
+        if (i === 0) ctx.moveTo(cx, cy);
+        else ctx.lineTo(cx, cy);
+      });
+      ctx.stroke();
+      ctx.restore();
+
+      ctx.save();
+      ctx.setLineDash([6, 6]);
+      ctx.strokeStyle = 'rgba(239,68,68,0.85)';
+      ctx.beginPath();
+      ctx.moveTo(margin, toCanvasY(maxHeight));
+      ctx.lineTo(toCanvasX(xPeak), toCanvasY(maxHeight));
+      ctx.stroke();
+
+      ctx.strokeStyle = 'rgba(245,158,11,0.95)';
+      ctx.beginPath();
+      ctx.moveTo(toCanvasX(range), groundY);
+      ctx.lineTo(toCanvasX(range), toCanvasY(0));
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.restore();
+
+      ctx.save();
+      ctx.fillStyle = '#ef4444';
+      ctx.beginPath();
+      ctx.arc(toCanvasX(peakPoint.x), toCanvasY(peakPoint.y), 5.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.font = '14px sans-serif';
+      ctx.fillText(`最高 ${maxHeight.toFixed(1)} m`, toCanvasX(peakPoint.x) + 10, toCanvasY(peakPoint.y) - 10);
+
+      ctx.fillStyle = '#f59e0b';
+      ctx.beginPath();
+      ctx.arc(toCanvasX(range), toCanvasY(0), 5.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillText(`距離 ${range.toFixed(1)} m`, toCanvasX(range) - 20, toCanvasY(0) - 14);
+      ctx.restore();
+
+      drawBall(toCanvasX(lastPoint.x), toCanvasY(lastPoint.y), settings.size);
+
+      ctx.save();
+      ctx.fillStyle = '#111827';
+      ctx.beginPath();
+      ctx.arc(toCanvasX(0), toCanvasY(0), 5.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.font = '13px sans-serif';
+      ctx.fillText('発射点', toCanvasX(0) + 10, toCanvasY(0) - 10);
+      ctx.fillText(`飛行時間 ${flightTime.toFixed(2)} 秒`, margin + 14, 40);
+      ctx.restore();
+    }
+
+    function prepareAndDraw(autoplay = false) {
+      const settings = getCurrentSettings();
+
+      angleInput.value = settings.angle;
+      angleRange.value = settings.angle;
+      speedInput.value = settings.speedKmh;
+      speedRange.value = settings.speedKmh;
+      gravityValue.value = settings.gravity;
+      windSpeed.value = settings.wind;
+      windSpeedRange.value = settings.wind;
+      updateLabels();
+
+      latestSim = simulateProjectile(settings);
+      rangeResult.textContent = `${latestSim.range.toFixed(2)} m`;
+      maxHeightResult.textContent = `${latestSim.maxHeight.toFixed(2)} m`;
+      timeResult.textContent = `${latestSim.flightTime.toFixed(2)} 秒`;
+
+      currentInfo.innerHTML = `
+        <strong>現在の条件</strong><br>
+        重力: ${settings.gravity.toFixed(2)} m/s² / ${settings.size.label} / ${settings.mass.label} (${(settings.mass.massKg * 1000).toFixed(0)} g)<br>
+        風: ${settings.direction === 'tail' ? '追い風' : '向かい風'} ${settings.wind.toFixed(0)} m/s
+      `;
+
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      animationIndex = 0;
+
+      if (autoplay) animateTrajectory();
+      else renderScene();
+    }
+
+    function animateTrajectory() {
+      if (!latestSim) return;
+      const total = latestSim.points.length;
+      function step() {
+        renderScene(animationIndex);
+        animationIndex += 2;
+        if (animationIndex < total) {
+          animationFrameId = requestAnimationFrame(step);
+        } else {
+          renderScene();
+        }
+      }
+      step();
+    }
+
+    angleInput.addEventListener('input', () => syncInputs(angleInput, angleRange));
+    angleRange.addEventListener('input', () => syncInputs(angleRange, angleInput));
+    speedInput.addEventListener('input', () => syncInputs(speedInput, speedRange));
+    speedRange.addEventListener('input', () => syncInputs(speedRange, speedInput));
+    windSpeed.addEventListener('input', () => syncInputs(windSpeed, windSpeedRange));
+    windSpeedRange.addEventListener('input', () => syncInputs(windSpeedRange, windSpeed));
+    windType.addEventListener('change', () => prepareAndDraw(false));
+    sizePreset.addEventListener('change', () => prepareAndDraw(false));
+    massPreset.addEventListener('change', () => prepareAndDraw(false));
+    gravityPreset.addEventListener('change', applyGravityPreset);
+    gravityValue.addEventListener('input', () => {
+      gravityPreset.value = 'custom';
+      prepareAndDraw(false);
+    });
+
+    document.getElementById('simulateBtn').addEventListener('click', () => prepareAndDraw(true));
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      angleInput.value = 45;
+      angleRange.value = 45;
+      speedInput.value = 72;
+      speedRange.value = 72;
+      gravityPreset.value = 'earth';
+      gravityValue.value = 9.8;
+      windType.value = 'tail';
+      windSpeed.value = 5;
+      windSpeedRange.value = 5;
+      sizePreset.value = 'baseball';
+      massPreset.value = 'baseball';
+      prepareAndDraw(false);
+    });
+
+    updateLabels();
+    prepareAndDraw(false);
+  </script>
+</body>
+</html>
