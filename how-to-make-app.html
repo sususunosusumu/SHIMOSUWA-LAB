@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIでアプリを作る手順 | SHIMOSUWA LAB</title>
+  <style>
+    :root{
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --text:#1f2937;
+      --sub:#6b7280;
+      --line:#e5e7eb;
+      --accent:#2563eb;
+      --accent-soft:#eff6ff;
+      --ok:#16a34a;
+      --warn:#d97706;
+      --dark:#0f172a;
+    }
+
+    *{box-sizing:border-box;}
+
+    body{
+      margin:0;
+      font-family:"Segoe UI","Hiragino Sans","Yu Gothic UI",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.75;
+    }
+
+    header{
+      padding:72px 20px 40px;
+      text-align:center;
+      background:linear-gradient(180deg,#eef4ff 0%, #f6f8fb 100%);
+    }
+
+    header h1{
+      margin:0 0 14px;
+      font-size:clamp(28px,4vw,42px);
+      line-height:1.25;
+    }
+
+    header p{
+      max-width:860px;
+      margin:0 auto;
+      color:var(--sub);
+      font-size:15px;
+    }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:24px 20px 80px;
+    }
+
+    .lead{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:22px;
+      box-shadow:0 10px 24px rgba(15,23,42,0.04);
+      margin-bottom:24px;
+    }
+
+    .lead h2{
+      margin:0 0 10px;
+      font-size:22px;
+    }
+
+    .lead p{
+      margin:0;
+      color:var(--sub);
+      font-size:14px;
+    }
+
+    .note-box{
+      margin-top:14px;
+      background:#fffbea;
+      border:1px solid #f3e8a6;
+      border-radius:14px;
+      padding:14px 16px;
+      font-size:14px;
+    }
+
+    .section-title{
+      margin:36px 0 14px;
+      font-size:24px;
+    }
+
+    .steps{
+      display:grid;
+      gap:18px;
+    }
+
+    .step{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:20px;
+      box-shadow:0 10px 24px rgba(15,23,42,0.04);
+    }
+
+    .step-head{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:14px;
+    }
+
+    .num{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      background:var(--accent);
+      color:#fff;
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+    }
+
+    .step h3{
+      margin:0;
+      font-size:22px;
+    }
+
+    .sub{
+      color:var(--sub);
+      font-size:14px;
+      margin-top:2px;
+    }
+
+    .cols{
+      display:grid;
+      grid-template-columns:1.2fr 1fr;
+      gap:18px;
+      margin-top:12px;
+    }
+
+    .panel{
+      background:#fafcff;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:16px;
+    }
+
+    .panel h4{
+      margin:0 0 8px;
+      font-size:16px;
+    }
+
+    .panel p{
+      margin:0 0 10px;
+      font-size:14px;
+      color:#374151;
+    }
+
+    ul{
+      margin:8px 0 0 20px;
+      padding:0;
+    }
+
+    li{
+      margin:6px 0;
+      font-size:14px;
+    }
+
+    .prompt{
+      margin-top:12px;
+      background:#0f172a;
+      color:#e5eefc;
+      border-radius:14px;
+      padding:16px;
+    }
+
+    .prompt h4{
+      margin:0 0 8px;
+      font-size:16px;
+      color:#fff;
+    }
+
+    .prompt pre{
+      margin:0;
+      white-space:pre-wrap;
+      word-break:break-word;
+      font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    .mini-tag{
+      display:inline-block;
+      padding:4px 10px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      color:var(--accent);
+      font-size:12px;
+      font-weight:700;
+      margin-bottom:8px;
+    }
+
+    .good{
+      color:var(--ok);
+      font-weight:700;
+    }
+
+    .warn{
+      color:var(--warn);
+      font-weight:700;
+    }
+
+    .faq{
+      display:grid;
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .faq-item{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:16px;
+    }
+
+    .faq-item h4{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+
+    .faq-item p{
+      margin:0;
+      color:#374151;
+      font-size:14px;
+    }
+
+    .summary{
+      margin-top:34px;
+      background:var(--dark);
+      color:white;
+      border-radius:20px;
+      padding:24px;
+    }
+
+    .summary h2{
+      margin:0 0 14px;
+      font-size:24px;
+    }
+
+    .summary p{
+      margin:0;
+      color:#dbe4f0;
+      font-size:14px;
+    }
+
+    footer{
+      text-align:center;
+      padding:34px 20px 60px;
+      color:var(--sub);
+      font-size:12px;
+    }
+
+    @media (max-width:860px){
+      .cols{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AIでアプリを作る手順</h1>
+    <p>
+      やりたいことを言葉で伝えて、HTMLファイルを作り、ブラウザで実際に動かすまでの流れを、
+      できるだけやさしくまとめたページです。
+    </p>
+  </header>
+
+  <main class="wrap">
+    <section class="lead">
+      <h2>このページでやること</h2>
+      <p>
+        今日は、AIに「こういうアプリを作りたい」と伝えて、HTMLファイルを作ってもらい、
+        そのファイルをパソコンに保存して、ブラウザで開いて動かしてみます。
+      </p>
+      <div class="note-box">
+        <strong>教室での考え方</strong><br>
+        アカウント登録が必要なAIサービスを使う場合は、保護者の方のメールアドレスで登録し、
+        保護者の方の管理のもとで使う形をおすすめします。
+      </div>
+    </section>
+
+    <h2 class="section-title">手順</h2>
+
+    <section class="steps">
+
+      <article class="step">
+        <div class="step-head">
+          <div class="num">1</div>
+          <div>
+            <h3>使うAIを選ぶ</h3>
+            <div class="sub">まずは、どのAIで作るかを決めます。</div>
+          </div>
+        </div>
+
+        <div class="cols">
+          <div class="panel">
+            <span class="mini-tag">おすすめ</span>
+            <h4>教室で使いやすい候補</h4>
+            <ul>
+              <li><strong>ChatGPT</strong>：日本語で指示しやすく、HTMLを1つにまとめて出してもらいやすい</li>
+              <li><strong>Gemini</strong>：Googleアカウントで使いやすい</li>
+            </ul>
+            <p>
+              どちらでも大丈夫ですが、最初は <span class="good">ChatGPT</span> がやりやすいことが多いです。
+            </p>
+          </div>
+
+          <div class="panel">
+            <h4>サービスの開き方</h4>
+            <ul>
+              <li>ChatGPT を使う場合：ブラウザで ChatGPT を開く</li>
+              <li>Gemini を使う場合：ブラウザで Gemini を開く</li>
+            </ul>
+            <p>
+              ChatGPT は新規登録時にメール確認が必要です。Gemini は Google アカウントでサインインして使います。:contentReference[oaicite:1]{index=1}
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="step-head">
+          <div class="num">2</div>
+          <div>
+            <h3>アカウントを使えるようにする</h3>
+            <div class="sub">必要なら登録・サインインをします。</div>
+          </div>
+        </div>
+
+        <div class="cols">
+          <div class="panel">
+            <h4>登録の考え方</h4>
+            <ul>
+              <li>基本は保護者の方のメールアドレスを使う</li>
+              <li>確認メールが受け取れる状態にしておく</li>
+              <li>迷惑メールフォルダも確認する</li>
+            </ul>
+            <p>
+              ChatGPT では、登録時にメール確認が必要です。ログイン時にも状況によって追加確認が求められることがあります。:contentReference[oaicite:2]{index=2}
+            </p>
+          </div>
+
+          <div class="panel">
+            <h4>Gemini を使う場合</h4>
+            <ul>
+              <li>Google アカウントでサインインする</li>
+              <li>すでにGoogleアカウントがあれば、そのまま使えることが多い</li>
+              <li>学校・会社のアカウントでは使い方が異なる場合がある</li>
+            </ul>
+            <p>
+              Gemini の公式ヘルプでも、Web版は Google アカウントでのサインイン手順が案内されています。:contentReference[oaicite:3]{index=3}
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="step-head">
+          <div class="num">3</div>
+          <div>
+            <h3>AIに「作りたいもの」を伝える</h3>
+            <div class="sub">ここがいちばん大事です。</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h4>伝えるときのコツ</h4>
+          <ul>
+            <li>何をするアプリかを書く</li>
+            <li>どんな見た目にしたいかを書く</li>
+            <li>ボタンや機能を書く</li>
+            <li><strong>「HTMLファイル1つで作ってください」</strong> と書く</li>
+          </ul>
+          <p>
+            AIはかなり賢いですが、ふわっと伝えるより、少し具体的に伝えた方がうまくいきます。
+          </p>
+        </div>
+
+        <div class="prompt">
+          <h4>プロンプト例</h4>
+          <pre>じゃんけんゲームを作ってください。
+グー・チョキ・パーのボタンを押して遊べるようにしてください。
+勝ち・負け・あいこが表示されるようにしてください。
+明るく楽しいデザインにしてください。
+HTMLファイル1つで動くように、CSSとJavaScriptも全部まとめて書いてください。</pre>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="step-head">
+          <div class="num">4</div>
+          <div>
+            <h3>できあがったコードを受け取る</h3>
+            <div class="sub">AIは文字の形でプログラムを返してくれます。</div>
+          </div>
+        </div>
+
+        <div class="cols">
+          <div class="panel">
+            <h4>HTMLファイルって何？</h4>
+            <p>
+              HTMLファイルは、Webページや簡単なアプリを表示するためのファイルです。
+              ブラウザは、このHTMLファイルを開くことで画面を表示します。
+            </p>
+            <p>
+              そこにデザインの情報や動きの情報も一緒に入れると、
+              <strong>ファイル1つだけで動くアプリ</strong> を作ることもできます。
+            </p>
+          </div>
+
+          <div class="panel">
+            <h4>ここで見るポイント</h4>
+            <ul>
+              <li>コードが <code>&lt;!DOCTYPE html&gt;</code> から始まっているか</li>
+              <li><code>&lt;html&gt;</code> から <code>&lt;/html&gt;</code> まであるか</li>
+              <li>途中だけではなく、全部出ているか</li>
+            </ul>
+            <p>
+              もし途中で切れていたら、<span class="warn">「続きも全部出してください」</span> と頼めばOKです。
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="step-head">
+          <div class="num">5</div>
+          <div>
+            <h3>テキストエディターに貼り付ける</h3>
+            <div class="sub">AIが出したコードを保存できる形にします。</div>
+          </div>
+        </div>
+
+        <div class="cols">
+          <div class="panel">
+            <h4>やること</h4>
+            <ul>
+              <li>メモ帳などのテキストエディターを開く</li>
+              <li>AIが出したコードを全部コピーする</li>
+              <li>テキストエディターに貼り付ける</li>
+            </ul>
+            <p>
+              「テキストエディター」は、文字を書くための道具です。ワープロソフトではなく、
+              シンプルに文字だけを保存できるものを使うのが分かりやすいです。
+            </p>
+          </div>
+
+          <div class="panel">
+            <h4>保存するときの名前</h4>
+            <ul>
+              <li>例：<code>janken.html</code></li>
+              <li>例：<code>timer.html</code></li>
+              <li>例：<code>quiz.html</code></li>
+            </ul>
+            <p>
+              ファイル名の最後を <strong>.html</strong> にします。  
+              これが「このファイルはHTMLです」という合図になります。
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="step-head">
+          <div class="num">6</div>
+          <div>
+            <h3>HTMLファイルとして保存する</h3>
+            <div class="sub">ここでアプリのファイルが完成します。</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h4>保存のしかた</h4>
+          <ul>
+            <li>「名前をつけて保存」を選ぶ</li>
+            <li>ファイル名を <code>○○.html</code> にする</li>
+            <li>保存場所は分かりやすい場所にする（デスクトップなど）</li>
+          </ul>
+          <p>
+            うまくいかないときは、<code>.txt</code> になっていないか確認します。  
+            大事なのは、最後が <strong>.html</strong> になっていることです。
+          </p>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="step-head">
+          <div class="num">7</div>
+          <div>
+            <h3>ブラウザで開いて動かしてみる</h3>
+            <div class="sub">できあがったアプリを実際に試します。</div>
+          </div>
+        </div>
+
+        <div class="cols">
+          <div class="panel">
+            <h4>開き方</h4>
+            <ul>
+              <li>保存したHTMLファイルを見つける</li>
+              <li>ダブルクリックする</li>
+              <li>ブラウザで開いて動くか確認する</li>
+            </ul>
+            <p>
+              うまくいけば、そのままWebページのように表示されます。
+            </p>
+          </div>
+
+          <div class="panel">
+            <h4>確認すること</h4>
+            <ul>
+              <li>ボタンは押せるか</li>
+              <li>文字は読めるか</li>
+              <li>思った通りに動くか</li>
+              <li>色や大きさは見やすいか</li>
+            </ul>
+            <p>
+              最初から完璧じゃなくて大丈夫です。  
+              動かしてみて、気になるところを見つけるのが大切です。
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="step-head">
+          <div class="num">8</div>
+          <div>
+            <h3>うまくいかなければAIに直してもらう</h3>
+            <div class="sub">ここからがAIの強いところです。</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h4>直し方の例</h4>
+          <ul>
+            <li>「ボタンをもっと大きくしてください」</li>
+            <li>「背景を青っぽくしてください」</li>
+            <li>「スマホでも見やすくしてください」</li>
+            <li>「このコードがうまく動きません。直してください」</li>
+          </ul>
+          <p>
+            一度で終わりではなく、少しずつ直していくことで、作品が良くなっていきます。
+          </p>
+        </div>
+
+        <div class="prompt">
+          <h4>修正依頼の例</h4>
+          <pre>さっき作ってもらったじゃんけんゲームを修正してください。
+ボタンをもっと大きくして、スマホでも見やすくしてください。
+勝ったときに少し楽しい表示が出るようにしてください。
+HTMLファイル1つで動く形のままで、全部書き直してください。</pre>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="step-head">
+          <div class="num">9</div>
+          <div>
+            <h3>完成したら作品として残す</h3>
+            <div class="sub">自分の作品として保存・展示できます。</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h4>最後にできること</h4>
+          <ul>
+            <li>ファイル名を分かりやすく整える</li>
+            <li>自分のニックネームを作品に入れる</li>
+            <li>作品ページとして展示する</li>
+          </ul>
+          <p>
+            こうして残しておくと、「自分で作った」という実感がはっきり出ます。
+          </p>
+        </div>
+      </article>
+
+    </section>
+
+    <h2 class="section-title">よくあるつまずき</h2>
+
+    <section class="faq">
+      <div class="faq-item">
+        <h4>Q. 保存したのにブラウザで開けません</h4>
+        <p>A. ファイル名の最後が <strong>.html</strong> ではなく、<strong>.txt</strong> になっていないか確認してください。</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>Q. 画面は出たけど、ボタンを押しても動きません</h4>
+        <p>A. コードの一部が足りないことがあります。AIに「全部のコードを最初から最後まで、1つのHTMLで出してください」と頼みます。</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>Q. 思ったものと違うものができました</h4>
+        <p>A. それで大丈夫です。AIには「何を」「どうしたいか」を追加で伝えると、かなり修正できます。</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>Q. どこまで自分の作品と言えるの？</h4>
+        <p>A. アイデアを考え、指示を出し、試して、直して、完成させたなら、それは立派に自分の作品です。</p>
+      </div>
+    </section>
+
+    <section class="summary">
+      <h2>まとめ</h2>
+      <p>
+        AIは、言葉からアプリ作りを助けてくれる道具です。  
+        でも、何を作るかを決めるのは自分です。  
+        作って、試して、直していく。その流れそのものが、ものづくりです。
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    SHIMOSUWA LAB
+  </footer>
+</body>
+</html>
