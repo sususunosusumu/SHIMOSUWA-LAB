@@ -334,6 +334,46 @@
       color:var(--sub);
     }
 
+    .gallery-box{
+      margin-top:28px;
+      background:linear-gradient(180deg,#ffffff 0%, #f8fbff 100%);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:28px;
+      box-shadow:var(--shadow);
+    }
+
+    .gallery-box-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .gallery-badge{
+      display:inline-block;
+      padding:6px 12px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      color:var(--accent);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.04em;
+      margin-bottom:12px;
+    }
+
+    .gallery-box h3{
+      margin:0 0 8px;
+      font-size:24px;
+    }
+
+    .gallery-box p{
+      margin:0;
+      font-size:15px;
+      color:var(--sub);
+      max-width:680px;
+    }
+
     .tools-section{
       background:linear-gradient(180deg, #f3f7ff 0%, #eef4ff 100%);
       border-top:1px solid #dbe5f2;
@@ -402,24 +442,6 @@
       font-weight:700;
     }
 
-    .contact-box{
-      margin-top:24px;
-      background:var(--dark);
-      color:#fff;
-      border-radius:20px;
-      padding:24px;
-    }
-
-    .contact-box p{
-      margin:0 0 10px;
-      color:#dbe4f0;
-    }
-
-    .contact-box a{
-      color:#fff;
-      text-decoration:underline;
-    }
-
     footer{
       padding:32px 0 56px;
       text-align:center;
@@ -435,6 +457,11 @@
 
       .two-col{
         grid-template-columns:1fr;
+      }
+
+      .gallery-box-inner{
+        flex-direction:column;
+        align-items:flex-start;
       }
     }
 
@@ -576,7 +603,7 @@
           <div class="subcards">
             <div class="subcard">
               <h3>作るもののイメージ</h3>
-              <p>カウンターゲーム、クイズ、簡単なおみくじ、反応速度ゲーム、ミニチャットボットなど、HTMLひとつで動く作品を作ります。</p>
+              <p>カウンターゲーム、クイズ、簡単なおみくじ、反応速度ゲーム、ミニチャットボット、動きのあるミニアプリなど、HTMLひとつで動く作品を作ります。</p>
             </div>
             <div class="subcard">
               <h3>AIをどう使うの？</h3>
@@ -650,53 +677,69 @@
         </p>
 
         <div class="samples-grid">
-          <a class="sample-card" href="sample/counter-game.html" target="_blank" rel="noopener noreferrer">
+          <a class="sample-card" href="sample/01_counter_game.html" target="_blank" rel="noopener noreferrer">
             <div class="sample-number">01</div>
             <h3>Counter Game</h3>
             <p>数を増やして遊ぶシンプルなカウンターゲーム</p>
           </a>
 
-          <a class="sample-card" href="sample/paint-app.html" target="_blank" rel="noopener noreferrer">
+          <a class="sample-card" href="sample/02_paint_app.html" target="_blank" rel="noopener noreferrer">
             <div class="sample-number">02</div>
             <h3>Paint App</h3>
             <p>自分で描いて楽しめるお絵かきアプリ</p>
           </a>
 
-          <a class="sample-card" href="sample/omikuji.html" target="_blank" rel="noopener noreferrer">
+          <a class="sample-card" href="sample/03_omikuji.html" target="_blank" rel="noopener noreferrer">
             <div class="sample-number">03</div>
             <h3>Omikuji</h3>
             <p>ボタンを押すと結果が出るおみくじアプリ</p>
           </a>
 
-          <a class="sample-card" href="sample/quiz-game.html" target="_blank" rel="noopener noreferrer">
+          <a class="sample-card" href="sample/04_quiz_game.html" target="_blank" rel="noopener noreferrer">
             <div class="sample-number">04</div>
             <h3>Quiz Game</h3>
             <p>問題に答えて遊べるミニクイズゲーム</p>
           </a>
 
-          <a class="sample-card" href="sample/reaction-test.html" target="_blank" rel="noopener noreferrer">
+          <a class="sample-card" href="sample/05_reaction_test.html" target="_blank" rel="noopener noreferrer">
             <div class="sample-number">05</div>
             <h3>Reaction Test</h3>
             <p>反応の速さを試せるシンプルなゲーム</p>
           </a>
 
-          <a class="sample-card" href="sample/simple-chatbot.html" target="_blank" rel="noopener noreferrer">
+          <a class="sample-card" href="sample/06_simple_chatbot.html" target="_blank" rel="noopener noreferrer">
             <div class="sample-number">06</div>
             <h3>Simple Chatbot</h3>
             <p>簡単な受け答えができるミニチャットボット</p>
           </a>
 
-          <a class="sample-card" href="sample/slide-puzzle.html" target="_blank" rel="noopener noreferrer">
+          <a class="sample-card" href="sample/07_slide_puzzle.html" target="_blank" rel="noopener noreferrer">
             <div class="sample-number">07</div>
             <h3>Slide Puzzle</h3>
             <p>並べ替えて遊ぶスライドパズル</p>
           </a>
 
-          <a class="sample-card" href="gallery.html" target="_blank" rel="noopener noreferrer">
-            <div class="sample-number">★</div>
-            <h3>みんなの作品ギャラリー</h3>
-            <p>教室で生まれた作品を見られるページ</p>
+          <a class="sample-card" href="sample/08_motion_app.html" target="_blank" rel="noopener noreferrer">
+            <div class="sample-number">08</div>
+            <h3>Motion App</h3>
+            <p>動きやアニメーションを楽しめるミニアプリ</p>
           </a>
+        </div>
+
+        <div class="gallery-box">
+          <div class="gallery-box-inner">
+            <div>
+              <div class="gallery-badge">GALLERY</div>
+              <h3>みんなの作品ギャラリー</h3>
+              <p>
+                ここから先はサンプルではなく、実際に教室で生まれた作品を見ていくページです。
+                子どもたちが自分で考えて作った作品を、少しずつ展示していきます。
+              </p>
+            </div>
+            <div>
+              <a class="btn btn-primary" href="gallery.html" target="_blank" rel="noopener noreferrer">作品ギャラリーを見る</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
