@@ -177,6 +177,15 @@
       margin:0;
       font-size:18px;
       font-weight:700;
+      line-height:1.7;
+    }
+
+    .info-card .small-note{
+      display:block;
+      margin-top:8px;
+      font-size:13px;
+      font-weight:400;
+      color:var(--sub);
       line-height:1.6;
     }
 
@@ -283,6 +292,74 @@
     .summary-list li{
       margin:10px 0;
       font-size:15px;
+    }
+
+    .timeline{
+      display:grid;
+      gap:16px;
+    }
+
+    .timeline-card{
+      display:grid;
+      grid-template-columns:90px 1fr;
+      gap:16px;
+      align-items:flex-start;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:20px;
+      box-shadow:var(--shadow);
+    }
+
+    .timeline-time{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:44px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      color:var(--accent);
+      font-size:14px;
+      font-weight:800;
+    }
+
+    .timeline-card h3{
+      margin:0 0 6px;
+      font-size:18px;
+    }
+
+    .timeline-card p{
+      margin:0;
+      font-size:14px;
+      color:var(--sub);
+    }
+
+    .map-card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+
+    .map-frame{
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid var(--line);
+    }
+
+    .map-frame iframe{
+      display:block;
+      width:100%;
+      height:380px;
+      border:0;
+    }
+
+    .map-note{
+      margin-top:14px;
+      font-size:14px;
+      color:var(--sub);
     }
 
     .samples-grid{
@@ -477,6 +554,10 @@
         grid-template-columns:1fr;
       }
 
+      .timeline-card{
+        grid-template-columns:1fr;
+      }
+
       .section{
         padding:52px 0;
       }
@@ -487,6 +568,10 @@
 
       .hero-actions{
         flex-direction:column;
+      }
+
+      .map-frame iframe{
+        height:300px;
       }
     }
   </style>
@@ -528,19 +613,58 @@
         <div class="info-grid">
           <div class="info-card">
             <h3>開催日</h3>
-            <p>4月19日（日曜日）<br>13:30〜15:00（90分）</p>
+            <p>
+              4月19日（日曜日）<br>
+              <strong>13:30開始（13:30〜15:00）</strong>
+            </p>
           </div>
+
           <div class="info-card">
             <h3>会場</h3>
-            <p>下諏訪まちづくり協働サポートセンター<br>下諏訪文化センター駐車場横<br>（〒393-0087 下諏訪町西鷹野町4611-77）</p>
+            <p>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000646/index.html" target="_blank" rel="noopener noreferrer">
+                下諏訪まちづくり協働サポートセンター（公式ページを見る）
+              </a><br>
+              下諏訪文化センター駐車場横<br>
+              （〒393-0087 下諏訪町西鷹野町4611-77）
+              <span class="small-note">会場の詳細や場所は、公式ページからもすぐ確認できます。</span>
+            </p>
           </div>
+
           <div class="info-card">
             <h3>対象</h3>
             <p>小学5年生〜中学生・高校生<br>保護者同伴推奨</p>
           </div>
+
           <div class="info-card">
             <h3>定員・受講料</h3>
             <p>定員 3名<br>受講料 無料</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2 class="section-title">会場マップ</h2>
+        <p class="section-lead">
+          当日迷わず来られるように、会場の場所を地図でも確認できるようにしています。
+        </p>
+
+        <div class="map-card">
+          <div class="map-frame">
+            <iframe
+              src="https://www.google.com/maps?q=%E4%B8%8B%E8%AB%8F%E8%A8%AA%E3%81%BE%E3%81%A1%E3%81%A5%E3%81%8F%E3%82%8A%E5%8D%94%E5%83%8D%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC&z=16&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="map-note">
+            会場名をクリックして公式ページを見ることもできます：
+            <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000646/index.html" target="_blank" rel="noopener noreferrer">
+              下諏訪まちづくり協働サポートセンター（公式ページ）
+            </a>
           </div>
         </div>
       </div>
@@ -634,6 +758,65 @@
       </div>
     </section>
 
+    <section class="section">
+      <div class="wrap">
+        <h2 class="section-title">当日の流れ</h2>
+        <p class="section-lead">
+          最初から難しいことをするのではなく、少しずつ進めます。まずは場に慣れて、ニックネームを決めて、AIを使いながら自分の作品づくりに入っていきます。
+        </p>
+
+        <div class="timeline">
+          <div class="timeline-card">
+            <div class="timeline-time">13:30</div>
+            <div>
+              <h3>スタート・自己紹介</h3>
+              <p>教室の流れを簡単に説明し、ニックネームで呼び合う準備をします。まずは緊張をほぐして、この場を楽しめる空気をつくります。</p>
+            </div>
+          </div>
+
+          <div class="timeline-card">
+            <div class="timeline-time">13:40</div>
+            <div>
+              <h3>作りたいものを考える</h3>
+              <p>ゲーム、ミニアプリ、おみくじ、クイズなど、自分が作ってみたいものを決めます。すぐ決まらなくても、サンプルやヒントを見ながら選べます。</p>
+            </div>
+          </div>
+
+          <div class="timeline-card">
+            <div class="timeline-time">13:50</div>
+            <div>
+              <h3>AIに伝えて作り始める</h3>
+              <p>ChatGPT などのAIに、やりたいことを言葉で伝えて、HTMLファイル1つで動く作品を作っていきます。</p>
+            </div>
+          </div>
+
+          <div class="timeline-card">
+            <div class="timeline-time">14:15</div>
+            <div>
+              <h3>動かして、直して、良くする</h3>
+              <p>できあがったものを実際に動かしてみて、色やボタン、見た目や動きを少しずつ調整します。ここが一番「自分で作っている」感じが出る時間です。</p>
+            </div>
+          </div>
+
+          <div class="timeline-card">
+            <div class="timeline-time">14:40</div>
+            <div>
+              <h3>作品を仕上げる</h3>
+              <p>ファイル名を整えたり、タイトルを入れたり、自分の作品として見せられる形に近づけます。</p>
+            </div>
+          </div>
+
+          <div class="timeline-card">
+            <div class="timeline-time">15:00</div>
+            <div>
+              <h3>終了</h3>
+              <p>完成した作品を保存し、必要に応じて作品ギャラリーに載せていける形にしていきます。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="overview">
       <div class="wrap">
         <h2 class="section-title">募集概要</h2>
@@ -644,8 +827,13 @@
             <h3 style="margin-top:0;">開催情報</h3>
             <ul>
               <li>開催日：4月19日（日曜日）</li>
-              <li>時間：13:30〜15:00（90分）</li>
-              <li>会場：下諏訪まちづくり協働サポートセンター 下諏訪文化センター駐車場横（〒393-0087 下諏訪町西鷹野町4611-77）</li>
+              <li>時間：13:30開始（13:30〜15:00）</li>
+              <li>会場：
+                <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000646/index.html" target="_blank" rel="noopener noreferrer">
+                  下諏訪まちづくり協働サポートセンター（公式ページを見る）
+                </a>
+              </li>
+              <li>所在地：下諏訪文化センター駐車場横（〒393-0087 下諏訪町西鷹野町4611-77）</li>
               <li>対象：小学5年生〜中学生・高校生</li>
               <li>保護者：同伴推奨</li>
               <li>定員：3名</li>
