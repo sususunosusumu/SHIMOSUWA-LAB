@@ -18,6 +18,8 @@
       --warm: #fff7e8;
       --green-soft: #eefbf3;
       --green-line: #cdebd8;
+      --pink-soft: #fff3f6;
+      --pink-line: #f3cbd6;
       --shadow: 0 10px 30px rgba(0,0,0,0.08);
       --radius: 18px;
       --max: 1080px;
@@ -173,6 +175,18 @@
       background: rgba(255,255,255,0.2);
     }
 
+    .btn-apply {
+      background: #ffef5f;
+      color: #3a3a00;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    .btn-apply:hover {
+      transform: translateY(-1px);
+      text-decoration: none;
+      background: #fff27f;
+    }
+
     main {
       padding: 32px 0 64px;
     }
@@ -225,7 +239,6 @@
 
     .info-list,
     .check-list,
-    .flow-list,
     .sample-list {
       margin: 0;
       padding-left: 1.2em;
@@ -233,7 +246,6 @@
 
     .info-list li,
     .check-list li,
-    .flow-list li,
     .sample-list li {
       margin: 0.5em 0;
     }
@@ -253,6 +265,11 @@
     .green-box {
       background: var(--green-soft);
       border: 1px solid var(--green-line);
+    }
+
+    .apply-box {
+      background: var(--pink-soft);
+      border: 1px solid var(--pink-line);
     }
 
     .subtle {
@@ -302,7 +319,8 @@
       margin-bottom: 6px;
     }
 
-    .gallery-box {
+    .gallery-box,
+    .apply-inner {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
@@ -376,11 +394,12 @@
         </p>
         <ul class="hero-points">
           <li>対象：小学校5年生〜中高生</li>
-          <li>保護者同伴推奨</li>
-          <li>90分で体験</li>
-          <li>作品はWeb公開も可能</li>
+          <li>定員：3名（3家族）</li>
+          <li>開始：13:30</li>
+          <li>先着順</li>
         </ul>
         <div class="cta-row">
+          <a class="btn btn-apply" href="https://example.com/form" target="_blank" rel="noopener noreferrer">応募フォームへ</a>
           <a class="btn btn-primary" href="#details">開催概要を見る</a>
           <a class="btn btn-secondary" href="#samples">サンプル作品を見る</a>
         </div>
@@ -393,13 +412,19 @@
           <dd>2026年4月19日（日）</dd>
 
           <dt>時間</dt>
-          <dd>13:30〜15:00</dd>
+          <dd><strong>13:30開始</strong> ／ 13:30〜15:00</dd>
 
           <dt>会場</dt>
           <dd>
             下諏訪町ものづくり支援センター しもすわものづくり協創センター<br>
             <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000646/index.html" target="_blank" rel="noopener noreferrer" style="color:#fff; text-decoration: underline;">会場案内ページを見る</a>
           </dd>
+
+          <dt>定員</dt>
+          <dd>3名（3家族）</dd>
+
+          <dt>受付</dt>
+          <dd>先着順</dd>
 
           <dt>参加費</dt>
           <dd>無料</dd>
@@ -410,6 +435,25 @@
 
   <main>
     <div class="container">
+
+      <section class="card apply-box">
+        <div class="apply-inner">
+          <div>
+            <h2>お申し込み</h2>
+            <p class="section-lead" style="margin-bottom: 0;">
+              参加をご希望の方は、下記の応募フォームからお申し込みください。<br>
+              <strong>定員は3名（＋保護者）、先着順</strong>です。
+            </p>
+          </div>
+          <div>
+            <a class="btn btn-apply" href="https://docs.google.com/forms/d/e/1FAIpQLSfPle-aidQCRKUvQ7w-qayl-i3efI5qZyfUVa97v9Rq3pjKiQ/viewform?usp=header" target="_blank" rel="noopener noreferrer">応募フォームを開く</a>
+          </div>
+        </div>
+        <p class="subtle" style="margin-top: 14px;">
+          ※ ここは、もともとの募集ページで使っていた応募フォームURLに差し替えてください。
+        </p>
+      </section>
+
       <section class="card">
         <h2 class="section-title">この教室でできること</h2>
         <p class="section-lead">
@@ -435,7 +479,7 @@
         <div class="card">
           <h2>開催概要</h2>
           <ul class="info-list">
-            <li><strong>日時：</strong>2026年4月19日（日）13:30〜15:00</li>
+            <li><strong>日時：</strong>2026年4月19日（日）<strong>13:30開始</strong>、13:30〜15:00</li>
             <li>
               <strong>会場：</strong>
               下諏訪町ものづくり支援センター しもすわものづくり協創センター<br>
@@ -444,6 +488,8 @@
               </a>
             </li>
             <li><strong>対象：</strong>小学校5年生〜中学生・高校生</li>
+            <li><strong>定員：</strong>3名</li>
+            <li><strong>受付：</strong>先着順</li>
             <li><strong>参加費：</strong>無料</li>
             <li><strong>持ち物：</strong>必要に応じて飲み物、メモなど</li>
             <li><strong>備考：</strong>保護者同伴を推奨します</li>
@@ -451,14 +497,19 @@
         </div>
 
         <div class="card">
-          <h2>こんな子におすすめ</h2>
+          <h2>少人数で行う理由</h2>
+          <p>
+            この教室は、<strong>一人ひとりの「作りたい」を大切にするため、3名（3家族）の少人数制</strong>で行います。
+          </p>
           <ul class="check-list">
-            <li>ゲームやアプリを作ることに興味がある</li>
-            <li>AIって何ができるのか試してみたい</li>
-            <li>自分のアイデアを形にしてみたい</li>
-            <li>むずかしい勉強っぽさより、まず体験してみたい</li>
-            <li>パソコンやWebの世界をのぞいてみたい</li>
+            <li>子どものアイデアをしっかり聞ける</li>
+            <li>AIへの伝え方をその場で一緒に調整できる</li>
+            <li>わからない所を置き去りにしにくい</li>
+            <li>一人ずつ違う作品づくりにも対応しやすい</li>
           </ul>
+          <p class="subtle">
+            ただ人数をしぼるためではなく、「その子らしい作品づくり」を支えるための少人数です。
+          </p>
         </div>
       </section>
 
@@ -559,6 +610,9 @@
             正解を教わるというより、試しながら作る体験を重視しています。
           </p>
           <p>
+            また、少人数で行うことで、一人ひとりの進み方やアイデアに合わせたサポートをしやすくしています。
+          </p>
+          <p>
             当日は、保護者の方向けにも、AIやネット活用のちょっと役立つ話題を短く紹介する形を予定しています。
           </p>
         </div>
@@ -596,6 +650,20 @@
         <p class="subtle">
           ※ 付録ページから、それぞれの個別ページへ移動できます。
         </p>
+      </section>
+
+      <section class="card apply-box">
+        <div class="apply-inner">
+          <div>
+            <h2>応募はこちら</h2>
+            <p class="section-lead" style="margin-bottom: 0;">
+              <strong>定員3名（3家族）・先着順</strong>です。参加をご希望の方はお早めにお申し込みください。
+            </p>
+          </div>
+          <div>
+            <a class="btn btn-apply" href="https://example.com/form" target="_blank" rel="noopener noreferrer">応募フォームを開く</a>
+          </div>
+        </div>
       </section>
     </div>
   </main>
