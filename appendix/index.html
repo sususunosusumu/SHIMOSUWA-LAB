@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Appendix｜下諏訪Lab</title>
+  <meta name="description" content="下諏訪Labの付録ページ。AIツール、APIガイド、アプリの作り方、ニックネーム案などの参考ページをまとめています。" />
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #1d2733;
+      --sub: #607083;
+      --line: #d8e2ec;
+      --accent: #1e73ff;
+      --accent-dark: #1558c0;
+      --soft: #eef5ff;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --radius: 18px;
+      --max: 1000px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e73ff, #5ea4ff);
+      color: #fff;
+      padding: 60px 0 42px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.22);
+      font-size: 0.92rem;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.2;
+    }
+
+    .lead {
+      margin: 0;
+      font-size: 1.05rem;
+      opacity: 0.98;
+    }
+
+    main {
+      padding: 32px 0 64px;
+    }
+
+    .back {
+      margin-bottom: 22px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .intro {
+      margin-bottom: 22px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .tool-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.1);
+    }
+
+    .tool-card h2 {
+      margin: 0 0 10px;
+      font-size: 1.25rem;
+      line-height: 1.4;
+    }
+
+    .tool-card p {
+      margin: 0 0 14px;
+      color: var(--sub);
+    }
+
+    .link-btn {
+      display: inline-block;
+      padding: 10px 16px;
+      background: var(--soft);
+      border: 1px solid #cfe1ff;
+      border-radius: 999px;
+      font-weight: 700;
+      color: var(--accent-dark);
+    }
+
+    .link-btn:hover {
+      text-decoration: none;
+      background: #e1efff;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--sub);
+      font-size: 0.95rem;
+      padding: 24px 0 48px;
+    }
+
+    @media (max-width: 760px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        width: min(var(--max), calc(100% - 20px));
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="badge">下諏訪Lab｜Appendix</div>
+      <h1>付録ページ</h1>
+      <p class="lead">
+        教室の参考になる補助ページをまとめています。<br>
+        興味のあるものから自由に見てください。
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="back">
+        <a href="../index.html">← 募集ページに戻る</a>
+      </div>
+
+      <div class="card intro">
+        <h2>このページについて</h2>
+        <p>
+          ここでは、教室で使う考え方や参考資料として、
+          AIツールの紹介、APIの基本、アプリの作り方、ニックネーム案などをまとめています。
+        </p>
+      </div>
+
+      <div class="grid">
+        <section class="tool-card">
+          <h2>AIツール紹介</h2>
+          <p>
+            どんなAIツールがあるのか、どんなことに使えるのかを見られるページです。
+          </p>
+          <a class="link-btn" href="./ai-tools.html">AIツールを見る</a>
+        </section>
+
+        <section class="tool-card">
+          <h2>APIガイド</h2>
+          <p>
+            APIとは何か、どういう場面で使うのかを、できるだけわかりやすく紹介するページです。
+          </p>
+          <a class="link-btn" href="./api_guide.html">APIガイドを見る</a>
+        </section>
+
+        <section class="tool-card">
+          <h2>How to Make App</h2>
+          <p>
+            AIにどうお願いすればアプリやページを作りやすいか、その流れや考え方をまとめたページです。
+          </p>
+          <a class="link-btn" href="./how-to-make-app.html">アプリの作り方を見る</a>
+        </section>
+
+        <section class="tool-card">
+          <h2>ニックネームリスト</h2>
+          <p>
+            教室で使えるニックネーム案をまとめたページです。自分らしい名前を楽しく選べます。
+          </p>
+          <a class="link-btn" href="./nickname.html">ニックネームを見る</a>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      SHIMOSUWA-LAB Appendix
+    </div>
+  </footer>
+</body>
+</html>
