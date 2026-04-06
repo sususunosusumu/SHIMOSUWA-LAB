@@ -16,12 +16,15 @@
       --accent-dark: #1558c0;
       --soft: #eef5ff;
       --warm: #fff7e8;
+      --green-soft: #eefbf3;
+      --green-line: #cdebd8;
       --shadow: 0 10px 30px rgba(0,0,0,0.08);
       --radius: 18px;
       --max: 1080px;
     }
 
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
@@ -34,6 +37,7 @@
       color: var(--accent);
       text-decoration: none;
     }
+
     a:hover {
       text-decoration: underline;
     }
@@ -221,14 +225,16 @@
 
     .info-list,
     .check-list,
-    .flow-list {
+    .flow-list,
+    .sample-list {
       margin: 0;
       padding-left: 1.2em;
     }
 
     .info-list li,
     .check-list li,
-    .flow-list li {
+    .flow-list li,
+    .sample-list li {
       margin: 0.5em 0;
     }
 
@@ -242,6 +248,11 @@
     .warm {
       background: var(--warm);
       border: 1px solid #f1ddb1;
+    }
+
+    .green-box {
+      background: var(--green-soft);
+      border: 1px solid var(--green-line);
     }
 
     .subtle {
@@ -271,6 +282,34 @@
       border: 1px solid #cfe1ff;
     }
 
+    .sample-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .sample-item {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      background: #fbfdff;
+    }
+
+    .sample-item a {
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+
+    .gallery-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
     .map-wrap {
       overflow: hidden;
       border-radius: 16px;
@@ -296,7 +335,8 @@
     @media (max-width: 900px) {
       .hero-inner,
       .grid-2,
-      .grid-3 {
+      .grid-3,
+      .sample-grid {
         grid-template-columns: 1fr;
       }
 
@@ -342,7 +382,7 @@
         </ul>
         <div class="cta-row">
           <a class="btn btn-primary" href="#details">開催概要を見る</a>
-          <a class="btn btn-secondary" href="#appendix">付録ページを見る</a>
+          <a class="btn btn-secondary" href="#samples">サンプル作品を見る</a>
         </div>
       </div>
 
@@ -442,6 +482,73 @@
             できたものを見てみる、公開方法の紹介、自由に質問
           </div>
         </div>
+      </section>
+
+      <section id="samples" class="card">
+        <h2>サンプル作品</h2>
+        <p class="section-lead">
+          こんな作品がHTMLひとつで作れます。クリックすると実際のページを開けます。
+        </p>
+
+        <div class="sample-grid">
+          <div class="sample-item">
+            <a href="./sample/01_counter_game.html" target="_blank" rel="noopener noreferrer">01｜カウンターゲーム</a>
+            <div class="subtle">数字を使ったシンプルなゲームの例です。</div>
+          </div>
+
+          <div class="sample-item">
+            <a href="./sample/02_paint_app.html" target="_blank" rel="noopener noreferrer">02｜おえかきアプリ</a>
+            <div class="subtle">マウスで自由に描けるペイントツールです。</div>
+          </div>
+
+          <div class="sample-item">
+            <a href="./sample/03_omikuji.html" target="_blank" rel="noopener noreferrer">03｜おみくじ</a>
+            <div class="subtle">ボタンを押すと結果が出る定番サンプルです。</div>
+          </div>
+
+          <div class="sample-item">
+            <a href="./sample/04_quiz_game.html" target="_blank" rel="noopener noreferrer">04｜クイズゲーム</a>
+            <div class="subtle">問題を出して答える形式のアプリです。</div>
+          </div>
+
+          <div class="sample-item">
+            <a href="./sample/05_reaction_test.html" target="_blank" rel="noopener noreferrer">05｜反応速度テスト</a>
+            <div class="subtle">タイミングよくクリックして反応速度を測ります。</div>
+          </div>
+
+          <div class="sample-item">
+            <a href="./sample/06_simple_chatbot.html" target="_blank" rel="noopener noreferrer">06｜シンプルチャットボット</a>
+            <div class="subtle">会話っぽい動きを体験できるサンプルです。</div>
+          </div>
+
+          <div class="sample-item">
+            <a href="./sample/07_slide_puzzle.html" target="_blank" rel="noopener noreferrer">07｜スライドパズル</a>
+            <div class="subtle">並べ替えて遊べるパズルです。</div>
+          </div>
+
+          <div class="sample-item">
+            <a href="./sample/08_motion_app.html" target="_blank" rel="noopener noreferrer">08｜動きのあるアプリ</a>
+            <div class="subtle">アニメーションや動きを使った作品例です。</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card green-box">
+        <div class="gallery-box">
+          <div>
+            <h2>生徒作品ギャラリー</h2>
+            <p class="section-lead" style="margin-bottom: 0;">
+              実際に子どもたちが作った作品をまとめたページです。
+              教室でどんな作品が生まれるのか、参考として見ることができます。
+            </p>
+          </div>
+          <div>
+            <a class="btn btn-primary" href="./gallery/index.html">ギャラリーを見る</a>
+          </div>
+        </div>
+        <p class="subtle" style="margin-top: 14px;">
+          ※ ギャラリーページの場所が異なる場合は、このリンク先だけ実際のパスに合わせて変更してください。
+        </p>
       </section>
 
       <section class="grid grid-2">
