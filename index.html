@@ -4,21 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shimosuwa Creative Lab | 参加者募集</title>
-  <meta name="description" content="Shimosuwa Creative Lab 4月19日開催分の参加者募集ページ。AIを使ってHTMLファイル1つで動くゲームやアプリをつくる90分の教室です。" />
+  <meta name="description" content="Shimosuwa Creative Lab 参加者募集ページ。AIを使ってHTMLファイル1つで動くゲームやアプリをつくる教室です。" />
   <style>
     :root{
-      --bg:#f7f8fb;
-      --card:#ffffff;
-      --text:#1f2937;
-      --sub:#5b6472;
-      --line:#e5e7eb;
-      --accent:#2563eb;
-      --accent2:#0f766e;
-      --warn-bg:#fff7ed;
-      --warn-line:#fdba74;
-      --shadow:0 18px 40px rgba(15, 23, 42, 0.08);
-      --radius:20px;
-      --max:1080px;
+      --bg:#f5f8ff;
+      --bg2:#eef6ff;
+      --card:rgba(255,255,255,0.88);
+      --card-strong:#ffffff;
+      --text:#1f2a44;
+      --sub:#5f6b85;
+      --line:rgba(150,170,210,0.22);
+      --accent:#3b82f6;
+      --accent2:#22c55e;
+      --accent3:#8b5cf6;
+      --accent-soft:#e8f1ff;
+      --warn-bg:#fff8e8;
+      --warn-line:#f6c453;
+      --shadow:0 20px 50px rgba(50, 80, 140, 0.10);
+      --shadow-soft:0 10px 30px rgba(50, 80, 140, 0.08);
+      --radius:24px;
+      --max:1120px;
     }
 
     *{box-sizing:border-box}
@@ -26,66 +31,109 @@
     body{
       margin:0;
       font-family:"Hiragino Sans","Yu Gothic","Meiryo",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
-      background:linear-gradient(180deg,#f8fbff 0%,#f7f8fb 100%);
       color:var(--text);
       line-height:1.8;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(59,130,246,0.12), transparent 26%),
+        radial-gradient(circle at 90% 0%, rgba(139,92,246,0.10), transparent 24%),
+        radial-gradient(circle at 100% 100%, rgba(34,197,94,0.08), transparent 25%),
+        linear-gradient(180deg, #f7fbff 0%, #f3f7ff 42%, #eef5ff 100%);
     }
 
     a{
       color:var(--accent);
       text-decoration:none;
     }
-    a:hover{opacity:.85}
+
+    a:hover{
+      opacity:.88;
+    }
 
     .wrap{
-      width:min(var(--max), calc(100% - 32px));
+      width:min(var(--max), calc(100% - 28px));
       margin:0 auto;
     }
 
     .hero{
-      padding:72px 0 42px;
-      background:
-        radial-gradient(circle at top right, rgba(37,99,235,.10), transparent 30%),
-        radial-gradient(circle at top left, rgba(15,118,110,.08), transparent 28%);
+      position:relative;
+      overflow:hidden;
+      padding:82px 0 48px;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:auto -120px -120px auto;
+      width:320px;
+      height:320px;
+      background:radial-gradient(circle, rgba(59,130,246,0.12), transparent 70%);
+      pointer-events:none;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:20px auto auto -100px;
+      width:260px;
+      height:260px;
+      background:radial-gradient(circle, rgba(139,92,246,0.10), transparent 70%);
+      pointer-events:none;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:24px;
+      align-items:start;
     }
 
     .eyebrow{
-      display:inline-block;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
       padding:8px 14px;
       border-radius:999px;
-      background:#eef4ff;
-      color:#1d4ed8;
-      font-weight:700;
-      font-size:14px;
-      letter-spacing:.03em;
+      background:rgba(255,255,255,0.72);
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,0.7);
+      box-shadow:var(--shadow-soft);
+      color:#2563eb;
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.06em;
       margin-bottom:18px;
     }
 
     h1{
       margin:0 0 18px;
-      font-size:clamp(34px, 6vw, 62px);
-      line-height:1.15;
+      font-size:clamp(38px, 6vw, 68px);
+      line-height:1.08;
       letter-spacing:.01em;
     }
 
     .lead{
-      max-width:860px;
-      font-size:clamp(16px, 2vw, 20px);
+      margin:0 0 20px;
+      max-width:820px;
+      font-size:clamp(16px, 2vw, 21px);
       color:var(--sub);
-      margin:0 0 28px;
     }
 
     .hero-copy{
+      margin:0 0 28px;
+      max-width:800px;
       font-size:17px;
       color:var(--text);
-      max-width:860px;
-      margin:0 0 30px;
+    }
+
+    .accent-line{
+      display:inline;
+      background:linear-gradient(transparent 62%, rgba(96,165,250,0.24) 62%);
     }
 
     .cta-row{
       display:flex;
       flex-wrap:wrap;
-      gap:14px;
+      gap:12px;
       margin-top:18px;
     }
 
@@ -93,41 +141,38 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:8px;
       min-height:52px;
-      padding:0 22px;
+      padding:0 20px;
       border-radius:14px;
-      font-weight:700;
+      font-weight:800;
+      font-size:15px;
       border:1px solid transparent;
-      transition:.2s ease;
-    }
-
-    .btn-primary{
-      background:var(--accent);
-      color:#fff;
-      box-shadow:0 10px 24px rgba(37,99,235,.18);
-    }
-
-    .btn-secondary{
-      background:#fff;
-      color:var(--accent);
-      border-color:#cfe0ff;
+      transition:.22s ease;
+      box-shadow:none;
     }
 
     .btn:hover{
-      transform:translateY(-1px);
+      transform:translateY(-2px);
     }
 
-    .grid{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:24px;
-      align-items:start;
+    .btn-primary{
+      background:linear-gradient(135deg, #3b82f6, #6366f1);
+      color:#fff;
+      box-shadow:0 14px 30px rgba(59,130,246,0.22);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,0.78);
+      backdrop-filter:blur(10px);
+      border-color:rgba(180,200,235,0.55);
+      color:var(--text);
+      box-shadow:var(--shadow-soft);
     }
 
     .card{
       background:var(--card);
-      border:1px solid rgba(229,231,235,.9);
+      backdrop-filter:blur(14px);
+      border:1px solid rgba(255,255,255,0.75);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
     }
@@ -143,47 +188,54 @@
     }
 
     .summary-item{
-      padding:16px 16px 14px;
-      background:#f8fafc;
-      border:1px solid #e9eef5;
-      border-radius:16px;
+      padding:16px;
+      border-radius:18px;
+      background:rgba(255,255,255,0.72);
+      border:1px solid rgba(205,220,245,0.55);
     }
 
     .summary-item dt{
+      margin:0 0 5px;
       font-size:12px;
-      font-weight:700;
-      color:#64748b;
+      color:#6c7a97;
+      font-weight:800;
+      letter-spacing:.07em;
       text-transform:uppercase;
-      letter-spacing:.06em;
-      margin-bottom:6px;
     }
 
     .summary-item dd{
       margin:0;
       font-size:16px;
-      font-weight:700;
-      color:var(--text);
+      font-weight:800;
       line-height:1.5;
+      color:var(--text);
+    }
+
+    .value-sub{
+      font-size:14px;
+      color:var(--sub);
+      font-weight:600;
     }
 
     .notice{
-      margin-top:18px;
-      padding:20px;
-      border-radius:18px;
-      background:var(--warn-bg);
+      margin-top:26px;
+      padding:24px;
+      border-radius:22px;
+      background:linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,248,232,0.96));
       border:2px solid var(--warn-line);
+      box-shadow:var(--shadow-soft);
     }
 
-    .notice h2,
-    .notice h3{
+    .notice h2{
       margin:0 0 10px;
-      font-size:22px;
+      font-size:24px;
       line-height:1.4;
+      color:#8a4b00;
     }
 
     .notice p{
       margin:0 0 10px;
-      color:#7c2d12;
+      color:#7a4a11;
       font-size:16px;
     }
 
@@ -191,29 +243,31 @@
       padding:28px 0;
     }
 
+    .content-card{
+      padding:30px;
+    }
+
     .section-title{
-      font-size:30px;
-      line-height:1.3;
       margin:0 0 10px;
+      font-size:31px;
+      line-height:1.3;
+      letter-spacing:.01em;
     }
 
     .section-lead{
       margin:0 0 22px;
       color:var(--sub);
-    }
-
-    .content-card{
-      padding:28px;
+      font-size:16px;
     }
 
     .plain{
-      margin:0;
-      padding:0;
       list-style:none;
+      padding:0;
+      margin:0;
     }
 
     .plain li{
-      padding:10px 0;
+      padding:14px 0;
       border-bottom:1px solid var(--line);
     }
 
@@ -223,21 +277,17 @@
 
     .label{
       display:block;
-      font-size:13px;
-      font-weight:700;
-      color:#64748b;
-      margin-bottom:2px;
+      font-size:12px;
+      font-weight:800;
+      color:#7382a0;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:3px;
     }
 
     .value{
       font-size:17px;
-      font-weight:700;
-    }
-
-    .value-sub{
-      font-size:15px;
-      color:var(--sub);
-      font-weight:500;
+      font-weight:800;
     }
 
     .feature-grid{
@@ -247,23 +297,29 @@
     }
 
     .feature{
-      padding:20px;
-      border:1px solid var(--line);
-      border-radius:18px;
-      background:#fff;
+      padding:22px;
+      border-radius:20px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.92), rgba(247,250,255,0.94));
+      border:1px solid rgba(210,222,245,0.6);
+      box-shadow:var(--shadow-soft);
     }
 
     .feature-num{
-      font-size:13px;
-      font-weight:800;
+      display:inline-block;
+      margin-bottom:10px;
+      padding:4px 10px;
+      border-radius:999px;
+      background:var(--accent-soft);
       color:#2563eb;
+      font-size:12px;
+      font-weight:800;
       letter-spacing:.08em;
-      margin-bottom:8px;
     }
 
     .feature h3{
       margin:0 0 8px;
-      font-size:20px;
+      font-size:21px;
+      line-height:1.4;
     }
 
     .feature p{
@@ -274,47 +330,53 @@
     .sample-grid{
       display:grid;
       grid-template-columns:repeat(2, minmax(0,1fr));
-      gap:12px;
+      gap:14px;
     }
 
     .sample-link{
       display:block;
-      padding:16px 18px;
-      border:1px solid var(--line);
-      border-radius:16px;
-      background:#fff;
-      font-weight:700;
+      padding:18px 18px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(245,249,255,0.96));
+      border:1px solid rgba(205,220,245,0.7);
       color:var(--text);
-      transition:.2s ease;
+      font-weight:800;
+      line-height:1.6;
+      box-shadow:var(--shadow-soft);
+      transition:.22s ease;
     }
 
     .sample-link:hover{
-      transform:translateY(-1px);
-      border-color:#bfd3ff;
-      box-shadow:0 10px 24px rgba(15,23,42,.06);
-      color:var(--accent);
+      transform:translateY(-2px);
+      border-color:rgba(120,160,240,0.7);
+      box-shadow:0 16px 34px rgba(59,130,246,0.10);
+      color:#1d4ed8;
+    }
+
+    .contact-box{
+      margin-top:18px;
+      padding:18px 20px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(244,248,255,0.85));
+      border:1px solid rgba(205,220,245,0.7);
     }
 
     .muted{
       color:var(--sub);
     }
 
-    .contact-box{
-      margin-top:18px;
-      padding:18px 20px;
-      background:#f8fafc;
-      border:1px solid #e5e7eb;
-      border-radius:16px;
+    ul{
+      padding-left:1.3em;
     }
 
     footer{
-      padding:32px 0 48px;
-      color:#6b7280;
-      font-size:14px;
+      padding:36px 0 50px;
       text-align:center;
+      color:#76839d;
+      font-size:14px;
     }
 
-    @media (max-width: 900px){
+    @media (max-width: 920px){
       .grid{
         grid-template-columns:1fr;
       }
@@ -323,11 +385,16 @@
       .sample-grid{
         grid-template-columns:1fr;
       }
-      h1{
-        font-size:42px;
-      }
       .hero{
-        padding-top:56px;
+        padding-top:64px;
+      }
+      h1{
+        font-size:44px;
+      }
+      .content-card,
+      .hero-card,
+      .notice{
+        padding:22px;
       }
     }
   </style>
@@ -337,21 +404,26 @@
     <div class="wrap">
       <div class="grid">
         <div>
-          <div class="eyebrow">Shimosuwa Creative Lab</div>
-          <h1>やってみたいを、<br>かたちにする。</h1>
+          <div class="eyebrow">SHIMOSUWA CREATIVE LAB</div>
+          <h1>
+            つくるって、<br>
+            <span class="accent-line">おもしろい。</span>
+          </h1>
           <p class="lead">
-            ゲームやアプリを、自分で考えて、AIを使って、自分の作品として公開する。
-            「見るだけ」だった世界から、「自分でつくる側」へ踏み出す90分です。
+            AIを使って、ゲームやアプリを自分の言葉から形にしていく。
+            子どもたちが「つくる側」に一歩踏み出す、小さくて新しい教室です。
           </p>
           <p class="hero-copy">
-            Shimosuwa Creative Lab は、子どもたちが自分で考え、つくり、試しながら、
-            新しい世界へ一歩踏み出すための小さな創造の場です。<br>
-            AIやデジタルツールを使いながら、「こういうものを作りたい」を言葉にし、
-            少しずつ形にしていきます。
+            Shimosuwa Creative Lab は、子どもたちが自分で考え、自分で試し、
+            自分のアイデアを実際に形にしてみるための場です。<br>
+            難しいことを覚えることが中心ではなく、
+            「こういうものを作りたい」を言葉にして、AIと一緒に少しずつ作品にしていきます。
           </p>
+
           <div class="cta-row">
             <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfPle-aidQCRKUvQ7w-qayl-i3efI5qZyfUVa97v9Rq3pjKiQ/viewform" target="_blank" rel="noopener noreferrer">申し込みフォームへ</a>
             <a class="btn btn-secondary" href="#overview">募集概要を見る</a>
+            <a class="btn btn-secondary" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/appendix/index.html" target="_blank" rel="noopener noreferrer">アペンディクス</a>
           </div>
         </div>
 
@@ -403,11 +475,12 @@
         </aside>
       </div>
 
-      <div class="notice" style="margin-top:28px;">
+      <div class="notice">
         <h2>保護者の方・参加をご検討中のご家族へ</h2>
         <p>
-          この教室は、子どもたちの創造力や表現力を育てるための<strong>教育・体験活動</strong>です。
-          参加は<strong>無料</strong>で、会場内での<strong>物販・営業・勧誘・セールス等は一切ありません</strong>。
+          この教室は、子どもたちの創造力や表現力を育てるための
+          <strong>教育・体験活動</strong>です。参加は<strong>無料</strong>で、
+          会場内での<strong>物販・営業・勧誘・セールス等は一切ありません</strong>。
         </p>
         <p>
           また、この会場は、営利目的の営業活動のための場所ではなく、
@@ -416,7 +489,8 @@
         </p>
         <p>
           安心してご参加いただけるよう、教室の目的はあくまで
-          「子どもたちが、AIやデジタルを使って、自分の作りたいものを形にしてみること」にあります。
+          「子どもたちが、AIやデジタルを使って、自分の作りたいものを形にしてみること」
+          にあります。
         </p>
       </div>
     </div>
@@ -586,14 +660,39 @@
           </p>
 
           <div class="sample-grid">
-            <a class="sample-link" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/01_counter_game.html" target="_blank" rel="noopener noreferrer">01 Counter Game 数を増やして遊ぶシンプルなカウンターゲーム</a>
-            <a class="sample-link" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/02_paint_app.html" target="_blank" rel="noopener noreferrer">02 Paint App 自分で描いて楽しめるお絵かきアプリ</a>
-            <a class="sample-link" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/03_omikuji.html" target="_blank" rel="noopener noreferrer">03 Omikuji ボタンを押すと結果が出るおみくじアプリ</a>
-            <a class="sample-link" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/04_quiz_game.html" target="_blank" rel="noopener noreferrer">04 Quiz Game 問題に答えて遊べるミニクイズゲーム</a>
-            <a class="sample-link" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/05_reaction_test.html" target="_blank" rel="noopener noreferrer">05 Reaction Test 反応の速さを試せるシンプルなゲーム</a>
-            <a class="sample-link" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/06_simple_chatbot.html" target="_blank" rel="noopener noreferrer">06 Simple Chatbot 簡単な受け答えができるミニチャットボット</a>
-            <a class="sample-link" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/07_slide_puzzle.html" target="_blank" rel="noopener noreferrer">07 Slide Puzzle スライドして揃えるパズルゲーム</a>
-            <a class="sample-link" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/08_motion_app.html" target="_blank" rel="noopener noreferrer">08 Motion App ボールを投げる</a>
+            <a class="sample-link" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/01_counter_game.html" target="_blank" rel="noopener noreferrer">01 Counter Game　数を増やして遊ぶシンプルなカウンターゲーム</a>
+            <a class="sample-link" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/02_paint_app.html" target="_blank" rel="noopener noreferrer">02 Paint App　自分で描いて楽しめるお絵かきアプリ</a>
+            <a class="sample-link" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/03_omikuji.html" target="_blank" rel="noopener noreferrer">03 Omikuji　ボタンを押すと結果が出るおみくじアプリ</a>
+            <a class="sample-link" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/04_quiz_game.html" target="_blank" rel="noopener noreferrer">04 Quiz Game　問題に答えて遊べるミニクイズゲーム</a>
+            <a class="sample-link" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/05_reaction_test.html" target="_blank" rel="noopener noreferrer">05 Reaction Test　反応の速さを試せるシンプルなゲーム</a>
+            <a class="sample-link" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/06_simple_chatbot.html" target="_blank" rel="noopener noreferrer">06 Simple Chatbot　簡単な受け答えができるミニチャットボット</a>
+            <a class="sample-link" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/07_slide_puzzle.html" target="_blank" rel="noopener noreferrer">07 Slide Puzzle　スライドして揃えるパズルゲーム</a>
+            <a class="sample-link" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/08_motion_app.html" target="_blank" rel="noopener noreferrer">08 Motion App　ボールを投げるアプリ</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="content-card card">
+          <h2 class="section-title">教室で使う補足資料・アペンディクス</h2>
+          <p class="section-lead">
+            教室で使う補足資料や、進め方の参考、使い方の説明などをまとめています。
+            当日の確認用としても、ご家庭での振り返り用としてもご覧いただけます。
+          </p>
+
+          <div class="cta-row">
+            <a class="btn btn-secondary" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/appendix/index.html" target="_blank" rel="noopener noreferrer">
+              アペンディクスを見る
+            </a>
+          </div>
+
+          <div class="contact-box">
+            教室で使用する補足ページ：
+            <a href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/appendix/index.html" target="_blank" rel="noopener noreferrer">
+              https://sususunosusumu.github.io/SHIMOSUWA-LAB/appendix/index.html
+            </a>
           </div>
         </div>
       </div>
@@ -605,7 +704,7 @@
           <h2 class="section-title">みんなの作品を見る</h2>
           <p class="section-lead">教室で生まれたアイデアたち</p>
           <div class="cta-row">
-            <a class="btn btn-secondary" href="gallery.html">※まだ作品はありません。</a>
+            <a class="btn btn-secondary" href="gallery.html">まだ作品はありません。</a>
           </div>
         </div>
       </div>
