@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
@@ -23,148 +24,151 @@
       --max: 1080px;
     }
 
-    * { box-sizing: border-box; }
+```
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.75;
-    }
+body {
+  margin: 0;
+  font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.75;
+}
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
 
-    a:hover {
-      text-decoration: underline;
-    }
+a:hover {
+  text-decoration: underline;
+}
 
-    .container {
-      width: min(var(--max), calc(100% - 32px));
-      margin: 0 auto;
-    }
+.container {
+  width: min(var(--max), calc(100% - 32px));
+  margin: 0 auto;
+}
 
-    header {
-      background: linear-gradient(135deg, #1e73ff, #5ea4ff);
-      color: #fff;
-      padding: 60px 0 42px;
-    }
+header {
+  background: linear-gradient(135deg, #1e73ff, #5ea4ff);
+  color: #fff;
+  padding: 60px 0 42px;
+}
 
-    .badge {
-      display: inline-block;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.22);
-      font-size: 0.92rem;
-      margin-bottom: 16px;
-    }
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.22);
+  font-size: 0.92rem;
+  margin-bottom: 16px;
+}
 
-    h1 {
-      margin: 0 0 12px;
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.2;
-    }
+h1 {
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.2;
+}
 
-    .lead {
-      margin: 0;
-      font-size: 1.05rem;
-      opacity: 0.98;
-    }
+.lead {
+  margin: 0;
+  font-size: 1.05rem;
+  opacity: 0.98;
+}
 
-    main {
-      padding: 32px 0 64px;
-    }
+main {
+  padding: 32px 0 64px;
+}
 
-    .back {
-      margin-bottom: 22px;
-    }
+.back {
+  margin-bottom: 22px;
+}
 
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 24px;
-    }
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
 
-    .intro {
-      margin-bottom: 22px;
-    }
+.intro {
+  margin-bottom: 22px;
+}
 
-    .intro h2 {
-      margin-top: 0;
-    }
+.intro h2 {
+  margin-top: 0;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
-    }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
 
-    .tool-card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 22px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      display: flex;
-      flex-direction: column;
-    }
+.tool-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
 
-    .tool-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 34px rgba(0,0,0,0.1);
-    }
+.tool-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.1);
+}
 
-    .tool-card h2 {
-      margin: 0 0 10px;
-      font-size: 1.2rem;
-      line-height: 1.4;
-    }
+.tool-card h2 {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
 
-    .tool-card p {
-      margin: 0 0 16px;
-      color: var(--sub);
-      flex-grow: 1;
-    }
+.tool-card p {
+  margin: 0 0 16px;
+  color: var(--sub);
+  flex-grow: 1;
+}
 
-    .link-btn {
-      display: inline-block;
-      padding: 10px 16px;
-      background: var(--soft);
-      border: 1px solid #cfe1ff;
-      border-radius: 999px;
-      font-weight: 700;
-      color: var(--accent-dark);
-      align-self: flex-start;
-    }
+.link-btn {
+  display: inline-block;
+  padding: 10px 16px;
+  background: var(--soft);
+  border: 1px solid #cfe1ff;
+  border-radius: 999px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  align-self: flex-start;
+}
 
-    .link-btn:hover {
-      text-decoration: none;
-      background: #e1efff;
-    }
+.link-btn:hover {
+  text-decoration: none;
+  background: #e1efff;
+}
 
-    footer {
-      text-align: center;
-      color: var(--sub);
-      font-size: 0.95rem;
-      padding: 24px 0 48px;
-    }
+footer {
+  text-align: center;
+  color: var(--sub);
+  font-size: 0.95rem;
+  padding: 24px 0 48px;
+}
 
-    @media (max-width: 760px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 
-      .container {
-        width: min(var(--max), calc(100% - 20px));
-      }
-    }
+  .container {
+    width: min(var(--max), calc(100% - 20px));
+  }
+}
+```
+
   </style>
 </head>
 <body>
@@ -185,105 +189,88 @@
         <a href="../index.html">← 募集ページに戻る</a>
       </div>
 
-      <section class="card intro">
-        <h2>このページについて</h2>
-        <p>
-          ここには、下諏訪Labの教室や学びに関連する補助ページをまとめています。
-          AIツールの紹介、AIで何かを作る感覚、APIの基本、GTFSやライセンスの考え方、
-          アプリの作り方、ニックネーム案など、学びを広げるための入口として使えるようにしています。
-        </p>
-      </section>
+```
+  <section class="card intro">
+    <h2>このページについて</h2>
+    <p>
+      ここには、下諏訪Labの教室や学びに関連する補助ページをまとめています。
+      AIツールの紹介、AIで何かを作る感覚、APIの基本、GTFSやライセンスの考え方、
+      アプリの作り方、ニックネーム案など、学びを広げるための入口として使えるようにしています。
+    </p>
+  </section>
 
-      <div class="grid">
-        <section class="tool-card">
-          <h2>AIツール紹介</h2>
-          <p>
-            どんなAIツールがあるのか、どんなことに使えるのかを見られるページです。
-            まず全体像をつかみたい人向けです。
-          </p>
-          <a class="link-btn" href="./ai-tools.html" target="_blank" rel="noopener noreferrer">ページを開く</a>
-        </section>
+  <div class="grid">
 
-        <section class="tool-card">
-          <h2>AIキッズクラスの考え方</h2>
-          <p>
-            教室でどんな感覚を持ってほしいのか、
-            AIを「使う」だけでなく「作る道具として使う」という視点をまとめたページです。
-          </p>
-          <a class="link-btn" href="./ai_kids_class_explain.html" target="_blank" rel="noopener noreferrer">ページを開く</a>
-        </section>
+    <section class="tool-card">
+      <h2>AIツール紹介</h2>
+      <p>どんなAIツールがあるのかを見られるページです。</p>
+      <a class="link-btn" href="./ai-tools.html" target="_blank">ページを開く</a>
+    </section>
 
-        <section class="tool-card">
-          <h2>APIガイド</h2>
-          <p>
-            APIとは何か、どういう場面で使うのかを、できるだけわかりやすく紹介するページです。
-          </p>
-          <a class="link-btn" href="./api_guide.html" target="_blank" rel="noopener noreferrer">ページを開く</a>
-        </section>
+    <section class="tool-card">
+      <h2>AIキッズクラスの考え方</h2>
+      <p>AIを「作る道具」として使う視点をまとめたページです。</p>
+      <a class="link-btn" href="./ai_kids_class_explain.html" target="_blank">ページを開く</a>
+    </section>
 
-        <section class="tool-card">
-          <h2>GTFS / CC BY 4.0 解説</h2>
-          <p>
-            交通データのGTFSや、CC BY 4.0ライセンスについて、
-            活用のイメージがつかめるように整理したページです。
-          </p>
-          <a class="link-btn" href="./gtfs_ccby4_explainer.html" target="_blank" rel="noopener noreferrer">ページを開く</a>
-        </section>
+    <section class="tool-card">
+      <h2>APIガイド</h2>
+      <p>APIとは何かをわかりやすく説明します。</p>
+      <a class="link-btn" href="./api_guide.html" target="_blank">ページを開く</a>
+    </section>
 
-<section class="tool-card">
-  <h2>GitHubってなに？</h2>
-  <p>
-    GitHubとは何か、何に使うのか、HTMLをウェブで公開する使い方を
-    子ども向けにわかりやすく説明したページです。
-  </p>
-  <a class="link-btn" href="./github_for_kids.html" target="_blank" rel="noopener noreferrer">
-    ページを開く
-  </a>
-</section>
+    <section class="tool-card">
+      <h2>GTFS / CC BY 4.0 解説</h2>
+      <p>交通データとライセンスの基本。</p>
+      <a class="link-btn" href="./gtfs_ccby4_explainer.html" target="_blank">ページを開く</a>
+    </section>
 
-        
-<section class="tool-card">
-  <h2>GitHubにアップする方法</h2>
-  <p>
-    作ったHTMLをGitHubにアップして、ウェブで見られるようにする手順を
-    小学生でも分かるように説明しています。
-  </p>
-  <a class="link-btn" href="./github_upload_guide_kids.html" target="_blank" rel="noopener noreferrer">
-    ページを開く
-  </a>
-</section>
+    <section class="tool-card">
+      <h2>GitHubってなに？</h2>
+      <p>HTMLを公開する仕組みを学べます。</p>
+      <a class="link-btn" href="./github_for_kids.html" target="_blank">ページを開く</a>
+    </section>
 
+    <section class="tool-card">
+      <h2>GitHubにアップする方法</h2>
+      <p>作ったものを公開する手順。</p>
+      <a class="link-btn" href="./github_upload_guide_kids.html" target="_blank">ページを開く</a>
+    </section>
 
+    <section class="tool-card">
+      <h2>How to Make App</h2>
+      <p>AIにお願いしてアプリを作る流れ。</p>
+      <a class="link-btn" href="./how-to-make-app.html" target="_blank">ページを開く</a>
+    </section>
 
-        
-        <section class="tool-card">
-          <h2>How to Make App</h2>
-          <p>
-            AIにどうお願いするとアプリやページを作りやすいか、
-            その流れや考え方をまとめたページです。
-          </p>
-          <a class="link-btn" href="./how-to-make-app.html" target="_blank" rel="noopener noreferrer">ページを開く</a>
-        </section>
+    <!-- ★ここが今回追加 -->
+    <section class="tool-card">
+      <h2>つくったアプリを送る</h2>
+      <p>
+        教室で作ったアプリを提出するページです。<br>
+        ニックネームとファイルを送ることができます。
+      </p>
+      <a class="link-btn" href="./shimosuwa_lab_app_submit_page_kids.html" target="_blank">
+        ページを開く
+      </a>
+    </section>
 
-        <section class="tool-card">
-          <h2>子ども向けナレッジページ</h2>
-          <p>
-            ナレッジとは何か、知識をどう行動や創作につなげていくかを、
-            子ども向けにやわらかく伝えるためのページです。
-          </p>
-          <a class="link-btn" href="./knowledge_for_kids_ai_class.html" target="_blank" rel="noopener noreferrer">ページを開く</a>
-        </section>
+    <section class="tool-card">
+      <h2>子ども向けナレッジページ</h2>
+      <p>知識を行動につなげる考え方。</p>
+      <a class="link-btn" href="./knowledge_for_kids_ai_class.html" target="_blank">ページを開く</a>
+    </section>
 
-        <section class="tool-card">
-          <h2>ニックネームリスト</h2>
-          <p>
-            教室で使えるニックネーム案をまとめたページです。
-            自分らしい名前を楽しく選べます。
-          </p>
-          <a class="link-btn" href="./nickname.html" target="_blank" rel="noopener noreferrer">ページを開く</a>
-        </section>
-      </div>
-    </div>
+    <section class="tool-card">
+      <h2>ニックネームリスト</h2>
+      <p>楽しく名前を選べるページ。</p>
+      <a class="link-btn" href="./nickname.html" target="_blank">ページを開く</a>
+    </section>
+
+  </div>
+</div>
+```
+
   </main>
 
   <footer>
@@ -293,3 +280,4 @@
   </footer>
 </body>
 </html>
+
