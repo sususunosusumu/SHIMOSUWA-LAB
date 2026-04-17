@@ -4,7 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Appendix｜下諏訪Lab</title>
-  <meta name="description" content="下諏訪Labの付録ページ。AIツール、APIガイド、アプリの作り方、ニックネーム案などの参考ページをまとめています。" />
+  <meta
+    name="description"
+    content="下諏訪Labの付録ページ。AIツール、教室の考え方、APIガイド、GTFS・CC BY 4.0の解説、アプリの作り方、ニックネーム案などの参考ページをまとめています。"
+  />
   <style>
     :root {
       --bg: #f6f8fb;
@@ -17,7 +20,7 @@
       --soft: #eef5ff;
       --shadow: 0 10px 30px rgba(0,0,0,0.08);
       --radius: 18px;
-      --max: 1000px;
+      --max: 1080px;
     }
 
     * { box-sizing: border-box; }
@@ -92,6 +95,10 @@
       margin-bottom: 22px;
     }
 
+    .intro h2 {
+      margin-top: 0;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -105,6 +112,8 @@
       box-shadow: var(--shadow);
       padding: 22px;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
     }
 
     .tool-card:hover {
@@ -114,13 +123,14 @@
 
     .tool-card h2 {
       margin: 0 0 10px;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       line-height: 1.4;
     }
 
     .tool-card p {
-      margin: 0 0 14px;
+      margin: 0 0 16px;
       color: var(--sub);
+      flex-grow: 1;
     }
 
     .link-btn {
@@ -131,6 +141,7 @@
       border-radius: 999px;
       font-weight: 700;
       color: var(--accent-dark);
+      align-self: flex-start;
     }
 
     .link-btn:hover {
@@ -162,8 +173,8 @@
       <div class="badge">下諏訪Lab｜Appendix</div>
       <h1>付録ページ</h1>
       <p class="lead">
-        教室の参考になる補助ページをまとめています。<br>
-        興味のあるものから自由に見てください。
+        教室の考え方や参考資料をまとめたページです。<br>
+        気になるテーマから自由に開いて見てください。
       </p>
     </div>
   </header>
@@ -174,21 +185,32 @@
         <a href="../index.html">← 募集ページに戻る</a>
       </div>
 
-      <div class="card intro">
+      <section class="card intro">
         <h2>このページについて</h2>
         <p>
-          ここでは、教室で使う考え方や参考資料として、
-          AIツールの紹介、APIの基本、アプリの作り方、ニックネーム案などをまとめています。
+          ここには、下諏訪Labの教室や学びに関連する補助ページをまとめています。
+          AIツールの紹介、AIで何かを作る感覚、APIの基本、GTFSやライセンスの考え方、
+          アプリの作り方、ニックネーム案など、学びを広げるための入口として使えるようにしています。
         </p>
-      </div>
+      </section>
 
       <div class="grid">
         <section class="tool-card">
           <h2>AIツール紹介</h2>
           <p>
             どんなAIツールがあるのか、どんなことに使えるのかを見られるページです。
+            まず全体像をつかみたい人向けです。
           </p>
-          <a class="link-btn" href="./ai-tools.html">AIツールを見る</a>
+          <a class="link-btn" href="./ai-tools.html" target="_blank" rel="noopener noreferrer">ページを開く</a>
+        </section>
+
+        <section class="tool-card">
+          <h2>AIキッズクラスの考え方</h2>
+          <p>
+            教室でどんな感覚を持ってほしいのか、
+            AIを「使う」だけでなく「作る道具として使う」という視点をまとめたページです。
+          </p>
+          <a class="link-btn" href="./ai_kids_class_explain.html" target="_blank" rel="noopener noreferrer">ページを開く</a>
         </section>
 
         <section class="tool-card">
@@ -196,23 +218,43 @@
           <p>
             APIとは何か、どういう場面で使うのかを、できるだけわかりやすく紹介するページです。
           </p>
-          <a class="link-btn" href="./api_guide.html">APIガイドを見る</a>
+          <a class="link-btn" href="./api_guide.html" target="_blank" rel="noopener noreferrer">ページを開く</a>
+        </section>
+
+        <section class="tool-card">
+          <h2>GTFS / CC BY 4.0 解説</h2>
+          <p>
+            交通データのGTFSや、CC BY 4.0ライセンスについて、
+            活用のイメージがつかめるように整理したページです。
+          </p>
+          <a class="link-btn" href="./gtfs_ccby4_explainer.html" target="_blank" rel="noopener noreferrer">ページを開く</a>
         </section>
 
         <section class="tool-card">
           <h2>How to Make App</h2>
           <p>
-            AIにどうお願いすればアプリやページを作りやすいか、その流れや考え方をまとめたページです。
+            AIにどうお願いするとアプリやページを作りやすいか、
+            その流れや考え方をまとめたページです。
           </p>
-          <a class="link-btn" href="./how-to-make-app.html">アプリの作り方を見る</a>
+          <a class="link-btn" href="./how-to-make-app.html" target="_blank" rel="noopener noreferrer">ページを開く</a>
+        </section>
+
+        <section class="tool-card">
+          <h2>子ども向けナレッジページ</h2>
+          <p>
+            ナレッジとは何か、知識をどう行動や創作につなげていくかを、
+            子ども向けにやわらかく伝えるためのページです。
+          </p>
+          <a class="link-btn" href="./knowledge_for_kids_ai_class.html" target="_blank" rel="noopener noreferrer">ページを開く</a>
         </section>
 
         <section class="tool-card">
           <h2>ニックネームリスト</h2>
           <p>
-            教室で使えるニックネーム案をまとめたページです。自分らしい名前を楽しく選べます。
+            教室で使えるニックネーム案をまとめたページです。
+            自分らしい名前を楽しく選べます。
           </p>
-          <a class="link-btn" href="./nickname.html">ニックネームを見る</a>
+          <a class="link-btn" href="./nickname.html" target="_blank" rel="noopener noreferrer">ページを開く</a>
         </section>
       </div>
     </div>
