@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GTFS 時刻表ビジュアライザー</title>
+  <style>
+    :root{
+      --bg:#f6f9fc;
+      --card:#ffffff;
+      --ink:#0f172a;
+      --sub:#475569;
+      --line:#dbe4ee;
+      --accent:#2563eb;
+      --accent-soft:#dbeafe;
+      --good:#16a34a;
+      --good-soft:#dcfce7;
+      --warn:#b45309;
+      --warn-soft:#fef3c7;
+      --violet:#7c3aed;
+      --violet-soft:#ede9fe;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Yu Gothic UI","Hiragino Sans","Meiryo",sans-serif;
+      color:var(--ink);
+      background:linear-gradient(180deg,#eef4ff 0%, #f8fbff 30%, #ffffff 100%);
+      line-height:1.7;
+    }
+    .wrap{
+      width:min(1200px, calc(100% - 24px));
+      margin:0 auto;
+      padding:20px 0 48px;
+    }
+    .hero,.card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:24px;
+      box-shadow:0 12px 28px rgba(15,23,42,.05);
+    }
+    .hero{
+      padding:24px 20px;
+      background:linear-gradient(135deg,#eff6ff,#ffffff 58%,#eef2ff);
+    }
+    .card{padding:18px 16px;margin-top:16px}
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(28px,4vw,42px);
+      line-height:1.2;
+    }
+    h2{
+      margin:0 0 12px;
+      font-size:clamp(20px,3vw,28px);
+      line-height:1.3;
+    }
+    h3{
+      margin:0 0 10px;
+      font-size:1.08rem;
+    }
+    p{margin:8px 0}
+    .lead{color:var(--sub)}
+    .controls{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+      align-items:center;
+    }
+    input[type=file], input[type=text], select{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px 14px;
+      background:#fff;
+      font-size:1rem;
+      color:var(--ink);
+    }
+    input[type=file]{max-width:420px}
+    button{
+      border:none;
+      border-radius:14px;
+      padding:12px 16px;
+      background:var(--accent);
+      color:#fff;
+      font-weight:800;
+      cursor:pointer;
+    }
+    button.sub{
+      background:#eef2ff;
+      color:#1e3a8a;
+      border:1px solid #c7d2fe;
+    }
+    .status{
+      margin-top:12px;
+      padding:13px 14px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:#f8fafc;
+      font-weight:600;
+    }
+    .status.ok{background:var(--good-soft);border-color:#bbf7d0}
+    .status.warn{background:var(--warn-soft);border-color:#fde68a}
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:12px;
+    }
+    .chip{
+      display:inline-block;
+      padding:6px 10px;
+      background:#f8fafc;
+      border:1px solid var(--line);
+      border-radius:999px;
+      font-size:.92rem;
+      font-weight:700;
+    }
+    .grid{
+      display:grid;
+      gap:16px;
+      grid-template-columns:1fr;
+    }
+    @media(min-width:980px){
+      .grid-2-1{grid-template-columns:360px 1fr}
+      .grid-2{grid-template-columns:1fr 1fr}
+    }
+    .box{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:14px;
+      background:#fff;
+      margin-top:10px;
+    }
+    .muted{color:var(--sub)}
+    .small{font-size:.94rem}
+    .list{
+      border:1px solid var(--line);
+      border-radius:18px;
+      overflow:auto;
+      max-height:520px;
+      background:#fff;
+      margin-top:10px;
+    }
+    .list-item{
+      padding:12px 14px;
+      border-bottom:1px solid #edf2f7;
+      cursor:pointer;
+    }
+    .list-item:last-child{border-bottom:none}
+    .list-item:hover{background:#f8fbff}
+    .list-item.active{background:var(--accent-soft)}
+    .pill{
+      display:inline-block;
+      padding:4px 8px;
+      border-radius:999px;
+      background:#eef2ff;
+      color:#1e3a8a;
+      font-weight:700;
+      font-size:.84rem;
+      margin:2px 6px 2px 0;
+    }
+    .clickable-row{cursor:pointer}
+    .clickable-row:hover td{background:#f8fbff}
+    .clickable-row.active td{background:#dbeafe}
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:10px;
+      font-size:.95rem;
+    }
+    th,td{
+      border:1px solid var(--line);
+      padding:10px 10px;
+      text-align:left;
+      vertical-align:top;
+      background:#fff;
+    }
+    th{background:#f8fafc}
+    .timeline{
+      position:relative;
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:#fff;
+      padding:12px 12px 14px;
+      overflow:auto;
+      margin-top:10px;
+    }
+    .timeline-track{
+      display:grid;
+      gap:10px;
+      min-width:980px;
+    }
+    .timeline-segment{
+      position:relative;
+      height:86px;
+      border-radius:14px;
+      background:linear-gradient(180deg,#fafcff,#f7fbff);
+      border:1px solid #ebf2f9;
+      overflow:hidden;
+    }
+    .hour-grid{
+      position:absolute;
+      inset:0;
+      display:flex;
+    }
+    .hour-col{
+      flex:1;
+      border-right:1px dashed #d9e5f2;
+      position:relative;
+    }
+    .hour-col:last-child{border-right:none}
+    .hour-label{
+      position:absolute;
+      top:8px;
+      left:6px;
+      font-size:.78rem;
+      color:#64748b;
+      font-weight:700;
+    }
+    .event{
+      position:absolute;
+      bottom:12px;
+      transform:translateX(-50%);
+      min-width:36px;
+      height:36px;
+      padding:4px 8px;
+      border-radius:999px;
+      background:var(--accent);
+      color:#fff;
+      font-size:.76rem;
+      font-weight:800;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      white-space:nowrap;
+      box-shadow:0 8px 18px rgba(37,99,235,.25);
+    }
+    .legend{
+      margin-top:10px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .legend .pill{background:var(--violet-soft);color:#5b21b6}
+    pre{
+      margin:10px 0 0;
+      padding:14px;
+      background:#0f172a;
+      color:#e5eefc;
+      border-radius:16px;
+      overflow:auto;
+      font-size:.9rem;
+      line-height:1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>GTFS 時刻表ビジュアライザー</h1>
+      <p class="lead">
+        GTFS の ZIP ファイルを選ぶと、<strong>停留所一覧</strong>だけでなく、
+        <strong>その停留所に何時何分の便が来るか</strong>を見やすく表示します。
+      </p>
+      <div class="controls">
+        <input type="file" id="zipInput" accept=".zip">
+        <button id="loadBtn">ZIPを読む</button>
+        <button id="demoBtn" class="sub">見方の例を表示</button>
+      </div>
+      <div id="status" class="status warn">まだ ZIP は読み込まれていません。</div>
+      <div id="badges" class="chips"></div>
+    </section>
+
+    <div class="grid grid-2-1">
+      <section class="card">
+        <h2>1. 停留所を選ぶ</h2>
+        <input type="text" id="stopSearch" placeholder="停留所名・stop_id で検索">
+        <div class="box small muted" id="stopSummary">ZIPを読むと停留所一覧が出ます。</div>
+        <div class="list" id="stopList">
+          <div class="list-item muted">まだデータがありません。</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>2. 選んだ停留所の時刻表</h2>
+        <div class="grid grid-2">
+          <div class="box">
+            <h3>停留所情報</h3>
+            <div id="selectedStopInfo" class="muted">停留所を選ぶとここに情報が出ます。</div>
+          </div>
+          <div class="box">
+            <h3>表示条件</h3>
+            <label class="small muted" for="sortMode">並び順</label>
+            <select id="sortMode">
+              <option value="time">時刻順</option>
+              <option value="route">路線順</option>
+            </select>
+            <label class="small muted" for="routeFilter" style="display:block;margin-top:10px;">路線でしぼる</label>
+            <select id="routeFilter">
+              <option value="">すべての路線</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="box">
+          <h3>時間の流れが見えるビュー</h3>
+          <div class="muted small">その停留所に来る便を、6時間ごとに区切った時間軸で表示します。便が多い時間帯でも見やすくなります。</div>
+          <div class="timeline">
+            <div class="timeline-track" id="timelineTrack"></div>
+          </div>
+          <div class="legend" id="timelineLegend"></div>
+        </div>
+
+        <div class="box">
+          <h3>一覧表</h3>
+          <div class="muted small">arrival / departure / route / headsign をまとめて表示します。行をクリックすると、その便の始発から終点までの停車駅と時刻が下に出ます。</div>
+          <table>
+            <thead>
+              <tr>
+                <th>到着</th>
+                <th>出発</th>
+                <th>路線</th>
+                <th>行先 / 便</th>
+                <th>運行</th>
+              </tr>
+            </thead>
+            <tbody id="timeTableBody">
+              <tr><td colspan="5" class="muted">停留所を選ぶとここに時刻表が出ます。</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box">
+          <h3>選んだバスの停車順</h3>
+          <div class="muted small">時刻表の中から1本の便を選ぶと、その便がどの停留所を何時に通るかを、始発から終点まで表示します。</div>
+          <div id="selectedTripInfo" class="small muted" style="margin-top:10px;">時刻表の行をクリックすると、ここに便の情報が出ます。</div>
+          <table>
+            <thead>
+              <tr>
+                <th>順番</th>
+                <th>停留所</th>
+                <th>到着</th>
+                <th>出発</th>
+                <th>stop_id</th>
+              </tr>
+            </thead>
+            <tbody id="tripStopsBody">
+              <tr><td colspan="5" class="muted">まだ便が選ばれていません。</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box">
+          <h3>GTFSデータのつながり</h3>
+          <pre id="explainBox">stops.txt で停留所を選ぶ
+↓
+stop_times.txt でその停留所に来る時刻を集める
+↓
+trips.txt で便の情報を足す
+↓
+routes.txt で路線名を足す
+↓
+calendar.txt で運行日を足す</pre>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script>
+    const REQUIRED = ["stops.txt","routes.txt","trips.txt","stop_times.txt","calendar.txt"];
+    const state = {
+      gtfs: {},
+      stops: [],
+      selectedStopId: "",
+      selectedStop: null,
+      enrichedByStop: {},
+      routeMap: {},
+      tripMap: {},
+      serviceMap: {},
+      stopMap: {},
+      stopTimesByTrip: {},
+      selectedTripId: ""
+    };
+
+    const zipInput = document.getElementById("zipInput");
+    const loadBtn = document.getElementById("loadBtn");
+    const demoBtn = document.getElementById("demoBtn");
+    const statusEl = document.getElementById("status");
+    const badgesEl = document.getElementById("badges");
+    const stopSearchEl = document.getElementById("stopSearch");
+    const stopSummaryEl = document.getElementById("stopSummary");
+    const stopListEl = document.getElementById("stopList");
+    const selectedStopInfoEl = document.getElementById("selectedStopInfo");
+    const sortModeEl = document.getElementById("sortMode");
+    const routeFilterEl = document.getElementById("routeFilter");
+    const timelineTrackEl = document.getElementById("timelineTrack");
+    const timelineLegendEl = document.getElementById("timelineLegend");
+    const timeTableBodyEl = document.getElementById("timeTableBody");
+    const selectedTripInfoEl = document.getElementById("selectedTripInfo");
+    const tripStopsBodyEl = document.getElementById("tripStopsBody");
+
+    function setStatus(msg, type="warn"){
+      statusEl.className = "status " + type;
+      statusEl.textContent = msg;
+    }
+
+    function escapeHtml(v){
+      return String(v ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;");
+    }
+
+    function splitCsvLine(line){
+      const out = [];
+      let cur = "";
+      let inQuotes = false;
+      for(let i=0;i<line.length;i++){
+        const ch = line[i];
+        const next = line[i+1];
+        if(ch === '"'){
+          if(inQuotes && next === '"'){
+            cur += '"';
+            i++;
+          }else{
+            inQuotes = !inQuotes;
+          }
+        }else if(ch === "," && !inQuotes){
+          out.push(cur);
+          cur = "";
+        }else{
+          cur += ch;
+        }
+      }
+      out.push(cur);
+      return out;
+    }
+
+    function parseCSV(text){
+      const lines = text.replace(/\uFEFF/g,"").trim().split(/\r?\n/);
+      if(!lines.length || !lines[0]) return [];
+      const headers = splitCsvLine(lines[0]);
+      return lines.slice(1).filter(Boolean).map(line => {
+        const values = splitCsvLine(line);
+        const obj = {};
+        headers.forEach((h,i) => obj[h] = values[i] ?? "");
+        return obj;
+      });
+    }
+
+    function timeToMinutes(t){
+      if(!t) return null;
+      const m = String(t).match(/^(\d+):(\d{2})(?::(\d{2}))?$/);
+      if(!m) return null;
+      return Number(m[1]) * 60 + Number(m[2]);
+    }
+
+    function minsToLabel(mins){
+      if(mins == null || Number.isNaN(mins)) return "";
+      const hh = Math.floor(mins / 60);
+      const mm = mins % 60;
+      return String(hh).padStart(2,"0") + ":" + String(mm).padStart(2,"0");
+    }
+
+    function summarizeService(row){
+      if(!row) return "";
+      const days = [];
+      if(row.monday === "1") days.push("月");
+      if(row.tuesday === "1") days.push("火");
+      if(row.wednesday === "1") days.push("水");
+      if(row.thursday === "1") days.push("木");
+      if(row.friday === "1") days.push("金");
+      if(row.saturday === "1") days.push("土");
+      if(row.sunday === "1") days.push("日");
+      return days.join("") || row.service_id || "";
+    }
+
+    function buildMaps(){
+      state.routeMap = Object.fromEntries((state.gtfs["routes.txt"] || []).map(r => [r.route_id, r]));
+      state.tripMap = Object.fromEntries((state.gtfs["trips.txt"] || []).map(t => [t.trip_id, t]));
+      state.serviceMap = Object.fromEntries((state.gtfs["calendar.txt"] || []).map(c => [c.service_id, c]));
+      state.stopMap = Object.fromEntries((state.gtfs["stops.txt"] || []).map(s => [s.stop_id, s]));
+      state.stopTimesByTrip = {};
+      for (const row of (state.gtfs["stop_times.txt"] || [])) {
+        const tripId = row.trip_id || "";
+        if (!tripId) continue;
+        if (!state.stopTimesByTrip[tripId]) state.stopTimesByTrip[tripId] = [];
+        state.stopTimesByTrip[tripId].push(row);
+      }
+      for (const tripId in state.stopTimesByTrip) {
+        state.stopTimesByTrip[tripId].sort((a, b) => Number(a.stop_sequence || 999999) - Number(b.stop_sequence || 999999));
+      }
+    }
+
+    function buildEnrichedByStop(){
+      const stopTimes = state.gtfs["stop_times.txt"] || [];
+      const map = {};
+      for(const row of stopTimes){
+        const stopId = row.stop_id;
+        if(!stopId) continue;
+        const trip = state.tripMap[row.trip_id] || {};
+        const route = state.routeMap[trip.route_id] || {};
+        const service = state.serviceMap[trip.service_id] || {};
+        const departure = row.departure_time || row.arrival_time || "";
+        const arrival = row.arrival_time || row.departure_time || "";
+        const item = {
+          stop_id: stopId,
+          trip_id: row.trip_id || "",
+          arrival_time: arrival,
+          departure_time: departure,
+          arrival_mins: timeToMinutes(arrival),
+          departure_mins: timeToMinutes(departure),
+          route_id: trip.route_id || "",
+          route_short_name: route.route_short_name || "",
+          route_long_name: route.route_long_name || "",
+          route_label: route.route_short_name || route.route_long_name || trip.route_id || "",
+          headsign: trip.trip_headsign || "",
+          service_id: trip.service_id || "",
+          service_label: summarizeService(service)
+        };
+        if(!map[stopId]) map[stopId] = [];
+        map[stopId].push(item);
+      }
+      for(const stopId in map){
+        map[stopId].sort((a,b) => {
+          const am = a.departure_mins ?? a.arrival_mins ?? 999999;
+          const bm = b.departure_mins ?? b.arrival_mins ?? 999999;
+          return am - bm;
+        });
+      }
+      state.enrichedByStop = map;
+    }
+
+    function renderBadges(){
+      badgesEl.innerHTML = REQUIRED.map(name => {
+        const ok = Array.isArray(state.gtfs[name]);
+        return `<span class="chip">${escapeHtml(name)} : ${ok ? "読込OK" : "なし"}</span>`;
+      }).join("");
+    }
+
+    function renderStops(filter=""){
+      const q = filter.trim().toLowerCase();
+      const rows = state.stops.filter(s => {
+        const name = String(s.stop_name || "").toLowerCase();
+        const id = String(s.stop_id || "").toLowerCase();
+        return !q || name.includes(q) || id.includes(q);
+      });
+
+      stopSummaryEl.textContent = `停留所 ${state.stops.length} 件 / 表示 ${rows.length} 件`;
+      if(!rows.length){
+        stopListEl.innerHTML = `<div class="list-item muted">条件に合う停留所がありません。</div>`;
+        return;
+      }
+
+      stopListEl.innerHTML = rows.slice(0, 800).map(s => `
+        <div class="list-item ${s.stop_id === state.selectedStopId ? "active" : ""}" data-stop-id="${escapeHtml(s.stop_id)}">
+          <div><strong>${escapeHtml(s.stop_name || "(名称なし)")}</strong></div>
+          <div class="muted small">stop_id: ${escapeHtml(s.stop_id || "")}</div>
+          <div class="small">
+            ${(state.enrichedByStop[s.stop_id] || []).length ? `<span class="pill">時刻 ${escapeHtml((state.enrichedByStop[s.stop_id] || []).length)} 件</span>` : `<span class="pill">時刻なし</span>`}
+          </div>
+        </div>
+      `).join("");
+
+      [...stopListEl.querySelectorAll(".list-item[data-stop-id]")].forEach(el => {
+        el.addEventListener("click", () => selectStop(el.dataset.stopId));
+      });
+    }
+
+    function populateRouteFilter(items){
+      const labels = [...new Set(items.map(x => x.route_label).filter(Boolean))].sort((a,b) => a.localeCompare(b, "ja"));
+      routeFilterEl.innerHTML = `<option value="">すべての路線</option>` + labels.map(v =>
+        `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`
+      ).join("");
+    }
+
+    function getVisibleItemsForSelectedStop(){
+      let items = [...(state.enrichedByStop[state.selectedStopId] || [])];
+      const routeFilter = routeFilterEl.value;
+      const sortMode = sortModeEl.value;
+
+      if(routeFilter){
+        items = items.filter(x => x.route_label === routeFilter);
+      }
+
+      if(sortMode === "route"){
+        items.sort((a,b) => {
+          const ra = a.route_label || "";
+          const rb = b.route_label || "";
+          if(ra !== rb) return ra.localeCompare(rb, "ja");
+          const ta = a.departure_mins ?? a.arrival_mins ?? 999999;
+          const tb = b.departure_mins ?? b.arrival_mins ?? 999999;
+          return ta - tb;
+        });
+      } else {
+        items.sort((a,b) => {
+          const ta = a.departure_mins ?? a.arrival_mins ?? 999999;
+          const tb = b.departure_mins ?? b.arrival_mins ?? 999999;
+          return ta - tb;
+        });
+      }
+      return items;
+    }
+
+    function renderSelectedStop(){
+      if(!state.selectedStop){
+        selectedStopInfoEl.innerHTML = "停留所を選ぶとここに情報が出ます。";
+        timeTableBodyEl.innerHTML = `<tr><td colspan="5" class="muted">停留所を選んでください。</td></tr>`;
+        timelineTrackEl.innerHTML = "";
+        timelineLegendEl.innerHTML = "";
+        routeFilterEl.innerHTML = `<option value="">すべての路線</option>`;
+        selectedTripInfoEl.textContent = "時刻表の行をクリックすると、ここに便の情報が出ます。";
+        tripStopsBodyEl.innerHTML = `<tr><td colspan="5" class="muted">まだ便が選ばれていません。</td></tr>`;
+        return;
+      }
+
+      const baseItems = state.enrichedByStop[state.selectedStopId] || [];
+      populateRouteFilter(baseItems);
+      const items = getVisibleItemsForSelectedStop();
+
+      selectedStopInfoEl.innerHTML = `
+        <div><strong>${escapeHtml(state.selectedStop.stop_name || "(名称なし)")}</strong></div>
+        <div class="muted small">stop_id: ${escapeHtml(state.selectedStop.stop_id || "")}</div>
+        <div class="muted small">lat: ${escapeHtml(state.selectedStop.stop_lat || "")} / lon: ${escapeHtml(state.selectedStop.stop_lon || "")}</div>
+        <div class="small" style="margin-top:8px;">
+          <span class="pill">時刻件数 ${escapeHtml(baseItems.length)}</span>
+          <span class="pill">表示中 ${escapeHtml(items.length)}</span>
+        </div>
+      `;
+
+      if(!items.length){
+        timeTableBodyEl.innerHTML = `<tr><td colspan="5" class="muted">この条件では表示する便がありません。</td></tr>`;
+        renderTimeline([]);
+        return;
+      }
+
+      timeTableBodyEl.innerHTML = items.map(x => `
+        <tr class="clickable-row ${x.trip_id === state.selectedTripId ? "active" : ""}" data-trip-id="${escapeHtml(x.trip_id || "")}">
+          <td>${escapeHtml(x.arrival_time || "")}</td>
+          <td>${escapeHtml(x.departure_time || "")}</td>
+          <td>${escapeHtml(x.route_label || x.route_id || "")}</td>
+          <td>${escapeHtml(x.headsign || x.trip_id || "")}</td>
+          <td>${escapeHtml(x.service_label || x.service_id || "")}</td>
+        </tr>
+      `).join("");
+
+      [...timeTableBodyEl.querySelectorAll(".clickable-row[data-trip-id]")].forEach(el => {
+        el.addEventListener("click", () => selectTrip(el.dataset.tripId));
+      });
+
+      renderTimeline(items);
+
+      if(items.length){
+        const stillVisible = items.some(x => x.trip_id === state.selectedTripId);
+        if(!stillVisible){
+          state.selectedTripId = items[0].trip_id || "";
+        }
+      }else{
+        state.selectedTripId = "";
+      }
+      renderSelectedTrip();
+    }
+
+    function renderTimeline(items){
+      const segmentStarts = [0, 360, 720, 1080]; // 0-6, 6-12, 12-18, 18-24
+      const valid = items.filter(x => (x.departure_mins ?? x.arrival_mins) != null);
+
+      const segmentHtml = segmentStarts.map(start => {
+        const end = start + 360;
+        const cols = Array.from({length: 6}, (_, i) => {
+          const hour = Math.floor(start / 60) + i;
+          return `<div class="hour-col"><div class="hour-label">${String(hour).padStart(2,"0")}:00</div></div>`;
+        }).join("");
+
+        const segmentItems = valid.filter(x => {
+          const mins = x.departure_mins ?? x.arrival_mins;
+          return mins >= start && mins < end;
+        });
+
+        const events = segmentItems.map(x => {
+          const mins = x.departure_mins ?? x.arrival_mins;
+          const left = ((mins - start) / 360) * 100;
+          const label = (x.departure_time || x.arrival_time || "").slice(0,5);
+          const title = `${x.route_label || ""} ${x.headsign || ""} ${x.departure_time || x.arrival_time || ""}`;
+          return `<div class="event" style="left:${left}%;" title="${escapeHtml(title)}">${escapeHtml(label)}</div>`;
+        }).join("");
+
+        return `<div class="timeline-segment"><div class="hour-grid">${cols}</div>${events}</div>`;
+      }).join("");
+
+      timelineTrackEl.innerHTML = segmentHtml;
+
+      const routeLabels = [...new Set(valid.map(x => x.route_label).filter(Boolean))];
+      timelineLegendEl.innerHTML = routeLabels.length
+        ? routeLabels.map(v => `<span class="pill">${escapeHtml(v)}</span>`).join("")
+        : `<span class="muted small">表示できる時刻データがありません。</span>`;
+    }
+
+    function renderSelectedTrip(){
+      if(!state.selectedTripId){
+        selectedTripInfoEl.textContent = "時刻表の行をクリックすると、ここに便の情報が出ます。";
+        tripStopsBodyEl.innerHTML = `<tr><td colspan="5" class="muted">まだ便が選ばれていません。</td></tr>`;
+        return;
+      }
+
+      const trip = state.tripMap[state.selectedTripId] || {};
+      const route = state.routeMap[trip.route_id] || {};
+      const service = state.serviceMap[trip.service_id] || {};
+      const stopTimes = state.stopTimesByTrip[state.selectedTripId] || [];
+
+      selectedTripInfoEl.innerHTML = `
+        <div><strong>便ID:</strong> ${escapeHtml(state.selectedTripId)}</div>
+        <div><strong>路線:</strong> ${escapeHtml(route.route_short_name || route.route_long_name || trip.route_id || "")}</div>
+        <div><strong>行先:</strong> ${escapeHtml(trip.trip_headsign || "")}</div>
+        <div><strong>運行:</strong> ${escapeHtml(summarizeService(service) || trip.service_id || "")}</div>
+        <div><strong>停留所数:</strong> ${escapeHtml(stopTimes.length)}</div>
+      `;
+
+      if(!stopTimes.length){
+        tripStopsBodyEl.innerHTML = `<tr><td colspan="5" class="muted">この便の stop_times.txt データがありません。</td></tr>`;
+        return;
+      }
+
+      tripStopsBodyEl.innerHTML = stopTimes.map((row, idx) => {
+        const stop = state.stopMap[row.stop_id] || {};
+        return `
+          <tr>
+            <td>${escapeHtml(String(row.stop_sequence || idx + 1))}</td>
+            <td>${escapeHtml(stop.stop_name || row.stop_id || "")}</td>
+            <td>${escapeHtml(row.arrival_time || "")}</td>
+            <td>${escapeHtml(row.departure_time || "")}</td>
+            <td>${escapeHtml(row.stop_id || "")}</td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function selectTrip(tripId){
+      state.selectedTripId = tripId || "";
+      renderSelectedStop();
+      renderSelectedTrip();
+    }
+
+    function selectStop(stopId){
+      state.selectedStopId = stopId;
+      state.selectedStop = state.stops.find(s => String(s.stop_id) === String(stopId)) || null;
+      state.selectedTripId = "";
+      renderStops(stopSearchEl.value);
+      renderSelectedStop();
+    }
+
+    async function loadZip(){
+      const file = zipInput.files[0];
+      if(!file){
+        setStatus("先に GTFS の ZIP ファイルを選んでください。", "warn");
+        return;
+      }
+      if(!window.JSZip){
+        setStatus("JSZip の読み込みに失敗しました。ネット接続を確認してください。", "warn");
+        return;
+      }
+
+      setStatus("ZIP を読み込んでいます...", "warn");
+      state.gtfs = {};
+      state.stops = [];
+      state.selectedStopId = "";
+      state.selectedStop = null;
+      state.enrichedByStop = {};
+      state.selectedTripId = "";
+
+      try{
+        const zip = await JSZip.loadAsync(file);
+        for(const name of REQUIRED){
+          const entry = zip.file(name) || zip.file(new RegExp("(^|/)" + name.replace(".", "\\.") + "$", "i"))[0];
+          if(!entry) continue;
+          const text = await entry.async("string");
+          state.gtfs[name] = parseCSV(text);
+        }
+
+        state.stops = state.gtfs["stops.txt"] || [];
+        buildMaps();
+        buildEnrichedByStop();
+        renderBadges();
+        renderStops();
+        renderSelectedStop();
+
+        const missing = REQUIRED.filter(name => !state.gtfs[name]);
+        if(missing.length){
+          setStatus("読み込み完了。ただし一部不足: " + missing.join(", "), "warn");
+        }else{
+          setStatus("読み込み完了。停留所を選ぶと時刻表を見られます。", "ok");
+        }
+
+        if(state.stops.length){
+          selectStop(state.stops[0].stop_id);
+        }
+      }catch(err){
+        console.error(err);
+        setStatus("ZIP の読み込みでエラーが発生しました。GTFS の ZIP かどうか確認してください。", "warn");
+      }
+    }
+
+    loadBtn.addEventListener("click", loadZip);
+    stopSearchEl.addEventListener("input", e => renderStops(e.target.value));
+    sortModeEl.addEventListener("change", renderSelectedStop);
+    routeFilterEl.addEventListener("change", renderSelectedStop);
+
+    demoBtn.addEventListener("click", () => {
+      selectedStopInfoEl.innerHTML = `
+        <div><strong>下諏訪駅</strong></div>
+        <div class="muted small">stop_id: 1001</div>
+        <div class="muted small">lat: 36.0720 / lon: 138.0850</div>
+        <div class="small" style="margin-top:8px;">
+          <span class="pill">時刻件数 5</span>
+          <span class="pill">表示中 5</span>
+        </div>
+      `;
+      timeTableBodyEl.innerHTML = `
+        <tr><td>08:00:00</td><td>08:00:00</td><td>1</td><td>岡谷駅方面</td><td>月火水木金</td></tr>
+        <tr><td>08:35:00</td><td>08:35:00</td><td>1</td><td>岡谷駅方面</td><td>月火水木金</td></tr>
+        <tr><td>09:10:00</td><td>09:10:00</td><td>2</td><td>上諏訪方面</td><td>月火水木金土</td></tr>
+        <tr><td>10:05:00</td><td>10:05:00</td><td>2</td><td>上諏訪方面</td><td>月火水木金土</td></tr>
+        <tr><td>11:20:00</td><td>11:20:00</td><td>3</td><td>町内循環</td><td>毎日</td></tr>
+      `;
+      const demoItems = [
+        {departure_mins:480,departure_time:"08:00",route_label:"1"},
+        {departure_mins:515,departure_time:"08:35",route_label:"1"},
+        {departure_mins:550,departure_time:"09:10",route_label:"2"},
+        {departure_mins:605,departure_time:"10:05",route_label:"2"},
+        {departure_mins:680,departure_time:"11:20",route_label:"3"},
+      ];
+      renderTimeline(demoItems);
+      selectedTripInfoEl.innerHTML = `
+        <div><strong>便ID:</strong> T100</div>
+        <div><strong>路線:</strong> 1</div>
+        <div><strong>行先:</strong> 岡谷駅方面</div>
+        <div><strong>運行:</strong> 月火水木金</div>
+        <div><strong>停留所数:</strong> 4</div>
+      `;
+      tripStopsBodyEl.innerHTML = `
+        <tr><td>1</td><td>下諏訪駅</td><td>08:00:00</td><td>08:00:00</td><td>1001</td></tr>
+        <tr><td>2</td><td>赤砂</td><td>08:06:00</td><td>08:06:00</td><td>1004</td></tr>
+        <tr><td>3</td><td>岡谷市役所前</td><td>08:13:00</td><td>08:13:00</td><td>1005</td></tr>
+        <tr><td>4</td><td>岡谷駅</td><td>08:20:00</td><td>08:20:00</td><td>1002</td></tr>
+      `;
+      setStatus("これは見方の例です。実際の ZIP を読むと本物のデータに置き換わります。", "ok");
+    });
+  </script>
+</body>
+</html>
