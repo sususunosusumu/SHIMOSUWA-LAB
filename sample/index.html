@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>サンプルプログラム集 | SHIMOSUWA-LAB</title>
+  <style>
+    :root{
+      --bg1:#07111f;
+      --bg2:#0f1f3a;
+      --line:rgba(255,255,255,.14);
+      --text:#eef4ff;
+      --muted:#b8c6e3;
+      --accent:#7dd3fc;
+      --accent2:#c084fc;
+      --card:rgba(255,255,255,.08);
+      --shadow:0 18px 50px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 20%, rgba(125,211,252,.18), transparent 26%),
+        radial-gradient(circle at 90% 15%, rgba(192,132,252,.16), transparent 28%),
+        radial-gradient(circle at 50% 100%, rgba(56,189,248,.12), transparent 35%),
+        linear-gradient(160deg, var(--bg1), var(--bg2) 58%, #08101c);
+      min-height:100vh;
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{
+      width:min(1180px, calc(100% - 32px));
+      margin:0 auto;
+    }
+    .hero{
+      padding:56px 0 28px;
+    }
+    .hero-box{
+      position:relative;
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:40px 28px 30px;
+      background:linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.06));
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+    .hero-box::before{
+      content:"";
+      position:absolute;
+      inset:auto -80px -80px auto;
+      width:240px;height:240px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(125,211,252,.28), transparent 68%);
+      pointer-events:none;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:.5em;
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:13px;
+      color:#d9f3ff;
+      background:rgba(125,211,252,.12);
+      border:1px solid rgba(125,211,252,.25);
+      margin-bottom:18px;
+    }
+    h1{
+      margin:0 0 12px;
+      font-size:clamp(30px, 5vw, 56px);
+      line-height:1.05;
+      letter-spacing:.02em;
+    }
+    .lead{
+      margin:0;
+      max-width:760px;
+      color:var(--muted);
+      font-size:16px;
+    }
+    .stats{
+      display:flex;flex-wrap:wrap;gap:14px;
+      margin-top:26px;
+    }
+    .stat{
+      padding:14px 18px;
+      border-radius:18px;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      min-width:150px;
+    }
+    .stat strong{
+      display:block;
+      font-size:20px;
+      color:#fff;
+    }
+    .section-title{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:16px;
+      margin:28px 0 16px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size:28px;
+    }
+    .section-title p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:18px;
+      padding-bottom:44px;
+    }
+    .card{
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      min-height:245px;
+      padding:22px;
+      border-radius:24px;
+      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      transition:transform .2s ease, border-color .2s ease, background .2s ease;
+      overflow:hidden;
+    }
+    .card:hover{
+      transform:translateY(-4px);
+      border-color:rgba(125,211,252,.42);
+      background:linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.08));
+    }
+    .num{
+      display:inline-flex;
+      width:48px;height:48px;
+      border-radius:16px;
+      align-items:center;justify-content:center;
+      font-weight:800;
+      font-size:18px;
+      background:linear-gradient(135deg, rgba(125,211,252,.25), rgba(192,132,252,.28));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.12);
+    }
+    .card h3{
+      margin:18px 0 8px;
+      font-size:22px;
+      line-height:1.25;
+    }
+    .card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      flex:1;
+    }
+    .meta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:20px;
+      color:#dce9ff;
+      font-size:13px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:7px 11px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      white-space:nowrap;
+    }
+    .url{
+      margin-top:10px;
+      font-size:12px;
+      color:#9fc3f0;
+      word-break:break-all;
+    }
+    .arrow{
+      font-size:18px;
+      opacity:.85;
+    }
+    .footer{
+      padding:0 0 38px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .footer a{
+      color:#dff4ff;
+      text-decoration:underline;
+      text-underline-offset:3px;
+    }
+    @media (max-width: 920px){
+      .grid{grid-template-columns:repeat(2, minmax(0, 1fr));}
+    }
+    @media (max-width: 640px){
+      .hero{padding-top:26px}
+      .hero-box{padding:26px 18px 22px;border-radius:24px}
+      .grid{grid-template-columns:1fr;}
+      .section-title{align-items:flex-start;flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="hero-box">
+        <div class="badge">SHIMOSUWA-LAB / Sample Programs</div>
+        <h1>サンプルプログラム集</h1>
+        <p class="lead">
+          AIを使って作れる、1ファイル完結型のHTMLサンプル集です。
+          ゲーム、アプリ、地域データ、ミニ体験まで、見て・触って・まねして学べる形でまとめています。
+        </p>
+        <div class="stats">
+          <div class="stat">
+            <strong>10</strong>
+            サンプル作品
+          </div>
+          <div class="stat">
+            <strong>GitHub Pages</strong>
+            公開URLに直接リンク
+          </div>
+          <div class="stat">
+            <strong>AI × Code</strong>
+            言葉から作る体験
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <div class="section-title">
+        <h2>作品一覧</h2>
+        <p>01〜09 は SHIMOSUWA-LAB/sample 配下、10 は外部ページです。</p>
+      </div>
+
+      <div class="grid">
+        <a class="card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/01_counter_game.html" target="_blank" rel="noopener noreferrer">
+          <div class="num">01</div>
+          <h3>カウンターゲーム</h3>
+          <p>クリックや操作に反応して数が変わる、いちばん基本の体験型サンプルです。</p>
+          <div class="url">https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/01_counter_game.html</div>
+          <div class="meta">
+            <span class="tag">ゲーム / 基本操作</span>
+            <span class="arrow">↗</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/02_paint_app.html" target="_blank" rel="noopener noreferrer">
+          <div class="num">02</div>
+          <h3>お絵かきアプリ</h3>
+          <p>マウスやタッチで自由に描ける、直感的で人気の高いサンプルです。</p>
+          <div class="url">https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/02_paint_app.html</div>
+          <div class="meta">
+            <span class="tag">お絵かき / UI</span>
+            <span class="arrow">↗</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/03_omikuji.html" target="_blank" rel="noopener noreferrer">
+          <div class="num">03</div>
+          <h3>おみくじ</h3>
+          <p>ボタンを押すと結果が出る、ランダム処理の楽しさが分かるミニアプリです。</p>
+          <div class="url">https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/03_omikuji.html</div>
+          <div class="meta">
+            <span class="tag">ランダム / 運試し</span>
+            <span class="arrow">↗</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/04_quiz_game.html" target="_blank" rel="noopener noreferrer">
+          <div class="num">04</div>
+          <h3>クイズゲーム</h3>
+          <p>問題を出して答える形の定番サンプル。ルール設計の面白さが見えます。</p>
+          <div class="url">https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/04_quiz_game.html</div>
+          <div class="meta">
+            <span class="tag">クイズ / ロジック</span>
+            <span class="arrow">↗</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/05_reaction_test.html" target="_blank" rel="noopener noreferrer">
+          <div class="num">05</div>
+          <h3>反応速度テスト</h3>
+          <p>タイミングに合わせて反応するシンプルなゲーム。時間制御の基礎が入っています。</p>
+          <div class="url">https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/05_reaction_test.html</div>
+          <div class="meta">
+            <span class="tag">反射神経 / タイマー</span>
+            <span class="arrow">↗</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/06_simple_chatbot.html" target="_blank" rel="noopener noreferrer">
+          <div class="num">06</div>
+          <h3>シンプルチャットボット</h3>
+          <p>会話っぽいやり取りを体験できるサンプル。AI活用の入口として分かりやすい作品です。</p>
+          <div class="url">https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/06_simple_chatbot.html</div>
+          <div class="meta">
+            <span class="tag">会話 / AI風体験</span>
+            <span class="arrow">↗</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/07_slide_puzzle.html" target="_blank" rel="noopener noreferrer">
+          <div class="num">07</div>
+          <h3>スライドパズル</h3>
+          <p>ピースを動かしてそろえるゲーム。動きと状態管理の面白さが感じられます。</p>
+          <div class="url">https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/07_slide_puzzle.html</div>
+          <div class="meta">
+            <span class="tag">パズル / 状態管理</span>
+            <span class="arrow">↗</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/08_motion_app.html" target="_blank" rel="noopener noreferrer">
+          <div class="num">08</div>
+          <h3>モーションアプリ</h3>
+          <p>画面上の動きや演出を楽しめるサンプル。見た目の変化が気持ちいい作品です。</p>
+          <div class="url">https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/08_motion_app.html</div>
+          <div class="meta">
+            <span class="tag">アニメーション / 演出</span>
+            <span class="arrow">↗</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/09_shimosuwa_modern_sample.html" target="_blank" rel="noopener noreferrer">
+          <div class="num">09</div>
+          <h3>下諏訪町モダンサンプル</h3>
+          <p>下諏訪町の情報を題材に、自治体サイトを今っぽく再構成したデザインサンプルです。</p>
+          <div class="url">https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/09_shimosuwa_modern_sample.html</div>
+          <div class="meta">
+            <span class="tag">地域サイト / 再デザイン</span>
+            <span class="arrow">↗</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://sususunosusumu.github.io/Shimosuwa-database/index.html" target="_blank" rel="noopener noreferrer">
+          <div class="num">10</div>
+          <h3>下諏訪データベース</h3>
+          <p>別リポジトリにある外部ページへのリンクです。データや地域情報の活用例として配置しています。</p>
+          <div class="url">https://sususunosusumu.github.io/Shimosuwa-database/index.html</div>
+          <div class="meta">
+            <span class="tag">外部リンク / データ活用</span>
+            <span class="arrow">↗</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>このHTMLはそのまま <strong>sample/index.html</strong> として保存して使えます。</div>
+      <div>01〜09 は GitHub Pages 上の <strong>SHIMOSUWA-LAB/sample/</strong> に直接リンクしています。</div>
+    </footer>
+  </div>
+</body>
+</html>
