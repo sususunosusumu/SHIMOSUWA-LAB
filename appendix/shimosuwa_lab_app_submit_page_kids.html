@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>つくったアプリを送ろう | 下諏訪Lab</title>
+  <style>
+    :root{
+      --bg1:#eef7ff;
+      --bg2:#f4fff5;
+      --card:rgba(255,255,255,0.94);
+      --text:#1f2937;
+      --sub:#5b6470;
+      --blue:#2563eb;
+      --green:#16a34a;
+      --line:#dbe7f3;
+      --shadow:0 14px 36px rgba(30, 41, 59, 0.10);
+      --radius:24px;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:"Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(59,130,246,0.10), transparent 30%),
+        radial-gradient(circle at top right, rgba(34,197,94,0.10), transparent 28%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      line-height:1.8;
+    }
+
+    .wrap{
+      max-width:980px;
+      margin:0 auto;
+      padding:24px 18px 56px;
+    }
+
+    .hero,
+    .section{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.7);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(6px);
+    }
+
+    .hero{
+      padding:34px 22px;
+      text-align:center;
+      margin-bottom:22px;
+    }
+
+    .lab{
+      display:inline-block;
+      padding:7px 14px;
+      border-radius:999px;
+      background:#e0edff;
+      color:var(--blue);
+      font-weight:700;
+      font-size:0.92rem;
+      margin-bottom:14px;
+      letter-spacing:0.02em;
+    }
+
+    h1{
+      margin:0 0 12px;
+      font-size:clamp(1.9rem, 4.3vw, 2.9rem);
+      line-height:1.35;
+    }
+
+    .lead{
+      max-width:720px;
+      margin:0 auto;
+      color:var(--sub);
+      font-size:1.05rem;
+    }
+
+    .lead strong{
+      color:var(--text);
+    }
+
+    .section{
+      padding:26px 20px;
+      margin-bottom:20px;
+    }
+
+    h2{
+      margin:0 0 14px;
+      font-size:1.45rem;
+    }
+
+    .intro-box{
+      background:linear-gradient(135deg,#f8fbff,#f8fff8);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px 16px;
+      color:var(--sub);
+    }
+
+    .steps{
+      display:grid;
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .step{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      background:#fbfdff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:15px 14px;
+    }
+
+    .num{
+      width:42px;
+      height:42px;
+      flex:0 0 42px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-weight:700;
+      background:linear-gradient(135deg,var(--blue),#60a5fa);
+      box-shadow:0 8px 18px rgba(37,99,235,0.24);
+    }
+
+    .step strong{
+      display:block;
+      margin-bottom:3px;
+      font-size:1.03rem;
+    }
+
+    .point, .small-note{
+      border-radius:18px;
+      padding:15px 16px;
+      margin-top:18px;
+    }
+
+    .point{
+      background:#fefce8;
+      border:1px solid #fde68a;
+    }
+
+    .small-note{
+      background:#f0fdf4;
+      border:1px solid #bbf7d0;
+    }
+
+    .cta-wrap{
+      text-align:center;
+      margin-top:24px;
+    }
+
+    .cta{
+      display:inline-block;
+      text-decoration:none;
+      color:#fff;
+      font-weight:800;
+      font-size:1.08rem;
+      padding:16px 30px;
+      border-radius:999px;
+      background:linear-gradient(135deg,var(--green),#22c55e);
+      box-shadow:0 12px 24px rgba(34,197,94,0.25);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+
+    .cta:hover{
+      transform:translateY(-2px);
+      box-shadow:0 16px 28px rgba(34,197,94,0.30);
+    }
+
+    .url{
+      margin-top:14px;
+      color:var(--sub);
+      font-size:0.95rem;
+      word-break:break-all;
+    }
+
+    .url a{
+      color:var(--blue);
+    }
+
+    .footer{
+      text-align:center;
+      color:var(--sub);
+      font-size:0.95rem;
+      margin-top:18px;
+    }
+
+    .emoji{
+      font-size:1.15em;
+    }
+
+    @media (max-width: 640px){
+      .wrap{padding:16px 14px 42px}
+      .hero{padding:28px 16px}
+      .section{padding:20px 15px}
+      .lead{font-size:1rem}
+      .step{padding:14px 12px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="lab">下諏訪Lab</div>
+      <h1>つくったアプリを<br>送ってみよう <span class="emoji">🚀</span></h1>
+      <p class="lead">
+        教室でつくったアプリは、下のフォームから送ることができます。<br>
+        <strong>ニックネーム</strong>を入れて、<strong>つくったアプリのファイル</strong>を選んで送ってね。
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>やることは かんたん 4ステップ</h2>
+
+      <div class="intro-box">
+        むずかしく考えなくて大丈夫です。<br>
+        下のボタンを押して、順番に入力していけば送れます。
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <div>
+            <strong>フォームをひらく</strong>
+            下の「フォームをひらく」ボタンを押します。
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">2</div>
+          <div>
+            <strong>ニックネームを入力する</strong>
+            教室で使っているニックネームを書きます。
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">3</div>
+          <div>
+            <strong>アプリのファイルをえらぶ</strong>
+            自分がつくったHTMLファイルなど、送りたいファイルをえらびます。
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">4</div>
+          <div>
+            <strong>送信する</strong>
+            最後に送信ボタンを押したら完了です。
+          </div>
+        </div>
+      </div>
+
+      <div class="point">
+        <strong>ポイント</strong><br>
+        ファイル名がわかりやすいと見つけやすいです。<br>
+        たとえば <code>game.html</code> や <code>rocket-app.html</code> のような名前でもOKです。
+      </div>
+
+      <div class="small-note">
+        うまくいかないときは、あわてなくて大丈夫。<br>
+        教室でいっしょに確認できます。
+      </div>
+
+      <div class="cta-wrap">
+        <a class="cta"
+           href="https://docs.google.com/forms/d/e/1FAIpQLScFPwfl_OQ83fYc6bcjY1S1wn3tVcYgUqmJRBpIDHp86RY3iQ/viewform?usp=publish-editor"
+           target="_blank"
+           rel="noopener noreferrer">
+          フォームをひらく
+        </a>
+
+        <div class="url">
+          ひらかないときはこちら：<br>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLScFPwfl_OQ83fYc6bcjY1S1wn3tVcYgUqmJRBpIDHp86RY3iQ/viewform?usp=publish-editor"
+             target="_blank"
+             rel="noopener noreferrer">
+            Googleフォームをひらく
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      AIをつかって、じぶんのアイデアを形にしよう。<br>
+      下諏訪Lab
+    </div>
+  </div>
+</body>
+</html>
