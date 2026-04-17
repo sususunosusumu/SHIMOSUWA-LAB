@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shimosuwa Town Reimagined | 下諏訪町 サンプルデザイン</title>
+  <meta name="description" content="下諏訪町公式サイトをもとに再構成した、現代的でキラキラ感のあるサンプルトップページです。" />
+  <style>
+    :root{
+      --bg:#07111f;
+      --bg2:#0d1e35;
+      --panel:rgba(255,255,255,.08);
+      --panel-strong:rgba(255,255,255,.12);
+      --text:#f4f8ff;
+      --muted:#b3c2db;
+      --line:rgba(255,255,255,.12);
+      --accent:#7ae7ff;
+      --accent2:#8f7cff;
+      --accent3:#4ff0b7;
+      --danger:#ff8f9f;
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+      --radius:24px;
+      --max:1280px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:"Inter","Hiragino Sans","Yu Gothic UI","Yu Gothic","Meiryo",system-ui,sans-serif;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(122,231,255,.20), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(143,124,255,.24), transparent 30%),
+        radial-gradient(circle at 70% 80%, rgba(79,240,183,.18), transparent 28%),
+        linear-gradient(160deg, #06101c 0%, #0b1930 48%, #08111e 100%);
+      min-height:100vh;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%}
+    .container{width:min(calc(100% - 32px), var(--max)); margin:0 auto}
+    .glass{
+      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      border:1px solid var(--line);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow:var(--shadow);
+    }
+    header{
+      position:sticky; top:0; z-index:50;
+      background:rgba(5,11,21,.55);
+      backdrop-filter: blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      min-height:76px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:14px;
+      font-weight:800; letter-spacing:.03em;
+    }
+    .brand-mark{
+      width:44px; height:44px; border-radius:14px; position:relative; overflow:hidden;
+      background:linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow:0 12px 30px rgba(122,231,255,.35);
+    }
+    .brand-mark::before,
+    .brand-mark::after{
+      content:""; position:absolute; inset:auto; border-radius:999px;
+    }
+    .brand-mark::before{width:46px;height:46px; right:-8px; bottom:-14px; background:rgba(255,255,255,.26)}
+    .brand-mark::after{width:18px;height:18px; left:9px; top:9px; background:#fff}
+    .nav-links{display:flex; flex-wrap:wrap; gap:10px}
+    .nav-links a{
+      padding:10px 14px; border-radius:999px; font-size:.92rem; color:var(--muted);
+      border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.04);
+      transition:.2s ease;
+    }
+    .nav-links a:hover{color:#fff; transform:translateY(-1px); background:rgba(255,255,255,.08)}
+    .hero{padding:42px 0 22px}
+    .hero-grid{display:grid; grid-template-columns:1.4fr .9fr; gap:22px}
+    .hero-main{
+      padding:34px; border-radius:32px; position:relative; overflow:hidden;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.05)),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,.12), transparent 25%),
+        linear-gradient(135deg, rgba(122,231,255,.10), rgba(143,124,255,.14));
+    }
+    .hero-main::after{
+      content:""; position:absolute; inset:auto -60px -60px auto; width:220px; height:220px;
+      border-radius:50%; background:radial-gradient(circle, rgba(122,231,255,.20), transparent 60%);
+      pointer-events:none;
+    }
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:10px; padding:8px 14px; border-radius:999px;
+      background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.10); color:#dff9ff;
+      font-size:.9rem;
+    }
+    .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--accent3);box-shadow:0 0 0 8px rgba(79,240,183,.08)}
+    h1{
+      margin:18px 0 14px; font-size:clamp(2.2rem, 5vw, 4.6rem); line-height:1.04;
+      letter-spacing:-.03em;
+    }
+    .lead{font-size:1.05rem; line-height:1.8; color:#d7e5fb; max-width:820px}
+    .hero-actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:24px}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px; padding:14px 18px; border-radius:16px;
+      font-weight:700; border:1px solid transparent; transition:.2s ease; cursor:pointer;
+    }
+    .btn-primary{background:linear-gradient(135deg, var(--accent), #d1fbff); color:#04111a; box-shadow:0 18px 40px rgba(122,231,255,.24)}
+    .btn-secondary{background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.12); color:#f6fbff}
+    .btn:hover{transform:translateY(-2px)}
+    .hero-side{display:grid; gap:22px}
+    .mini-card,.stat-card,.section-card,.news-card,.category-card,.utility-card,.footer-card{
+      border-radius:28px;
+    }
+    .mini-card{padding:24px}
+    .mini-card h3,.section-title{margin:0 0 14px; font-size:1.08rem}
+    .muted{color:var(--muted)}
+    .stats{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:18px}
+    .stat-card{padding:18px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.10)}
+    .stat-label{font-size:.82rem; color:var(--muted); margin-bottom:6px}
+    .stat-value{font-size:1.7rem; font-weight:800}
+    .section{padding:22px 0}
+    .section-head{display:flex; align-items:end; justify-content:space-between; gap:16px; margin-bottom:16px}
+    .section-head h2{margin:0; font-size:clamp(1.5rem,3vw,2.4rem); letter-spacing:-.02em}
+    .section-head p{margin:0; color:var(--muted)}
+    .chip-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+    .chip{
+      display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px;
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.10); color:#e6f0ff;
+      font-size:.95rem;
+    }
+    .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+    .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:18px}
+    .news-card{padding:22px; position:relative; overflow:hidden}
+    .news-card::before{
+      content:""; position:absolute; inset:0; background:linear-gradient(120deg, rgba(122,231,255,.12), rgba(143,124,255,.02) 55%, transparent 100%); pointer-events:none;
+    }
+    .tag{display:inline-flex; padding:7px 10px; border-radius:999px; font-size:.78rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; background:rgba(255,255,255,.08); color:#ddf7ff; border:1px solid rgba(255,255,255,.10)}
+    .date{margin:14px 0 10px; color:#9db0cd; font-size:.92rem}
+    .news-title{font-size:1.08rem; line-height:1.6; margin:0 0 10px; font-weight:800}
+    .news-desc{color:var(--muted); line-height:1.75; margin:0 0 16px}
+    .card-link{display:inline-flex; align-items:center; gap:8px; color:#e8fdff; font-weight:700}
+    .cards{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+    .category-card{padding:22px}
+    .category-top{display:flex; align-items:start; justify-content:space-between; gap:12px; margin-bottom:14px}
+    .icon{
+      width:46px; height:46px; display:grid; place-items:center; border-radius:16px;
+      background:linear-gradient(135deg, rgba(122,231,255,.18), rgba(143,124,255,.18));
+      border:1px solid rgba(255,255,255,.10); font-size:1.2rem;
+    }
+    .category-card h3{margin:0; font-size:1.15rem}
+    .category-card p{margin:10px 0 16px; color:var(--muted); line-height:1.75}
+    .link-list{display:grid; gap:10px}
+    .link-list a{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:12px 14px; border-radius:16px; background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08); color:#edf5ff; transition:.2s ease;
+    }
+    .link-list a:hover{transform:translateX(2px); background:rgba(255,255,255,.08)}
+    .link-list small{color:#8ea4c6}
+    .utility-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:18px}
+    .utility-card{padding:24px}
+    .utility-card h3{margin:0 0 14px; font-size:1.1rem}
+    .split{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
+    .list-clean{display:grid; gap:10px; padding:0; margin:0; list-style:none}
+    .list-clean li{padding:12px 14px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:16px; color:#deebff; line-height:1.6}
+    .footer{padding:26px 0 44px}
+    .footer-card{padding:28px; display:grid; grid-template-columns:1.2fr .8fr; gap:18px}
+    .footer-title{font-size:1.45rem; margin:0 0 10px}
+    .footer-meta{display:grid; gap:8px; color:#dce8fb}
+    .tiny{font-size:.85rem; color:#95a9c8}
+    .search-box{display:flex; gap:10px; margin-top:12px}
+    .search-box input{
+      width:100%; padding:14px 16px; border-radius:16px; border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.06); color:#fff; outline:none;
+    }
+    .search-box input::placeholder{color:#89a0c2}
+    .empty{display:none; text-align:center; color:#b8c7de; padding:24px}
+    .ribbon{
+      position:absolute; right:18px; top:18px; padding:8px 12px; font-size:.75rem; font-weight:800;
+      background:linear-gradient(135deg, var(--accent2), #c0b4ff); color:#fff; border-radius:999px;
+      box-shadow:0 10px 24px rgba(143,124,255,.28);
+    }
+    @media (max-width: 1080px){
+      .hero-grid,.utility-grid,.footer-card,.grid-3,.grid-2,.cards{grid-template-columns:1fr}
+    }
+    @media (max-width: 760px){
+      .nav{padding:10px 0; align-items:flex-start; flex-direction:column}
+      .hero-main,.mini-card,.utility-card,.footer-card,.news-card,.category-card{padding:20px}
+      .stats,.split{grid-template-columns:1fr}
+      .nav-links{overflow:auto; max-width:100%}
+      .hero-actions{flex-direction:column; align-items:stretch}
+      .btn{justify-content:center}
+      h1{font-size:2.4rem}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="https://www.town.shimosuwa.lg.jp/www/index.html" target="_blank" rel="noopener noreferrer">
+        <span class="brand-mark"></span>
+        <span>
+          <div style="font-size:.86rem;color:var(--muted);font-weight:700;letter-spacing:.08em;">SAMPLE REDESIGN</div>
+          <div style="font-size:1.08rem;">下諏訪町 | Shimosuwa Town</div>
+        </span>
+      </a>
+      <nav class="nav-links">
+        <a href="#news">新着</a>
+        <a href="#categories">主要メニュー</a>
+        <a href="#safety">防災</a>
+        <a href="#town">まち情報</a>
+        <a href="#footer">アクセス</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-main glass">
+          <span class="eyebrow"><span class="dot"></span> 町の情報を、もっと見やすく、もっと今っぽく。</span>
+          <h1>Shimosuwa,<br>Reimagined.</h1>
+          <p class="lead">
+            これは下諏訪町公式サイトのトップページ構成をもとに、サンプルとして再設計した1ファイル完結のモダンHTMLです。
+            生活情報・手続き・子育て・防災・町政・観光まで、主要導線を一画面でつかみやすくし、光感のあるUIで「行きたい情報に迷わず触れられる」トップページを目指しました。
+          </p>
+          <div class="chip-row">
+            <span class="chip">✨ ガラス調UI</span>
+            <span class="chip">⚡ 主要リンクを再整理</span>
+            <span class="chip">🏞 観光・移住導線を強化</span>
+            <span class="chip">🛡 緊急情報を上部近くに配置</span>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://www.town.shimosuwa.lg.jp/www/index.html" target="_blank" rel="noopener noreferrer">公式トップを見る</a>
+            <a class="btn btn-secondary" href="#categories">主要メニューへ</a>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <div class="mini-card glass">
+            <h3>下諏訪町の現在</h3>
+            <p class="muted">公式サイト掲載値をもとにした町の基本情報です。</p>
+            <div class="stats">
+              <div class="stat-card">
+                <div class="stat-label">人口</div>
+                <div class="stat-value">17,974</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">世帯</div>
+                <div class="stat-value">8,640</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">窓口受付</div>
+                <div class="stat-value" style="font-size:1.1rem;line-height:1.45">8:30–17:15</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">所在地</div>
+                <div class="stat-value" style="font-size:1.05rem;line-height:1.45">長野県 下諏訪町</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mini-card glass" id="safety">
+            <div class="ribbon">防災</div>
+            <h3>緊急時リンク</h3>
+            <div class="link-list">
+              <a href="https://plus.sugumail.com/usr/shimosuwa/home" target="_blank" rel="noopener noreferrer"><span>緊急情報一覧</span><small>公式</small></a>
+              <a href="https://town-shimosuwa.jyouho.net/" target="_blank" rel="noopener noreferrer"><span>町の防災気象情報</span><small>雨量・水位</small></a>
+              <a href="https://www.jma.go.jp/bosai/warning/" target="_blank" rel="noopener noreferrer"><span>気象警報・注意報</span><small>気象庁</small></a>
+              <a href="https://traininfo.jreast.co.jp/train_info/" target="_blank" rel="noopener noreferrer"><span>鉄道運行情報</span><small>JR東日本</small></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="news">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>いま動いている情報</h2>
+            <p>トップページ掲載の新着情報・重要なお知らせを見やすく再編集。</p>
+          </div>
+          <a class="btn btn-secondary" href="https://www.town.shimosuwa.lg.jp/www/topics.html" target="_blank" rel="noopener noreferrer">重要なお知らせ一覧</a>
+        </div>
+
+        <div class="grid-3">
+          <article class="news-card glass">
+            <span class="tag">New</span>
+            <div class="date">2026年4月16日</div>
+            <h3 class="news-title">令和8年度 下諏訪町公民館「町民大学」</h3>
+            <p class="news-desc">学びの入口がわかりやすいよう、講座系情報を独立したカードとして上部表示。</p>
+            <a class="card-link" href="https://www.town.shimosuwa.lg.jp/www/index.html" target="_blank" rel="noopener noreferrer">公式トップで確認する →</a>
+          </article>
+
+          <article class="news-card glass">
+            <span class="tag">Important</span>
+            <div class="date">2026年4月13日</div>
+            <h3 class="news-title">窓口・電話受付時間の変更について</h3>
+            <p class="news-desc">生活に直結する案内は、目立つ色と短い説明で最初に認識できるようにしています。</p>
+            <a class="card-link" href="https://www.town.shimosuwa.lg.jp/www/topics.html" target="_blank" rel="noopener noreferrer">重要なお知らせ一覧 →</a>
+          </article>
+
+          <article class="news-card glass">
+            <span class="tag">Safety</span>
+            <div class="date">2026年4月10日</div>
+            <h3 class="news-title">国道142号 全面通行止めのお知らせ</h3>
+            <p class="news-desc">道路・災害・規制系は日常の行政案内と分け、視線を集める位置に配置する想定です。</p>
+            <a class="card-link" href="https://www.town.shimosuwa.lg.jp/www/index.html" target="_blank" rel="noopener noreferrer">公式トップで確認する →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="categories">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>主要メニュー</h2>
+            <p>公式トップの大分類を、使う人目線で強弱を付けて再配置。</p>
+          </div>
+        </div>
+
+        <div class="search-box">
+          <input id="menuSearch" type="text" placeholder="カテゴリやリンク名で絞り込み（例：子育て、防災、移住、税）" />
+        </div>
+        <div class="empty" id="emptyState">一致する項目がありません。</div>
+
+        <div class="cards" id="categoryGrid">
+          <article class="category-card glass searchable" data-keywords="くらし 地域 公共料金 住まい 移住 水道 ごみ 交通 相談">
+            <div class="category-top">
+              <div>
+                <div class="icon">🏡</div>
+              </div>
+              <a class="tag" href="https://www.town.shimosuwa.lg.jp/www/genre/1000100000022/index.html" target="_blank" rel="noopener noreferrer">カテゴリを見る</a>
+            </div>
+            <h3>くらし・地域</h3>
+            <p>住まい、移住、上下水道、ごみ、交通、相談など、生活のベースになる導線。</p>
+            <div class="link-list">
+              <a href="https://www.town.shimosuwa.lg.jp/www/genre/1000100000022/index.html" target="_blank" rel="noopener noreferrer"><span>くらし・地域トップ</span><small>公式</small></a>
+              <a href="https://kuguruto-shimosuwa.com/" target="_blank" rel="noopener noreferrer"><span>移住ポータル くぐると下諏訪</span><small>外部</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000369/index.html" target="_blank" rel="noopener noreferrer"><span>空き家情報バンク</span><small>住まい</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000001041/index.html" target="_blank" rel="noopener noreferrer"><span>ごみの収集日</span><small>生活</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000322/index.html" target="_blank" rel="noopener noreferrer"><span>バス</span><small>交通</small></a>
+            </div>
+          </article>
+
+          <article class="category-card glass searchable" data-keywords="手続き 届出 戸籍 住民票 税 マイナンバー 証明書">
+            <div class="category-top">
+              <div class="icon">🧾</div>
+              <a class="tag" href="https://www.town.shimosuwa.lg.jp/www/genre/1000100000012/index.html" target="_blank" rel="noopener noreferrer">カテゴリを見る</a>
+            </div>
+            <h3>手続き・届出</h3>
+            <p>戸籍、住民異動、各種証明書、税、年金、マイナンバー系を集約。</p>
+            <div class="link-list">
+              <a href="https://www.town.shimosuwa.lg.jp/www/genre/1000100000012/index.html" target="_blank" rel="noopener noreferrer"><span>手続き・届出トップ</span><small>公式</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000245/index.html" target="_blank" rel="noopener noreferrer"><span>マイナンバーカードについて</span><small>手続き</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000670/index.html" target="_blank" rel="noopener noreferrer"><span>転入届</span><small>住民異動</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000671/index.html" target="_blank" rel="noopener noreferrer"><span>転出届</span><small>住民異動</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000229/index.html" target="_blank" rel="noopener noreferrer"><span>住民票の請求</span><small>証明書</small></a>
+            </div>
+          </article>
+
+          <article class="category-card glass searchable" data-keywords="子育て 教育 保育園 学童 子ども 学校 図書館 文化">
+            <div class="category-top">
+              <div class="icon">🧒</div>
+              <a class="tag" href="https://www.town.shimosuwa.lg.jp/www/genre/1000100000043/index.html" target="_blank" rel="noopener noreferrer">カテゴリを見る</a>
+            </div>
+            <h3>子育て・教育</h3>
+            <p>妊娠・出産、保育園、手当、学校、図書館、文化施設へつながる導線。</p>
+            <div class="link-list">
+              <a href="https://www.town.shimosuwa.lg.jp/www/genre/1000100000043/index.html" target="_blank" rel="noopener noreferrer"><span>子育て・教育トップ</span><small>公式</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000190/index.html" target="_blank" rel="noopener noreferrer"><span>保育園への入園</span><small>保育</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000457/index.html" target="_blank" rel="noopener noreferrer"><span>学童クラブ</span><small>子育て</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000374/index.html" target="_blank" rel="noopener noreferrer"><span>児童手当</span><small>助成</small></a>
+              <a href="https://www.libnet-suwa.gr.jp/" target="_blank" rel="noopener noreferrer"><span>図書館関連</span><small>外部</small></a>
+            </div>
+          </article>
+
+          <article class="category-card glass searchable" data-keywords="健康 福祉 高齢者 障害者 医療 生活支援 予防接種">
+            <div class="category-top">
+              <div class="icon">💚</div>
+              <a class="tag" href="https://www.town.shimosuwa.lg.jp/www/genre/1000100000058/index.html" target="_blank" rel="noopener noreferrer">カテゴリを見る</a>
+            </div>
+            <h3>健康・福祉</h3>
+            <p>国保、医療、健診、予防接種、高齢者支援、障害者支援、生活支援など。</p>
+            <div class="link-list">
+              <a href="https://www.town.shimosuwa.lg.jp/www/genre/1000100000058/index.html" target="_blank" rel="noopener noreferrer"><span>健康・福祉トップ</span><small>公式</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000270/index.html" target="_blank" rel="noopener noreferrer"><span>健康診査・予防接種</span><small>健康</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000282/index.html" target="_blank" rel="noopener noreferrer"><span>高齢者支援</span><small>福祉</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000294/index.html" target="_blank" rel="noopener noreferrer"><span>障害者支援・サービス</span><small>福祉</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000311/index.html" target="_blank" rel="noopener noreferrer"><span>生活支援</span><small>支援</small></a>
+            </div>
+          </article>
+
+          <article class="category-card glass searchable" data-keywords="防災 安全 ハザードマップ 消防団 地震 水害 気象">
+            <div class="category-top">
+              <div class="icon">🛡</div>
+              <a class="tag" href="https://www.town.shimosuwa.lg.jp/www/genre/1000100000001/index.html" target="_blank" rel="noopener noreferrer">カテゴリを見る</a>
+            </div>
+            <h3>防災・安全</h3>
+            <p>災害への備え、気象情報、ハザードマップ、消防団、防災アプリ関連を強く見せる設計。</p>
+            <div class="link-list">
+              <a href="https://www.town.shimosuwa.lg.jp/www/genre/1000100000001/index.html" target="_blank" rel="noopener noreferrer"><span>防災・安全トップ</span><small>公式</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000340/index.html" target="_blank" rel="noopener noreferrer"><span>総合ハザードマップ</span><small>重要</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1676535200672/index.html" target="_blank" rel="noopener noreferrer"><span>しもすわインフォ</span><small>防災情報</small></a>
+              <a href="https://plus.sugumail.com/usr/shimosuwa/home" target="_blank" rel="noopener noreferrer"><span>メール配信サービス</span><small>外部</small></a>
+              <a href="https://www.pref.nagano.lg.jp/bosai/shingata_bosaiapp.html" target="_blank" rel="noopener noreferrer"><span>信州防災アプリ</span><small>長野県</small></a>
+            </div>
+          </article>
+
+          <article class="category-card glass searchable" data-keywords="町政 情報公開 統計 役場 予算 採用 オープンデータ 町長">
+            <div class="category-top">
+              <div class="icon">🏛</div>
+              <a class="tag" href="https://www.town.shimosuwa.lg.jp/www/genre/1000100000070/index.html" target="_blank" rel="noopener noreferrer">カテゴリを見る</a>
+            </div>
+            <h3>町政情報</h3>
+            <p>町の概要、会議、例規集、統計、採用、寄附、オープンデータなど行政側の入口。</p>
+            <div class="link-list">
+              <a href="https://www.town.shimosuwa.lg.jp/www/genre/1000100000070/index.html" target="_blank" rel="noopener noreferrer"><span>町政情報トップ</span><small>公式</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/genre/1000100000077/index.html" target="_blank" rel="noopener noreferrer"><span>統計情報</span><small>データ</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/genre/1000100000086/index.html" target="_blank" rel="noopener noreferrer"><span>町長室へようこそ</span><small>町長</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000368/index.html" target="_blank" rel="noopener noreferrer"><span>リンク集</span><small>関連情報</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/sitemap.html" target="_blank" rel="noopener noreferrer"><span>サイトマップ</span><small>全体像</small></a>
+            </div>
+          </article>
+
+          <article class="category-card glass searchable" data-keywords="観光 施設 温泉 宿場 諏訪湖 八島 キャンプ 移住 旅行">
+            <div class="category-top">
+              <div class="icon">🏞</div>
+              <a class="tag" href="https://www.town.shimosuwa.lg.jp/www/genre/1000100000085/index.html" target="_blank" rel="noopener noreferrer">カテゴリを見る</a>
+            </div>
+            <h3>観光・まちの魅力</h3>
+            <p>町の観光施設だけでなく、公式観光サイトや移住サイトへの導線も前面に。</p>
+            <div class="link-list">
+              <a href="https://www.town.shimosuwa.lg.jp/www/genre/1000100000085/index.html" target="_blank" rel="noopener noreferrer"><span>観光施設トップ</span><small>公式</small></a>
+              <a href="https://shimosuwaonsen.jp/" target="_blank" rel="noopener noreferrer"><span>おいでなしてしもすわ</span><small>観光公式</small></a>
+              <a href="https://kuguruto-shimosuwa.com/" target="_blank" rel="noopener noreferrer"><span>くぐると下諏訪</span><small>移住</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000404/index.html" target="_blank" rel="noopener noreferrer"><span>諏訪湖博物館・赤彦記念館</span><small>文化</small></a>
+              <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000412/index.html" target="_blank" rel="noopener noreferrer"><span>おんばしら館 よいさ</span><small>観光</small></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="town">
+      <div class="container utility-grid">
+        <div class="utility-card glass">
+          <h3>まちを知る</h3>
+          <div class="split">
+            <ul class="list-clean">
+              <li><strong>広報</strong><br><a href="https://www.town.shimosuwa.lg.jp/www/contents/1773878955673/index.html" target="_blank" rel="noopener noreferrer">クローズアップしもすわ 2026年4月号</a></li>
+              <li><strong>統計</strong><br><a href="https://www.town.shimosuwa.lg.jp/www/genre/1000100000077/index.html" target="_blank" rel="noopener noreferrer">人口・世帯などの統計情報</a></li>
+              <li><strong>町長室</strong><br><a href="https://www.town.shimosuwa.lg.jp/www/genre/1000100000086/index.html" target="_blank" rel="noopener noreferrer">町長メッセージ・関連情報</a></li>
+            </ul>
+            <ul class="list-clean">
+              <li><strong>役場へのアクセス</strong><br><a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000106/index.html" target="_blank" rel="noopener noreferrer">交通アクセスを見る</a></li>
+              <li><strong>お問い合わせ</strong><br><a href="https://www.town.shimosuwa.lg.jp/inquiry2/mailform?SectionID=1467187023024" target="_blank" rel="noopener noreferrer">公式フォームへ</a></li>
+              <li><strong>サイト全体</strong><br><a href="https://www.town.shimosuwa.lg.jp/www/sitemap.html" target="_blank" rel="noopener noreferrer">サイトマップを見る</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="utility-card glass">
+          <h3>このサンプルの見せ方</h3>
+          <ul class="list-clean">
+            <li>トップファーストビューに「町の価値」と「主要導線」を重ね、第一印象を刷新。</li>
+            <li>生活・手続き・防災・観光をカード化し、スマホでも迷いにくい構造に変更。</li>
+            <li>防災や重要なお知らせは上寄せ。観光・移住は世界観重視で別レイヤーに配置。</li>
+            <li>1ファイル完結なので、そのままGitHub Pages用のサンプルとして使えます。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer">
+    <div class="container footer-card glass">
+      <div>
+        <h2 class="footer-title">下諏訪町 役場情報</h2>
+        <div class="footer-meta">
+          <div>〒393-8501 長野県諏訪郡下諏訪町4613番地8</div>
+          <div>電話 0266-27-1111（代表） / FAX 0266-28-1070</div>
+          <div>窓口受付時間：月〜金 8:30–17:15（土日祝・年末年始を除く）</div>
+        </div>
+        <div class="hero-actions" style="margin-top:18px">
+          <a class="btn btn-primary" href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000106/index.html" target="_blank" rel="noopener noreferrer">アクセスを見る</a>
+          <a class="btn btn-secondary" href="https://www.town.shimosuwa.lg.jp/www/index.html" target="_blank" rel="noopener noreferrer">公式サイトへ</a>
+        </div>
+      </div>
+      <div>
+        <div class="tiny">NOTE</div>
+        <p class="muted" style="line-height:1.8;margin-top:10px">
+          このHTMLは、下諏訪町公式トップページの公開構成・主要カテゴリ・掲載情報をもとに作成した「再デザイン用サンプル」です。
+          画像やCMSの内部挙動までは再現せず、見た目と導線整理を優先しています。
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const input = document.getElementById('menuSearch');
+    const items = Array.from(document.querySelectorAll('.searchable'));
+    const empty = document.getElementById('emptyState');
+
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      let visible = 0;
+      items.forEach(item => {
+        const txt = (item.dataset.keywords + ' ' + item.innerText).toLowerCase();
+        const show = !q || txt.includes(q);
+        item.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      empty.style.display = visible ? 'none' : 'block';
+    });
+  </script>
+</body>
+</html>
