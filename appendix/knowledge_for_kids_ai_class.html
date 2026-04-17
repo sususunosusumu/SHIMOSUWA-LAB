@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>知識とナレッジ｜この教室で手に入れたもの</title>
+  <style>
+    :root{
+      --bg1:#f7fbff;
+      --bg2:#eef8f2;
+      --card:#ffffff;
+      --text:#203040;
+      --muted:#617384;
+      --line:#d7e6ef;
+      --accent:#3b82f6;
+      --accent2:#10b981;
+      --soft:#f8fcff;
+      --shadow:0 12px 30px rgba(30,60,90,.10);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Yu Gothic","Hiragino Kaku Gothic ProN","Meiryo",system-ui,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, #ffffff 0%, var(--bg1) 45%, var(--bg2) 100%);
+      line-height:1.85;
+    }
+    .wrap{
+      max-width:1000px;
+      margin:0 auto;
+      padding:24px 18px 56px;
+    }
+    .hero,.section{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+    }
+    .hero{
+      padding:34px 26px;
+      background:linear-gradient(135deg, rgba(59,130,246,.10), rgba(16,185,129,.10));
+    }
+    .section{
+      padding:24px 20px;
+      margin-top:24px;
+    }
+    .tag{
+      display:inline-block;
+      padding:6px 12px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:12px;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(30px, 5vw, 44px);
+      line-height:1.25;
+    }
+    h2{
+      margin:0 0 14px;
+      font-size:27px;
+      line-height:1.35;
+    }
+    h3{
+      margin:0 0 8px;
+      font-size:20px;
+      line-height:1.45;
+    }
+    p{margin:0 0 10px}
+    .lead{
+      color:var(--muted);
+      font-size:18px;
+      margin:0;
+    }
+    .muted{color:var(--muted)}
+    .grid{
+      display:grid;
+      gap:14px;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    }
+    .card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+    }
+    .badge{
+      display:inline-flex;
+      min-width:36px;
+      height:36px;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:#fff;
+      font-weight:700;
+      margin-bottom:10px;
+    }
+    .compare{
+      display:grid;
+      gap:14px;
+      grid-template-columns:1fr 1fr;
+      margin-top:14px;
+    }
+    .box{
+      border-radius:20px;
+      padding:18px;
+      border:1px solid var(--line);
+      background:#fff;
+    }
+    .knowledge{
+      border-left:6px solid #94a3b8;
+      background:#fbfdff;
+    }
+    .kn{
+      border-left:6px solid #10b981;
+      background:#f7fffb;
+    }
+    .big{
+      margin-top:16px;
+      padding:18px;
+      border-radius:20px;
+      text-align:center;
+      font-size:22px;
+      font-weight:700;
+      background:linear-gradient(135deg, rgba(59,130,246,.10), rgba(16,185,129,.10));
+      border:1px solid var(--line);
+    }
+    ul{
+      margin:8px 0 0 1.15em;
+      padding:0;
+    }
+    li{margin:6px 0}
+    .flow{
+      display:grid;
+      gap:14px;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    }
+    .step{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      background:linear-gradient(180deg,#ffffff 0%, #fbfdff 100%);
+    }
+    .quote{
+      margin-top:14px;
+      border:1px dashed #b9d4e4;
+      background:var(--soft);
+      border-radius:18px;
+      padding:18px;
+    }
+    .footer{
+      margin-top:20px;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+    }
+    @media (max-width: 760px){
+      .compare{grid-template-columns:1fr}
+      h2{font-size:24px}
+      .lead{font-size:17px}
+    }
+    @media print{
+      body{background:#fff}
+      .hero,.section{box-shadow:none}
+      .wrap{max-width:none;padding:0}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="tag">子ども向け AIプログラミング教室</div>
+      <h1>この教室で手に入れたものは、<br>「知識」だけではありません</h1>
+      <p class="lead">
+        話を聞いて「知る」ことも大切。<br>
+        でも、自分でやってみて「できる」ようになることは、もっと大きな力です。
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>知識とナレッジのちがい</h2>
+      <div class="compare">
+        <div class="box knowledge">
+          <h3>知識（ちしき）</h3>
+          <p><strong>知っていること</strong></p>
+          <p class="muted">
+            人から教えてもらったこと、本で読んだこと、
+            動画で見たことなどを「知っている」状態です。
+          </p>
+          <ul>
+            <li>AIでアプリが作れることを知っている</li>
+            <li>HTMLというファイルがあることを知っている</li>
+            <li>AIにお願いすると作ってくれることを知っている</li>
+          </ul>
+        </div>
+
+        <div class="box kn">
+          <h3>ナレッジ</h3>
+          <p><strong>自分でできること</strong></p>
+          <p class="muted">
+            ただ知っているだけではなく、
+            自分で使って、自分で形にできるようになった状態です。
+          </p>
+          <ul>
+            <li>AIにお願いしてアプリを作れる</li>
+            <li>HTMLファイルとして形にできる</li>
+            <li>自分の考えを、使えるものにできる</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="big">
+        「知っている」と「できる」は、ちがう
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>この教室でみんながやったこと</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="badge">1</div>
+          <h3>作りたいものを考えた</h3>
+          <p class="muted">
+            ただ聞いていただけではなく、
+            自分で「こんなものを作りたい」と考えました。
+          </p>
+        </div>
+        <div class="card">
+          <div class="badge">2</div>
+          <h3>AIに伝えた</h3>
+          <p class="muted">
+            自分の考えをAIに伝えて、
+            形にするためのお願いを出しました。
+          </p>
+        </div>
+        <div class="card">
+          <div class="badge">3</div>
+          <h3>できたものを見て直した</h3>
+          <p class="muted">
+            うまくいかなかった所を見つけて、
+            少しずつ良くしていきました。
+          </p>
+        </div>
+        <div class="card">
+          <div class="badge">4</div>
+          <h3>使える形にした</h3>
+          <p class="muted">
+            ただのアイデアではなく、
+            HTMLファイルという形で使えるものにしました。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>だから、これはナレッジです</h2>
+      <p class="muted">
+        この教室でみんなは、
+        「AIでアプリが作れるらしい」と聞いただけではありません。<br>
+        実際に、
+        <strong>自分の考えで、AIを使って、形を作る</strong>
+        ところまでやりました。
+      </p>
+      <div class="quote">
+        <h3>つまり…</h3>
+        <p>
+          「AIを使えば、HTMLファイルで、自分の作りたいものを形にできる」
+        </p>
+        <p class="muted">
+          これは、知識ではなく、<strong>みんなが手に入れたナレッジ</strong>です。
+        </p>
+      </div>
+      <div class="big">
+        この教室で、みんなの中に「できる」が増えた
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>たとえば、こんなちがい</h2>
+      <div class="compare">
+        <div class="box knowledge">
+          <h3>知識の例</h3>
+          <p class="muted">
+            諏訪湖でワカサギが釣れることを知っている。<br>
+            うなぎが取れることを知っている。
+          </p>
+          <p>
+            でも、自分ではまだやったことがない。<br>
+            それは「知っている」ということです。
+          </p>
+        </div>
+
+        <div class="box kn">
+          <h3>ナレッジの例</h3>
+          <p class="muted">
+            実際に諏訪湖でワカサギを釣ることができる。<br>
+            実際にうなぎを取ることができる。
+          </p>
+          <p>
+            それは「知っている」だけではなく、
+            <strong>自分でできる</strong>ということです。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>学校の勉強にもつながる考え方</h2>
+      <div class="flow">
+        <div class="step">
+          <h3>知識</h3>
+          <p class="muted">
+            教えてもらう。読む。聞く。知る。
+          </p>
+        </div>
+        <div class="step">
+          <h3>ためしてみる</h3>
+          <p class="muted">
+            自分でやってみる。使ってみる。形にしてみる。
+          </p>
+        </div>
+        <div class="step">
+          <h3>ナレッジになる</h3>
+          <p class="muted">
+            「知っている」が「できる」に変わる。
+          </p>
+        </div>
+      </div>
+
+      <div class="quote">
+        <p>
+          勉強でも、スポーツでも、ものづくりでも同じです。<br>
+          教えてもらっただけでは、まだ「知識」です。<br>
+          でも、自分でやってみてできるようになると、それは<strong>ナレッジ</strong>になります。
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>この教室で、みんなに持って帰ってほしい感覚</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>AIは見ているだけのものじゃない</h3>
+          <p class="muted">
+            自分で使って、自分の考えを形にできる道具です。
+          </p>
+        </div>
+        <div class="card">
+          <h3>自分にもできる</h3>
+          <p class="muted">
+            難しそうに見えても、やってみることで「できる」に変わります。
+          </p>
+        </div>
+        <div class="card">
+          <h3>今日できたことは、自分の力</h3>
+          <p class="muted">
+            今日作れたこと、試せたこと、直せたことは、
+            もうみんなの中に残る力です。
+          </p>
+        </div>
+      </div>
+
+      <div class="big">
+        今日みんなが手に入れたのは、知識だけではなく、ナレッジです
+      </div>
+    </section>
+
+    <div class="footer">
+      知ることは大切。<br>
+      でも、自分でできるようになることは、もっと大きな力になる。
+    </div>
+  </div>
+</body>
+</html>

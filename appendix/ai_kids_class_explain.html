@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIでつくる教室｜子ども向け説明ページ</title>
+  <style>
+    :root{
+      --bg1:#f7fbff;
+      --bg2:#eef8f3;
+      --card:#ffffff;
+      --text:#203040;
+      --muted:#5f7180;
+      --accent:#3b82f6;
+      --accent2:#10b981;
+      --line:#d8e7ef;
+      --soft:#f6fbff;
+      --shadow:0 12px 30px rgba(30,60,90,.10);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Yu Gothic","Hiragino Kaku Gothic ProN","Meiryo",system-ui,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, #ffffff 0%, var(--bg1) 42%, var(--bg2) 100%);
+      line-height:1.8;
+    }
+    .wrap{
+      max-width:1000px;
+      margin:0 auto;
+      padding:24px 18px 56px;
+    }
+    .hero{
+      background:linear-gradient(135deg, rgba(59,130,246,.11), rgba(16,185,129,.11));
+      border:1px solid var(--line);
+      border-radius:30px;
+      padding:34px 26px;
+      box-shadow:var(--shadow);
+    }
+    .tag{
+      display:inline-block;
+      padding:6px 12px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:12px;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(30px, 5vw, 44px);
+      line-height:1.25;
+    }
+    .lead{
+      margin:0;
+      color:var(--muted);
+      font-size:18px;
+    }
+    .section{
+      margin-top:24px;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:24px 20px;
+    }
+    h2{
+      margin:0 0 14px;
+      font-size:27px;
+      line-height:1.35;
+    }
+    h3{
+      margin:0 0 8px;
+      font-size:20px;
+      line-height:1.4;
+    }
+    p{margin:0 0 10px}
+    .muted{color:var(--muted)}
+    .grid{
+      display:grid;
+      gap:14px;
+      grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+    }
+    .card, .step, .sample, .mini{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+    }
+    .badge{
+      display:inline-flex;
+      min-width:36px;
+      height:36px;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:#fff;
+      font-weight:700;
+      margin-bottom:10px;
+    }
+    .big-message{
+      margin-top:16px;
+      font-size:22px;
+      font-weight:700;
+      text-align:center;
+      padding:18px;
+      border-radius:20px;
+      background:linear-gradient(135deg, rgba(59,130,246,.10), rgba(16,185,129,.10));
+      border:1px solid var(--line);
+    }
+    .flow{
+      display:grid;
+      gap:14px;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    }
+    .step{
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(180deg,#ffffff 0%, #fbfdff 100%);
+    }
+    .step::after{
+      content:"";
+      position:absolute;
+      right:-26px;
+      bottom:-26px;
+      width:90px;
+      height:90px;
+      border-radius:50%;
+      background:linear-gradient(135deg, rgba(59,130,246,.07), rgba(16,185,129,.07));
+    }
+    .step p, .card p, .sample p, .mini p{position:relative; z-index:1}
+    ul{
+      margin:8px 0 0 1.15em;
+      padding:0;
+    }
+    li{margin:6px 0}
+    .cycle{
+      margin-top:14px;
+      padding:16px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:var(--soft);
+      text-align:center;
+      font-weight:700;
+      font-size:18px;
+    }
+    .sample{
+      background:linear-gradient(135deg, rgba(255,255,255,.92), rgba(240,249,255,.98));
+      border-style:dashed;
+    }
+    .sample-title{
+      font-weight:700;
+      color:#1e4f90;
+      margin-bottom:8px;
+    }
+    .two{
+      display:grid;
+      gap:14px;
+      grid-template-columns:1fr 1fr;
+    }
+    .mini{
+      background:#fbfdff;
+    }
+    .good{
+      border-left:5px solid #10b981;
+    }
+    .notyet{
+      border-left:5px solid #f59e0b;
+    }
+    .footer-note{
+      margin-top:20px;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+    }
+    @media (max-width: 720px){
+      .two{grid-template-columns:1fr}
+      .lead{font-size:17px}
+      h2{font-size:24px}
+    }
+    @media print{
+      body{background:#fff}
+      .wrap{max-width:none;padding:0}
+      .hero,.section{box-shadow:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="tag">子ども向け AIプログラミング教室</div>
+      <h1>AIで<br>「自分の作りたいもの」を<br>形にしてみよう</h1>
+      <p class="lead">
+        この教室では、AIを使ってプログラミングをしながら、<br>
+        自分のアイデアを少しずつ形にしていきます。
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>AIってどんなもの？</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="badge">1</div>
+          <h3>AIは魔法ではありません</h3>
+          <p class="muted">
+            何も言わなくても、全部を自動でやってくれるものではありません。
+          </p>
+        </div>
+        <div class="card">
+          <div class="badge">2</div>
+          <h3>AIは手伝ってくれる人のようなもの</h3>
+          <p class="muted">
+            人にお願いするのと同じように、
+            「何をしてほしいか」を伝えると、それに合わせて動いてくれます。
+          </p>
+        </div>
+        <div class="card">
+          <div class="badge">3</div>
+          <h3>伝えたことが結果につながる</h3>
+          <p class="muted">
+            ふんわり伝えると、ふんわりした結果になります。<br>
+            だから、自分の考えを伝えることが大切です。
+          </p>
+        </div>
+      </div>
+      <div class="big-message">
+        AIは「考えたことを形にするためのパートナー」
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>まず最初に大事なこと</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="badge">1</div>
+          <h3>何を作りたいかを決める</h3>
+          <p class="muted">
+            「どんなものを作りたいか」があると、
+            AIへのお願いがはっきりしてきます。
+          </p>
+        </div>
+        <div class="card">
+          <div class="badge">2</div>
+          <h3>できあがりをイメージする</h3>
+          <p class="muted">
+            色は？形は？どんな動きをする？<br>
+            完成したときの姿を思い浮かべることが大切です。
+          </p>
+        </div>
+        <div class="card">
+          <div class="badge">3</div>
+          <h3>一回で思い通りじゃなくて大丈夫</h3>
+          <p class="muted">
+            最初から完ぺきでなくてOK。<br>
+            ためして、見て、少しずつ良くしていきます。
+          </p>
+        </div>
+      </div>
+      <div class="big-message">
+        「作りたい気持ち」と「完成のイメージ」が、はじめの一歩
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>この教室でやること</h2>
+      <p class="muted">
+        いきなりむずかしいことをするのではなく、
+        <strong>考える → やってみる → 見てみる → なおす</strong>
+        をくり返しながら作っていきます。
+      </p>
+
+      <div class="flow" style="margin-top:14px;">
+        <div class="step">
+          <div class="badge">P</div>
+          <h3>Plan（プラン）</h3>
+          <p><strong>どういう指示を出すか考える</strong></p>
+          <p class="muted">
+            作りたいものを形にするために、
+            AIに何をどう伝えるかを考える段階です。
+          </p>
+          <ul>
+            <li>何を作る？</li>
+            <li>どんな見た目にする？</li>
+            <li>どんな動きをさせる？</li>
+            <li>AIにどんな言葉でお願いする？</li>
+          </ul>
+        </div>
+
+        <div class="step">
+          <div class="badge">D</div>
+          <h3>Do（やってみる）</h3>
+          <p><strong>実際にAIに伝えてみる</strong></p>
+          <p class="muted">
+            考えたことをAIへ入力して、
+            プログラムや画面を作ってもらいます。
+          </p>
+          <ul>
+            <li>AIにお願いを書く</li>
+            <li>出てきたものを動かしてみる</li>
+            <li>思った通りか見てみる</li>
+          </ul>
+        </div>
+
+        <div class="step">
+          <div class="badge">C</div>
+          <h3>Check（チェック）</h3>
+          <p><strong>できばえを確認する</strong></p>
+          <p class="muted">
+            できたものを見て、
+            「いいところ」と「ちがうところ」を見つけます。
+          </p>
+          <ul>
+            <li>見た目は思った感じかな？</li>
+            <li>ちゃんと動くかな？</li>
+            <li>使いやすいかな？</li>
+            <li>もっとこうしたい所はあるかな？</li>
+          </ul>
+        </div>
+
+        <div class="step">
+          <div class="badge">A</div>
+          <h3>Action（改善）</h3>
+          <p><strong>次に良くするところを考える</strong></p>
+          <p class="muted">
+            「ここを変えたい」「もっとこうしたい」を見つけて、
+            次にやることを決めます。
+          </p>
+          <ul>
+            <li>文字を大きくしたい</li>
+            <li>色を見やすくしたい</li>
+            <li>ボタンを押しやすくしたい</li>
+            <li>動きをもっと楽しくしたい</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cycle">
+        改善で「次はこうしよう」と決めたら、また Plan にもどる
+      </div>
+      <p class="muted" style="margin-top:12px;">
+        つまり次のプランでは、
+        <strong>それを実現するために、今度はAIにどんな指示を出すか</strong>
+        を考えることになります。
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>やってみると、こんな感じ</h2>
+      <div class="sample">
+        <div class="sample-title">たとえば「ねこが歩く画面」を作りたいとき</div>
+        <ul>
+          <li><strong>最初に必要なこと：</strong>「ねこが歩く、かわいい画面を作りたい」と決める</li>
+          <li><strong>Plan：</strong>「空は水色、地面は緑、ねこが右に歩く画面にして」と、AIにどう伝えるか考える</li>
+          <li><strong>Do：</strong> 実際にAIへお願いする</li>
+          <li><strong>Check：</strong> ねこは見やすい？ 動きは合ってる？ 背景は思った感じ？ を見る</li>
+          <li><strong>Action：</strong> 「ねこをもっと大きくしたい」「ジャンプもできるようにしたい」と考える</li>
+          <li><strong>次のPlan：</strong> 「ねこを大きくして、スペースキーでジャンプできるようにして」と次の指示を考える</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>伝わり方のコツ</h2>
+      <p class="muted">
+        同じお願いでも、伝え方で結果は変わります。
+      </p>
+      <div class="two" style="margin-top:14px;">
+        <div class="mini notyet">
+          <h3>まだふんわりしたお願い</h3>
+          <p>「ねこのゲームを作って」</p>
+          <p class="muted">
+            これでも動くことはあるけれど、
+            どんなねこで、どんな画面かが分かりにくいです。
+          </p>
+        </div>
+        <div class="mini good">
+          <h3>少し伝わりやすいお願い</h3>
+          <p>「水色の空と緑の地面で、白いねこが右に歩く画面を作って」</p>
+          <p class="muted">
+            作りたいイメージが入ると、
+            AIもそれに近い形で作りやすくなります。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>この教室で大切にしていること</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>AIは魔法ではない</h3>
+          <p class="muted">
+            何でも自動でできるものではなく、
+            自分の考えを伝えることで動いてくれるものです。
+          </p>
+        </div>
+        <div class="card">
+          <h3>うまくじゃなくていい、伝えることが大事</h3>
+          <p class="muted">
+            最初から上手に伝えなくて大丈夫。<br>
+            「こうしたい」を言葉にすることが一番大切です。
+          </p>
+        </div>
+        <div class="card">
+          <h3>思った通りにならなくてOK</h3>
+          <p class="muted">
+            1回でうまくいかなくて当たり前。<br>
+            「ここをこうしたい」と少しずつ良くしていくことが大事です。
+          </p>
+        </div>
+        <div class="card">
+          <h3>作る力はこれからの力</h3>
+          <p class="muted">
+            AIを使って、自分の考えを形にできることは、
+            これからとても大きな力になります。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      自分で考える。やってみる。見てみる。少しずつ良くする。<br>
+      そのくり返しで、作りたいものは少しずつ本物になっていきます。
+    </div>
+  </div>
+</body>
+</html>
