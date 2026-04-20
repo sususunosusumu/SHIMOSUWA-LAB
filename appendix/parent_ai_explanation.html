@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>保護者向け｜AI活用教室の考え方</title>
+  <style>
+    :root{
+      --bg:#f7f9fc;
+      --card:#ffffff;
+      --text:#1f2937;
+      --sub:#4b5563;
+      --accent:#2563eb;
+      --accent-soft:#dbeafe;
+      --good:#0f766e;
+      --warn:#b45309;
+      --line:#e5e7eb;
+      --shadow:0 10px 30px rgba(0,0,0,.07);
+      --radius:20px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Yu Gothic","Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
+      background:linear-gradient(180deg,#eef4ff 0%,#f8fbff 30%,#f7f9fc 100%);
+      color:var(--text);
+      line-height:1.8;
+    }
+    .wrap{
+      width:min(1100px, calc(100% - 32px));
+      margin:0 auto;
+    }
+    header{padding:48px 0 28px;}
+    .hero{
+      background:linear-gradient(135deg,#1d4ed8,#2563eb 55%,#3b82f6);
+      color:#fff;
+      border-radius:28px;
+      padding:38px 32px;
+      box-shadow:var(--shadow);
+    }
+    .eyebrow{
+      display:inline-block;
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.04em;
+      background:rgba(255,255,255,.15);
+      padding:6px 12px;
+      border-radius:999px;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0 0 12px;
+      font-size:clamp(28px,4vw,42px);
+      line-height:1.25;
+    }
+    .hero p{
+      margin:0;
+      font-size:clamp(16px,2vw,19px);
+      max-width:900px;
+      color:rgba(255,255,255,.95);
+    }
+    main{padding-bottom:52px}
+    section{
+      margin:22px 0;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .section-inner{padding:28px}
+    h2{
+      margin:0 0 14px;
+      font-size:clamp(22px,3vw,30px);
+      line-height:1.35;
+    }
+    h3{
+      margin:0 0 10px;
+      font-size:clamp(18px,2.5vw,22px);
+      line-height:1.4;
+    }
+    p{margin:0 0 14px}
+    .lead{
+      font-size:18px;
+      color:var(--sub);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:18px;
+    }
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:18px;
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:20px;
+      background:#fff;
+    }
+    .pill{
+      display:inline-block;
+      font-size:13px;
+      font-weight:700;
+      padding:6px 10px;
+      border-radius:999px;
+      margin-bottom:10px;
+    }
+    .pill.blue{background:var(--accent-soft); color:#1d4ed8;}
+    .pill.green{background:#dcfce7; color:#166534;}
+    .pill.orange{background:#ffedd5; color:#9a3412;}
+    .quote{
+      border-left:5px solid var(--accent);
+      background:#f8fbff;
+      padding:16px 18px;
+      border-radius:0 14px 14px 0;
+      margin:10px 0 0;
+      font-weight:700;
+    }
+    .compare{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:10px;
+    }
+    .bad{
+      background:#fff7ed;
+      border:1px solid #fed7aa;
+      border-radius:18px;
+      padding:20px;
+    }
+    .good{
+      background:#ecfeff;
+      border:1px solid #a5f3fc;
+      border-radius:18px;
+      padding:20px;
+    }
+    .bad h3{color:#9a3412}
+    .good h3{color:#155e75}
+    .flow{
+      display:grid;
+      grid-template-columns:repeat(5, minmax(0,1fr));
+      gap:12px;
+      margin-top:14px;
+    }
+    .step{
+      background:#f9fafb;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+      min-height:120px;
+    }
+    .step-num{
+      font-size:13px;
+      font-weight:800;
+      color:var(--accent);
+      margin-bottom:8px;
+    }
+    .example{
+      background:#f8fafc;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      margin-top:12px;
+    }
+    .checklist{
+      display:grid;
+      gap:10px;
+      margin-top:10px;
+    }
+    .check{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      background:#fafafa;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px 14px;
+    }
+    .check .icon{
+      width:26px;
+      height:26px;
+      border-radius:50%;
+      background:var(--accent-soft);
+      color:var(--accent);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+      flex:0 0 26px;
+      margin-top:1px;
+    }
+    .faq{
+      display:grid;
+      gap:14px;
+      margin-top:10px;
+    }
+    .qa{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px 18px;
+      background:#fff;
+    }
+    .qa .q{
+      font-weight:800;
+      margin-bottom:8px;
+    }
+    .callout{
+      background:#eff6ff;
+      border:1px solid #bfdbfe;
+      border-radius:18px;
+      padding:20px;
+    }
+    .footer{
+      text-align:center;
+      color:#6b7280;
+      font-size:14px;
+      padding:16px 0 34px;
+    }
+    ul{
+      margin:8px 0 0 1.2em;
+      padding:0;
+    }
+    li{margin:5px 0}
+    @media (max-width: 860px){
+      .grid,.grid-3,.compare,.flow{
+        grid-template-columns:1fr;
+      }
+      .section-inner{padding:22px}
+      .hero{padding:28px 22px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="hero">
+        <div class="eyebrow">保護者向け説明資料</div>
+        <h1>AIを使うと、自分で考える力は弱くなるのか？</h1>
+        <p>
+          この教室では、AIを「答えを丸投げする道具」としてではなく、
+          <strong>自分の考えを整理し、言葉にし、形にしていくための補助役</strong>として使います。
+          大切にしているのは、子どもが考えなくなることではなく、<strong>考え始めやすくなること</strong>です。
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <div class="section-inner">
+          <h2>まず結論です</h2>
+          <p class="lead">
+            AIの使い方によって、子どもの学びは大きく変わります。
+            <strong>丸投げすれば考える力は弱くなります。</strong>
+            ですが、<strong>自分の考えを出したあとにAIで整理し、最後に自分で直す</strong>使い方なら、
+            むしろ「考えを整理して形にする力」は伸ばせます。
+          </p>
+
+          <div class="compare">
+            <div class="bad">
+              <div class="pill orange">よくない使い方</div>
+              <h3>最初からAIに全部やらせる</h3>
+              <p>例：「読書感想文を書いて」「自由研究をまとめて」だけで終わる。</p>
+              <ul>
+                <li>自分の考えが入らない</li>
+                <li>内容を理解しないまま提出しやすい</li>
+                <li>考える練習になりにくい</li>
+              </ul>
+            </div>
+
+            <div class="good">
+              <div class="pill green">この教室で目指す使い方</div>
+              <h3>自分で考えたものを、AIで整えていく</h3>
+              <p>例：「自分はこう感じた」を先に出し、そのあとAIで整理する。</p>
+              <ul>
+                <li>自分の考えが土台になる</li>
+                <li>整理・比較・修正の練習になる</li>
+                <li>最後は自分の言葉に戻せる</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-inner">
+          <h2>なぜ、力が伸びるのか</h2>
+          <div class="grid-3">
+            <div class="card">
+              <div class="pill blue">1</div>
+              <h3>考えを言葉にする回数が増える</h3>
+              <p>
+                「うまく書けない」「どう言えばいいかわからない」で止まってしまう子でも、
+                AIがいると、一度出した考えを整理して先に進めます。
+                その結果、<strong>自分の考えを出す回数そのもの</strong>が増えます。
+              </p>
+            </div>
+            <div class="card">
+              <div class="pill blue">2</div>
+              <h3>違和感に気づいて直す練習になる</h3>
+              <p>
+                AIが整えた文章を見て、
+                「ちょっと違う」「自分が言いたいのはこっち」と感じることがあります。
+                このときに育つのが、<strong>判断力・編集力</strong>です。
+              </p>
+            </div>
+            <div class="card">
+              <div class="pill blue">3</div>
+              <h3>“できた”経験が次の意欲につながる</h3>
+              <p>
+                何も書けずに終わるより、
+                「自分の考えがちゃんと形になった」という体験の方が、
+                次もやってみようという気持ちにつながります。
+              </p>
+            </div>
+          </div>
+
+          <div class="quote">
+            AIは、子どもの代わりに考えるものではなく、
+            子どもが考えたことを整理しやすくするための補助輪のような存在です。
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-inner">
+          <h2>教室では、こういう順番で使います</h2>
+          <p class="lead">
+            いちばん大事なのは、<strong>最初に自分の考えがあること</strong>です。
+            そのため、AIは最初から答えを出す役ではなく、途中から入る役にしています。
+          </p>
+
+          <div class="flow">
+            <div class="step">
+              <div class="step-num">STEP 1</div>
+              <h3>まず自分で考える</h3>
+              <p>一言でも、箇条書きでも、話すだけでも大丈夫です。</p>
+            </div>
+            <div class="step">
+              <div class="step-num">STEP 2</div>
+              <h3>思ったことを出す</h3>
+              <p>「どこが面白かった」「どこが不思議だった」など、自分の感じたことを出します。</p>
+            </div>
+            <div class="step">
+              <div class="step-num">STEP 3</div>
+              <h3>AIで整理する</h3>
+              <p>文章を整える、順番を並べる、表現をわかりやすくするなどを行います。</p>
+            </div>
+            <div class="step">
+              <div class="step-num">STEP 4</div>
+              <h3>自分で見直す</h3>
+              <p>「これは違う」「この言い方がいい」と判断します。</p>
+            </div>
+            <div class="step">
+              <div class="step-num">STEP 5</div>
+              <h3>自分の作品にする</h3>
+              <p>最後は自分で選び、自分の言葉にして仕上げます。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-inner">
+          <h2>具体例で見ると、こうなります</h2>
+
+          <div class="example">
+            <h3>例1：読書感想文</h3>
+            <p><strong>よくない使い方</strong>：本のタイトルだけ伝えて、感想文をAIに全部書かせる。</p>
+            <p><strong>よい使い方</strong>：まず子どもが「ここが面白かった」「この場面は悲しかった」と話す。そこからAIに「この内容を感想文の形に整えて」と頼み、最後に自分で直す。</p>
+            <p><strong>育つ力</strong>：感じたことを出す力、順番を整える力、自分らしい言葉を選ぶ力。</p>
+          </div>
+
+          <div class="example">
+            <h3>例2：発表や作文の準備</h3>
+            <p><strong>よい使い方</strong>：「言いたいことはあるけど順番がぐちゃぐちゃ」という状態から、AIに「3つに分けて整理して」と頼む。</p>
+            <p><strong>育つ力</strong>：話の組み立て方、要点をしぼる力、伝わる順番を考える力。</p>
+          </div>
+
+          <div class="example">
+            <h3>例3：アプリや作品づくり</h3>
+            <p><strong>よい使い方</strong>：「こんなものがあったら面白い」「自分はこれが好き」という気持ちを先に出し、AIに「形にする方法」を相談する。</p>
+            <p><strong>育つ力</strong>：発想を具体化する力、試しながら直す力、完成まで持っていく力。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-inner">
+          <h2>保護者の方が心配しやすい点と、この教室の考え方</h2>
+
+          <div class="faq">
+            <div class="qa">
+              <div class="q">Q. AIに頼ると、自分で考えなくなりませんか？</div>
+              <div class="a">
+                何も考えずに最初からAIに任せれば、その心配はあります。
+                だからこそ教室では、<strong>「まず自分で考える」「AIはそのあと」「最後に自分で直す」</strong>
+                という順番を重視しています。
+              </div>
+            </div>
+
+            <div class="qa">
+              <div class="q">Q. 文章が上手く見えても、本人の力にならないのでは？</div>
+              <div class="a">
+                上手く見せること自体は目的ではありません。
+                目的は、<strong>自分の考えを伝わる形にしていくプロセス</strong>を経験することです。
+                完成した文章だけでなく、そこに至るやり取りそのものに価値があります。
+              </div>
+            </div>
+
+            <div class="qa">
+              <div class="q">Q. 調べ学習や宿題でズルに使ってしまわないか心配です。</div>
+              <div class="a">
+                その懸念は自然です。
+                だから教室では、答えの写しではなく、<strong>「自分の考えをどう育てるか」</strong>に重点を置きます。
+                便利さだけではなく、使い方のルールも一緒に伝えます。
+              </div>
+            </div>
+
+            <div class="qa">
+              <div class="q">Q. どんな子に向いていますか？</div>
+              <div class="a">
+                すでに作りたいものがある子にはもちろん向いていますが、
+                むしろ<strong>「うまく言えない」「何をしたいかわからない」子にも相性があります。</strong>
+                AIは、その曖昧な気持ちを整理する最初の手助けになれるからです。
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-inner">
+          <h2>この教室で特に大切にしていること</h2>
+          <div class="checklist">
+            <div class="check">
+              <div class="icon">1</div>
+              <div><strong>正解を出すこと</strong>より、<strong>自分の考えを出すこと</strong>を大切にします。</div>
+            </div>
+            <div class="check">
+              <div class="icon">2</div>
+              <div><strong>AIに任せること</strong>より、<strong>AIと対話しながら直すこと</strong>を大切にします。</div>
+            </div>
+            <div class="check">
+              <div class="icon">3</div>
+              <div><strong>完成度の高さ</strong>より、<strong>自分の考えが形になったという実感</strong>を大切にします。</div>
+            </div>
+            <div class="check">
+              <div class="icon">4</div>
+              <div><strong>誰かと同じ答え</strong>より、<strong>その子らしい見方や言い方</strong>を大切にします。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-inner">
+          <h2>最後に</h2>
+          <div class="callout">
+            <p>
+              AI時代に本当に大切になるのは、
+              「全部自分だけでやること」ではなく、
+              <strong>自分の考えを持ち、それを相手に伝わる形にしていく力</strong>です。
+            </p>
+            <p>
+              この教室では、AIを使って“考えなくてよくする”のではなく、
+              <strong>考えを深め、整理し、形にする練習</strong>をしていきます。
+            </p>
+            <p>
+              目指しているのは、AIに使われることではなく、
+              <strong>AIを使いながら、自分の頭で考え続けられる子ども</strong>を育てることです。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">
+        保護者向け説明資料｜AI活用教室の考え方
+      </div>
+    </main>
+  </div>
+</body>
+</html>

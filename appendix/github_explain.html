@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>下諏訪Lab｜自分のアプリを世界に公開する</title>
+  <style>
+    :root{
+      --bg1:#f6fbff;
+      --bg2:#eef4ff;
+      --card:#ffffff;
+      --text:#1f2937;
+      --sub:#4b5563;
+      --blue:#2563eb;
+      --blue2:#60a5fa;
+      --pink:#ec4899;
+      --yellow:#f59e0b;
+      --green:#10b981;
+      --line:#dbe4f0;
+      --shadow:0 16px 40px rgba(37,99,235,.10);
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Yu Gothic","Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top right, #ffe6f3 0, rgba(255,230,243,0) 30%),
+        radial-gradient(circle at top left, #dff4ff 0, rgba(223,244,255,0) 28%),
+        linear-gradient(180deg,var(--bg2),var(--bg1));
+      line-height:1.8;
+    }
+    .wrap{
+      width:min(1120px, calc(100% - 28px));
+      margin:0 auto;
+      padding:26px 0 56px;
+    }
+    .hero{
+      background:linear-gradient(135deg,#1d4ed8 0%, #2563eb 48%, #7c3aed 100%);
+      color:#fff;
+      border-radius:32px;
+      padding:34px 28px 30px;
+      box-shadow:0 20px 48px rgba(37,99,235,.22);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:auto -60px -80px auto;
+      width:240px;
+      height:240px;
+      background:radial-gradient(circle, rgba(255,255,255,.28), rgba(255,255,255,0));
+      border-radius:50%;
+    }
+    .eyebrow{
+      display:inline-block;
+      background:rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.22);
+      padding:7px 12px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.03em;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0 0 12px;
+      font-size:clamp(30px,4vw,48px);
+      line-height:1.2;
+    }
+    .hero .lead{
+      margin:0;
+      max-width:900px;
+      font-size:clamp(17px,2.2vw,21px);
+      color:rgba(255,255,255,.96);
+    }
+    .hero-points{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+      margin-top:22px;
+    }
+    .hero-point{
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:18px;
+      padding:14px;
+      backdrop-filter:blur(5px);
+    }
+    .hero-point strong{
+      display:block;
+      font-size:18px;
+      margin-bottom:4px;
+    }
+
+    section{
+      margin-top:22px;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .section-inner{padding:28px;}
+    h2{
+      margin:0 0 12px;
+      font-size:clamp(24px,3vw,34px);
+      line-height:1.3;
+    }
+    h3{
+      margin:0 0 10px;
+      font-size:clamp(18px,2vw,23px);
+      line-height:1.4;
+    }
+    p{margin:0 0 12px}
+    .lead-text{
+      font-size:18px;
+      color:var(--sub);
+    }
+    .grid-2{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
+    }
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+    }
+    .card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:20px;
+    }
+    .tag{
+      display:inline-block;
+      font-size:12px;
+      font-weight:800;
+      padding:6px 10px;
+      border-radius:999px;
+      margin-bottom:10px;
+      letter-spacing:.02em;
+    }
+    .tag.blue{background:#dbeafe;color:#1d4ed8;}
+    .tag.pink{background:#fce7f3;color:#be185d;}
+    .tag.green{background:#dcfce7;color:#166534;}
+    .tag.yellow{background:#fef3c7;color:#92400e;}
+    .big-quote{
+      margin-top:16px;
+      background:linear-gradient(135deg,#eff6ff,#fdf2f8);
+      border:1px solid #dbeafe;
+      border-radius:20px;
+      padding:20px;
+      font-size:clamp(20px,2.4vw,28px);
+      font-weight:800;
+      line-height:1.5;
+    }
+
+    .steps{
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:12px;
+      margin-top:14px;
+    }
+    .step{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      background:#fbfdff;
+      min-height:170px;
+    }
+    .step-num{
+      display:inline-flex;
+      width:34px;height:34px;
+      align-items:center;justify-content:center;
+      border-radius:50%;
+      background:#dbeafe;
+      color:#1d4ed8;
+      font-weight:900;
+      margin-bottom:10px;
+    }
+
+    .app-list{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:16px;
+      margin-top:10px;
+    }
+    .app-item{
+      border-radius:20px;
+      padding:18px;
+      color:#111827;
+      min-height:180px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,#ffffff,#f9fbff);
+    }
+    .app-item .emoji{
+      font-size:28px;
+      margin-bottom:8px;
+      display:block;
+    }
+
+    .flowline{
+      display:grid;
+      grid-template-columns:1.1fr .25fr 1.1fr .25fr 1.1fr;
+      gap:10px;
+      align-items:stretch;
+      margin-top:14px;
+    }
+    .flow-box{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+    }
+    .arrow{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:32px;
+      font-weight:900;
+      color:#60a5fa;
+    }
+
+    .url-box{
+      background:#0f172a;
+      color:#e5f0ff;
+      border-radius:20px;
+      padding:20px;
+      margin-top:14px;
+      font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size:15px;
+      overflow:auto;
+    }
+
+    .checklist{display:grid; gap:12px; margin-top:12px;}
+    .check{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 16px;
+      background:#fafcff;
+    }
+    .check-icon{
+      flex:0 0 30px;
+      width:30px;height:30px;
+      display:flex;align-items:center;justify-content:center;
+      border-radius:50%;
+      background:#dbeafe;
+      color:#1d4ed8;
+      font-weight:900;
+      margin-top:1px;
+    }
+
+    .faq{display:grid; gap:14px; margin-top:10px;}
+    .qa{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px 18px;
+      background:#fff;
+    }
+    .qa .q{
+      font-weight:800;
+      margin-bottom:6px;
+      color:#111827;
+    }
+
+    .final{
+      background:linear-gradient(135deg,#111827,#1e3a8a 55%, #7c3aed);
+      color:#fff;
+      border-radius:28px;
+      padding:28px;
+      box-shadow:0 18px 40px rgba(17,24,39,.22);
+    }
+    .final h2{margin-bottom:10px}
+    .final p{color:rgba(255,255,255,.95)}
+    .spark{
+      font-size:clamp(22px,2.8vw,34px);
+      font-weight:900;
+      line-height:1.5;
+      margin-top:8px;
+    }
+    .footer{
+      text-align:center;
+      color:#6b7280;
+      margin-top:18px;
+      font-size:14px;
+    }
+
+    @media (max-width: 920px){
+      .hero-points,.grid-2,.grid-3,.app-list,.steps,.flowline{
+        grid-template-columns:1fr;
+      }
+      .arrow{transform:rotate(90deg)}
+      .section-inner{padding:22px}
+      .hero{padding:28px 22px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="eyebrow">下諏訪Lab 生徒向けガイド</div>
+      <h1>自分のアプリを<br>世界に公開しよう。</h1>
+      <p class="lead">
+        この教室では、AIを使って自分のアイデアをアプリにします。<br>
+        そして、作って終わりではなく、<strong>GitHubを使ってウェブに公開し、みんなが見られる形にする</strong>ところまでやります。
+      </p>
+
+      <div class="hero-points">
+        <div class="hero-point">
+          <strong>つくる</strong>
+          AIと一緒に、自分だけのアプリを形にする。
+        </div>
+        <div class="hero-point">
+          <strong>のせる</strong>
+          GitHubを使って、インターネットに公開する。
+        </div>
+        <div class="hero-point">
+          <strong>みせる</strong>
+          家族や友だちに「これ、自分が作った」と見せられる。
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <div class="section-inner">
+        <h2>この教室でいちばん大事にしていること</h2>
+        <p class="lead-text">
+          ただプログラムを作るだけではありません。<br>
+          <strong>「自分の頭の中にあるものを、見える形にして、世界に出す」</strong>ところまでが学びです。
+        </p>
+        <div class="big-quote">
+          すごいのは「AIが作ったこと」じゃない。<br>
+          <span style="color:#1d4ed8;">自分のアイデアが、本当に見える形になって、誰かに届くこと。</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-inner">
+        <h2>なぜGitHubまでやるの？</h2>
+        <div class="grid-3">
+          <div class="card">
+            <div class="tag blue">理由 1</div>
+            <h3>作って終わりにならない</h3>
+            <p>
+              ノートに書いて終わるのではなく、実際にウェブで動くものになります。
+              「作品」が「本当に使えるもの」に近づきます。
+            </p>
+          </div>
+          <div class="card">
+            <div class="tag pink">理由 2</div>
+            <h3>自分のURLを持てる</h3>
+            <p>
+              自分が作ったページに、実際のURLがつきます。
+              そのURLを開けば、自分の作品がいつでも見られます。
+            </p>
+          </div>
+          <div class="card">
+            <div class="tag green">理由 3</div>
+            <h3>世界につながる感覚が持てる</h3>
+            <p>
+              インターネットに公開することで、
+              「自分の作ったものが外の世界に出る」というリアルな体験になります。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-inner">
+        <h2>教室の流れ</h2>
+        <p class="lead-text">
+          やることは、難しそうに見えて、流れで見るとシンプルです。
+        </p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <h3>やりたいことを決める</h3>
+            <p>ゲームでも、占いでも、鉄道でも、自己紹介でもOK。自分が少しでも気になるものから始めます。</p>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <h3>AIに相談する</h3>
+            <p>「こういうものを作りたい」と伝えて、HTMLの形にしていきます。</p>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <h3>自分で直す</h3>
+            <p>色、文字、大きさ、動きなどを変えて、自分らしい作品にしていきます。</p>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <h3>GitHubにアップする</h3>
+            <p>作ったHTMLファイルをアップロードして、ウェブにのせます。</p>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <h3>URLで開く</h3>
+            <p>自分の作品が実際のページとして見られるようになります。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-inner">
+        <h2>たとえば、こんなアプリが作れる</h2>
+        <div class="app-list">
+          <div class="app-item">
+            <span class="emoji">🔮</span>
+            <h3>気分占いアプリ</h3>
+            <p>今日の気分を書いたら、占いっぽい結果が出る。色やラッキーアイテムも表示できる。</p>
+          </div>
+          <div class="app-item">
+            <span class="emoji">🚆</span>
+            <h3>鉄道ダイヤグラム</h3>
+            <p>好きな駅や列車の動きを、自分なりに見える形にしていく。好きな子はかなり深く作りこめる。</p>
+          </div>
+          <div class="app-item">
+            <span class="emoji">🎮</span>
+            <h3>ミニゲーム</h3>
+            <p>じゃんけん、クイズ、タイミングゲームなど。自分の好きなテーマで遊べる。</p>
+          </div>
+          <div class="app-item">
+            <span class="emoji">📝</span>
+            <h3>読書メモ整理ページ</h3>
+            <p>本を読んで感じたことをまとめる。自分の考えを見やすく整える練習にもなる。</p>
+          </div>
+          <div class="app-item">
+            <span class="emoji">⏰</span>
+            <h3>タイマー・勉強サポート</h3>
+            <p>勉強時間、休憩時間、目標時間を見える化。自分に必要な機能を足していける。</p>
+          </div>
+          <div class="app-item">
+            <span class="emoji">🌟</span>
+            <h3>自己紹介ページ</h3>
+            <p>好きなもの、夢、趣味、写真のかわりのイラストなどを入れて、自分のページを作れる。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-inner">
+        <h2>GitHubで公開すると、何がうれしい？</h2>
+        <div class="flowline">
+          <div class="flow-box">
+            <div class="tag yellow">教室の中</div>
+            <h3>自分で作った</h3>
+            <p>まずは教室の中で、自分のアプリが動く。ここで最初の「できた」が生まれます。</p>
+          </div>
+          <div class="arrow">→</div>
+          <div class="flow-box">
+            <div class="tag blue">インターネット</div>
+            <h3>ウェブにのる</h3>
+            <p>GitHubにアップすると、ファイルがただのデータではなく、見られるページになります。</p>
+          </div>
+          <div class="arrow">→</div>
+          <div class="flow-box">
+            <div class="tag pink">その先</div>
+            <h3>人に見せられる</h3>
+            <p>家族に送れる。友だちに見せられる。「これ、自分が作った」と言える作品になります。</p>
+          </div>
+        </div>
+
+        <div class="url-box">
+https://your-name.github.io/my-app/
+        </div>
+        <p style="margin-top:10px;color:#4b5563;">
+          こういうURLで、自分の作品が見られるようになります。
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-inner">
+        <h2>この教室で身につくナレッジ</h2>
+        <div class="grid-2">
+          <div class="card">
+            <div class="tag blue">つくる知識</div>
+            <h3>AIにどう頼めば、形になるか</h3>
+            <p>
+              ただ「作って」と言うのではなく、
+              どんな見た目にしたいか、何ができるようにしたいかを伝える力が身につきます。
+            </p>
+          </div>
+          <div class="card">
+            <div class="tag green">見せる知識</div>
+            <h3>作ったものを公開する方法</h3>
+            <p>
+              自分のパソコンの中だけで終わらせず、
+              どうやってネットにのせるか、どうやって人に見せるかを学べます。
+            </p>
+          </div>
+          <div class="card">
+            <div class="tag pink">直す知識</div>
+            <h3>「ちょっと違う」を自分で直す力</h3>
+            <p>
+              AIが出したものをそのまま使うのではなく、
+              自分のイメージに近づけるために調整する力がつきます。
+            </p>
+          </div>
+          <div class="card">
+            <div class="tag yellow">届ける知識</div>
+            <h3>人に伝わる形にする感覚</h3>
+            <p>
+              自分だけが分かればよいのではなく、
+              家族や友だちが見ても「わかる」「楽しい」と感じる作品にする考え方が身につきます。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-inner">
+        <h2>こんな子に向いている</h2>
+        <div class="checklist">
+          <div class="check">
+            <div class="check-icon">✓</div>
+            <div><strong>好きなものがある子</strong>：鉄道、ゲーム、動物、本、スポーツなど、自分の「好き」を作品にしやすい。</div>
+          </div>
+          <div class="check">
+            <div class="check-icon">✓</div>
+            <div><strong>まだ何を作りたいか決まっていない子</strong>：AIと話しながら、アイデアを見つけていける。</div>
+          </div>
+          <div class="check">
+            <div class="check-icon">✓</div>
+            <div><strong>パソコンで何かを作ってみたい子</strong>：ゲーム感覚からでも入りやすい。</div>
+          </div>
+          <div class="check">
+            <div class="check-icon">✓</div>
+            <div><strong>「見せられる作品」がほしい子</strong>：URLで人に見せられるのが大きな魅力。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-inner">
+        <h2>よくある疑問</h2>
+        <div class="faq">
+          <div class="qa">
+            <div class="q">Q. 難しそうだけど、本当にできる？</div>
+            <div class="a">最初から全部一人でやる必要はありません。AIと一緒に進めるので、まずは「こうしたい」を言えれば大丈夫です。</div>
+          </div>
+          <div class="qa">
+            <div class="q">Q. プログラミングが初めてでも大丈夫？</div>
+            <div class="a">大丈夫です。この教室では、難しい言葉を覚えることよりも、「こういうものを作りたい」を形にすることを大切にしています。</div>
+          </div>
+          <div class="qa">
+            <div class="q">Q. GitHubって何？</div>
+            <div class="a">もともとは作ったものを保存したり管理したりするための場所です。この教室では、その力を使って、自分のHTMLアプリをウェブで公開する場所として使います。</div>
+          </div>
+          <div class="qa">
+            <div class="q">Q. 公開したら、本当にみんなが見られるの？</div>
+            <div class="a">公開設定にすれば、URLを知っている人が見られるページになります。だからこそ「自分の作品が外に出た」という実感を持てます。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="final">
+      <h2>この教室のゴール</h2>
+      <p>
+        ただアプリを作れるようになることではありません。<br>
+        <strong>「自分の頭の中にあったものを、AIと一緒に形にして、ウェブで公開し、人に見せられる」</strong><br>
+        その体験を持つことです。
+      </p>
+      <div class="spark">
+        「すごいね」と言われるだけじゃない。<br>
+        <span style="color:#fde68a;">“これ、自分が作ったんだ” と言える体験</span>を持って帰ろう。
+      </div>
+    </div>
+
+    <div class="footer">
+      下諏訪Lab｜生徒向け資料「自分のアプリを世界に公開する」
+    </div>
+  </div>
+</body>
+</html>
