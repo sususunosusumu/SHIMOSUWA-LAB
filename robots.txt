@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sususunosusumu.github.io/SHIMOSUWA-LAB/sitemap.xml
