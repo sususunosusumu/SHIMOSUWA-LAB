@@ -3,233 +3,131 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>下諏訪Lab | AIでものづくりを学ぶ教室</title>
-  <meta name="description" content="AIを使ってアプリ、作文、自己紹介、意見文、未来予想図などを形にする教室。大切なのは、自分にとっての正解を考えて伝える力を育てること。" />
+  <title>Shimosuwa Lab | AIでものづくり教室 参加者募集</title>
+  <meta name="description" content="Shimosuwa Lab のAIでものづくり教室 参加者募集ページ。AIを使って、Webページ1つで動く簡単なアプリや、自分の伝えたいことを形にする教室です。大切なのは、自分にとっての正解を考えて伝える力。" />
   <style>
     :root{
-      --bg:#f5f7fc;
-      --bg2:#eef2ff;
-      --card:#ffffff;
-      --ink:#172338;
-      --sub:#5f6e88;
-      --line:#dde5f3;
-      --accent:#5b67ff;
-      --accent2:#8a63ff;
-      --accent3:#00a6a6;
-      --soft:#eef1ff;
-      --warm:#fff5e9;
-      --good:#15805f;
-      --shadow:0 18px 44px rgba(22,35,56,.10);
-      --radius:24px;
-      --max:1180px;
+      --bg:#f6f8fc; --card:#ffffff; --ink:#122033; --sub:#637089; --line:#dfe6f4;
+      --accent:#5e6bff; --accent2:#8c67ff; --soft:#eef2ff; --warm:#fff5ea; --mint:#ecfbf8;
+      --good:#0e8966; --warning:#a86115; --shadow:0 24px 50px rgba(18,32,51,.10); --radius:26px; --max:1180px;
     }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic UI","Noto Sans JP",sans-serif;
-      color:var(--ink);
-      background:
-        radial-gradient(circle at 0% 0%, rgba(91,103,255,.12), transparent 25%),
-        radial-gradient(circle at 100% 0%, rgba(138,99,255,.10), transparent 22%),
-        linear-gradient(180deg, #f9fbff 0%, #f5f7fc 100%);
-      line-height:1.82;
-    }
-    a{color:var(--accent);text-decoration:none}
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic UI","Noto Sans JP",sans-serif;color:var(--ink);
+      background:radial-gradient(circle at 0% 0%, rgba(94,107,255,.10), transparent 28%),radial-gradient(circle at 100% 0%, rgba(140,103,255,.10), transparent 24%),linear-gradient(180deg,#fbfcff 0%,#f6f8fc 100%);line-height:1.82}
+    a{color:inherit;text-decoration:none}
     .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
-    .badge{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:8px 14px;border-radius:999px;
-      background:rgba(91,103,255,.10);color:var(--accent);
-      font-weight:800;font-size:.92rem;letter-spacing:.02em;
-    }
-    .hero{padding:30px 0 52px}
-    .hero-card{
-      position:relative;overflow:hidden;
-      background:linear-gradient(135deg, rgba(255,255,255,.96), rgba(244,247,255,.94));
-      border:1px solid rgba(255,255,255,.85);
-      border-radius:38px;
-      box-shadow:var(--shadow);
-    }
-    .hero-card::before{
-      content:"";position:absolute;inset:0;
-      background:
-        radial-gradient(circle at 88% 18%, rgba(91,103,255,.16), transparent 20%),
-        radial-gradient(circle at 12% 85%, rgba(138,99,255,.12), transparent 18%),
-        radial-gradient(circle at 72% 92%, rgba(0,166,166,.08), transparent 18%);
-      pointer-events:none;
-    }
-    .hero-grid{
-      position:relative;z-index:1;
-      display:grid;grid-template-columns:1.15fr .85fr;gap:28px;
-      padding:46px;
-    }
-    h1{
-      margin:16px 0 18px;
-      font-size:clamp(2.1rem,4vw,4rem);
-      line-height:1.12;letter-spacing:-.04em;
-    }
-    .lead{
-      margin:0;
-      font-size:1.08rem;color:var(--sub);max-width:42em;
-    }
+    .topbar{position:sticky;top:0;z-index:20;backdrop-filter:saturate(180%) blur(12px);background:rgba(246,248,252,.72);border-bottom:1px solid rgba(223,230,244,.8)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px}
+    .brand{font-weight:900;letter-spacing:.01em;color:var(--ink)} .brand span{color:var(--accent)}
+    .nav{display:flex;gap:14px;flex-wrap:wrap;font-size:.95rem;color:var(--sub)} .nav a:hover{color:var(--ink)}
+    .hero{padding:26px 0 56px}
+    .hero-card{position:relative;overflow:hidden;background:linear-gradient(135deg, rgba(255,255,255,.98), rgba(244,247,255,.95));border:1px solid rgba(255,255,255,.85);border-radius:40px;box-shadow:var(--shadow)}
+    .hero-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 88% 18%, rgba(94,107,255,.16), transparent 20%),radial-gradient(circle at 12% 84%, rgba(140,103,255,.12), transparent 18%),radial-gradient(circle at 72% 92%, rgba(0,167,160,.08), transparent 16%);pointer-events:none}
+    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.18fr .82fr;gap:26px;padding:46px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:rgba(94,107,255,.10);color:var(--accent);font-weight:900;font-size:.92rem;letter-spacing:.02em}
+    h1{margin:18px 0 14px;font-size:clamp(2.25rem,4.5vw,4.35rem);line-height:1.06;letter-spacing:-.045em}
+    .hero-subtitle{display:block;margin-top:16px;font-size:clamp(1.18rem,2.2vw,1.85rem);line-height:1.35;color:#33415d;font-weight:800;letter-spacing:-.02em}
+    .lead{margin:0;font-size:1.08rem;color:var(--sub);max-width:44em}
     .hero-points{display:grid;gap:12px;margin:26px 0 28px}
-    .point{
-      display:flex;gap:12px;align-items:flex-start;
-      padding:14px 15px;border-radius:18px;
-      background:rgba(255,255,255,.78);
-      border:1px solid var(--line);
-    }
-    .dot{
-      width:30px;height:30px;border-radius:50%;flex:0 0 auto;
-      display:grid;place-items:center;
-      color:#fff;font-weight:900;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      box-shadow:0 10px 24px rgba(91,103,255,.22);
-      margin-top:2px;
-    }
-    .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:14px 20px;border-radius:999px;font-weight:900;
-      border:1px solid transparent;transition:.2s ease;
-    }
+    .point{display:flex;gap:12px;align-items:flex-start;padding:14px 15px;border-radius:18px;background:rgba(255,255,255,.80);border:1px solid var(--line)}
+    .dot{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:0 0 auto;font-weight:900;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 10px 24px rgba(94,107,255,.24);margin-top:2px}
+    .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 20px;border-radius:999px;font-weight:900;transition:.2s ease;border:1px solid transparent}
     .btn:hover{transform:translateY(-1px)}
-    .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 12px 28px rgba(91,103,255,.24)}
-    .btn-secondary{background:#fff;border-color:var(--line);color:var(--ink)}
-    .side-panel{
-      background:#fff;border:1px solid var(--line);
-      border-radius:28px;box-shadow:var(--shadow);padding:24px;
-      align-self:stretch;
-    }
+    .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 14px 28px rgba(94,107,255,.24)}
+    .btn-secondary{background:#fff;color:var(--ink);border-color:var(--line)}
+    .side-panel{background:#fff;border:1px solid var(--line);border-radius:30px;box-shadow:var(--shadow);padding:24px;align-self:stretch}
     .side-panel h2{margin:0 0 10px;font-size:1.18rem}
     .side-list{display:grid;gap:12px;margin-top:16px}
-    .side-item{
-      padding:14px 15px;border-radius:18px;background:var(--soft);
-      color:#2a3655;font-size:.96rem;
-    }
+    .side-item{padding:14px 15px;border-radius:18px;background:var(--soft);color:#2a3655;font-size:.96rem}
+    .notice-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+    .notice{border-radius:20px;padding:16px 18px;border:1px solid transparent;font-size:.95rem}
+    .notice.free{background:var(--mint);border-color:#c9eee7}
+    .notice.safe{background:var(--warm);border-color:#f0e0c8}
     section{padding:28px 0}
-    .section-title{
-      margin:0 0 10px;
-      font-size:clamp(1.6rem,2.8vw,2.45rem);
-      line-height:1.24;letter-spacing:-.025em;
-    }
+    .kicker{display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(14,137,102,.08);color:var(--good);font-size:.84rem;font-weight:900;margin-bottom:12px}
+    .section-title{margin:0 0 10px;font-size:clamp(1.62rem,2.9vw,2.5rem);line-height:1.24;letter-spacing:-.025em}
     .section-lead{margin:0 0 24px;color:var(--sub)}
-    .kicker{
-      display:inline-block;padding:6px 12px;border-radius:999px;
-      background:rgba(21,128,95,.08);color:var(--good);
-      font-size:.84rem;font-weight:900;margin-bottom:12px;
-    }
     .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{
-      background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-      box-shadow:var(--shadow);padding:24px;
-    }
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
     .card h3{margin:0 0 10px;font-size:1.08rem}
     .card p{margin:0;color:var(--sub)}
     .split{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    .quote{
-      background:linear-gradient(135deg,#fff,#f5f8ff);
-      border:1px solid var(--line);border-radius:30px;
-      box-shadow:var(--shadow);padding:28px;
-    }
+    .quote{background:linear-gradient(135deg,#fff,#f5f8ff);border:1px solid var(--line);border-radius:30px;box-shadow:var(--shadow);padding:28px}
     .quote strong{display:block;font-size:1.42rem;line-height:1.45;letter-spacing:-.02em;margin-bottom:8px}
     .quote p{margin:0;color:var(--sub)}
     .example-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-    .example{
-      background:#fff;border:1px solid var(--line);border-radius:22px;
-      box-shadow:var(--shadow);padding:20px;
-    }
+    .example{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:20px}
     .example h4{margin:0 0 8px;font-size:1.04rem}
     .example ul{margin:0;padding-left:1.2em;color:var(--sub)}
     .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-    .step{
-      background:#fff;border:1px solid var(--line);border-radius:22px;
-      box-shadow:var(--shadow);padding:18px;
-    }
-    .num{
-      width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
-      background:var(--ink);color:#fff;font-weight:900;margin-bottom:12px;
-    }
-    .step h4{margin:0 0 8px;font-size:1rem}
-    .step p{margin:0;color:var(--sub);font-size:.94rem}
-    .reflection{
-      background:linear-gradient(135deg,var(--warm),#fff);
-      border:1px solid #f1dfc7;border-radius:30px;
-      box-shadow:var(--shadow);padding:28px;
-    }
+    .step{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:18px}
+    .num{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:#fff;font-weight:900;margin-bottom:12px}
+    .step h4{margin:0 0 8px;font-size:1rem} .step p{margin:0;color:var(--sub);font-size:.94rem}
+    .reflection{background:linear-gradient(135deg,var(--warm),#fff);border:1px solid #f1dfc7;border-radius:30px;box-shadow:var(--shadow);padding:28px}
     .reflection h3{margin-top:0}
     .em{font-weight:900;color:var(--ink)}
-    .checklist{display:grid;gap:12px;margin-top:14px}
-    .check{
-      background:#fff;border:1px solid var(--line);border-radius:18px;
-      box-shadow:var(--shadow);padding:14px 16px;
-    }
     .faq{display:grid;gap:12px}
-    details{
-      background:#fff;border:1px solid var(--line);border-radius:18px;
-      box-shadow:var(--shadow);padding:16px 18px;
-    }
-    summary{cursor:pointer;font-weight:900;list-style:none}
-    summary::-webkit-details-marker{display:none}
+    details{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:16px 18px}
+    summary{cursor:pointer;font-weight:900;list-style:none} summary::-webkit-details-marker{display:none}
     details p{margin:10px 0 0;color:var(--sub)}
-    .outline{
-      background:#fff;border:1px solid var(--line);border-radius:30px;
-      box-shadow:var(--shadow);padding:28px;
-    }
+    .outline{background:#fff;border:1px solid var(--line);border-radius:30px;box-shadow:var(--shadow);padding:28px}
     .outline ul{margin:0;padding-left:1.2em;color:var(--sub)}
-    .final-cta{
-      position:relative;overflow:hidden;
-      background:linear-gradient(135deg,#1b2440,#33427b);
-      color:#fff;border-radius:36px;padding:36px;box-shadow:var(--shadow);
-    }
-    .final-cta::before{
-      content:"";position:absolute;inset:0;
-      background:radial-gradient(circle at 85% 18%, rgba(255,255,255,.12), transparent 24%);
-      pointer-events:none;
-    }
-    .final-cta *{position:relative;z-index:1}
-    .final-cta p{color:rgba(255,255,255,.82)}
+    .final-cta{position:relative;overflow:hidden;background:linear-gradient(135deg,#17223f,#34437d);color:#fff;border-radius:36px;padding:36px;box-shadow:var(--shadow)}
+    .final-cta::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 18%, rgba(255,255,255,.12), transparent 24%);pointer-events:none}
+    .final-cta *{position:relative;z-index:1} .final-cta p{color:rgba(255,255,255,.83)}
     footer{padding:24px 0 54px;color:var(--sub);font-size:.95rem}
     .tiny{font-size:.88rem;color:var(--sub)}
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    @media (max-width:980px){
-      .hero-grid,.cards,.split,.example-grid,.steps,.grid-2{grid-template-columns:1fr}
-      .hero-grid{padding:30px}
-    }
-    @media (max-width:640px){
-      body{line-height:1.72}
-      .wrap{padding:0 14px}
-      .hero{padding:16px 0 28px}
-      .hero-grid{padding:20px}
-      .card,.quote,.reflection,.outline,.side-panel,.example,.step,.final-cta{padding:18px}
-      .cta-row{flex-direction:column}
-      .btn{width:100%}
-    }
+    @media (max-width:980px){.hero-grid,.cards,.split,.example-grid,.steps,.grid-2,.notice-grid{grid-template-columns:1fr}.hero-grid{padding:30px}}
+    @media (max-width:720px){.topbar-inner{padding:10px 14px}.nav{display:none}}
+    @media (max-width:640px){body{line-height:1.72}.wrap{padding:0 14px}.hero{padding:16px 0 28px}.hero-grid{padding:20px}.card,.quote,.reflection,.outline,.side-panel,.example,.step,.final-cta{padding:18px}.cta-row{flex-direction:column}.btn{width:100%}h1{font-size:clamp(2rem,12vw,3rem)}}
   </style>
 </head>
 <body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Shimosuwa <span>Lab</span></div>
+      <nav class="nav">
+        <a href="#concept">教室の考え方</a>
+        <a href="#contents">できること</a>
+        <a href="#reflection">前回からの改善</a>
+        <a href="#join">開催概要</a>
+      </nav>
+    </div>
+  </header>
+
   <div class="wrap">
     <section class="hero">
       <div class="hero-card">
         <div class="hero-grid">
           <div>
-            <span class="badge">下諏訪Lab｜AIでものづくりの教室</span>
-            <h1>AIで何かを作る。<br>その先にあるのは、<br>自分にとっての正解を考えて伝える力。</h1>
+            <span class="eyebrow">Shimosuwa Lab｜AIでものづくり教室 参加者募集</span>
+            <h1>
+              Shimosuwa Lab<br>
+              AIでものづくり教室
+              <span class="hero-subtitle">AIを使って、アプリや自分の作りたいものを形にする教室です。</span>
+            </h1>
             <p class="lead">
-              AIがあれば、アプリ、作文、読書感想文、自己紹介、意見文、未来予想図、ブログ、発表原稿など、今まで「やってみたいけれど難しかったこと」に手が届くようになります。<br>
-              でも、本当に大切なのは、AIに答えをもらうことではありません。<span class="em">自分は何を作りたいのか。どんな答えが自分にとって良い答えなのか。そこを自分で考えて、人に伝えられること。</span>この教室は、その力を育てるためのページです。
+              このページは、<span class="em">Shimosuwa Lab が行う「AIでものづくり教室」の募集ページ</span>です。<br>
+              AIを使って、<span class="em">Webページ1つで動く簡単なアプリ</span>を作ったり、作文、自己紹介、意見文、未来予想図など、<span class="em">自分の伝えたいことや作りたいものを形にする</span>ことを学びます。<br>
+              そしてその先で大切にしたいのが、<span class="em">自分にとっての正解を考えて、人に伝えられるようになること</span>です。
             </p>
 
             <div class="hero-points">
-              <div class="point"><div class="dot">1</div><div><strong>AIでできることが一気に増える</strong><br><span class="tiny">アプリだけでなく、文章、発表、自分の表現、社会への意見まで形にできる時代です。</span></div></div>
-              <div class="point"><div class="dot">2</div><div><strong>表現が苦手でも入口に立てる</strong><br><span class="tiny">「話すのが苦手」「文章が苦手」というハンディを、AIがかなり軽くしてくれます。</span></div></div>
-              <div class="point"><div class="dot">3</div><div><strong>最後に差を生むのは考える力</strong><br><span class="tiny">AIは人のできる能力の差を小さくする。でも、その人の考える力が差を生むようになります。</span></div></div>
+              <div class="point"><div class="dot">1</div><div><strong>これは募集ページです</strong><br><span class="tiny">Shimosuwa Lab が行う「AIでものづくり教室」の内容と参加案内をまとめています。</span></div></div>
+              <div class="point"><div class="dot">2</div><div><strong>アプリだけではありません</strong><br><span class="tiny">Webアプリ、作文、読書感想文、自己紹介、意見文、未来予想図など、作りたいものを入口にできます。</span></div></div>
+              <div class="point"><div class="dot">3</div><div><strong>身につけたいのは考えて伝える力</strong><br><span class="tiny">AIは人のできる能力の差を小さくする。でも、その人の考える力が差を生むようになります。</span></div></div>
+            </div>
+
+            <div class="notice-grid">
+              <div class="notice free"><strong>参加費は無料です。</strong><br>まずは安心して体験していただくことを大切にしています。</div>
+              <div class="notice safe"><strong>勧誘やセールスは一切ありません。</strong><br>教材販売・継続契約・営業目的のご案内は行いません。</div>
             </div>
 
             <div class="cta-row">
-              <a class="btn btn-primary" href="#concept">この教室の考え方を見る</a>
-              <a class="btn btn-secondary" href="#join">開催概要を見る</a>
+              <a class="btn btn-primary" href="#join">申込・開催概要を見る</a>
+              <a class="btn btn-secondary" href="#concept">この教室の考え方を見る</a>
             </div>
           </div>
 
@@ -250,81 +148,30 @@
     <section id="concept">
       <div class="kicker">この教室の核心</div>
       <h2 class="section-title">作り方だけを教える教室ではありません。<br>自分にとっての正解を考えて、伝える力を育てる教室です。</h2>
-      <p class="section-lead">
-        AIが出てきたことで、表現のハードルは大きく下がりました。伝えることが苦手でも、文章が苦手でも、形にするところまではたどり着ける時代です。だからこそ、これから大切になるのは、<span class="em">「何を作るか」「何を良い答えとするか」「それは本当に自分の考えか」</span>を、自分で考えることです。
-      </p>
+      <p class="section-lead">AIが出てきたことで、表現のハードルは大きく下がりました。伝えることが苦手でも、文章が苦手でも、形にするところまではたどり着ける時代です。だからこそ、これから大切になるのは、<span class="em">「何を作るか」「何を良い答えとするか」「それは本当に自分の考えか」</span>を、自分で考えることです。</p>
       <div class="cards">
-        <div class="card">
-          <h3>AI以前</h3>
-          <p>良い考えがあっても、うまく話せるか、うまく書けるかで届き方が大きく変わっていました。表現力が壁になることが多くありました。</p>
-        </div>
-        <div class="card">
-          <h3>AI以後</h3>
-          <p>文章を整える、説明をわかりやすくする、表現を磨くことはAIでかなり補えるようになりました。入口の差は小さくできます。</p>
-        </div>
-        <div class="card">
-          <h3>それでも残るもの</h3>
-          <p>本人の考え方は補えません。何を大切にするか、どこをゴールにするか、自分なりの正解を考えて人に伝える力が最後に残ります。</p>
-        </div>
+        <div class="card"><h3>AI以前</h3><p>良い考えがあっても、うまく話せるか、うまく書けるかで届き方が大きく変わっていました。表現力が壁になることが多くありました。</p></div>
+        <div class="card"><h3>AI以後</h3><p>文章を整える、説明をわかりやすくする、表現を磨くことはAIでかなり補えるようになりました。入口の差は小さくできます。</p></div>
+        <div class="card"><h3>それでも残るもの</h3><p>本人の考え方は補えません。何を大切にするか、どこをゴールにするか、自分なりの正解を考えて人に伝える力が最後に残ります。</p></div>
       </div>
     </section>
 
     <section>
       <div class="split">
-        <div class="quote">
-          <strong>下諏訪町にいても、世界と同じスタートラインに立てる。</strong>
-          <p>
-            小さな町にいても、情報が少なくても、経験がまだ少ない子どもでも、AIを通じて世界レベルの知恵に触れ、何かを知り、作り、試せる時代になりました。東京でも地方でも、大人でも子どもでも、入口の差は小さくできます。
-          </p>
-        </div>
-        <div class="quote">
-          <strong>ただし、考える力の差は残ります。</strong>
-          <p>
-            AIは人のできる能力の差を小さくします。でも、その人の<span class="em">考える力</span>が差を生むようになります。だからこの教室では、AIを便利に使うだけで終わらせず、<span class="em">AIを使いながら自分で考える</span>ことを大切にします。
-          </p>
-        </div>
+        <div class="quote"><strong>下諏訪町にいても、世界と同じスタートラインに立てる。</strong><p>小さな町にいても、情報が少なくても、経験がまだ少ない子どもでも、AIを通じて世界レベルの知恵に触れ、何かを知り、作り、試せる時代になりました。東京でも地方でも、大人でも子どもでも、入口の差は小さくできます。</p></div>
+        <div class="quote"><strong>ただし、考える力の差は残ります。</strong><p>AIは人のできる能力の差を小さくします。でも、その人の<span class="em">考える力</span>が差を生むようになります。だからこの教室では、AIを便利に使うだけで終わらせず、<span class="em">AIを使いながら自分で考える</span>ことを大切にします。</p></div>
       </div>
     </section>
 
-    <section>
+    <section id="contents">
       <div class="kicker">入口は一つではありません</div>
       <h2 class="section-title">アプリだけにしない。<br>その子の興味に合わせて、入口を広くします。</h2>
-      <p class="section-lead">
-        ものづくりの入口は人によって違います。プログラミングが好きな子もいれば、文章、アイデア、将来の夢、気持ちの整理、意見を言うことに興味がある子もいます。だから、アプリ制作だけに限定せず、<span class="em">「自分が形にしたいもの」</span>を出発点にします。
-      </p>
+      <p class="section-lead">ものづくりの入口は人によって違います。プログラミングが好きな子もいれば、文章、アイデア、将来の夢、気持ちの整理、意見を言うことに興味がある子もいます。だから、アプリ制作だけに限定せず、<span class="em">「自分が形にしたいもの」</span>を出発点にします。</p>
       <div class="example-grid">
-        <div class="example">
-          <h4>アプリ・便利ツールを作る</h4>
-          <ul>
-            <li>ゲーム、クイズ、カレンダー、学習補助ツール</li>
-            <li>自分や誰かの役に立つ小さなアプリ</li>
-            <li>作ったものをWebで公開する体験</li>
-          </ul>
-        </div>
-        <div class="example">
-          <h4>作文・感想文・意見文を書く</h4>
-          <ul>
-            <li>読書感想文の整理</li>
-            <li>自分の考えを筋道立てて言葉にする</li>
-            <li>社会の出来事に対する自分の意見を書く</li>
-          </ul>
-        </div>
-        <div class="example">
-          <h4>自分を表現する</h4>
-          <ul>
-            <li>自己紹介文、プロフィール、ブログ</li>
-            <li>自分の好きなことや大切にしたいことを言葉にする</li>
-            <li>人前で話すための原稿を作る</li>
-          </ul>
-        </div>
-        <div class="example">
-          <h4>未来を描く</h4>
-          <ul>
-            <li>自分の未来予想図</li>
-            <li>町や社会についてのアイデア</li>
-            <li>「こうなったらいいな」を形にする</li>
-          </ul>
-        </div>
+        <div class="example"><h4>アプリ・便利ツールを作る</h4><ul><li>ゲーム、クイズ、カレンダー、学習補助ツール</li><li>自分や誰かの役に立つ小さなアプリ</li><li>作ったものをWebで公開する体験</li></ul></div>
+        <div class="example"><h4>作文・感想文・意見文を書く</h4><ul><li>読書感想文の整理</li><li>自分の考えを筋道立てて言葉にする</li><li>社会の出来事に対する自分の意見を書く</li></ul></div>
+        <div class="example"><h4>自分を表現する</h4><ul><li>自己紹介文、プロフィール、ブログ</li><li>自分の好きなことや大切にしたいことを言葉にする</li><li>人前で話すための原稿を作る</li></ul></div>
+        <div class="example"><h4>未来を描く</h4><ul><li>自分の未来予想図</li><li>町や社会についてのアイデア</li><li>「こうなったらいいな」を形にする</li></ul></div>
       </div>
     </section>
 
@@ -340,20 +187,13 @@
       </div>
     </section>
 
-    <section>
+    <section id="reflection">
       <div class="reflection">
-        <div class="kicker" style="background:rgba(255,154,60,.14);color:#ad5d00;">4月19日の開催から見えたこと</div>
+        <div class="kicker" style="background:rgba(255,154,60,.14);color:var(--warning);">4月19日の開催から見えたこと</div>
         <h3>前回の反省を、次の教室の強みに変えます。</h3>
-        <p>
-          4月19日に一度開催し、男の子と女の子の計3人が参加してくれました。プログラミングやアプリに比較的興味がある子には、かなり役立つ時間になりました。
-          一方で、<span class="em">「そもそも何を作りたいかまだ分からない」「アプリにそこまで興味がない」</span>という子にとっては、最初の入口が少し狭く感じられた部分がありました。
-        </p>
-        <p>
-          つまり問題は「AIが難しい」ことではなく、<span class="em">入口が一つに寄りすぎていた</span>ことでした。そこで次は、アプリだけではなく、文章、紹介文、意見文、未来のアイデア、自分に役立つもの、人に役立つものなど、<span class="em">何を作るかの幅を広げ、自分の興味から入れる教室</span>にしていきます。
-        </p>
-        <p>
-          AIは、使い方によっては面倒に見えることもあります。でも、自分の関心に合った入口が見つかれば、AIは一気に<span class="em">「表現を手伝ってくれる相棒」</span>に変わります。この教室は、そこを一緒に見つけていくための場です。
-        </p>
+        <p>4月19日に一度開催し、男の子と女の子の計3人が参加してくれました。プログラミングやアプリに比較的興味がある子には、かなり役立つ時間になりました。一方で、<span class="em">「そもそも何を作りたいかまだ分からない」「アプリにそこまで興味がない」</span>という子にとっては、最初の入口が少し狭く感じられた部分がありました。</p>
+        <p>つまり問題は「AIが難しい」ことではなく、<span class="em">入口が一つに寄りすぎていた</span>ことでした。そこで次は、アプリだけではなく、文章、紹介文、意見文、未来のアイデア、自分に役立つもの、人に役立つものなど、<span class="em">何を作るかの幅を広げ、自分の興味から入れる教室</span>にしていきます。</p>
+        <p>AIは、使い方によっては面倒に見えることもあります。でも、自分の関心に合った入口が見つかれば、AIは一気に<span class="em">「表現を手伝ってくれる相棒」</span>に変わります。この教室は、そこを一緒に見つけていくための場です。</p>
       </div>
     </section>
 
@@ -361,18 +201,9 @@
       <div class="kicker">この教室で得られること</div>
       <h2 class="section-title">明日から、何が変わるのか。</h2>
       <div class="cards">
-        <div class="card">
-          <h3>「できない」が減る</h3>
-          <p>うまく書けない、うまく話せない、形にできない、という壁が低くなります。最初の一歩が踏み出しやすくなります。</p>
-        </div>
-        <div class="card">
-          <h3>自分は何をしたいかを考えるようになる</h3>
-          <p>ただ答えをもらうのではなく、「自分はどうしたい？」「これは自分にとって本当に良い答え？」と考える習慣がついてきます。</p>
-        </div>
-        <div class="card">
-          <h3>人に伝えることが近くなる</h3>
-          <p>アイデアや気持ちを、自分なりの形で人に渡せるようになります。学校でも日常でも、これから先にずっと生きる力です。</p>
-        </div>
+        <div class="card"><h3>「できない」が減る</h3><p>うまく書けない、うまく話せない、形にできない、という壁が低くなります。最初の一歩が踏み出しやすくなります。</p></div>
+        <div class="card"><h3>自分は何をしたいかを考えるようになる</h3><p>ただ答えをもらうのではなく、「自分はどうしたい？」「これは自分にとって本当に良い答え？」と考える習慣がついてきます。</p></div>
+        <div class="card"><h3>人に伝えることが近くなる</h3><p>アイデアや気持ちを、自分なりの形で人に渡せるようになります。学校でも日常でも、これから先にずっと生きる力です。</p></div>
       </div>
     </section>
 
@@ -390,12 +221,8 @@
         </div>
         <div class="outline">
           <div class="kicker">保護者の方へ</div>
-          <p>
-            AIで文章が整う時代だからこそ、「自分で考えなくなるのでは」と心配になるのは自然です。だからこの教室では、AIに任せきりにするのではなく、<span class="em">AIの出したものを見て、自分で考え直す</span>ことを大切にします。
-          </p>
-          <p>
-            これからの時代は、表現だけが得意な子よりも、<span class="em">何を伝えるべきかを考えられる子</span>が強くなります。この教室は、その土台を作るためのものです。
-          </p>
+          <p>AIで文章が整う時代だからこそ、「自分で考えなくなるのでは」と心配になるのは自然です。だからこの教室では、AIに任せきりにするのではなく、<span class="em">AIの出したものを見て、自分で考え直す</span>ことを大切にします。</p>
+          <p>これからの時代は、表現だけが得意な子よりも、<span class="em">何を伝えるべきかを考えられる子</span>が強くなります。この教室は、その土台を作るためのものです。</p>
         </div>
       </div>
     </section>
@@ -404,18 +231,9 @@
       <div class="kicker">よくある疑問</div>
       <h2 class="section-title">アプリに興味がなくても大丈夫？<br>文章が苦手でも大丈夫？</h2>
       <div class="faq">
-        <details open>
-          <summary>アプリにあまり興味がなくても参加できますか？</summary>
-          <p>できます。今回の教室はアプリ制作だけに絞りません。文章、紹介文、意見文、未来のアイデア、人に伝えるものなど、自分の関心に合った入口から始められるようにします。</p>
-        </details>
-        <details>
-          <summary>文章が苦手でも大丈夫ですか？</summary>
-          <p>大丈夫です。むしろ、文章が苦手だったり、気持ちをうまく表現しにくかったりする子にこそ、AIは良い助けになります。そのうえで、最後は自分の言葉として選び直すことを一緒にやります。</p>
-        </details>
-        <details>
-          <summary>AIに頼ると、自分で考えなくなりませんか？</summary>
-          <p>任せきりにすれば、そうなる可能性はあります。だからこの教室では、AIの答えをそのまま使うのではなく、「これは本当に自分の考えか？」「もっと良い形はないか？」と見直す時間を大事にします。</p>
-        </details>
+        <details open><summary>アプリにあまり興味がなくても参加できますか？</summary><p>できます。今回の教室はアプリ制作だけに絞りません。文章、紹介文、意見文、未来のアイデア、人に伝えるものなど、自分の関心に合った入口から始められるようにします。</p></details>
+        <details><summary>文章が苦手でも大丈夫ですか？</summary><p>大丈夫です。むしろ、文章が苦手だったり、気持ちをうまく表現しにくかったりする子にこそ、AIは良い助けになります。そのうえで、最後は自分の言葉として選び直すことを一緒にやります。</p></details>
+        <details><summary>AIに頼ると、自分で考えなくなりませんか？</summary><p>任せきりにすれば、そうなる可能性はあります。だからこの教室では、AIの答えをそのまま使うのではなく、「これは本当に自分の考えか？」「もっと良い形はないか？」と見直す時間を大事にします。</p></details>
       </div>
     </section>
 
@@ -423,10 +241,7 @@
       <div class="final-cta">
         <div class="kicker" style="background:rgba(255,255,255,.12);color:#fff;">次回開催予定</div>
         <h2 class="section-title" style="color:#fff;margin-bottom:12px;">AIは、できることを増やします。<br>でも、何を正解にするかは人が考えます。</h2>
-        <p>
-          この教室は、AIを使う練習だけをする場所ではありません。<br>
-          AIを使って、<span class="em" style="color:#fff;">自分は何を作りたいのか、自分にとっての良い答えは何か、それをどう人に伝えるか</span>を考える場所です。
-        </p>
+        <p>この教室は、AIを使う練習だけをする場所ではありません。<br>AIを使って、<span class="em" style="color:#fff;">自分は何を作りたいのか、自分にとっての良い答えは何か、それをどう人に伝えるか</span>を考える場所です。</p>
         <div class="grid-2" style="margin:22px 0 10px;">
           <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:22px;padding:18px;">
             <strong style="display:block;margin-bottom:8px;">開催概要</strong>
@@ -434,26 +249,28 @@
             <div>形式：各ご家庭への訪問授業</div>
             <div>時間：90分（40分＋10分＋40分）</div>
             <div>目安：13:00〜15:00</div>
+            <div>参加費：無料</div>
           </div>
           <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:22px;padding:18px;">
             <strong style="display:block;margin-bottom:8px;">対象・申込</strong>
-            <div>対象：パソコンの操作ができる方</div>
+            <div>対象：ある程度パソコンが操作できる（インターネットで検索ができるレベル）</div>
             <div>定員：先着3名</div>
             <div>主催：宮坂 進</div>
-            <div>申込：Googleフォームから受付</div><div>問い合わせ：farm@lucky-bright.com</div>
+            <div>申込：Googleフォームまたはメールにて随時受付</div>
+            <div>問い合わせ：farm@lucky-bright.com</div>
           </div>
         </div>
         <div class="cta-row">
           <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfPle-aidQCRKUvQ7w-qayl-i3efI5qZyfUVa97v9Rq3pjKiQ/viewform?usp=header" target="_blank" rel="noopener noreferrer">申込フォームはこちら</a>
           <a class="btn btn-secondary" href="mailto:farm@lucky-bright.com">お問い合わせ</a>
         </div>
-        <p class="tiny" style="color:rgba(255,255,255,.72);margin-top:12px;">※開催日が確定したら、必要に応じて日時表記のみ更新してご利用ください。</p>
+        <p class="tiny" style="color:rgba(255,255,255,.72);margin-top:12px;">※勧誘やセールスなどを目的としたものではありません。安心してご検討ください。</p>
       </div>
     </section>
 
     <footer>
-      <div>下諏訪Lab / AIを使ったものづくりの教室</div>
-      <div class="tiny">このページはGitHub Pages等にそのまま掲載しやすいよう、1ファイル構成で作成しています。</div>
+      <div>Shimosuwa Lab / AIでものづくり教室</div>
+      <div class="tiny">このページは、直前の募集ページの構成と内容を土台に、冒頭の分かりやすさ・無料案内・勧誘なし案内・見た目の完成度を強化して再構成した版です。</div>
     </footer>
   </div>
 </body>
