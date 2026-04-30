@@ -1,91 +1,1012 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shimosuwa Lab | AIでものづくり教室 — 参加者募集</title>
-<meta name="description" content="下諏訪Lab が行う「AIでものづくり教室」の募集ページ。AIを使って、アプリ・作文・自己紹介・未来予想図など、自分の作りたいものを形にする教室です。参加費無料・5月下旬開催・先着3名。">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>下諏訪Lab｜AIでものづくり教室｜無料・個別対応</title>
 
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<div id="root"></div>
+<meta name="description" content="下諏訪LabのAIでものづくり教室。AIを使ってアプリ、作品、文章、物語、絵本、研究、発表を形にする無料の個別サポート。家庭訪問またはZoom対応。セールス・物販は一切ありません。" />
+<meta name="keywords" content="下諏訪,下諏訪町,AI教室,AIでものづくり,子ども向けAI,プログラミング,自由研究,読書感想文,絵本,物語,小説,台本,GitHub,下諏訪Lab" />
 
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-
-<script type="text/babel" src="tweaks-panel.jsx"></script>
-<script type="text/babel" src="hero.jsx"></script>
-<script type="text/babel" src="sections.jsx"></script>
-
-<script type="text/babel">
-const { useState, useEffect, useRef } = React;
-
-const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "sectionStyle": "card",
-  "columns": 4,
-  "headerBg": "paper"
-}/*EDITMODE-END*/;
-
-function App() {
-  const [tweaks, setTweaks] = useTweaks(TWEAK_DEFAULTS);
-
-  // Reveal-on-scroll
-  useEffect(() => {
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add("in");
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
-    return () => obs.disconnect();
-  }, []);
-
-  return (
-    <>
-      <Hero />
-      <div className="reveal"><Concept /></div>
-      <div className="reveal"><FlowTour /></div>
-      <div className="reveal"><Contents sectionStyle={tweaks.sectionStyle} columns={tweaks.columns} /></div>
-      <div className="reveal"><Reflection /></div>
-      <div className="reveal"><Outcomes /></div>
-      <div className="reveal"><Faq /></div>
-      <div className="reveal"><Join /></div>
-      <Footer />
-
-      <TweaksPanel title="Tweaks">
-        <TweakSection title="セクションの見せ方">
-          <TweakRadio
-            label="カード or フラット"
-            value={tweaks.sectionStyle}
-            onChange={v => setTweaks({ sectionStyle: v })}
-            options={[
-              { value: "card",  label: "カード" },
-              { value: "flat",  label: "フラット" },
-            ]}
-          />
-          <TweakRadio
-            label="カラム数（できることセクション）"
-            value={String(tweaks.columns)}
-            onChange={v => setTweaks({ columns: Number(v) })}
-            options={[
-              { value: "1", label: "1" },
-              { value: "2", label: "2" },
-              { value: "4", label: "4" },
-            ]}
-          />
-        </TweakSection>
-      </TweaksPanel>
-    </>
-  );
+<style>
+:root{
+  --bg:#f7f7f3;
+  --ink:#121417;
+  --muted:#657081;
+  --line:rgba(18,20,23,.12);
+  --card:#ffffff;
+  --deep:#111827;
+  --accent:#6157ff;
+  --accent2:#8b5cf6;
+  --mint:#e9fbf5;
+  --warm:#fff4e6;
+  --blue:#eef3ff;
+  --gold:#b48a3c;
+  --green:#0e8966;
+  --shadow:0 28px 80px rgba(17,24,39,.12);
+  --radius:30px;
+  --max:1180px;
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic UI","Noto Sans JP",Meiryo,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(97,87,255,.12), transparent 28rem),
+    radial-gradient(circle at 100% 0%, rgba(180,138,60,.14), transparent 25rem),
+    linear-gradient(180deg,#fbfbf8 0%,var(--bg) 60%,#f0eee7 100%);
+  line-height:1.85;
+  letter-spacing:.02em;
+}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+.em{font-weight:900;color:var(--ink)}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  backdrop-filter:blur(18px) saturate(170%);
+  background:rgba(247,247,243,.78);
+  border-bottom:1px solid var(--line);
+}
+.topbar-inner{
+  height:68px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+.brand{
+  font-weight:950;
+  letter-spacing:.02em;
+  white-space:nowrap;
+}
+.brand span{color:var(--accent)}
+.nav{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  color:var(--muted);
+  font-size:.92rem;
+}
+.nav a:hover{color:var(--ink)}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px 22px;
+  border-radius:999px;
+  font-weight:950;
+  line-height:1.2;
+  border:1px solid transparent;
+  transition:.22s ease;
+  text-align:center;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{
+  color:#fff;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  box-shadow:0 18px 38px rgba(97,87,255,.28);
+}
+.btn-dark{
+  color:#fff;
+  background:var(--deep);
+  box-shadow:0 18px 38px rgba(17,24,39,.22);
+}
+.btn-light{
+  background:#fff;
+  color:var(--ink);
+  border-color:var(--line);
+}
+.btn-white{
+  background:#fff;
+  color:var(--ink);
+}
+
+.hero{
+  padding:34px 0 72px;
+}
+.hero-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:48px;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.98),rgba(244,247,255,.94));
+  border:1px solid rgba(255,255,255,.92);
+  box-shadow:var(--shadow);
+}
+.hero-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 86% 18%, rgba(97,87,255,.20), transparent 24%),
+    radial-gradient(circle at 12% 88%, rgba(14,137,102,.10), transparent 24%),
+    radial-gradient(circle at 72% 90%, rgba(180,138,60,.12), transparent 18%);
+  pointer-events:none;
+}
+.hero-grid{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:32px;
+  padding:54px;
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:9px 15px;
+  border-radius:999px;
+  background:rgba(97,87,255,.10);
+  color:var(--accent);
+  font-size:.9rem;
+  font-weight:950;
+}
+.dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--green);
+}
+h1{
+  margin:22px 0 18px;
+  font-size:clamp(2.55rem,5.6vw,5.2rem);
+  line-height:1.03;
+  letter-spacing:-.065em;
+}
+.hero-sub{
+  display:block;
+  margin-top:18px;
+  font-size:clamp(1.22rem,2.2vw,1.95rem);
+  line-height:1.35;
+  color:#33415d;
+  font-weight:950;
+  letter-spacing:-.035em;
+}
+.lead{
+  margin:0;
+  max-width:48em;
+  color:var(--muted);
+  font-size:1.08rem;
+}
+.hero-points{
+  display:grid;
+  gap:12px;
+  margin:28px 0 0;
+}
+.point{
+  display:flex;
+  gap:13px;
+  align-items:flex-start;
+  padding:15px 16px;
+  background:rgba(255,255,255,.84);
+  border:1px solid var(--line);
+  border-radius:22px;
+}
+.num{
+  width:34px;
+  height:34px;
+  flex:0 0 auto;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:#fff;
+  font-weight:950;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  box-shadow:0 12px 26px rgba(97,87,255,.25);
+}
+.tiny{font-size:.9rem;color:var(--muted)}
+.cta-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:26px;
+}
+
+.side-panel{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:36px;
+  padding:28px;
+  box-shadow:var(--shadow);
+}
+.side-panel h2{
+  margin:0 0 14px;
+  font-size:1.25rem;
+  letter-spacing:-.03em;
+}
+.side-list{
+  display:grid;
+  gap:12px;
+}
+.side-item{
+  padding:15px 16px;
+  border-radius:22px;
+  background:var(--blue);
+  color:#2a3655;
+  font-size:.96rem;
+}
+.badges{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:18px;
+}
+.badge{
+  border-radius:22px;
+  padding:15px;
+  font-size:.92rem;
+}
+.badge.free{background:var(--mint);border:1px solid #c9eee7}
+.badge.safe{background:var(--warm);border:1px solid #f1dfc7}
+
+section{padding:42px 0}
+.kicker{
+  display:inline-block;
+  margin-bottom:12px;
+  padding:7px 13px;
+  border-radius:999px;
+  color:var(--green);
+  background:rgba(14,137,102,.08);
+  font-size:.82rem;
+  font-weight:950;
+  letter-spacing:.06em;
+}
+.section-title{
+  margin:0 0 12px;
+  font-size:clamp(1.75rem,3.2vw,2.8rem);
+  line-height:1.22;
+  letter-spacing:-.04em;
+}
+.section-lead{
+  margin:0 0 28px;
+  max-width:60em;
+  color:var(--muted);
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+.card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:28px;
+  box-shadow:var(--shadow);
+}
+.card h3{
+  margin:0 0 10px;
+  font-size:1.15rem;
+}
+.card p{margin:0;color:var(--muted)}
+
+.split{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+.quote{
+  background:linear-gradient(135deg,#fff,#f4f7ff);
+  border:1px solid var(--line);
+  border-radius:34px;
+  padding:32px;
+  box-shadow:var(--shadow);
+}
+.quote strong{
+  display:block;
+  margin-bottom:10px;
+  font-size:1.48rem;
+  line-height:1.45;
+  letter-spacing:-.035em;
+}
+.quote p{margin:0;color:var(--muted)}
+
+.course-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+}
+.course{
+  position:relative;
+  overflow:hidden;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:38px;
+  padding:34px;
+  box-shadow:var(--shadow);
+}
+.course::before{
+  content:"";
+  position:absolute;
+  top:-90px;
+  right:-90px;
+  width:240px;
+  height:240px;
+  border-radius:50%;
+  background:rgba(97,87,255,.12);
+}
+.course:nth-child(2)::before{
+  background:rgba(180,138,60,.16);
+}
+.course > *{position:relative;z-index:1}
+.course-label{
+  display:inline-block;
+  margin-bottom:16px;
+  padding:7px 12px;
+  border-radius:999px;
+  background:var(--deep);
+  color:#fff;
+  font-size:.78rem;
+  font-weight:950;
+  letter-spacing:.08em;
+}
+.course h3{
+  margin:0 0 12px;
+  font-size:2rem;
+  letter-spacing:-.05em;
+}
+.course p{color:var(--muted)}
+.course ul{
+  margin:16px 0 24px;
+  padding-left:1.2em;
+  color:var(--muted);
+}
+.course li{margin:.35em 0}
+
+.example-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+.example{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:26px;
+  padding:24px;
+  box-shadow:var(--shadow);
+}
+.example h4{
+  margin:0 0 8px;
+  font-size:1.08rem;
+}
+.example ul{
+  margin:0;
+  padding-left:1.2em;
+  color:var(--muted);
+}
+
+.steps{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:14px;
+}
+.step{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:26px;
+  padding:20px;
+  box-shadow:var(--shadow);
+}
+.step-num{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:var(--deep);
+  color:#fff;
+  font-weight:950;
+  margin-bottom:12px;
+}
+.step h4{
+  margin:0 0 8px;
+  font-size:1rem;
+}
+.step p{
+  margin:0;
+  color:var(--muted);
+  font-size:.94rem;
+}
+
+.reflection{
+  background:linear-gradient(135deg,var(--warm),#fff);
+  border:1px solid #f1dfc7;
+  border-radius:36px;
+  padding:34px;
+  box-shadow:var(--shadow);
+}
+.reflection h3{
+  margin:0 0 12px;
+  font-size:1.6rem;
+  letter-spacing:-.035em;
+}
+
+.outline{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:34px;
+  padding:32px;
+  box-shadow:var(--shadow);
+}
+.outline ul{
+  margin:0;
+  padding-left:1.2em;
+  color:var(--muted);
+}
+.outline li{margin:.35em 0}
+
+.faq{
+  display:grid;
+  gap:12px;
+}
+details{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:18px 20px;
+  box-shadow:var(--shadow);
+}
+summary{
+  cursor:pointer;
+  list-style:none;
+  font-weight:950;
+}
+summary::-webkit-details-marker{display:none}
+details p{
+  margin:10px 0 0;
+  color:var(--muted);
+}
+
+.final-cta{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,#111827,#34437d);
+  color:#fff;
+  border-radius:42px;
+  padding:42px;
+  box-shadow:var(--shadow);
+}
+.final-cta::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 86% 18%,rgba(255,255,255,.15),transparent 26%);
+}
+.final-cta *{position:relative;z-index:1}
+.final-cta p{color:rgba(255,255,255,.84)}
+.final-cta .em{color:#fff}
+.final-cta .kicker{
+  background:rgba(255,255,255,.13);
+  color:#fff;
+}
+.info-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin:24px 0 12px;
+}
+.info-box{
+  padding:20px;
+  border-radius:24px;
+  background:rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.15);
+}
+.info-box strong{
+  display:block;
+  margin-bottom:8px;
+}
+
+footer{
+  padding:30px 0 70px;
+  color:var(--muted);
+  font-size:.94rem;
+}
+
+.mobile-cta{
+  display:none;
+  position:fixed;
+  z-index:80;
+  left:12px;
+  right:12px;
+  bottom:12px;
+  padding:8px;
+  border-radius:999px;
+  background:rgba(17,24,39,.95);
+  box-shadow:0 18px 48px rgba(0,0,0,.28);
+}
+.mobile-cta a{
+  display:block;
+  padding:14px 18px;
+  border-radius:999px;
+  background:#fff;
+  color:var(--ink);
+  text-align:center;
+  font-weight:950;
+}
+
+@media(max-width:980px){
+  .hero-grid,
+  .cards,
+  .split,
+  .course-grid,
+  .example-grid,
+  .steps,
+  .info-grid,
+  .badges{
+    grid-template-columns:1fr;
+  }
+  .hero-grid{padding:34px}
+}
+@media(max-width:760px){
+  .topbar-inner{height:58px;padding:0 14px}
+  .nav{display:none}
+  .wrap{padding:0 14px}
+  .hero{padding:16px 0 36px}
+  .hero-card{border-radius:32px}
+  .hero-grid{padding:22px}
+  h1{font-size:clamp(2.15rem,12vw,3.35rem)}
+  .hero-sub{font-size:1.18rem}
+  .side-panel,.card,.course,.quote,.example,.step,.reflection,.outline,.final-cta{
+    padding:22px;
+  }
+  .cta-row{flex-direction:column}
+  .btn{width:100%}
+  body{padding-bottom:78px}
+  .mobile-cta{display:block}
+}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Course",
+  "name":"下諏訪Lab AIでものづくり教室",
+  "description":"下諏訪町の子どもたちに向けた無料のAI活用教室。AIを使ってアプリ・作品・文章・物語・絵本・研究・発表を形にする個別サポート。",
+  "provider":{
+    "@type":"Organization",
+    "name":"下諏訪Lab",
+    "url":"https://sususunosusumu.github.io/SHIMOSUWA-LAB/"
+  },
+  "areaServed":"長野県下諏訪町",
+  "offers":{
+    "@type":"Offer",
+    "price":"0",
+    "priceCurrency":"JPY"
+  }
+}
 </script>
+</head>
+
+<body>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#">Shimosuwa <span>Lab</span></a>
+    <nav class="nav">
+      <a href="#concept">考え方</a>
+      <a href="#courses">2つのコース</a>
+      <a href="#examples">できること</a>
+      <a href="#parents">保護者の方へ</a>
+      <a href="#join">申込</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+<section class="hero">
+  <div class="hero-card">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow"><span class="dot"></span> Shimosuwa Lab｜AIでものづくり教室 参加者募集</span>
+
+        <h1>
+          AIを使って、<br>
+          自分の考えを<br>
+          形にする。
+          <span class="hero-sub">
+            アプリを作る。文章にする。物語を描く。<br>
+            そして、自分にとっての正解を考える。
+          </span>
+        </h1>
+
+        <p class="lead">
+          このページは、<span class="em">下諏訪Lab が行う「AIでものづくり教室」</span>の募集ページです。
+          AIを使って、Webページ1つで動くアプリや作品を作るだけでなく、
+          読書感想文、自由研究、意見文、発表資料、物語、絵本、小説、台本など、
+          <span class="em">自分の考えやイメージを形にする</span>ことを大切にします。
+        </p>
+
+        <div class="hero-points">
+          <div class="point">
+            <div class="num">1</div>
+            <div>
+              <strong>AIは「答えをもらう機械」ではありません。</strong><br>
+              <span class="tiny">自分の考えを広げ、形にし、見直すための道具です。</span>
+            </div>
+          </div>
+          <div class="point">
+            <div class="num">2</div>
+            <div>
+              <strong>大切なのは、AIに使われる側ではなく、AIを使う側になること。</strong><br>
+              <span class="tiny">何を作りたいか、何を良いと思うかを自分で考えます。</span>
+            </div>
+          </div>
+          <div class="point">
+            <div class="num">3</div>
+            <div>
+              <strong>アプリ制作だけでなく、文章・研究・創作にも対応します。</strong><br>
+              <span class="tiny">その子の興味に合わせて、入口を広くします。</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLScFPwfl_OQ83fYc6bcjY1S1wn3tVcYgUqmJRBpIDHp86RY3iQ/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer">無料で申し込む</a>
+          <a class="btn btn-light" href="#courses">2つのコースを見る</a>
+        </div>
+      </div>
+
+      <aside class="side-panel">
+        <h2>この教室で育てたい力</h2>
+        <div class="side-list">
+          <div class="side-item"><strong>問いを立てる力</strong><br>何を作りたいのか、何を伝えたいのかを考える。</div>
+          <div class="side-item"><strong>AIに伝える力</strong><br>目的、条件、雰囲気、使う人を言葉にする。</div>
+          <div class="side-item"><strong>評価する力</strong><br>出てきたものをそのまま受け取らず、自分で見直す。</div>
+          <div class="side-item"><strong>改善する力</strong><br>違和感を言葉にして、もう一度AIに伝える。</div>
+          <div class="side-item"><strong>表現する力</strong><br>文章、物語、絵本、台本など、自分の世界を形にする。</div>
+        </div>
+
+        <div class="badges">
+          <div class="badge free"><strong>参加費無料</strong><br>安心して体験できます。</div>
+          <div class="badge safe"><strong>勧誘なし</strong><br>物販・営業はありません。</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="concept">
+  <div class="kicker">この教室の考え方</div>
+  <h2 class="section-title">
+    AI時代に本当に大切になるのは、<br>
+    「作らせる力」ではなく「考えて判断する力」です。
+  </h2>
+  <p class="section-lead">
+    たとえば家を建てるとき、「家を作って」とだけ言っても、自分にとって良い家にはなりません。
+    どんな暮らしがしたいのか、どんな部屋が必要なのか、できあがった設計が本当に自分の思いに合っているのか。
+    そこを考えるのは人間です。AIを使うことも同じです。
+  </p>
+
+  <div class="cards">
+    <div class="card">
+      <h3>AIに任せるだけでは足りない</h3>
+      <p>AIは文章を書き、コードを作り、物語も考えてくれます。でも、それが本当に良いかどうかは、使う人が判断します。</p>
+    </div>
+    <div class="card">
+      <h3>ナレッジは「知っていること」ではない</h3>
+      <p>ナレッジとは、知識を実際に使い、自分の経験として扱えるようになることです。</p>
+    </div>
+    <div class="card">
+      <h3>自分にとっての正解を作る</h3>
+      <p>正解を覚えるだけではなく、自分にとって何が良いのかを考え、人に伝えられるようになることを大切にします。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="split">
+    <div class="quote">
+      <strong>下諏訪町にいても、世界と同じスタートラインに立てる。</strong>
+      <p>AIがあれば、小さな町にいても、世界中の知恵や技術に触れることができます。都市部に行かなくても、考えたことを形にする入口に立てます。</p>
+    </div>
+    <div class="quote">
+      <strong>でも、最後に差を生むのは「考える力」です。</strong>
+      <p>AIは、人のできる能力の差を小さくします。だからこそ、これからは「何を考えるか」「何を良いと判断するか」が大切になります。</p>
+    </div>
+  </div>
+</section>
+
+<section id="courses">
+  <div class="kicker">2つのコース</div>
+  <h2 class="section-title">
+    作る子にも、伝えたい子にも。<br>
+    入口を2つに分けました。
+  </h2>
+  <p class="section-lead">
+    アプリ制作に興味がある子だけでなく、まだ何を作りたいか分からない子、
+    文章や物語、研究、発表、創作に向いている子にも入りやすいように、2つのコースに分けています。
+  </p>
+
+  <div class="course-grid">
+    <article class="course">
+      <span class="course-label">Build Course</span>
+      <h3>つくるコース</h3>
+      <p>
+        アプリ、ゲーム、便利ツール、Webページ、作品などをAIと一緒に作ります。
+        希望があれば、GitHub Pagesを使って、URLで見られる形に公開するところまでサポートします。
+      </p>
+      <ul>
+        <li>HTMLアプリ・ミニゲーム制作</li>
+        <li>自分用の学習ツールや記録ツール</li>
+        <li>地域や好きなテーマをまとめるWebページ</li>
+        <li>GitHubを使った公開体験</li>
+      </ul>
+      <a class="btn btn-dark" href="#join">このコースで相談する</a>
+    </article>
+
+    <article class="course">
+      <span class="course-label">Express Course</span>
+      <h3>伝える・創るコース</h3>
+      <p>
+        読書感想文、自由研究、意見文、自己紹介、発表資料だけでなく、
+        <span class="em">物語・絵本・ショート童話・小説・台本</span>などの創作も含めて、
+        AIを使いながら自分の考えやイメージを形にします。
+      </p>
+      <ul>
+        <li>読書感想文・意見文・自由研究</li>
+        <li>ショートストーリー・童話・小説</li>
+        <li>絵本のストーリーづくり</li>
+        <li>セリフ・台本・シナリオ</li>
+        <li>自分の世界観の表現</li>
+      </ul>
+      <a class="btn btn-dark" href="#join">このコースで相談する</a>
+    </article>
+  </div>
+</section>
+
+<section id="examples">
+  <div class="kicker">できることの例</div>
+  <h2 class="section-title">
+    アプリだけに限定しません。<br>
+    その子の興味から始めます。
+  </h2>
+
+  <div class="example-grid">
+    <div class="example">
+      <h4>アプリ・便利ツール</h4>
+      <ul>
+        <li>電卓、クイズ、カレンダー、ゲーム</li>
+        <li>勉強や生活に役立つ小さなツール</li>
+        <li>スマホで見られるWebアプリ</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <h4>文章・研究</h4>
+      <ul>
+        <li>読書感想文</li>
+        <li>自由研究</li>
+        <li>意見文・発表資料</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <h4>創作・ストーリーづくり</h4>
+      <ul>
+        <li>ショート童話・小説</li>
+        <li>オリジナル絵本のストーリー</li>
+        <li>キャラクター設定</li>
+        <li>セリフ・会話・台本</li>
+        <li>自分の世界観を形にする作品</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <h4>未来・地域・自分の関心</h4>
+      <ul>
+        <li>将来やってみたいことの整理</li>
+        <li>下諏訪町についてのアイデア</li>
+        <li>好きなことを人に伝えるページ</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">進め方</div>
+  <h2 class="section-title">
+    AIに作らせるのではなく、<br>
+    AIと一緒に考えて直します。
+  </h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>やってみたいことを出す</h4>
+      <p>アプリでも文章でも物語でも、まずは小さな興味から始めます。</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>AIに伝える</h4>
+      <p>目的、条件、雰囲気、使う人、登場人物、世界観などを言葉にします。</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>形にしてみる</h4>
+      <p>AIの出力をもとに、まずは一度形にします。</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h4>違和感を見る</h4>
+      <p>「なんか違う」「もっとこうしたい」を大事にします。</p>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <h4>直して仕上げる</h4>
+      <p>自分にとって納得できる形に近づけます。希望者は公開まで進めます。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="reflection">
+    <div class="kicker" style="background:rgba(255,154,60,.14);color:#a86115;">前回からの改善</div>
+    <h3>前回の教室で見えた課題を、今回の設計に反映しました。</h3>
+    <p>
+      以前の教室では、AIを使ってアプリを作る体験を中心に行いました。
+      プログラミングやアプリに興味がある子にとっては、非常に手応えのある時間になりました。
+      一方で、最初から「作りたいアプリ」がある子ばかりではありません。
+    </p>
+    <p>
+      そこで今回は、アプリ制作だけに絞らず、
+      <span class="em">文章、研究、自己表現、発表、物語、絵本、台本、地域へのアイデア</span>なども入口にします。
+      AIの価値は、プログラムを書くことだけではありません。
+      自分の考えやイメージを整理し、人に伝わる形にすることにも大きな価値があります。
+    </p>
+    <p>
+      この教室は、AIを学ぶ教室というより、
+      <span class="em">AIを使って、自分の中にある考えや世界を見つけ、形にする教室</span>です。
+    </p>
+  </div>
+</section>
+
+<section id="parents">
+  <div class="kicker">保護者の方へ</div>
+  <h2 class="section-title">
+    無料・個別対応。<br>
+    セールスや物販は一切ありません。
+  </h2>
+
+  <div class="split">
+    <div class="outline">
+      <p>
+        主催者は、下諏訪町で暮らす普通の会社員です。
+        この活動は、これからの下諏訪町を作っていく子どもたちが、
+        AIをただ便利に使うだけでなく、
+        <span class="em">自分の考えを形にする道具として使えるようになること</span>を願って行っています。
+      </p>
+      <p>
+        参加費は無料です。
+        勧誘、セールス、物販、教材販売、継続契約などは一切ありません。
+      </p>
+    </div>
+
+    <div class="outline">
+      <ul>
+        <li>1人ずつ個別に対応します</li>
+        <li>開催日時は応募者ごとに調整します</li>
+        <li>家庭訪問またはZoomで対応します</li>
+        <li>保護者同席も歓迎します</li>
+        <li>対応できる日時には限りがあります</li>
+        <li>内容はお子さんの興味に合わせて調整します</li>
+        <li>創作・物語づくり・自己表現も対応します</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">よくある質問</div>
+  <h2 class="section-title">アプリに興味がなくても大丈夫？</h2>
+
+  <div class="faq">
+    <details open>
+      <summary>アプリを作りたいわけではなくても参加できますか？</summary>
+      <p>
+        参加できます。今回から「つくるコース」と「伝える・創るコース」に分けています。
+        文章、研究、発表、自己紹介、意見文、物語、絵本、台本などでも大丈夫です。
+      </p>
+    </details>
+    <details>
+      <summary>創作でも参加できますか？</summary>
+      <p>
+        できます。ショート童話、小説、絵本のストーリー、キャラクター設定、セリフ、台本など、
+        自分の中にあるイメージや世界観を形にすることも、この教室の大切なテーマです。
+      </p>
+    </details>
+    <details>
+      <summary>AIに頼ると、自分で考えなくなりませんか？</summary>
+      <p>
+        任せきりにすると、その心配はあります。
+        だからこの教室では、AIの答えをそのまま使うのではなく、
+        「これは本当に自分の考えか」「もっと良くするにはどうするか」を一緒に考えます。
+      </p>
+    </details>
+    <details>
+      <summary>本当に無料ですか？</summary>
+      <p>
+        無料です。セールス、物販、教材販売、勧誘はありません。
+        下諏訪町の子どもたちの未来に少しでも役立てばという思いで行っています。
+      </p>
+    </details>
+  </div>
+</section>
+
+<section id="join">
+  <div class="final-cta">
+    <div class="kicker">申込・開催概要</div>
+    <h2 class="section-title" style="color:#fff;margin-bottom:12px;">
+      まずは、やってみたいことを教えてください。
+    </h2>
+    <p>
+      「アプリを作ってみたい」「自由研究をまとめたい」「物語を書いてみたい」
+      「絵本のストーリーを作りたい」「何ができるか相談したい」だけでも大丈夫です。
+      内容と日時は、応募後に個別に調整します。
+    </p>
+
+    <div class="info-grid">
+      <div class="info-box">
+        <strong>開催方法</strong>
+        <div>家庭訪問 または Zoom</div>
+        <div>1人ずつ個別対応</div>
+        <div>保護者同席歓迎</div>
+      </div>
+      <div class="info-box">
+        <strong>開催日時</strong>
+        <div>固定日程ではありません</div>
+        <div>応募者ごとに適時調整</div>
+        <div>対応可能な日時には限りがあります</div>
+      </div>
+      <div class="info-box">
+        <strong>料金</strong>
+        <div>無料</div>
+        <div>勧誘・セールスなし</div>
+        <div>物販・教材販売なし</div>
+      </div>
+      <div class="info-box">
+        <strong>連絡先</strong>
+        <div>farm@lucky-bright.com</div>
+        <div>Googleフォームから受付</div>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLScFPwfl_OQ83fYc6bcjY1S1wn3tVcYgUqmJRBpIDHp86RY3iQ/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer">Googleフォームから申し込む</a>
+      <a class="btn btn-white" href="mailto:farm@lucky-bright.com">メールで問い合わせる</a>
+    </div>
+
+    <p class="tiny" style="color:rgba(255,255,255,.75);margin-top:14px;">
+      ※フォーム送信後、内容・方法・日時を個別に相談して決めます。
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div>Shimosuwa Lab / 下諏訪Lab｜AIでものづくり教室</div>
+  <div class="tiny">
+    AIを使って、自分の考えと世界を形にする。下諏訪町の子どもたちのための無料・個別対応プロジェクト。
+  </div>
+</footer>
+
+</div>
+</main>
+
+<div class="mobile-cta">
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLScFPwfl_OQ83fYc6bcjY1S1wn3tVcYgUqmJRBpIDHp86RY3iQ/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer">
+    無料で申し込む
+  </a>
+</div>
+
 </body>
 </html>
