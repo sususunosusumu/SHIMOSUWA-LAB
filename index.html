@@ -7,7 +7,7 @@
 <title>下諏訪Lab｜AIでものづくり教室｜無料・個別対応</title>
 
 <meta name="description" content="下諏訪LabのAIでものづくり教室。AIを使ってアプリ、作品、文章、物語、絵本、研究、発表を形にする無料の個別サポート。家庭訪問またはZoom対応。セールス・物販は一切ありません。" />
-<meta name="keywords" content="下諏訪,下諏訪町,AI教室,AIでものづくり,子ども向けAI,プログラミング,自由研究,読書感想文,絵本,物語,小説,台本,GitHub,下諏訪Lab" />
+<meta name="keywords" content="下諏訪,下諏訪町,AI教室,AIでものづくり,子ども向けAI,プログラミング,自由研究,読書感想文,絵本,物語、小説,台本,GitHub,下諏訪Lab,バイブコーディング,AI開発,ものづくり" />
 
 <style>
 :root{
@@ -311,6 +311,94 @@ section{padding:42px 0}
 }
 .quote p{margin:0;color:var(--muted)}
 
+.unlock-section{
+  position:relative;
+  overflow:hidden;
+  border-radius:46px;
+  padding:42px;
+  background:
+    radial-gradient(circle at 84% 18%, rgba(97,87,255,.24), transparent 28%),
+    radial-gradient(circle at 10% 92%, rgba(14,137,102,.13), transparent 28%),
+    linear-gradient(135deg,#111827,#26315f 58%,#3b2f76);
+  color:#fff;
+  box-shadow:var(--shadow);
+}
+.unlock-section .kicker{
+  background:rgba(255,255,255,.13);
+  color:#fff;
+}
+.unlock-section .section-title,
+.unlock-section .em{color:#fff}
+.unlock-section .section-lead{color:rgba(255,255,255,.82)}
+.unlock-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:22px;
+  align-items:stretch;
+}
+.unlock-copy{
+  position:relative;
+  z-index:1;
+}
+.unlock-copy h2{
+  margin-top:0;
+}
+.unlock-phrase{
+  display:block;
+  margin:20px 0 14px;
+  font-size:clamp(1.8rem,4vw,3.8rem);
+  line-height:1.08;
+  letter-spacing:-.06em;
+  font-weight:950;
+}
+.unlock-note{
+  color:rgba(255,255,255,.78);
+  max-width:48em;
+}
+.unlock-panel{
+  position:relative;
+  z-index:1;
+  display:grid;
+  gap:12px;
+}
+.unlock-card{
+  padding:18px 20px;
+  border-radius:24px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.16);
+  backdrop-filter:blur(16px);
+}
+.unlock-card strong{
+  display:block;
+  margin-bottom:4px;
+  color:#fff;
+}
+.unlock-card span{
+  color:rgba(255,255,255,.76);
+  font-size:.94rem;
+}
+.flow-line{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:24px;
+}
+.flow-pill{
+  padding:10px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.18);
+  color:#fff;
+  font-weight:900;
+  font-size:.92rem;
+}
+.flow-arrow{
+  display:grid;
+  place-items:center;
+  color:rgba(255,255,255,.65);
+  font-weight:950;
+}
+
 .course-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -542,7 +630,8 @@ footer{
   .example-grid,
   .steps,
   .info-grid,
-  .badges{
+  .badges,
+  .unlock-grid{
     grid-template-columns:1fr;
   }
   .hero-grid{padding:34px}
@@ -556,11 +645,13 @@ footer{
   .hero-grid{padding:22px}
   h1{font-size:clamp(2.15rem,12vw,3.35rem)}
   .hero-sub{font-size:1.18rem}
-  .side-panel,.card,.course,.quote,.example,.step,.reflection,.outline,.final-cta{
+  .side-panel,.card,.course,.quote,.example,.step,.reflection,.outline,.final-cta,.unlock-section{
     padding:22px;
   }
   .cta-row{flex-direction:column}
   .btn{width:100%}
+  .flow-line{gap:8px}
+  .flow-arrow{display:none}
   body{padding-bottom:78px}
   .mobile-cta{display:block}
 }
@@ -593,6 +684,7 @@ footer{
     <a class="brand" href="#">Shimosuwa <span>Lab</span></a>
     <nav class="nav">
       <a href="#concept">考え方</a>
+      <a href="#unlock">特権の解放</a>
       <a href="#courses">2つのコース</a>
       <a href="#examples">できること</a>
       <a href="#parents">保護者の方へ</a>
@@ -611,19 +703,19 @@ footer{
         <span class="eyebrow"><span class="dot"></span> Shimosuwa Lab｜AIでものづくり教室 参加者募集</span>
 
         <h1>
-          AIを使って、<br>
-          自分の考えを<br>
-          形にする。
+          AIを、<br>
+          上手に使える力を<br>
+          身につけよう。
           <span class="hero-sub">
             アプリを作る。文章にする。物語を描く。<br>
-            そして、自分にとっての正解を考える。
+            自分の考えを、AIと一緒に形にする。
           </span>
         </h1>
 
         <p class="lead">
           このページは、<span class="em">下諏訪Lab が行う「AIでものづくり教室」</span>の募集ページです。
-          AIを使って、Webページ1つで動くアプリや作品を作るだけでなく、
-          読書感想文、自由研究、意見文、発表資料、物語、絵本、小説、台本など、
+          AIをただ知るだけではなく、調べる、考える、作る、直す、伝えるために上手に使う力を育てます。
+          Webページ1つで動くアプリや作品、読書感想文、自由研究、意見文、発表資料、物語、絵本、小説、台本など、
           <span class="em">自分の考えやイメージを形にする</span>ことを大切にします。
         </p>
 
@@ -638,8 +730,8 @@ footer{
           <div class="point">
             <div class="num">2</div>
             <div>
-              <strong>大切なのは、AIに使われる側ではなく、AIを使う側になること。</strong><br>
-              <span class="tiny">何を作りたいか、何を良いと思うかを自分で考えます。</span>
+              <strong>作れる人だけが持っていた特権を、子どもたちにも開く。</strong><br>
+              <span class="tiny">専門スキルがなくても、アイデアを作品として外に出せる時代です。</span>
             </div>
           </div>
           <div class="point">
@@ -653,7 +745,7 @@ footer{
 
         <div class="cta-row">
           <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLScFPwfl_OQ83fYc6bcjY1S1wn3tVcYgUqmJRBpIDHp86RY3iQ/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer">無料で申し込む</a>
-          <a class="btn btn-light" href="#courses">2つのコースを見る</a>
+          <a class="btn btn-light" href="#unlock">この教室の思想を見る</a>
         </div>
       </div>
 
@@ -663,7 +755,7 @@ footer{
           <div class="side-item"><strong>問いを立てる力</strong><br>何を作りたいのか、何を伝えたいのかを考える。</div>
           <div class="side-item"><strong>AIに伝える力</strong><br>目的、条件、雰囲気、使う人を言葉にする。</div>
           <div class="side-item"><strong>評価する力</strong><br>出てきたものをそのまま受け取らず、自分で見直す。</div>
-          <div class="side-item"><strong>改善する力</strong><br>違和感を言葉にして、もう一度AIに伝える。</div>
+          <div class="side-item"><strong>完成まで届ける力</strong><br>途中で止まったアイデアを、作品として人に見せられる形にする。</div>
           <div class="side-item"><strong>表現する力</strong><br>文章、物語、絵本、台本など、自分の世界を形にする。</div>
         </div>
 
@@ -704,6 +796,63 @@ footer{
   </div>
 </section>
 
+<section id="unlock">
+  <div class="unlock-section">
+    <div class="unlock-grid">
+      <div class="unlock-copy">
+        <div class="kicker">AI時代のものづくり</div>
+        <span class="unlock-phrase">
+          作れる人だけが持っていた<br>
+          特権を、ひらく。
+        </span>
+        <p class="unlock-note">
+          これまで、アイデアを形にできる人は限られていました。プログラムを書ける人、デザインできる人、CADを扱える人、文章を整えられる人。つまり、技術を持っている人だけが、自分の考えを作品として外に出しやすかったのです。
+        </p>
+        <p class="unlock-note">
+          でも今は違います。AIに目的や条件を伝えれば、アプリのたたき台も、文章の構成も、物語の世界観も、発表資料の骨組みも作れます。大事なのは、細かい作業を全部自分で抱えることではなく、<span class="em">何を作りたいのか、何を良いと判断するのかを自分で持つこと</span>です。
+        </p>
+        <p class="unlock-note">
+          AIは、人のセンスや能力を置き換えるものではありません。むしろ、面倒な反復作業や、最初のたたき台づくりを肩代わりしてくれる存在です。だからこそ子どもたちは、細かな作業で止まるのではなく、<span class="em">自分のアイデアや創造をどう具現化するか</span>に集中できます。
+        </p>
+        <p class="unlock-note">
+          この教室が目指すのは、単にAIを使えるようになることではありません。頭の中にある「やってみたい」「こうだったら面白い」「これを伝えたい」という小さなアイデアを、途中で止めずに、誰かに見せられる形まで届けることです。
+        </p>
+
+        <div class="flow-line" aria-label="アイデアから完成までの流れ">
+          <div class="flow-pill">思いつく</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-pill">AIに伝える</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-pill">反復作業を任せる</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-pill">自分で判断する</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-pill">完成まで届ける</div>
+        </div>
+      </div>
+
+      <div class="unlock-panel">
+        <div class="unlock-card">
+          <strong>以前：スキルが壁になる</strong>
+          <span>作りたいものがあっても、コード、デザイン、文章、公開方法が分からず、途中で止まりやすい。</span>
+        </div>
+        <div class="unlock-card">
+          <strong>これから：AIが実装の橋になる</strong>
+          <span>AIが反復作業やたたき台づくりを支え、人はアイデア、判断、センス、創造に集中する。</span>
+        </div>
+        <div class="unlock-card">
+          <strong>子どもに必要な力</strong>
+          <span>コードを丸暗記する力よりも、「何を作りたいか」「どこが違うか」「どう良くしたいか」を言葉にする力。</span>
+        </div>
+        <div class="unlock-card">
+          <strong>この教室のゴール</strong>
+          <span>ただ体験して終わるのではなく、自分のアイデアが作品になる感覚を持ち帰ること。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="split">
     <div class="quote">
@@ -712,7 +861,7 @@ footer{
     </div>
     <div class="quote">
       <strong>でも、最後に差を生むのは「考える力」です。</strong>
-      <p>AIは、人のできる能力の差を小さくします。だからこそ、これからは「何を考えるか」「何を良いと判断するか」が大切になります。</p>
+      <p>AIは、人のセンスや能力を奪うものではありません。むしろ、面倒な反復作業を引き受けることで、その子自身の考え、判断、創造に集中できる時間を増やします。</p>
     </div>
   </div>
 </section>
@@ -816,8 +965,8 @@ footer{
 <section>
   <div class="kicker">進め方</div>
   <h2 class="section-title">
-    AIに作らせるのではなく、<br>
-    AIと一緒に考えて直します。
+    AIに全部任せるのではなく、<br>
+    自分の判断で、AIと一緒に仕上げます。
   </h2>
 
   <div class="steps">
@@ -851,7 +1000,7 @@ footer{
 
 <section>
   <div class="reflection">
-    <div class="kicker" style="background:rgba(255,154,60,.14);color:#a86115;"学習コンテンツのアップデート</div>
+    <div class="kicker" style="background:rgba(255,154,60,.14);color:#a86115;">学習コンテンツのアップデート</div>
     <h3>これまでの教室での経験と課題を、今後の教室の設計に反映しました。</h3>
     <p>
       以前の教室では、AIを使ってアプリを作る体験を中心に行いました。
@@ -866,7 +1015,7 @@ footer{
     </p>
     <p>
       この教室は、AIを学ぶ教室というより、
-      <span class="em">AIを使って、自分の中にある考えや世界を見つけ、形にする教室</span>です。
+      <span class="em">AIを使って、自分の中にある考えや世界を見つけ、完成まで届ける教室</span>です。
     </p>
   </div>
 </section>
@@ -919,6 +1068,13 @@ footer{
       </p>
     </details>
     <details>
+      <summary>バイブコーディングのようなものですか？</summary>
+      <p>
+        近い部分はあります。AIに自然な言葉で作りたいものを伝え、たたき台を作ってもらうからです。
+        ただし、この教室では「雰囲気で任せる」だけではなく、目的を考え、出てきたものを見直し、どう直すかを言葉にするところまで大切にします。
+      </p>
+    </details>
+    <details>
       <summary>創作でも参加できますか？</summary>
       <p>
         できます。ショート童話、小説、絵本のストーリー、キャラクター設定、セリフ、台本など、
@@ -931,6 +1087,7 @@ footer{
         任せきりにすると、その心配はあります。
         だからこの教室では、AIの答えをそのまま使うのではなく、
         「これは本当に自分の考えか」「もっと良くするにはどうするか」を一緒に考えます。
+        AIはセンスや能力の代わりではなく、反復作業やたたき台づくりを助ける道具として使います。
       </p>
     </details>
     <details>
@@ -995,7 +1152,7 @@ footer{
 <footer>
   <div>Shimosuwa Lab / 下諏訪Lab｜AIでものづくり教室</div>
   <div class="tiny">
-    AIを使って、自分の考えと世界を形にする。下諏訪町の子どもたちのための無料・個別対応プロジェクト。
+    AIを使って、自分の考えと世界を完成まで届ける。下諏訪町の子どもたちのための無料・個別対応プロジェクト。
   </div>
 </footer>
 
