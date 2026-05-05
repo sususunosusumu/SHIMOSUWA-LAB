@@ -1,1 +1,282 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>下諏訪Lab GTFSデータ ダウンロード</title>
+  <meta name="description" content="下諏訪Labが作成した、あざみ号・スワンバスのGTFSデータと時刻表検索アプリのページです。" />
 
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --blue: #2563eb;
+      --green: #059669;
+      --orange: #ea580c;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.10), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(5, 150, 105, 0.10), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      padding: 56px 20px 32px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.75);
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 5vw, 52px);
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin: 18px auto 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    main {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto 64px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      min-height: 270px;
+    }
+
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 21px;
+      letter-spacing: -0.02em;
+    }
+
+    .card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 14px;
+      flex: 1;
+    }
+
+    .tag {
+      display: inline-block;
+      width: fit-content;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      margin-bottom: 14px;
+      background: #eef2ff;
+      color: #3730a3;
+    }
+
+    .tag.green {
+      background: #ecfdf5;
+      color: #047857;
+    }
+
+    .tag.orange {
+      background: #fff7ed;
+      color: #c2410c;
+    }
+
+    a.button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+      background: var(--blue);
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-weight: 700;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    a.button:hover {
+      transform: translateY(-1px);
+      opacity: 0.92;
+    }
+
+    a.button.green { background: var(--green); }
+    a.button.orange { background: var(--orange); }
+
+    .section {
+      margin-top: 34px;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .link-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .link-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .link-row strong {
+      display: block;
+      font-size: 16px;
+    }
+
+    .link-row span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    .link-row a {
+      color: var(--blue);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 24px 20px 48px;
+    }
+
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .link-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="badge">Shimosuwa Lab / GTFS Open Data</div>
+  <h1>下諏訪・諏訪エリア<br>GTFSデータ</h1>
+  <p class="lead">
+    あざみ号・スワンバスのGTFSデータと、時刻表検索アプリを公開しています。
+  </p>
+</header>
+
+<main>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="tag green">あざみ号</span>
+      <h2>あざみ号 GTFS</h2>
+      <p>下諏訪町循環バス「あざみ号」の全路線データ。</p>
+      <a class="button green" href="./ccby4_azami_all_routes_gtfs.zip" download>
+        ダウンロード
+      </a>
+    </div>
+
+    <div class="card">
+      <span class="tag orange">スワンバス</span>
+      <h2>スワンバス GTFS</h2>
+      <p>諏訪湖周スワンバス単独のGTFSデータ。</p>
+      <a class="button orange" href="./ccby4_swan_only_gtfs.zip" download>
+        ダウンロード
+      </a>
+    </div>
+
+    <div class="card">
+      <span class="tag">全部入り</span>
+      <h2>全路線統合 GTFS</h2>
+      <p>あざみ号＋スワンバス統合データ。</p>
+      <a class="button" href="./ccby4_shimosuwa_suwa_all_routes_gtfs.zip" download>
+        ダウンロード
+      </a>
+    </div>
+
+  </div>
+
+  <section class="section">
+    <h2>関連ページ</h2>
+
+    <div class="link-list">
+
+      <div class="link-row">
+        <div>
+          <strong>時刻表検索アプリ</strong>
+          <span>便ごとの全停留所と時刻を表示できるHTMLアプリ</span>
+        </div>
+        <a href="./azami_shimosuwa.html">開く</a>
+      </div>
+
+      <div class="link-row">
+        <div>
+          <strong>下諏訪Lab メインページ</strong>
+          <span>AI・ものづくり・地域活動のトップページ</span>
+        </div>
+        <a href="../">メインへ</a>
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  Created by Shimosuwa Lab / CC BY 4.0
+</footer>
+
+</body>
+</html>
