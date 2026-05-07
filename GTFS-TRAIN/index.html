@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中央本線・篠ノ井線 時刻表ビューア</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+:root{
+  --navy:#08152f;
+  --bg:#f3f6fb;
+  --line:#d8dde7;
+  --selected:#fff176;
+  --origin:#fff4b8;
+  --limited:#ede7ff;
+  --limited-head:#6d4bc3;
+  --normal-head:#08152f;
+  --muted:#9aa3b2;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--bg);
+  color:#111827;
+}
+header{
+  background:var(--navy);
+  color:#fff;
+  padding:26px 28px;
+}
+header h1{
+  margin:0 0 8px;
+  font-size:34px;
+  letter-spacing:.02em;
+}
+header p{margin:0;color:#dbeafe}
+.controls{
+  background:#fff;
+  margin:22px;
+  padding:20px;
+  border-radius:20px;
+  display:grid;
+  grid-template-columns: 1.4fr 180px 220px 280px auto auto;
+  gap:14px;
+  align-items:end;
+  box-shadow:0 8px 26px rgba(15,23,42,.08);
+}
+label{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  font-size:13px;
+  font-weight:700;
+  color:#334155;
+}
+input,select,button{
+  padding:12px 13px;
+  border-radius:13px;
+  border:1px solid #cbd5e1;
+  font-size:15px;
+  background:#fff;
+}
+button{
+  background:var(--navy);
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+  border:0;
+}
+button.secondary{
+  background:#fff;
+  color:var(--navy);
+  border:1px solid #cbd5e1;
+}
+.info{
+  margin:0 22px 16px;
+  background:#fff;
+  padding:14px 18px;
+  border-radius:16px;
+  box-shadow:0 4px 14px rgba(15,23,42,.05);
+  color:#334155;
+}
+.legend{
+  display:flex;
+  gap:16px;
+  align-items:center;
+  flex-wrap:wrap;
+  font-size:13px;
+}
+.chip{
+  display:inline-flex;
+  gap:6px;
+  align-items:center;
+}
+.box{
+  width:18px;height:12px;border-radius:3px;display:inline-block;border:1px solid #cbd5e1;
+}
+.box.selected{background:var(--selected);border-color:#e0c000}
+.box.origin{background:var(--origin);border-color:#e0c000}
+.box.limited{background:var(--limited);border-color:#b5a7ee}
+.table-wrap{
+  overflow:auto;
+  margin:0 22px 24px;
+  background:#fff;
+  border-radius:20px;
+  box-shadow:0 8px 26px rgba(15,23,42,.08);
+  max-height:72vh;
+}
+table{
+  border-collapse:separate;
+  border-spacing:0;
+  min-width:1600px;
+  width:max-content;
+}
+th,td{
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:7px 11px;
+  text-align:center;
+  white-space:nowrap;
+  min-width:86px;
+  height:37px;
+}
+th{
+  position:sticky;
+  top:0;
+  z-index:5;
+  background:var(--normal-head);
+  color:#fff;
+  font-weight:900;
+}
+th.station-col{
+  z-index:8;
+}
+th.limited-train{
+  background:var(--limited-head);
+  color:#fff;
+}
+td.station-col, th.station-col{
+  position:sticky;
+  left:0;
+  min-width:118px;
+  font-weight:900;
+  border-left:1px solid var(--line);
+}
+td.station-col{
+  background:#fff;
+  z-index:4;
+}
+td.time{
+  font-variant-numeric:tabular-nums;
+}
+td.empty{
+  color:#b6bdc8;
+  background:#fafafa;
+}
+td.origin{
+  background:var(--origin);
+  font-weight:900;
+}
+td.selected-time, td.selected-station{
+  background:var(--selected) !important;
+  font-weight:900;
+}
+td.selected-station{
+  color:#111827;
+}
+td.limited-stop{
+  background:#faf8ff;
+}
+td.selected-time.limited-stop{
+  background:var(--selected) !important;
+}
+.train-no{
+  font-size:13px;
+  line-height:1.15;
+  max-width:94px;
+  white-space:normal;
+  margin:auto;
+}
+.service{
+  margin-top:3px;
+  font-size:11px;
+  opacity:.86;
+  font-weight:700;
+}
+.via{
+  margin-top:3px;
+  font-size:10px;
+  opacity:.8;
+  font-weight:700;
+}
+.badge{
+  display:inline-block;
+  padding:1px 5px;
+  border-radius:999px;
+  background:rgba(255,255,255,.18);
+}
+.note{
+  color:#64748b;
+  font-size:12px;
+  margin-top:6px;
+}
+@media(max-width:1000px){
+  .controls{grid-template-columns:1fr 1fr}
+  header h1{font-size:26px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>中央本線・篠ノ井線 時刻表ビューア</h1>
+  <p>GTFS ZIPを読み込み、松本〜富士見間を横スクロール型の時刻表として表示します。岡谷〜塩尻間は、みどり湖経由と辰野経由を併記します。</p>
+</header>
+
+<section class="controls">
+  <label>
+    GTFS ZIP
+    <input type="file" id="zipFile" accept=".zip">
+  </label>
+
+  <label>
+    日付
+    <input type="date" id="datePicker">
+  </label>
+
+  <label>
+    方向
+    <select id="direction">
+      <option value="down">下り</option>
+      <option value="up" selected>上り</option>
+    </select>
+  </label>
+
+  <label>
+    駅選択（行を黄色表示）
+    <select id="stationSelect"></select>
+  </label>
+
+  <button id="renderBtn">表示更新</button>
+  <button class="secondary" id="scrollNowBtn">現在時刻へ</button>
+</section>
+
+<section class="info">
+  <div class="legend">
+    <span class="chip"><span class="box selected"></span>選択駅の停車時刻</span>
+    <span class="chip"><span class="box origin"></span>始発駅</span>
+    <span class="chip"><span class="box limited"></span>特急・速達系の列車見出し</span>
+    <span>岡谷〜塩尻間は、みどり湖経由と辰野経由（川岸・辰野・信濃川島・小野）を併記</span>
+    <span>— = この駅には停車しません／その経路を通りません</span>
+  </div>
+  <div id="status" class="note">GTFS ZIPを選択してください。</div>
+</section>
+
+<div class="table-wrap" id="tableWrap">
+  <table id="table"></table>
+</div>
+
+<script>
+// 松本〜富士見の表示順。
+ // 岡谷〜塩尻間は「みどり湖経由」と「辰野経由」があるため、
+ // みどり湖に加えて、辰野経由の 川岸・辰野・信濃川島・小野 も表示する。
+const stationOrder = [
+  "松本","南松本","平田","村井","広丘","塩尻",
+  "みどり湖",
+  "小野","信濃川島","辰野","川岸",
+  "岡谷","下諏訪","上諏訪","茅野","青柳","すずらんの里","富士見"
+];
+
+let gtfs = {};
+let lastTrains = [];
+
+const datePicker = document.getElementById("datePicker");
+datePicker.value = localDateString(new Date());
+
+function localDateString(d){
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,"0");
+  const day = String(d.getDate()).padStart(2,"0");
+  return `${y}-${m}-${day}`;
+}
+
+function csvParse(text){
+  text = text.replace(/^\uFEFF/,"");
+  const rows = [];
+  let row = [], cell = "", q = false;
+  for(let i=0;i<text.length;i++){
+    const c = text[i], n = text[i+1];
+    if(c === '"' && q && n === '"'){ cell += '"'; i++; }
+    else if(c === '"'){ q = !q; }
+    else if(c === "," && !q){ row.push(cell); cell = ""; }
+    else if((c === "\n" || c === "\r") && !q){
+      if(c === "\r" && n === "\n") i++;
+      row.push(cell);
+      if(row.some(v => v !== "")) rows.push(row);
+      row = []; cell = "";
+    }else{
+      cell += c;
+    }
+  }
+  if(cell || row.length){
+    row.push(cell);
+    if(row.some(v => v !== "")) rows.push(row);
+  }
+  if(!rows.length) return [];
+  const header = rows.shift();
+  return rows.map(r=>{
+    const obj = {};
+    header.forEach((h,i)=> obj[h] = r[i] ?? "");
+    return obj;
+  });
+}
+
+async function readZip(file){
+  const zip = await JSZip.loadAsync(file);
+
+  async function readCSV(name){
+    const f = zip.file(name);
+    if(!f) return [];
+    return csvParse(await f.async("string"));
+  }
+
+  gtfs = {
+    stops: await readCSV("stops.txt"),
+    routes: await readCSV("routes.txt"),
+    trips: await readCSV("trips.txt"),
+    stop_times: await readCSV("stop_times.txt"),
+    calendar: await readCSV("calendar.txt"),
+    calendar_dates: await readCSV("calendar_dates.txt")
+  };
+
+  initStationSelect();
+  renderTable();
+}
+
+function initStationSelect(){
+  const sel = document.getElementById("stationSelect");
+  sel.innerHTML = "";
+  stationOrder.forEach(st=>{
+    const op = document.createElement("option");
+    op.value = st;
+    op.textContent = st;
+    if(st === "下諏訪") op.selected = true;
+    sel.appendChild(op);
+  });
+}
+
+function yyyymmdd(dateStr){
+  return dateStr.replaceAll("-","");
+}
+
+function activeServiceIds(dateStr){
+  const d = new Date(dateStr + "T00:00:00");
+  const dow = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"][d.getDay()];
+  const ymd = yyyymmdd(dateStr);
+  const active = new Set();
+
+  (gtfs.calendar || []).forEach(c=>{
+    if(c.start_date && c.end_date && (ymd < c.start_date || ymd > c.end_date)) return;
+    if(String(c[dow] || "0") === "1") active.add(c.service_id);
+  });
+
+  (gtfs.calendar_dates || []).forEach(cd=>{
+    if(cd.date !== ymd) return;
+    if(cd.exception_type === "1") active.add(cd.service_id);
+    if(cd.exception_type === "2") active.delete(cd.service_id);
+  });
+
+  return active;
+}
+
+function serviceLabel(serviceId){
+  if(serviceId === "WEEKDAY") return "平日";
+  if(serviceId === "HOLIDAY") return "休日";
+  return serviceId || "";
+}
+
+function routeDirectionMatch(routeId, direction){
+  const id = String(routeId || "");
+  if(direction === "up") return id.endsWith("_UP") || id.includes("UP");
+  return id.endsWith("_DOWN") || id.includes("DOWN");
+}
+
+function toMin(t){
+  if(!t) return 999999;
+  const [h,m] = t.split(":").map(Number);
+  return h*60 + m;
+}
+
+function formatTime(t){
+  if(!t) return "";
+  const [h,m] = t.split(":");
+  return `${h.padStart(2,"0")}:${m.padStart(2,"0")}`;
+}
+
+function classifyLimited(train){
+  // 元PDFの列車名はGTFSに保持されていないため、停車駅数と列車番号から速達・特急系を推定。
+  const stopCount = train.stationStops.length;
+  const no = String(train.shortName || "");
+  if(stopCount <= 5) return true;
+  if(/^[1-9]M$/.test(no)) return true;
+  if(/^50\d{2}M$/.test(no)) return true;
+  if(/^10\d{2}M$/.test(no) && stopCount <= 7) return true;
+  if(/^80\d{2}M$/.test(no) && stopCount <= 7) return true;
+  return false;
+}
+
+function buildTrains(){
+  const dateStr = document.getElementById("datePicker").value;
+  const direction = document.getElementById("direction").value;
+  const active = activeServiceIds(dateStr);
+
+  const stopNameById = Object.fromEntries((gtfs.stops || []).map(s=>[s.stop_id, s.stop_name]));
+
+  const stopTimesByTrip = {};
+  (gtfs.stop_times || []).forEach(st=>{
+    if(!stopTimesByTrip[st.trip_id]) stopTimesByTrip[st.trip_id] = [];
+    stopTimesByTrip[st.trip_id].push(st);
+  });
+
+  const trainsRaw = [];
+
+  (gtfs.trips || []).forEach(trip=>{
+    if(!active.has(trip.service_id)) return;
+    if(!routeDirectionMatch(trip.route_id, direction)) return;
+
+    const raw = (stopTimesByTrip[trip.trip_id] || [])
+      .map(st=>({
+        station: stopNameById[st.stop_id],
+        time: st.departure_time || st.arrival_time,
+        seq: Number(st.stop_sequence || 0)
+      }))
+      .filter(x=>stationOrder.includes(x.station) && x.time)
+      .sort((a,b)=>a.seq-b.seq);
+
+    if(raw.length < 1) return;
+
+    const byStation = {};
+    raw.forEach(x=>{ byStation[x.station] = x; });
+
+    const first = raw[0];
+    const trainNo = trip.trip_short_name || trip.trip_id;
+
+    const train = {
+      tripId: trip.trip_id,
+      shortName: trainNo,
+      serviceId: trip.service_id,
+      routeId: trip.route_id,
+      byStation,
+      firstStation: first.station,
+      firstTime: first.time,
+      sortTime: first.time,
+      stationStops: raw,
+      via: detectVia(byStation)
+    };
+
+    train.isLimited = classifyLimited(train);
+    trainsRaw.push(train);
+  });
+
+  // 重複統合ルール：
+  // 「列車番号＋serviceId＋経由タイプ」が同じ場合だけ統合する。
+  // これにより、1405M と 2228M など別列車は統合しない。
+  const mergedMap = new Map();
+
+  trainsRaw.forEach(train=>{
+    const key = [
+      train.shortName,
+      train.serviceId,
+      train.via
+    ].join("::");
+
+    if(!mergedMap.has(key)){
+      mergedMap.set(key, {
+        ...train,
+        byStation:{...train.byStation},
+        stationStops:[...train.stationStops]
+      });
+      return;
+    }
+
+    const base = mergedMap.get(key);
+
+    // 同じ列車番号だけを補完統合。
+    // 同じ駅に違う時刻がある場合は、既存値を優先して誤結合を避ける。
+    stationOrder.forEach(st=>{
+      if(!base.byStation[st] && train.byStation[st]){
+        base.byStation[st] = train.byStation[st];
+      }
+    });
+
+    base.stationStops = stationOrder
+      .filter(st => base.byStation[st])
+      .map(st => base.byStation[st])
+      .sort((a,b)=>toMin(a.time)-toMin(b.time));
+
+    const first = base.stationStops[0];
+    if(first){
+      base.firstStation = first.station;
+      base.firstTime = first.time;
+      base.sortTime = first.time;
+    }
+
+    base.isLimited = base.isLimited || train.isLimited;
+  });
+
+  const trains = [...mergedMap.values()];
+
+  trains.sort((a,b)=>{
+    const t = toMin(a.firstTime) - toMin(b.firstTime);
+    if(t !== 0) return t;
+    return String(a.shortName).localeCompare(String(b.shortName), "ja");
+  });
+
+  return trains;
+}
+
+function detectVia(byStation){
+  const hasMidori = !!byStation["みどり湖"];
+  const hasTatsuno =
+    !!byStation["川岸"] || !!byStation["辰野"] ||
+    !!byStation["信濃川島"] || !!byStation["小野"];
+
+  if(hasMidori && hasTatsuno) return "MIXED";
+  if(hasTatsuno) return "辰野経由";
+  if(hasMidori) return "みどり湖経由";
+  return "DIRECT";
+}
+
+function renderTable(){
+  if(!gtfs.stop_times){
+    document.getElementById("status").textContent = "GTFS ZIPを選択してください。";
+    return;
+  }
+
+  const selected = document.getElementById("stationSelect").value || "下諏訪";
+  const trains = buildTrains();
+  lastTrains = trains;
+
+  const table = document.getElementById("table");
+  table.innerHTML = "";
+
+  const head = document.createElement("tr");
+  const stHead = document.createElement("th");
+  stHead.className = "station-col";
+  stHead.textContent = "駅名";
+  head.appendChild(stHead);
+
+  trains.forEach(train=>{
+    const th = document.createElement("th");
+    if(train.isLimited) th.classList.add("limited-train");
+
+    const label = serviceLabel(train.serviceId);
+    const viaLabel = (train.via === "辰野経由" || train.via === "みどり湖経由") ? train.via : "";
+    th.innerHTML = `
+      <div class="train-no">${escapeHtml(train.shortName)}</div>
+      <div class="service"><span class="badge">${escapeHtml(label)}</span></div>
+      ${viaLabel ? `<div class="via">${escapeHtml(viaLabel)}</div>` : ""}
+    `;
+    head.appendChild(th);
+  });
+
+  table.appendChild(head);
+
+  stationOrder.forEach(station=>{
+    const tr = document.createElement("tr");
+
+    const tdStation = document.createElement("td");
+    tdStation.className = "station-col";
+    tdStation.textContent = station;
+    if(station === selected) tdStation.classList.add("selected-station");
+    tr.appendChild(tdStation);
+
+    trains.forEach(train=>{
+      const td = document.createElement("td");
+      const stop = train.byStation[station];
+
+      if(stop){
+        td.className = "time";
+        td.textContent = formatTime(stop.time);
+
+        if(train.isLimited) td.classList.add("limited-stop");
+        if(train.firstStation === station) td.classList.add("origin");
+        if(station === selected) td.classList.add("selected-time");
+      }else{
+        td.className = "empty";
+        td.textContent = "—";
+      }
+
+      tr.appendChild(td);
+    });
+
+    table.appendChild(tr);
+  });
+
+  const limitedCount = trains.filter(t=>t.isLimited).length;
+  document.getElementById("status").textContent =
+    `表示列車数：${trains.length}本（列車番号＋経由別で重複統合 / 速達・特急系推定：${limitedCount}本） / 選択駅：${selected}`;
+}
+
+function escapeHtml(s){
+  return String(s ?? "").replace(/[&<>"']/g, m=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[m]));
+}
+
+function scrollToCurrentTime(){
+  if(!lastTrains.length) return;
+  const now = new Date();
+  const nowMin = now.getHours()*60 + now.getMinutes();
+  let idx = lastTrains.findIndex(t=>toMin(t.firstTime) >= nowMin);
+  if(idx < 0) idx = 0;
+
+  const wrap = document.getElementById("tableWrap");
+  const cellWidth = 86;
+  wrap.scrollLeft = Math.max(0, idx * cellWidth - 240);
+}
+
+document.getElementById("zipFile").addEventListener("change", e=>{
+  const file = e.target.files[0];
+  if(file) readZip(file);
+});
+
+document.getElementById("renderBtn").addEventListener("click", renderTable);
+document.getElementById("scrollNowBtn").addEventListener("click", scrollToCurrentTime);
+document.getElementById("direction").addEventListener("change", renderTable);
+document.getElementById("stationSelect").addEventListener("change", renderTable);
+document.getElementById("datePicker").addEventListener("change", renderTable);
+</script>
+
+</body>
+</html>
