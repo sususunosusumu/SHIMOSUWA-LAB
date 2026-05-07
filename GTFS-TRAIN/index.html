@@ -1,10 +1,61 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>中央本線・篠ノ井線 時刻表ビューア（PDF座標照合版）</title>
+
+<title>
+JR下諏訪駅 時刻表検索｜中央本線・篠ノ井線
+</title>
+
+<meta name="description"
+content="JR下諏訪駅の電車時刻表を検索できる無料ページです。中央本線・篠ノ井線の上り・下り列車、特急列車、松本〜富士見間の時刻表を確認できます。">
+
+<meta name="keywords"
+content="下諏訪駅 時刻表, JR下諏訪駅, 中央本線 時刻表, 篠ノ井線 時刻表, 下諏訪駅 電車 時刻表, 松本 富士見 時刻表">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical"
+href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/GTFS-TRAIN/index.html">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="JR下諏訪駅 時刻表検索｜中央本線・篠ノ井線">
+<meta property="og:description" content="JR下諏訪駅の中央本線・篠ノ井線の電車時刻表検索ページです。">
+<meta property="og:url" content="https://sususunosusumu.github.io/SHIMOSUWA-LAB/GTFS-TRAIN/index.html">
+
+<meta name="twitter:card" content="summary_large_image">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<!-- 構造化データ -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebPage",
+  "name":"JR下諏訪駅 時刻表検索",
+  "description":"JR下諏訪駅の中央本線・篠ノ井線の時刻表検索ページ",
+  "url":"https://sususunosusumu.github.io/SHIMOSUWA-LAB/GTFS-TRAIN/index.html",
+  "inLanguage":"ja",
+  "about":[
+    {
+      "@type":"Place",
+      "name":"下諏訪駅"
+    },
+    {
+      "@type":"Thing",
+      "name":"中央本線"
+    },
+    {
+      "@type":"Thing",
+      "name":"篠ノ井線"
+    }
+  ]
+}
+</script>
+
 <style>
 :root{
   --navy:#08152f;
@@ -17,24 +68,50 @@
   --normal-head:#08152f;
   --muted:#9aa3b2;
 }
-*{box-sizing:border-box}
+
+*{
+  box-sizing:border-box
+}
+
 body{
   margin:0;
   font-family:"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
   background:var(--bg);
   color:#111827;
 }
+
 header{
   background:var(--navy);
   color:#fff;
   padding:26px 28px;
 }
+
 header h1{
   margin:0 0 8px;
   font-size:34px;
   letter-spacing:.02em;
+  line-height:1.3;
 }
-header p{margin:0;color:#dbeafe}
+
+header p{
+  margin:0;
+  color:#dbeafe
+}
+
+main{
+  max-width:1400px;
+  margin:0 auto;
+}
+
+.intro{
+  margin:22px;
+  background:#fff;
+  padding:22px;
+  border-radius:20px;
+  box-shadow:0 8px 26px rgba(15,23,42,.08);
+  line-height:1.8;
+}
+
 .controls{
   background:#fff;
   margin:22px;
@@ -46,6 +123,7 @@ header p{margin:0;color:#dbeafe}
   align-items:end;
   box-shadow:0 8px 26px rgba(15,23,42,.08);
 }
+
 label{
   display:flex;
   flex-direction:column;
@@ -54,6 +132,7 @@ label{
   font-weight:700;
   color:#334155;
 }
+
 input,select,button{
   padding:12px 13px;
   border-radius:13px;
@@ -61,6 +140,7 @@ input,select,button{
   font-size:15px;
   background:#fff;
 }
+
 button{
   background:var(--navy);
   color:white;
@@ -68,11 +148,13 @@ button{
   cursor:pointer;
   border:0;
 }
+
 button.secondary{
   background:#fff;
   color:var(--navy);
   border:1px solid #cbd5e1;
 }
+
 .info{
   margin:0 22px 16px;
   background:#fff;
@@ -81,6 +163,7 @@ button.secondary{
   box-shadow:0 4px 14px rgba(15,23,42,.05);
   color:#334155;
 }
+
 .legend{
   display:flex;
   gap:16px;
@@ -88,17 +171,36 @@ button.secondary{
   flex-wrap:wrap;
   font-size:13px;
 }
+
 .chip{
   display:inline-flex;
   gap:6px;
   align-items:center;
 }
+
 .box{
-  width:18px;height:12px;border-radius:3px;display:inline-block;border:1px solid #cbd5e1;
+  width:18px;
+  height:12px;
+  border-radius:3px;
+  display:inline-block;
+  border:1px solid #cbd5e1;
 }
-.box.selected{background:var(--selected);border-color:#e0c000}
-.box.origin{background:var(--origin);border-color:#e0c000}
-.box.limited{background:var(--limited);border-color:#b5a7ee}
+
+.box.selected{
+  background:var(--selected);
+  border-color:#e0c000
+}
+
+.box.origin{
+  background:var(--origin);
+  border-color:#e0c000
+}
+
+.box.limited{
+  background:var(--limited);
+  border-color:#b5a7ee
+}
+
 .table-wrap{
   overflow:auto;
   margin:0 22px 24px;
@@ -107,12 +209,14 @@ button.secondary{
   box-shadow:0 8px 26px rgba(15,23,42,.08);
   max-height:72vh;
 }
+
 table{
   border-collapse:separate;
   border-spacing:0;
   min-width:1600px;
   width:max-content;
 }
+
 th,td{
   border-right:1px solid var(--line);
   border-bottom:1px solid var(--line);
@@ -122,6 +226,7 @@ th,td{
   min-width:86px;
   height:37px;
 }
+
 th{
   position:sticky;
   top:0;
@@ -130,13 +235,16 @@ th{
   color:#fff;
   font-weight:900;
 }
+
 th.station-col{
   z-index:8;
 }
+
 th.limited-train{
   background:var(--limited-head);
   color:#fff;
 }
+
 td.station-col, th.station-col{
   position:sticky;
   left:0;
@@ -144,34 +252,44 @@ td.station-col, th.station-col{
   font-weight:900;
   border-left:1px solid var(--line);
 }
+
 td.station-col{
   background:#fff;
   z-index:4;
 }
+
 td.time{
   font-variant-numeric:tabular-nums;
 }
+
 td.empty{
   color:#b6bdc8;
   background:#fafafa;
 }
+
 td.origin{
   background:var(--origin);
   font-weight:900;
 }
-td.selected-time, td.selected-station{
+
+td.selected-time,
+td.selected-station{
   background:var(--selected) !important;
   font-weight:900;
 }
+
 td.selected-station{
   color:#111827;
 }
+
 td.limited-stop{
   background:#faf8ff;
 }
+
 td.selected-time.limited-stop{
   background:var(--selected) !important;
 }
+
 .train-no{
   font-size:13px;
   line-height:1.15;
@@ -179,89 +297,211 @@ td.selected-time.limited-stop{
   white-space:normal;
   margin:auto;
 }
+
 .service{
   margin-top:3px;
   font-size:11px;
   opacity:.86;
   font-weight:700;
 }
+
 .via{
   margin-top:3px;
   font-size:10px;
   opacity:.8;
   font-weight:700;
 }
+
 .train-name{
   opacity:1;
   font-size:11px;
   line-height:1.15;
 }
+
 .badge{
   display:inline-block;
   padding:1px 5px;
   border-radius:999px;
   background:rgba(255,255,255,.18);
 }
+
 .note{
   color:#64748b;
   font-size:12px;
   margin-top:6px;
 }
+
+.faq{
+  margin:22px;
+  background:#fff;
+  padding:24px;
+  border-radius:20px;
+  box-shadow:0 8px 26px rgba(15,23,42,.08);
+  line-height:1.8;
+}
+
+.faq h3{
+  margin-top:28px;
+  margin-bottom:8px;
+}
+
 @media(max-width:1000px){
-  .controls{grid-template-columns:1fr 1fr}
-  header h1{font-size:26px}
+
+  .controls{
+    grid-template-columns:1fr 1fr
+  }
+
+  header h1{
+    font-size:26px
+  }
 }
 </style>
 </head>
+
 <body>
 
 <header>
-  <h1>中央本線・篠ノ井線 時刻表ビューア</h1>
-  <p>列車名入りGTFS ZIPを読み込み、松本〜富士見間を横スクロール型の時刻表として表示します。特急はGTFSの列車名を見て紫色で表示します。</p>
+
+<h1>
+JR下諏訪駅 時刻表検索（中央本線・篠ノ井線）
+</h1>
+
+<p>
+中央本線・篠ノ井線の上り・下り列車、特急列車の時刻表を検索できます。
+</p>
+
 </header>
 
+<main>
+
+<section class="intro">
+
+<h2>このページについて</h2>
+
+<p>
+このページでは、JR下諏訪駅を通る中央本線・篠ノ井線の時刻表を確認できます。
+</p>
+
+<p>
+松本〜富士見間の列車を対象に、上り・下り方向、特急列車、辰野経由・みどり湖経由などを一覧形式で表示します。
+</p>
+
+<p>
+JR下諏訪駅の電車時刻表を調べたい場合や、
+中央本線・篠ノ井線の時刻確認ページとして利用できます。
+</p>
+
+<p>
+GTFSデータを利用して、横スクロール型の時刻表ビューアとして表示しています。
+</p>
+
+</section>
+
 <section class="controls">
-  <label>
-    GTFS ZIP
-    <input type="file" id="zipFile" accept=".zip">
-  </label>
 
-  <label>
-    日付
-    <input type="date" id="datePicker">
-  </label>
+<label>
+GTFS ZIP
+<input type="file" id="zipFile" accept=".zip">
+</label>
 
-  <label>
-    方向
-    <select id="direction">
-      <option value="down">下り</option>
-      <option value="up" selected>上り</option>
-    </select>
-  </label>
+<label>
+日付
+<input type="date" id="datePicker">
+</label>
 
-  <label>
-    駅選択（行を黄色表示）
-    <select id="stationSelect"></select>
-  </label>
+<label>
+方向
+<select id="direction">
+<option value="down">下り</option>
+<option value="up" selected>上り</option>
+</select>
+</label>
 
-  <button id="renderBtn">表示更新</button>
-  <button class="secondary" id="scrollNowBtn">現在時刻へ</button>
+<label>
+駅選択（行を黄色表示）
+<select id="stationSelect"></select>
+</label>
+
+<button id="renderBtn">表示更新</button>
+
+<button class="secondary" id="scrollNowBtn">
+現在時刻へ
+</button>
+
 </section>
 
 <section class="info">
-  <div class="legend">
-    <span class="chip"><span class="box selected"></span>選択駅の停車時刻</span>
-    <span class="chip"><span class="box origin"></span>始発駅</span>
-    <span class="chip"><span class="box limited"></span>特急列車の見出し</span>
-    <span>岡谷〜塩尻間は、みどり湖経由と辰野経由（川岸・辰野・信濃川島・小野）を併記</span>
-    <span>— = この駅には停車しません／その経路を通りません</span>
-  </div>
-  <div id="status" class="note">GTFS ZIPを選択してください。</div>
+
+<div class="legend">
+
+<span class="chip">
+<span class="box selected"></span>
+選択駅の停車時刻
+</span>
+
+<span class="chip">
+<span class="box origin"></span>
+始発駅
+</span>
+
+<span class="chip">
+<span class="box limited"></span>
+特急列車の見出し
+</span>
+
+<span>
+岡谷〜塩尻間は、みどり湖経由と辰野経由
+（川岸・辰野・信濃川島・小野）を併記
+</span>
+
+<span>
+— = この駅には停車しません／その経路を通りません
+</span>
+
+</div>
+
+<div id="status" class="note">
+GTFS ZIPを選択してください。
+</div>
+
 </section>
 
 <div class="table-wrap" id="tableWrap">
-  <table id="table"></table>
+<table id="table"></table>
 </div>
+
+<section class="faq">
+
+<h2>よくある質問</h2>
+
+<h3>JR下諏訪駅の時刻表は検索できますか？</h3>
+
+<p>
+はい。中央本線・篠ノ井線を含む、JR下諏訪駅を通る列車時刻表を検索できます。
+</p>
+
+<h3>特急列車にも対応していますか？</h3>
+
+<p>
+はい。GTFSデータに含まれる特急列車名を表示し、紫色で区別しています。
+</p>
+
+<h3>辰野経由とみどり湖経由は区別できますか？</h3>
+
+<p>
+はい。岡谷〜塩尻間については、辰野経由・みどり湖経由を判別して表示しています。
+</p>
+
+<h3>GTFSデータとは何ですか？</h3>
+
+<p>
+公共交通機関の時刻表データ形式です。このページではGTFSデータを利用して時刻表を表示しています。
+</p>
+
+</section>
+
+</main>
+
 
 <script>
 // 松本〜富士見の表示順。
