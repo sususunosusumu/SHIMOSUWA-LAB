@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>中央本線・篠ノ井線 時刻表ビューア</title>
+<title>中央本線・篠ノ井線 時刻表ビューア（PDF座標照合版）</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
 :root{
@@ -191,6 +191,11 @@ td.selected-time.limited-stop{
   opacity:.8;
   font-weight:700;
 }
+.train-name{
+  opacity:1;
+  font-size:11px;
+  line-height:1.15;
+}
 .badge{
   display:inline-block;
   padding:1px 5px;
@@ -212,7 +217,7 @@ td.selected-time.limited-stop{
 
 <header>
   <h1>中央本線・篠ノ井線 時刻表ビューア</h1>
-  <p>GTFS ZIPを読み込み、松本〜富士見間を横スクロール型の時刻表として表示します。岡谷〜塩尻間は、みどり湖経由と辰野経由を併記します。</p>
+  <p>列車名入りGTFS ZIPを読み込み、松本〜富士見間を横スクロール型の時刻表として表示します。特急はGTFSの列車名を見て紫色で表示します。</p>
 </header>
 
 <section class="controls">
@@ -247,7 +252,7 @@ td.selected-time.limited-stop{
   <div class="legend">
     <span class="chip"><span class="box selected"></span>選択駅の停車時刻</span>
     <span class="chip"><span class="box origin"></span>始発駅</span>
-    <span class="chip"><span class="box limited"></span>特急・速達系の列車見出し</span>
+    <span class="chip"><span class="box limited"></span>特急列車の見出し</span>
     <span>岡谷〜塩尻間は、みどり湖経由と辰野経由（川岸・辰野・信濃川島・小野）を併記</span>
     <span>— = この駅には停車しません／その経路を通りません</span>
   </div>
@@ -271,6 +276,8 @@ const stationOrder = [
 
 let gtfs = {};
 let lastTrains = [];
+
+const AUTO_GTFS_FILE = "jr_east_chuo_shinonoi_gtfs_coord_verified_clean.zip";
 
 const datePicker = document.getElementById("datePicker");
 datePicker.value = localDateString(new Date());
@@ -396,15 +403,8 @@ function formatTime(t){
 }
 
 function classifyLimited(train){
-  // 元PDFの列車名はGTFSに保持されていないため、停車駅数と列車番号から速達・特急系を推定。
-  const stopCount = train.stationStops.length;
-  const no = String(train.shortName || "");
-  if(stopCount <= 5) return true;
-  if(/^[1-9]M$/.test(no)) return true;
-  if(/^50\d{2}M$/.test(no)) return true;
-  if(/^10\d{2}M$/.test(no) && stopCount <= 7) return true;
-  if(/^80\d{2}M$/.test(no) && stopCount <= 7) return true;
-  return false;
+  const name = String(train.trainName || "");
+  return name.startsWith("特急");
 }
 
 function buildTrains(){
@@ -448,6 +448,7 @@ function buildTrains(){
       shortName: trainNo,
       serviceId: trip.service_id,
       routeId: trip.route_id,
+      trainName: trip.trip_headsign || "",
       byStation,
       firstStation: first.station,
       firstTime: first.time,
@@ -504,6 +505,7 @@ function buildTrains(){
     }
 
     base.isLimited = base.isLimited || train.isLimited;
+    if(!base.trainName && train.trainName) base.trainName = train.trainName;
   });
 
   const trains = [...mergedMap.values()];
@@ -554,9 +556,11 @@ function renderTable(){
 
     const label = serviceLabel(train.serviceId);
     const viaLabel = (train.via === "辰野経由" || train.via === "みどり湖経由") ? train.via : "";
+    const showName = train.trainName && train.trainName !== "普通";
     th.innerHTML = `
       <div class="train-no">${escapeHtml(train.shortName)}</div>
       <div class="service"><span class="badge">${escapeHtml(label)}</span></div>
+      ${showName ? `<div class="via train-name">${escapeHtml(train.trainName)}</div>` : ""}
       ${viaLabel ? `<div class="via">${escapeHtml(viaLabel)}</div>` : ""}
     `;
     head.appendChild(th);
@@ -597,7 +601,7 @@ function renderTable(){
 
   const limitedCount = trains.filter(t=>t.isLimited).length;
   document.getElementById("status").textContent =
-    `表示列車数：${trains.length}本（列車番号＋経由別で重複統合 / 速達・特急系推定：${limitedCount}本） / 選択駅：${selected}`;
+    `表示列車数：${trains.length}本（PDF座標抽出GTFS / 特急：${limitedCount}本） / 選択駅：${selected}`;
 }
 
 function escapeHtml(s){
@@ -628,6 +632,21 @@ document.getElementById("scrollNowBtn").addEventListener("click", scrollToCurren
 document.getElementById("direction").addEventListener("change", renderTable);
 document.getElementById("stationSelect").addEventListener("change", renderTable);
 document.getElementById("datePicker").addEventListener("change", renderTable);
+
+async function autoLoadGTFS(){
+  try{
+    const res = await fetch(AUTO_GTFS_FILE);
+    if(!res.ok) throw new Error("GTFS not found");
+    const blob = await res.blob();
+    await readZip(blob);
+    document.getElementById("status").textContent += " / GTFS自動読込成功";
+  }catch(e){
+    document.getElementById("status").textContent =
+      "GTFS自動読込失敗。ZIPを手動選択してください。";
+  }
+}
+
+window.addEventListener("load", autoLoadGTFS);
 </script>
 
 </body>
