@@ -1,108 +1,345 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>下諏訪町バス時刻表検索｜あざみ号・スワンバス対応（停留所・路線検索）</title>
+
+<title>あざみ号 時刻表検索｜下諏訪町 スワンバス対応</title>
+
+<meta name="description"
+content="下諏訪町のあざみ号・スワンバスの時刻表を検索できる無料ページです。停留所・路線・時間から次のバス時刻を簡単に確認できます。">
+
+<meta name="keywords"
+content="あざみ号 時刻表, 下諏訪町 バス 時刻表, スワンバス 時刻表, 下諏訪 バス検索, JR下諏訪駅 バス, 下諏訪 GTFS">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical"
+href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/GTFS/azami_shimosuwa.html">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="あざみ号 時刻表検索｜下諏訪町 スワンバス対応">
+<meta property="og:description" content="下諏訪町のあざみ号・スワンバスの時刻表検索ページ。停留所・路線・時間から簡単に検索できます。">
+<meta property="og:url" content="https://sususunosusumu.github.io/SHIMOSUWA-LAB/GTFS/azami_shimosuwa.html">
+
+<meta name="twitter:card" content="summary_large_image">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
-<meta name="description" content="下諏訪町のあざみ号・スワンバスの時刻表を検索できるページ。停留所・路線・時間から次のバスを簡単に確認できます。GTFSデータ対応。">
-<meta name="keywords" content="下諏訪町 バス 時刻表, あざみ号 時刻表, スワンバス 時刻表, 下諏訪 バス検索, 諏訪 バス GTFS">
-  
+<!-- 構造化データ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "あざみ号 時刻表検索",
+  "description": "下諏訪町のあざみ号・スワンバスの時刻表を検索できるページ",
+  "url": "https://sususunosusumu.github.io/SHIMOSUWA-LAB/GTFS/azami_shimosuwa.html",
+  "inLanguage": "ja",
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "あざみ号"
+    },
+    {
+      "@type": "Thing",
+      "name": "スワンバス"
+    },
+    {
+      "@type": "Place",
+      "name": "下諏訪町"
+    }
+  ]
+}
+</script>
+
 <style>
-body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f4f6f8;color:#111827}
-header{background:#0f172a;color:#fff;padding:56px 24px}
-header h1{font-size:40px;margin:0 0 16px}
-header p{margin:0;color:#dbeafe;font-size:17px}
-main{max-width:1100px;margin:0 auto;padding:32px 20px}
-.card{background:#fff;border-radius:20px;padding:24px;margin-bottom:24px;box-shadow:0 12px 35px rgba(15,23,42,.08)}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-label{display:block;font-weight:700;margin-bottom:6px}
-select,input,button{font:inherit}
-select,input{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:12px;background:#fff}
-button{background:#0f172a;color:#fff;border:0;border-radius:12px;padding:13px 18px;font-weight:700;cursor:pointer}
-button:hover{opacity:.9}
-.note{color:#64748b;font-size:14px;margin-top:18px}
-.result-row{display:grid;grid-template-columns:100px 1fr 120px;gap:16px;align-items:center;padding:16px;border-bottom:1px solid #e5e7eb;cursor:pointer}
-.result-row:hover{background:#f8fafc}
-.time{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums}
-.route-name{font-weight:700}
-.small{color:#64748b;font-size:13px}
-a{color:#2563eb;font-weight:700;text-decoration:none}
-.loading{font-weight:700;color:#475569}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#f4f6f8;
+  color:#111827;
+}
+
+header{
+  background:#0f172a;
+  color:#fff;
+  padding:56px 24px;
+}
+
+header h1{
+  font-size:40px;
+  margin:0 0 16px;
+  line-height:1.25;
+}
+
+header p{
+  margin:0;
+  color:#dbeafe;
+  font-size:17px;
+}
+
+main{
+  max-width:1100px;
+  margin:0 auto;
+  padding:32px 20px;
+}
+
+.card{
+  background:#fff;
+  border-radius:20px;
+  padding:24px;
+  margin-bottom:24px;
+  box-shadow:0 12px 35px rgba(15,23,42,.08);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+label{
+  display:block;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+select,input,button{
+  font:inherit;
+}
+
+select,input{
+  width:100%;
+  padding:12px;
+  border:1px solid #cbd5e1;
+  border-radius:12px;
+  background:#fff;
+}
+
+button{
+  background:#0f172a;
+  color:#fff;
+  border:0;
+  border-radius:12px;
+  padding:13px 18px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:.9;
+}
+
+.note{
+  color:#64748b;
+  font-size:14px;
+  margin-top:18px;
+}
+
+.result-row{
+  display:grid;
+  grid-template-columns:100px 1fr 120px;
+  gap:16px;
+  align-items:center;
+  padding:16px;
+  border-bottom:1px solid #e5e7eb;
+  cursor:pointer;
+}
+
+.result-row:hover{
+  background:#f8fafc;
+}
+
+.time{
+  font-size:22px;
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+}
+
+.route-name{
+  font-weight:700;
+}
+
+.small{
+  color:#64748b;
+  font-size:13px;
+}
+
+a{
+  color:#2563eb;
+  font-weight:700;
+  text-decoration:none;
+}
+
+.loading{
+  font-weight:700;
+  color:#475569;
+}
+
+.faq h3{
+  margin-top:28px;
+  margin-bottom:8px;
+}
+
+.faq p{
+  margin-top:0;
+  line-height:1.8;
+}
+
 @media(max-width:800px){
-  .grid{grid-template-columns:1fr}
-  .result-row{grid-template-columns:80px 1fr}
-  .result-row button{grid-column:1 / -1}
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .result-row{
+    grid-template-columns:80px 1fr;
+  }
+
+  .result-row button{
+    grid-column:1 / -1;
+  }
+
+  header h1{
+    font-size:30px;
+  }
 }
 </style>
 </head>
 
 <body>
+
 <header>
-  <h1>下諏訪町ローカルバス時刻表検索｜あざみ号・スワンバス</h1>
-  <p>あざみ号全路線＋スワンバス内回り・外回り / GTFSデータ読み込み版</p>
+
+<h1>
+あざみ号・スワンバス 時刻表検索（下諏訪町）
+</h1>
+
+<p>
+下諏訪町のコミュニティバス「あざみ号」「スワンバス」の時刻表を検索できます。
+</p>
+
 </header>
-  
+
 <main>
 
 <section class="card">
+
 <h2>このページについて</h2>
+
 <p>
 このページでは、長野県下諏訪町を走るコミュニティバス
 「あざみ号」および「スワンバス」の時刻表を検索できます。
 </p>
+
 <p>
 停留所・路線・時間を指定すると、次に来るバスを一覧で表示します。
-GTFSデータを利用しており、実際の運行に基づいた検索が可能です。
+GTFSデータを利用しており、実際の運行情報に基づいた検索が可能です。
 </p>
+
 <p>
-「下諏訪町 バス 時刻表」「あざみ号 時刻」などの検索でも利用できます。
+JR下諏訪駅から利用できる、あざみ号・スワンバスの時刻確認にも対応しています。
+観光・通勤・通学用の下諏訪町バス検索ページとして利用できます。
 </p>
+
+<p>
+「下諏訪町 バス 時刻表」「あざみ号 時刻表」「スワンバス 時刻表」などの検索にも対応しています。
+</p>
+
 </section>
-  
-  <section class="card">
-    <div class="grid">
-      <div>
-        <label for="routeSelect">路線</label>
-        <select id="routeSelect"></select>
-      </div>
-      <div>
-        <label for="stopSelect">停留所</label>
-        <select id="stopSelect"></select>
-      </div>
-      <div>
-        <label for="baseTime">基準時刻</label>
-        <input type="time" id="baseTime" value="08:00">
-      </div>
-      <div>
-        <label for="serviceSelect">運行日</label>
-        <select id="serviceSelect">
-          <option value="ALL">すべて表示</option>
-          <option value="WKD">平日扱い</option>
-          <option value="SAT">土曜扱い</option>
-          <option value="SUN">日曜・祝日扱い</option>
-        </select>
-      </div>
-    </div>
 
-    <p style="margin-top:22px">
-      <button onclick="searchTrips()">この後の便を表示</button>
-    </p>
+<section class="card">
 
-    <p class="note">
-      実際の時刻表PDF：
-      <a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000461/simple/a.pdf" target="_blank" rel="noopener">
-        下諏訪町公式PDFを開く
-      </a>
-    </p>
-    <p id="status" class="loading">GTFSデータを読み込み中...</p>
-  </section>
+<div class="grid">
 
-  <section class="card">
-    <h2>検索結果</h2>
-    <div id="result">GTFSデータを読み込んでいます。</div>
-  </section>
+<div>
+<label for="routeSelect">路線</label>
+<select id="routeSelect"></select>
+</div>
+
+<div>
+<label for="stopSelect">停留所</label>
+<select id="stopSelect"></select>
+</div>
+
+<div>
+<label for="baseTime">基準時刻</label>
+<input type="time" id="baseTime" value="08:00">
+</div>
+
+<div>
+<label for="serviceSelect">運行日</label>
+
+<select id="serviceSelect">
+<option value="ALL">すべて表示</option>
+<option value="WKD">平日扱い</option>
+<option value="SAT">土曜扱い</option>
+<option value="SUN">日曜・祝日扱い</option>
+</select>
+
+</div>
+</div>
+
+<p style="margin-top:22px">
+<button onclick="searchTrips()">この後の便を表示</button>
+</p>
+
+<p class="note">
+実際の時刻表PDF：
+<a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000461/simple/a.pdf"
+target="_blank"
+rel="noopener">
+下諏訪町公式PDFを開く
+</a>
+</p>
+
+<p id="status" class="loading">
+GTFSデータを読み込み中...
+</p>
+
+</section>
+
+<section class="card">
+
+<h2>検索結果</h2>
+
+<div id="result">
+GTFSデータを読み込んでいます。
+</div>
+
+</section>
+
+<section class="card faq">
+
+<h2>よくある質問</h2>
+
+<h3>あざみ号の時刻表は検索できますか？</h3>
+
+<p>
+はい。下諏訪町のコミュニティバス「あざみ号」の時刻表を停留所・路線から検索できます。
+</p>
+
+<h3>スワンバスにも対応していますか？</h3>
+
+<p>
+はい。スワンバス内回り・外回りにも対応しています。
+</p>
+
+<h3>JR下諏訪駅から利用できますか？</h3>
+
+<p>
+はい。JR下諏訪駅周辺から利用できるバス路線の確認にも対応しています。
+</p>
+
+<h3>GTFSデータとは何ですか？</h3>
+
+<p>
+公共交通機関の時刻表データ形式です。このページではGTFSデータを利用して時刻表を表示しています。
+</p>
+
+</section>
+
 </main>
 
 <script>
@@ -148,6 +385,7 @@ function parseCSV(text){
   }
 
   const header = rows.shift();
+
   return rows.map(r => {
     const obj = {};
     header.forEach((h, i) => obj[h] = r[i] ?? "");
@@ -174,9 +412,15 @@ function serviceMatch(serviceId){
 }
 
 async function loadGTFS(){
+
   try{
+
     const res = await fetch(GTFS_ZIP);
-    if(!res.ok) throw new Error("ZIPファイルを取得できませんでした。");
+
+    if(!res.ok){
+      throw new Error("ZIPファイルを取得できませんでした。");
+    }
+
     const buf = await res.arrayBuffer();
     const zip = await JSZip.loadAsync(buf);
 
@@ -199,34 +443,49 @@ async function loadGTFS(){
 
     document.getElementById("status").textContent =
       `読み込み完了：路線 ${routes.length}件 / 停留所 ${stops.length}件 / 便 ${trips.length}件`;
-    document.getElementById("result").textContent = "条件を選んで検索してください。";
+
+    document.getElementById("result").textContent =
+      "条件を選んで検索してください。";
+
   }catch(e){
-    document.getElementById("status").textContent = "読み込みエラー：" + e.message;
-    document.getElementById("result").textContent = "GTFS ZIPのファイル名・配置場所を確認してください。";
+
+    document.getElementById("status").textContent =
+      "読み込みエラー：" + e.message;
+
+    document.getElementById("result").textContent =
+      "GTFS ZIPのファイル名・配置場所を確認してください。";
   }
 }
 
 function routeLabel(r){
-  return [r.route_short_name, r.route_long_name].filter(Boolean).join(" ");
+  return [r.route_short_name, r.route_long_name]
+    .filter(Boolean)
+    .join(" ");
 }
 
 function initSelectors(){
+
   const routeSelect = document.getElementById("routeSelect");
   routeSelect.innerHTML = "";
 
   routes.forEach(r => {
+
     const opt = document.createElement("option");
     opt.value = r.route_id;
     opt.textContent = routeLabel(r);
+
     routeSelect.appendChild(opt);
   });
 
   routeSelect.onchange = updateStopSelect;
+
   updateStopSelect();
 }
 
 function updateStopSelect(){
+
   const routeId = document.getElementById("routeSelect").value;
+
   const routeTripIds = trips
     .filter(t => t.route_id === routeId)
     .map(t => t.trip_id);
@@ -239,36 +498,49 @@ function updateStopSelect(){
   )];
 
   const stopSelect = document.getElementById("stopSelect");
+
   stopSelect.innerHTML = "";
 
   stopIds.forEach(id => {
+
     const opt = document.createElement("option");
+
     opt.value = id;
     opt.textContent = stopMap[id]?.stop_name || id;
+
     stopSelect.appendChild(opt);
   });
 }
 
 function searchTrips(){
+
   const routeId = document.getElementById("routeSelect").value;
   const stopId = document.getElementById("stopSelect").value;
+
   const base = document.getElementById("baseTime").value;
   const baseMin = toMinutes(base);
 
   const result = document.getElementById("result");
+
   result.innerHTML = "";
 
   const matched = [];
 
   trips.forEach(trip => {
+
     if(trip.route_id !== routeId) return;
     if(!serviceMatch(trip.service_id)) return;
 
-    const st = stopTimes.find(x => x.trip_id === trip.trip_id && x.stop_id === stopId);
+    const st = stopTimes.find(
+      x => x.trip_id === trip.trip_id && x.stop_id === stopId
+    );
+
     if(!st) return;
 
     const depMin = toMinutes(st.departure_time);
+
     if(depMin >= baseMin){
+
       matched.push({
         trip_id: trip.trip_id,
         route_id: routeId,
@@ -280,32 +552,46 @@ function searchTrips(){
     }
   });
 
-  matched.sort((a,b) => toMinutes(a.departure_time) - toMinutes(b.departure_time));
+  matched.sort(
+    (a,b) => toMinutes(a.departure_time) - toMinutes(b.departure_time)
+  );
 
   if(matched.length === 0){
+
     result.textContent = "該当する便がありません。";
+
     return;
   }
 
   matched.forEach(m => {
+
     const r = routeMap[m.route_id];
+
     const row = document.createElement("div");
+
     row.className = "result-row";
+
     row.onclick = () => openTripWindow(m.trip_id);
 
     row.innerHTML = `
       <div class="time">${formatTime(m.departure_time)}</div>
+
       <div>
         <div class="route-name">${routeLabel(r)}</div>
-        <div class="small">trip_id: ${m.trip_id} / service: ${m.service_id}</div>
+        <div class="small">
+          trip_id: ${m.trip_id} / service: ${m.service_id}
+        </div>
       </div>
+
       <button type="button">詳細</button>
     `;
+
     result.appendChild(row);
   });
 }
 
 function openTripWindow(tripId){
+
   const trip = tripMap[tripId];
   const route = routeMap[trip.route_id];
 
@@ -316,42 +602,100 @@ function openTripWindow(tripId){
   const html = `
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
+
 <meta charset="UTF-8">
+
 <title>便の詳細</title>
+
 <style>
-body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:28px;color:#111827}
-h1{margin-bottom:4px}
-.meta{color:#64748b;margin-bottom:24px}
-table{width:100%;border-collapse:collapse}
-th,td{padding:12px;border-bottom:1px solid #e5e7eb;text-align:left}
-th{background:#f8fafc}
-.time{font-weight:800;font-variant-numeric:tabular-nums}
-button{margin-top:20px;background:#0f172a;color:white;border:0;border-radius:10px;padding:10px 16px;font-weight:700}
+body{
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  padding:28px;
+  color:#111827
+}
+
+h1{
+  margin-bottom:4px
+}
+
+.meta{
+  color:#64748b;
+  margin-bottom:24px
+}
+
+table{
+  width:100%;
+  border-collapse:collapse
+}
+
+th,td{
+  padding:12px;
+  border-bottom:1px solid #e5e7eb;
+  text-align:left
+}
+
+th{
+  background:#f8fafc
+}
+
+.time{
+  font-weight:800;
+  font-variant-numeric:tabular-nums
+}
+
+button{
+  margin-top:20px;
+  background:#0f172a;
+  color:white;
+  border:0;
+  border-radius:10px;
+  padding:10px 16px;
+  font-weight:700
+}
 </style>
+
 </head>
+
 <body>
+
 <h1>${routeLabel(route)}</h1>
-<div class="meta">trip_id: ${tripId} / service: ${trip.service_id}</div>
+
+<div class="meta">
+trip_id: ${tripId} / service: ${trip.service_id}
+</div>
+
 <table>
+
 <thead>
-<tr><th>順番</th><th>停留所</th><th>発車時刻</th></tr>
+<tr>
+<th>順番</th>
+<th>停留所</th>
+<th>発車時刻</th>
+</tr>
 </thead>
+
 <tbody>
+
 ${rows.map(st => `
 <tr>
-  <td>${st.stop_sequence}</td>
-  <td>${stopMap[st.stop_id]?.stop_name || st.stop_id}</td>
-  <td class="time">${formatTime(st.departure_time)}</td>
+<td>${st.stop_sequence}</td>
+<td>${stopMap[st.stop_id]?.stop_name || st.stop_id}</td>
+<td class="time">${formatTime(st.departure_time)}</td>
 </tr>
 `).join("")}
+
 </tbody>
 </table>
+
 <button onclick="window.print()">印刷</button>
+
 </body>
 </html>`;
 
   const w = window.open("", "_blank");
+
   w.document.open();
   w.document.write(html);
   w.document.close();
@@ -359,5 +703,6 @@ ${rows.map(st => `
 
 loadGTFS();
 </script>
+
 </body>
 </html>
