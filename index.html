@@ -3,6 +3,22 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="canonical" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="author" content="下諏訪Lab" />
+<meta name="theme-color" content="#6157ff" />
+
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="ja_JP" />
+<meta property="og:site_name" content="下諏訪Lab" />
+<meta property="og:title" content="下諏訪Lab｜AIでものづくり教室｜無料・個別対応" />
+<meta property="og:description" content="下諏訪町の子どもたちに向けた無料のAIでものづくり教室。AIを使ってアプリ、作品、文章、物語、絵本、研究、発表を形にします。" />
+<meta property="og:url" content="https://sususunosusumu.github.io/SHIMOSUWA-LAB/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="下諏訪Lab｜AIでものづくり教室｜無料・個別対応" />
+<meta name="twitter:description" content="AIを使って、自分の考えと世界を完成まで届ける。下諏訪町の子どもたちのための無料・個別対応プロジェクト。" />
+
 
 <title>下諏訪Lab｜AIでものづくり教室｜無料・個別対応</title>
 
@@ -622,9 +638,64 @@ footer{
   font-weight:950;
 }
 
+
+.related-links{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+.related-link-card{
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  min-height:210px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:26px;
+  box-shadow:var(--shadow);
+  transition:.22s ease;
+}
+.related-link-card::before{
+  content:"";
+  position:absolute;
+  top:-80px;
+  right:-80px;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  background:rgba(97,87,255,.10);
+}
+.related-link-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(97,87,255,.28);
+}
+.related-link-card > *{position:relative;z-index:1}
+.related-link-card h3{
+  margin:0 0 10px;
+  font-size:1.08rem;
+  letter-spacing:-.02em;
+}
+.related-link-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:.94rem;
+}
+.related-link-card span{
+  display:inline-flex;
+  align-items:center;
+  margin-top:18px;
+  color:var(--accent);
+  font-weight:950;
+  font-size:.92rem;
+}
+
 @media(max-width:980px){
   .hero-grid,
   .cards,
+  .related-links,
   .split,
   .course-grid,
   .example-grid,
@@ -674,6 +745,52 @@ footer{
     "price":"0",
     "priceCurrency":"JPY"
   }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"下諏訪Lab",
+  "alternateName":"Shimosuwa Lab",
+  "url":"https://sususunosusumu.github.io/SHIMOSUWA-LAB/",
+  "inLanguage":"ja",
+  "description":"下諏訪町の子どもたちに向けた無料のAIでものづくり教室。AIを使ってアプリ、作品、文章、物語、絵本、研究、発表を形にする個別サポート。"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"ItemList",
+  "name":"下諏訪Lab 関連ページ",
+  "itemListElement":[
+    {
+      "@type":"ListItem",
+      "position":1,
+      "name":"あざみ号の時刻表検索",
+      "url":"https://sususunosusumu.github.io/SHIMOSUWA-LAB/GTFS/index.html"
+    },
+    {
+      "@type":"ListItem",
+      "position":2,
+      "name":"JR下諏訪駅の時刻表検索",
+      "url":"https://sususunosusumu.github.io/SHIMOSUWA-LAB/GTFS-TRAIN/index.html"
+    },
+    {
+      "@type":"ListItem",
+      "position":3,
+      "name":"この教室の資料（付録資料）",
+      "url":"https://sususunosusumu.github.io/SHIMOSUWA-LAB/appendix/index.html"
+    },
+    {
+      "@type":"ListItem",
+      "position":4,
+      "name":"この教室の参考作品など",
+      "url":"https://sususunosusumu.github.io/SHIMOSUWA-LAB/sampleN/index.html"
+    }
+  ]
 }
 </script>
 </head>
@@ -1146,6 +1263,52 @@ footer{
     <p class="tiny" style="color:rgba(255,255,255,.75);margin-top:14px;">
       ※フォーム送信後、内容・方法・日時を個別に相談して決めます。
     </p>
+  </div>
+</section>
+
+
+<section id="related-pages">
+  <div class="kicker">関連ページ</div>
+  <h2 class="section-title">
+    この教室で作れるもの・学べる資料
+  </h2>
+  <p class="section-lead">
+    下諏訪Labで扱う参考作品、交通時刻表検索アプリ、付録資料をまとめています。
+    AIを使えば、こうした地域に役立つページや作品も自分で作れるようになります。
+  </p>
+
+  <div class="related-links">
+    <a class="related-link-card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/GTFS/index.html">
+      <div>
+        <h3>あざみ号の時刻表検索</h3>
+        <p>この教室でも作れます。GTFSデータを使って、地域のバス時刻表を検索できるページです。</p>
+      </div>
+      <span>ページを開く →</span>
+    </a>
+
+    <a class="related-link-card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/GTFS-TRAIN/index.html">
+      <div>
+        <h3>JR下諏訪駅の時刻表検索</h3>
+        <p>この教室でも作れます。駅の時刻表を見やすく探せる、地域情報アプリの参考例です。</p>
+      </div>
+      <span>ページを開く →</span>
+    </a>
+
+    <a class="related-link-card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/appendix/index.html">
+      <div>
+        <h3>この教室の資料（付録資料）</h3>
+        <p>AI、GitHub、HTMLアプリ制作など、教室で使う補足資料をまとめたページです。</p>
+      </div>
+      <span>ページを開く →</span>
+    </a>
+
+    <a class="related-link-card" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sampleN/index.html">
+      <div>
+        <h3>この教室の参考作品など</h3>
+        <p>AIとHTMLで作れるサンプル作品や、教室で参考にできるページをまとめています。</p>
+      </div>
+      <span>ページを開く →</span>
+    </a>
   </div>
 </section>
 
