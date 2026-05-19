@@ -1,1 +1,384 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <title>下諏訪Lab サイトメニュー｜Shimosuwa Creative Lab</title>
+  <meta name="description" content="下諏訪Labで作成したWebページ一覧。AI教室、あざみ号時刻表、JR時刻表、人口統計、天気・気温統計、予算データ、福祉向け絵カード予定表などへアクセスできます。" />
+  <meta name="keywords" content="下諏訪Lab, Shimosuwa Creative Lab, 下諏訪町, AI教室, あざみ号, 下諏訪駅, 人口統計, 天気, 予算, 絵カード, 予定表" />
+
+  <style>
+    :root {
+      --bg: #f5f2ec;
+      --card: rgba(255, 255, 255, 0.86);
+      --text: #1f2933;
+      --muted: #667085;
+      --line: rgba(31, 41, 51, 0.12);
+      --accent: #2563eb;
+      --accent2: #0f766e;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.10);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 35%),
+        radial-gradient(circle at top right, rgba(15, 118, 110, 0.16), transparent 32%),
+        linear-gradient(135deg, #f8fafc 0%, var(--bg) 100%);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 56px 0 64px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.64);
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      margin: 20px 0 14px;
+      font-size: clamp(32px, 5vw, 58px);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .hero {
+      margin: 34px auto 28px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.68);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .hero h2 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 28px;
+      color: var(--accent);
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .section-title {
+      margin: 36px 0 16px;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      position: relative;
+      min-height: 260px;
+      padding: 22px;
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.06);
+      overflow: hidden;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0.9;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 42px rgba(15, 23, 42, 0.13);
+      border-color: rgba(37, 99, 235, 0.25);
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.08);
+      color: #1d4ed8;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .card h3 {
+      margin: 18px 0 10px;
+      font-size: 21px;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+    }
+
+    .card p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.75;
+    }
+
+    .use {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      font-size: 13px;
+      line-height: 1.65;
+      color: #475467;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #111827;
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .btn:hover {
+      background: var(--accent);
+    }
+
+    footer {
+      margin-top: 44px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        width: min(100% - 22px, 1120px);
+        padding-top: 32px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <header>
+      <div class="label">Shimosuwa Creative Lab / Site Menu</div>
+      <h1>下諏訪Lab<br>サイトメニュー</h1>
+      <p class="lead">
+        これまで作成してきたWebページへの入口です。AI教室、交通、統計、天気、予算、福祉向け予定表など、
+        下諏訪に関する実用ページをここから開けます。
+      </p>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <h2>作ったものを、ひとつの入口に集約する。</h2>
+          <p>
+            このページは、下諏訪Labで制作した各Webページのポータルです。
+            それぞれのカードをクリックすると、新しいタブで対象ページが開きます。
+          </p>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <strong>9</strong>
+            <span>掲載ページ</span>
+          </div>
+          <div class="stat">
+            <strong>4</strong>
+            <span>主要カテゴリ</span>
+          </div>
+          <div class="stat">
+            <strong>1</strong>
+            <span>総合入口</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="section-title">サイト一覧</h2>
+
+    <section class="grid">
+      <article class="card">
+        <span class="tag">総合メニュー</span>
+        <h3>サイトメニューのページ</h3>
+        <p>下諏訪Lab関連ページを一覧で確認できる総合入口です。</p>
+        <div class="use">役立つ場面：作成済みページを人に見せたいとき、全体像を共有したいとき。</div>
+        <a class="btn" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/site-menu/index.html" target="_blank" rel="noopener noreferrer">ページを開く →</a>
+      </article>
+
+      <article class="card">
+        <span class="tag">メイン選択</span>
+        <h3>Shimosuwa Creative Lab メイン選択画面</h3>
+        <p>下諏訪Creative Labの主要コンテンツへ進むためのメイン選択ページです。</p>
+        <div class="use">役立つ場面：教室・サンプル・関連資料などへ整理して案内したいとき。</div>
+        <a class="btn" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/sitemenu/index.html" target="_blank" rel="noopener noreferrer">ページを開く →</a>
+      </article>
+
+      <article class="card">
+        <span class="tag">AI教室</span>
+        <h3>下諏訪Lab 教室募集ページ</h3>
+        <p>AIを使って自分のアイデアを形にする教室の紹介・募集ページです。</p>
+        <div class="use">役立つ場面：参加希望者や保護者に、教室の目的や雰囲気を伝えたいとき。</div>
+        <a class="btn" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/index.html" target="_blank" rel="noopener noreferrer">ページを開く →</a>
+      </article>
+
+      <article class="card">
+        <span class="tag">交通</span>
+        <h3>下諏訪町 あざみ号 時刻表ページ</h3>
+        <p>下諏訪町のコミュニティバス「あざみ号」の時刻表を確認できるページです。</p>
+        <div class="use">役立つ場面：バスの出発時刻や移動ルートを調べたいとき。</div>
+        <a class="btn" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/GTFS/index.html" target="_blank" rel="noopener noreferrer">ページを開く →</a>
+      </article>
+
+      <article class="card">
+        <span class="tag">交通</span>
+        <h3>下諏訪町 JR時刻表ページ</h3>
+        <p>JR下諏訪駅を利用するときに、列車時刻を確認できるページです。</p>
+        <div class="use">役立つ場面：通勤・通学・お出かけ前に電車の時刻を確認したいとき。</div>
+        <a class="btn" href="https://sususunosusumu.github.io/SHIMOSUWA-LAB/GTFS-TRAIN/index.html" target="_blank" rel="noopener noreferrer">ページを開く →</a>
+      </article>
+
+      <article class="card">
+        <span class="tag">地域データ</span>
+        <h3>下諏訪町 人口統計ページ</h3>
+        <p>下諏訪町の人口に関する統計情報を見やすく確認できるページです。</p>
+        <div class="use">役立つ場面：町の人口推移や地域の現状を把握したいとき。</div>
+        <a class="btn" href="https://sususunosusumu.github.io/Shimosuwa-database/population.html" target="_blank" rel="noopener noreferrer">ページを開く →</a>
+      </article>
+
+      <article class="card">
+        <span class="tag">地域データ</span>
+        <h3>下諏訪町 天気と気温の統計ページ</h3>
+        <p>下諏訪町周辺の天気や気温の傾向を確認できる統計ページです。</p>
+        <div class="use">役立つ場面：季節ごとの気温変化や、暮らしに関わる天候傾向を見たいとき。</div>
+        <a class="btn" href="https://sususunosusumu.github.io/Shimosuwa-database/weather/index.html" target="_blank" rel="noopener noreferrer">ページを開く →</a>
+      </article>
+
+      <article class="card">
+        <span class="tag">地域データ</span>
+        <h3>下諏訪町 予算関係ページ</h3>
+        <p>下諏訪町の予算に関する情報を確認できるデータページです。</p>
+        <div class="use">役立つ場面：町のお金の使われ方や、行政の重点領域を見たいとき。</div>
+        <a class="btn" href="https://sususunosusumu.github.io/Shimosuwa-database/index.html" target="_blank" rel="noopener noreferrer">ページを開く →</a>
+      </article>
+
+      <article class="card">
+        <span class="tag">福祉・生活支援</span>
+        <h3>絵カードによる予定表管理ページ</h3>
+        <p>絵カードを使って、1日の予定や活動を視覚的に整理できるページです。</p>
+        <div class="use">役立つ場面：文字だけでは予定が伝わりにくい子どもや家族に、見通しを分かりやすく伝えたいとき。</div>
+        <a class="btn" href="https://sususunosusumu.github.io/akarin/index.html" target="_blank" rel="noopener noreferrer">ページを開く →</a>
+      </article>
+    </section>
+
+    <footer>
+      下諏訪Lab / Shimosuwa Creative Lab<br>
+      AIとWebを使って、地域の情報・学び・暮らしを少しずつ形にしていくためのページ群です。
+    </footer>
+  </main>
+</body>
+</html>
