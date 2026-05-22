@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>第30回操法大会 ホース展張練習プログラム V2</title>
+    <title>第30回操法大会 ホース展張練習プログラム V3</title>
     <style>
         body {
             margin: 0;
@@ -111,7 +111,7 @@
         <div id="status-box" class="hud-box">構え（右足固定）</div>
     </div>
 
-    <div id="instruction">力加減に注意！火点マークへ正確にドラッグ！</div>
+    <div id="instruction">火点マークを狙って上へ素早くドラッグ！</div>
 
     <div id="result-screen">
         <h2 id="result-title">審査結果</h2>
@@ -133,7 +133,7 @@
     canvas.height = viewHeight;
 
     const startY = viewHeight * 0.85; 
-    const targetY = viewHeight * 0.15; // 10mの理想到達基準点（火点の中心座標）
+    const targetY = viewHeight * 0.15; // 10m地点の絶対限界壁（火点の中心座標）
     const playLengthPx = startY - targetY; 
     const pxToCm = 1000 / playLengthPx; 
 
@@ -142,24 +142,22 @@
     let startY_touch = 0;
     let startTime = 0;
     
-    // ホースの物理形状軌跡（緩みを再現するため下線と上線で分離）
     let hosePointsLower = []; 
     let hosePointsUpper = []; 
     
-    let rollProgress = 0; // 転がりの進捗値 (0.0 〜 1.0相当)
-    let maxRollTarget = 0; // 勢いに応じた最大の到達到達ポテンシャル
+    let rollProgress = 0; // 現在の進捗位置 (0.0 〜 1.0) ※1.0が10mジャストの壁
+    let targetProgress = 0; // 投げた勢いによる理想の進み予定位置
     let rollSpeed = 0;
     let rollCurve = 0; 
-    let bounceTimer = 0; // 跳ね返りアニメーション用タイマー
-    let finalEndpoint = { x: canvas.width / 2, y: targetY }; // 最終的な静止先端座標
+    let bounceSpeed = 0; // 跳ね返りバックの速度
 
     function resetGame() {
         gameState = 'ready';
         rollProgress = 0;
-        maxRollTarget = 0;
+        targetProgress = 0;
         rollSpeed = 0;
         rollCurve = 0;
-        bounceTimer = 0;
+        bounceSpeed = 0;
         hosePointsLower = [];
         hosePointsUpper = [];
         document.getElementById('result-screen').style.display = 'none';
@@ -195,18 +193,21 @@
         const deltaX = endX - startX;
         const deltaY = endY - startY_touch;
 
-        if (deltaY < -30) {
+        if (deltaY < -20) {
             document.getElementById('instruction').style.display = 'none';
             document.getElementById('status-box').innerText = '展張中！';
             
-            // 速度（強さ）の取得
-            const speedInput = Math.min(Math.abs(deltaY) / Math.max(duration, 1) * 15, 35);
+            // 入力速度の取得
+            const speedInput = Math.min(Math.abs(deltaY) / Math.max(duration, 1) * 15, 40);
             
-            // 勢いに応じた「どこまで転がろうとするか」のターゲット距離を設定
-            // 理想（10mジャスト）は speedInput がおよそ 18〜20 の範囲
-            maxRollTarget = (speedInput / 19.0); 
+            // 【改善】普通の投げ（speedInputが10以上など）であれば10mにしっかり到達するように調整
+            targetProgress = speedInput * 0.075; 
+            if (targetProgress > 0.85) {
+                // ある程度しっかり投げたら確実に10m（進捗1.0）へ届くように底上げ
+                targetProgress = Math.max(targetProgress, 1.0); 
+            }
             
-            rollSpeed = speedInput * 0.003;
+            rollSpeed = Math.max(speedInput * 0.004, 0.012);
             rollCurve = (deltaX / Math.abs(deltaY)) * 45; 
 
             generateHosePaths();
@@ -217,38 +218,30 @@
         }
     }
 
-    // 各種イベント登録
     canvas.addEventListener('touchstart', (e) => { e.preventDefault(); const coords = getCanvasCoords(e); handleStart(coords.x, coords.y); }, { passive: false });
     canvas.addEventListener('touchmove', (e) => { e.preventDefault(); }, { passive: false });
     canvas.addEventListener('touchend', (e) => { e.preventDefault(); const coords = getCanvasCoords(e); handleEnd(coords.x, coords.y); }, { passive: false });
     canvas.addEventListener('mousedown', (e) => { const coords = getCanvasCoords(e); handleStart(coords.x, coords.y); });
     window.addEventListener('mouseup', (e) => { if (gameState !== 'flicking') return; const coords = getCanvasCoords(e); handleEnd(coords.x, coords.y); });
 
-    // 二重巻ホースの上線・下線のうねりと重なりのズレを生成
     function generateHosePaths() {
         hosePointsLower = [];
         hosePointsUpper = [];
-        const segments = 120;
-        
-        let currentXLower = canvas.width / 2;
-        let currentXUpper = canvas.width / 2;
+        const segments = 100; // 0〜100が 0m〜10mジャスト
 
-        // 最大値を超えて突っ込む場合を考慮した配列拡張
-        const maxSegments = Math.ceil(segments * Math.max(maxRollTarget, 1.3));
-
-        for (let i = 0; i <= maxSegments; i++) {
+        for (let i = 0; i <= segments; i++) {
             const ratio = i / segments; 
             const y = startY - (playLengthPx * ratio);
             
+            let currentXLower = canvas.width / 2;
+            let currentXUpper = canvas.width / 2;
+
             if (i > 0) {
-                // 基本の蛇行ノイズ
                 const noise = Math.sin(ratio * Math.PI * 2.5) * (rollCurve * 0.4);
                 const drift = ratio * ratio * rollCurve * 1.2;
-                
-                // 下側のホースのベースライン
                 currentXLower = (canvas.width / 2) + drift + noise;
                 
-                // 【新仕様】ブレ（rollCurve）が大きいほど、上線と下線が緩んで横にズレる物理再現
+                // ブレが大きいほど重なりが崩れて横ズレする表現
                 const looseness = Math.sin(ratio * Math.PI * 1.5) * (rollCurve * 0.35);
                 currentXUpper = currentXLower + looseness;
             }
@@ -258,70 +251,73 @@
         }
     }
 
-    // 物理アニメーションループ
     function animateRoll() {
-        if (gameState === 'rolling') {
-            rollProgress += rollSpeed;
-            rollSpeed *= 0.975; // 地面抵抗の減速
+        if (gameState !== 'rolling') return;
 
-            // 勢いが尽きるか、設定された最大到達点に達したとき
-            if (rollProgress >= maxRollTarget || rollSpeed < 0.0004) {
-                // 【新仕様】もし10m（進捗1.0）を大幅に超える勢い（1.05以上）があった場合は跳ね返りフェーズへ
-                if (rollProgress > 1.03) {
-                    gameState = 'bouncing';
-                    bounceTimer = 0;
-                    document.getElementById('status-box').innerText = '先端跳ね返り発生！';
-                    animateBounce();
-                    return;
-                } else {
-                    endGame();
-                    return;
-                }
+        rollProgress += rollSpeed;
+        rollSpeed *= 0.975; // 地面抵抗減速
+
+        // 【新物理】進捗1.0（10m地点）はホースの物理的限界なので絶対に超えない
+        if (rollProgress >= 1.0) {
+            rollProgress = 1.0; 
+            
+            // 10mの壁にぶつかったときの「余剰な勢い（超過していたはずのエネルギー）」を計算
+            const excessForce = targetProgress - 1.0;
+
+            if (excessForce > 0.05) {
+                // 【新仕様】空気の抜けたボールが壁に当たったような、わずかな跳ね返り挙動に移行
+                gameState = 'bouncing';
+                bounceSpeed = Math.min(excessForce * 0.05, 0.03); // 跳ね返る初速（最大でも30cm〜40cm程度に限定）
+                document.getElementById('status-box').innerText = '10m限界で微跳ね返り！';
+                animateBounce();
+                return;
+            } else {
+                endGame();
+                return;
             }
-            draw();
-            requestAnimationFrame(animateRoll);
         }
-    }
 
-    // 【新仕様】勢い余った時の跳ね返り（バック）物理アニメーション
-    function animateBounce() {
-        if (gameState !== 'bouncing') return;
-
-        bounceTimer += 0.08;
-        // サイン波を使って、先端がキュッと手前に引き戻される（縮む）挙動を表現
-        const bounceOffset = Math.sin(bounceTimer) * (rollProgress * 0.06);
-        
-        // 徐々に減衰させて停止
-        if (bounceTimer >= Math.PI) {
-            rollProgress -= (rollProgress * 0.06); // 最終的に手前に戻った位置で固定
+        // 10mに届く前に勢いが尽きた場合
+        if (rollProgress >= targetProgress || rollSpeed < 0.0005) {
+            if (rollProgress > targetProgress) rollProgress = targetProgress;
             endGame();
             return;
         }
 
-        // アニメーション中の進捗を一時的に戻す
-        rollProgress -= (Math.cos(bounceTimer) + 1) * 0.0015;
+        draw();
+        requestAnimationFrame(animateRoll);
+    }
+
+    // 【新物理】空気の抜けたボールのような「ポスッ」とした微小な跳ね返り
+    function animateBounce() {
+        if (gameState !== 'bouncing') return;
+
+        rollProgress -= bounceSpeed; // 手前（減少方向）に戻る
+        bounceSpeed *= 0.85; // 空気が抜けているので、急速に反動を失って止まる
+
+        if (bounceSpeed < 0.001) {
+            gameState = 'result';
+            endGame();
+            return;
+        }
 
         draw();
         requestAnimationFrame(animateBounce);
     }
 
-    // 採点（100点満点から、火点中心点と先端の絶対直線距離cmをそのまま引く）
     function endGame() {
         gameState = 'result';
         
-        const currentIndex = Math.min(Math.floor(rollProgress * 120), hosePointsLower.length - 1);
-        // 静止した先端（折り返し地点）の座標
-        finalEndpoint = hosePointsLower[currentIndex];
+        // 静止した折り返し地点のインデックスと座標（0〜100に収まる）
+        const index = Math.max(0, Math.min(100, Math.floor(rollProgress * 100)));
+        const finalEndpoint = hosePointsLower[index];
 
-        // 【新仕様】10m基準点（canvas.width/2, targetY）からの絶対直線距離（ピクセル）を計算
+        // 10m基準点（canvas.width/2, targetY）からの絶対直線距離（cm）を計算
         const diffX = finalEndpoint.x - (canvas.width / 2);
         const diffY = finalEndpoint.y - targetY;
         const totalDistancePx = Math.sqrt(diffX * diffX + diffY * diffY);
-
-        // ピクセルから実際のセンチメートル（cm）へ換算
         const deviationCm = Math.round(totalDistancePx * pxToCm * 10) / 10;
         
-        // 1cmにつき1点減点
         let score = 100 - Math.floor(deviationCm);
         if (score < 0) score = 0;
 
@@ -330,19 +326,17 @@
         document.getElementById('result-deviation').innerText = `基準点からのズレ: ${deviationCm} cm`;
         document.getElementById('result-score').innerText = `${score}点`;
 
-        // 状態に応じた実践的なコメント分岐
-        let comment = "完璧な展張です！距離・直進性ともに文句なし、100点満点！";
+        let comment = "完璧な展張です！100点満点、お見事！";
         if (score < 100) {
-            if (finalEndpoint.y > targetY + 5) {
-                comment = "力が弱く、10m先までホースが伸びきっていません。もっと力強く押し出してください！";
-            } else if (diffY < -5) {
-                comment = "勢いが良すぎたため、先端で激しい跳ね返り（バック）が起き、手前に戻ってしまいました。";
+            if (rollProgress < 0.98) {
+                comment = "押し出しが弱く、10m先までホースが伸びきっていません。";
+            } else if (index === 100 && Math.abs(diffX) > 3) {
+                comment = "距離は10m届いていますが、左右の軸がブレて基準点から逸れています。";
             } else {
-                comment = "直進性がブレたため、重なりが緩んで左右に逸れています。左手のガイドを意識しましょう。";
+                comment = "勢いが良すぎたため、10m限界点に当たって手前にポスッと跳ね返って戻りました。";
             }
         }
-        if (score < 80) comment = "蛇行と前後のズレが重なっています。目線を火点にカチッと合わせ、再チャレンジ！";
-        if (score < 60) comment = "著しいズレです。右足の固定、あるいは押し出し方向の軸が完全に崩れています。";
+        if (score < 80) comment = "蛇行や跳ね返りが重なっています。目線を火点へ真っ直ぐ向け、再チャレンジ！";
 
         document.getElementById('result-comment').innerText = comment;
         document.getElementById('result-screen').style.display = 'block';
@@ -367,13 +361,13 @@
         ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
         ctx.font = '11px sans-serif';
         ctx.textAlign = 'right';
-        for (let m = 0; m <= 12; m += 2) {
+        for (let m = 0; m <= 10; m += 2) {
             const y = startY - (playLengthPx * (m / 10));
             ctx.fillText(`${m}m`, canvas.width - 15, y + 4);
             ctx.fillRect(canvas.width - 10, y, 10, 1);
         }
 
-        // 火点（標的）マーク
+        // 火点マーク（10m基準壁）
         const targetRadius = 22;
         ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = 3;
@@ -392,51 +386,48 @@
         ctx.fillStyle = '#fff';
         ctx.fillRect(0, startY, canvas.width, 3);
 
-        // ホースの二重巻描画
+        // ホース描画
         if (hosePointsLower.length > 0) {
-            const currentIndex = Math.min(Math.floor(rollProgress * 120), hosePointsLower.length - 1);
+            const index = Math.max(0, Math.min(100, Math.floor(rollProgress * 100)));
             
-            // 1. 下側のホース（地面に設置するライン：灰白色で少し太め）
+            // 下線（灰白色）
             ctx.strokeStyle = '#eaeaea';
             ctx.lineWidth = 14;
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
             ctx.beginPath();
             ctx.moveTo(canvas.width / 2, startY);
-            for (let i = 0; i <= currentIndex; i++) {
+            for (let i = 0; i <= index; i++) {
                 ctx.lineTo(hosePointsLower[i].x, hosePointsLower[i].y);
             }
             ctx.stroke();
 
-            // 下線に立体感を出すための内側シャドウ
-            ctx.strokeStyle = '#c8c8c8';
-            ctx.lineWidth = 11;
+            ctx.strokeStyle = '#d0d0d0';
+            ctx.lineWidth = 10;
             ctx.stroke();
 
-            // 2. 【新仕様】上側のホース（手元から伸びるライン：純白色で細め。ズレを強調）
+            // 上線（純白色）
             ctx.strokeStyle = '#ffffff';
             ctx.lineWidth = 7;
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
             ctx.beginPath();
             ctx.moveTo(canvas.width / 2, startY);
-            for (let i = 0; i <= currentIndex; i++) {
+            for (let i = 0; i <= index; i++) {
                 ctx.lineTo(hosePointsUpper[i].x, hosePointsUpper[i].y);
             }
             ctx.stroke();
 
-            // メス金具（スタート位置に固定）
+            // メス金具
             ctx.fillStyle = '#d4af37';
             ctx.beginPath();
             ctx.arc(canvas.width / 2, startY, 9, 0, Math.PI * 2);
             ctx.fill();
 
-            // 3. 転がる巻本体（停止時は消える）
+            // 転がる巻本体（停止時は非表示）
             if (gameState === 'rolling' || gameState === 'bouncing') {
-                const head = hosePointsLower[currentIndex];
-                // 残りの巻が小さくなる直径シミュレーション
-                const currentRatio = currentIndex / 120;
-                const rollRadius = Math.max(18 - (11 * currentRatio), 7);
+                const head = hosePointsLower[index];
+                const rollRadius = Math.max(18 - (11 * (index / 100)), 7);
 
                 ctx.fillStyle = 'rgba(0,0,0,0.25)';
                 ctx.beginPath();
@@ -454,20 +445,20 @@
                 ctx.arc(head.x, head.y, rollRadius * 0.6, 0, Math.PI * 2);
                 ctx.stroke();
             } else if (gameState === 'result') {
-                // 【結果画面時】止まった折り返し地点を目立たせるピン表示
+                // 静止先端の赤ピン
                 ctx.fillStyle = '#ff3333';
                 ctx.beginPath();
                 ctx.arc(finalEndpoint.x, finalEndpoint.y, 4, 0, Math.PI * 2);
                 ctx.fill();
             }
 
-            // オス金具（手元に待機）
+            // オス金具
             ctx.fillStyle = '#d4af37';
             ctx.beginPath();
             ctx.arc(canvas.width / 2, startY - 5, 7, 0, Math.PI * 2);
             ctx.fill();
         } else {
-            // 初期状態のホースの巻束
+            // 初期巻束状態
             ctx.fillStyle = 'rgba(0,0,0,0.3)';
             ctx.beginPath();
             ctx.arc(canvas.width / 2 + 3, startY - 15, 20, 0, Math.PI * 2);
