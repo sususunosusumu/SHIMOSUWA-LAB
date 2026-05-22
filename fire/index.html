@@ -2,316 +2,435 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>消防操法 展長ゲーム</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>第30回操法大会 ホース展張練習プログラム</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             background-color: #222;
-            color: #fff;
-            font-family: sans-serif;
-            text-align: center;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             overflow: hidden;
-            user-select: none;
             -webkit-user-select: none;
+            user-select: none;
         }
-        #game-container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            max-width: 450px;
+        #gameCanvas {
+            display: block;
             margin: 0 auto;
-            background-color: #333;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            background-color: #4a5d4e; /* 操法場の地面 */
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            cursor: pointer;
         }
-        #hud {
+        #ui-container {
             position: absolute;
             top: 10px;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
             pointer-events: none;
-            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .hud-box {
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
             font-weight: bold;
-            text-shadow: 1px 1px 2px #000;
-            z-index: 10;
+            border: 1px solid #ffcc00;
         }
-        canvas {
-            display: block;
-            width: 100%;
-            height: 100%;
-            background-color: #444; /* 操法会場の地面イメージ */
-        }
-        #result-modal {
-            display: none;
+        #result-screen {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px solid #ff4444;
             width: 80%;
-            box-sizing: border-box;
-            z-index: 20;
+            max-width: 320px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 3px solid #ffcc00;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            display: none;
+            box-shadow: 0 0 30px rgba(0,0,0,1);
         }
-        #result-modal h2 {
+        #result-screen h2 {
             margin-top: 0;
             color: #ffcc00;
+            font-size: 24px;
         }
-        #result-modal button {
-            background: #ff4444;
-            color: white;
+        .score-val {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ff3333;
+            margin: 10px 0;
+            text-shadow: 0 0 10px rgba(255,51,51,0.5);
+        }
+        #retry-btn {
+            background: #ffcc00;
+            color: #000;
             border: none;
-            padding: 10px 20px;
+            padding: 10px 25px;
             font-size: 16px;
+            font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
+            pointer-events: auto;
             margin-top: 15px;
         }
         #instruction {
             position: absolute;
             bottom: 30px;
-            width: 100%;
-            text-align: center;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            background: rgba(0,0,0,0.6);
+            padding: 8px 20px;
+            border-radius: 20px;
             font-size: 14px;
-            color: #ddd;
+            font-weight: bold;
             pointer-events: none;
-            text-shadow: 1px 1px 2px #000;
+            text-align: center;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
         }
     </style>
 </head>
 <body>
 
-<div id="game-container">
-    <div id="hud">
-        <div id="score-display">得点: --</div>
-        <div id="status-display">準備完了</div>
+    <div id="ui-container">
+        <div id="score-box" class="hud-box">得点: --</div>
+        <div id="status-box" class="hud-box">構え（右足固定）</div>
     </div>
-    
-    <canvas id="gameCanvas"></canvas>
-    
-    <div id="instruction">画面をタップ＆上にスライドしてホースを投げる！<br>(速さ＝速度 / 長さ＝角度)</div>
 
-    <div id="result-modal">
-        <h2 id="modal-title">結果発表</h2>
-        <p id="modal-score" style="font-size: 24px; font-weight: bold;"></p>
-        <p id="modal-details"></p>
-        <button onclick="resetGame()">もう一度練習する</button>
+    <div id="instruction">火点マークを狙って上へ素早くドラッグ！</div>
+
+    <div id="result-screen">
+        <h2 id="result-title">審査結果</h2>
+        <div id="result-deviation">最大ズレ: -- cm</div>
+        <div id="result-score" class="score-val">100点</div>
+        <div id="result-comment">コメント</div>
+        <button id="retry-btn" onclick="resetGame()">再チャレンジ</button>
     </div>
-</div>
+
+    <canvas id="gameCanvas"></canvas>
 
 <script>
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
-    const modal = document.getElementById('result-modal');
 
-    // 画面解像度合わせ
-    function resize() {
-        const container = document.getElementById('game-container');
-        canvas.width = container.clientWidth;
-        canvas.height = container.clientHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
+    const viewWidth = Math.min(window.innerWidth, 450);
+    const viewHeight = window.innerHeight;
+    canvas.width = viewWidth;
+    canvas.height = viewHeight;
 
-    // ゲーム状態
-    let gameState = 'ready'; // ready, rolling, finished
-    let touchStart = { x: 0, y: 0, time: 0 };
-    let touchEnd = { x: 0, y: 0, time: 0 };
+    const startY = viewHeight * 0.85; 
+    const targetY = viewHeight * 0.15; // 10m地点であり、火点マークの中心
+    const playLengthPx = startY - targetY; 
+    const pxToCm = 1000 / playLengthPx; 
 
-    // オブジェクト位置設定
-    const startPos = { x: canvas.width / 2, y: canvas.height * 0.85 }; // ホース置き場
-    const targetPos = { x: canvas.width / 2, y: canvas.height * 0.1 }; // 遠くの火点
-
-    // ホース物理
-    let hoseDots = []; // 展開されたホースの軌跡
-    let currentLength = 0;
-    const maxHoseLength = 200; // ゲーム内でのホースの長さの最大値
+    let gameState = 'ready'; 
+    let startX = 0;
+    let startY_touch = 0;
+    let startTime = 0;
+    let hosePoints = []; 
+    
+    let rollProgress = 0; 
     let rollSpeed = 0;
-    let rollAngle = 0; // 煽る角度（ラジアン）
+    let rollCurve = 0; 
+
+    function resetGame() {
+        gameState = 'ready';
+        rollProgress = 0;
+        rollSpeed = 0;
+        rollCurve = 0;
+        hosePoints = [];
+        document.getElementById('result-screen').style.display = 'none';
+        document.getElementById('score-box').innerText = '得点: --';
+        document.getElementById('status-box').innerText = '構え（右足固定）';
+        document.getElementById('instruction').style.display = 'block';
+        draw();
+    }
+
+    function getCanvasCoords(e) {
+        const rect = canvas.getBoundingClientRect();
+        if (e.touches && e.touches.length > 0) {
+            return { x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top };
+        } else if (e.changedTouches && e.changedTouches.length > 0) {
+            return { x: e.changedTouches[0].clientX - rect.left, y: e.changedTouches[0].clientY - rect.top };
+        } else {
+            return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+        }
+    }
+
+    function handleStart(x, y) {
+        if (gameState !== 'ready') return;
+        startX = x;
+        startY_touch = y;
+        startTime = performance.now();
+        gameState = 'flicking';
+    }
+
+    function handleEnd(endX, endY) {
+        if (gameState !== 'flicking') return;
+        const duration = performance.now() - startTime;
+
+        const deltaX = endX - startX;
+        const deltaY = endY - startY_touch;
+
+        if (deltaY < -30) {
+            document.getElementById('instruction').style.display = 'none';
+            document.getElementById('status-box').innerText = '展張中！';
+            
+            const speedInput = Math.min(Math.abs(deltaY) / Math.max(duration, 1) * 15, 25);
+            rollSpeed = Math.max(speedInput, 8) * 0.002; 
+
+            rollCurve = (deltaX / Math.abs(deltaY)) * 45; 
+
+            generateHosePath();
+            gameState = 'rolling';
+            animateRoll();
+        } else {
+            gameState = 'ready'; 
+        }
+    }
+
+    canvas.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        const coords = getCanvasCoords(e);
+        handleStart(coords.x, coords.y);
+    }, { passive: false });
+
+    canvas.addEventListener('touchmove', (e) => { e.preventDefault(); }, { passive: false });
+
+    canvas.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        const coords = getCanvasCoords(e);
+        handleEnd(coords.x, coords.y);
+    }, { passive: false });
+
+    canvas.addEventListener('mousedown', (e) => {
+        const coords = getCanvasCoords(e);
+        handleStart(coords.x, coords.y);
+    });
+
+    window.addEventListener('mouseup', (e) => {
+        if (gameState !== 'flicking') return;
+        const coords = getCanvasCoords(e);
+        handleEnd(coords.x, coords.y);
+    });
+
+    function generateHosePath() {
+        hosePoints = [];
+        const segments = 100;
+        let currentX = canvas.width / 2;
+
+        for (let i = 0; i <= segments; i++) {
+            const ratio = i / segments;
+            const y = startY - (playLengthPx * ratio);
+            
+            if (i > 0) {
+                const noise = Math.sin(ratio * Math.PI * 2.5) * (rollCurve * 0.4);
+                const drift = ratio * ratio * rollCurve * 1.2;
+                currentX = (canvas.width / 2) + drift + noise;
+            }
+            hosePoints.push({ x: currentX, y: y });
+        }
+    }
+
+    function animateRoll() {
+        if (gameState !== 'rolling') return;
+
+        rollProgress += rollSpeed;
+        rollSpeed *= 0.98; 
+
+        if (rollProgress >= 1.0 || rollSpeed < 0.0005) {
+            if (rollProgress > 1.0) rollProgress = 1.0;
+            endGame();
+            return;
+        }
+
+        draw();
+        requestAnimationFrame(animateRoll);
+    }
+
+    function endGame() {
+        gameState = 'result';
+        let maxDevPx = 0;
+        const activeCount = Math.floor(rollProgress * (hosePoints.length - 1));
+        
+        for (let i = 0; i <= activeCount; i++) {
+            const dev = Math.abs(hosePoints[i].x - canvas.width / 2);
+            if (dev > maxDevPx) maxDevPx = dev;
+        }
+
+        const maxDevCm = Math.round(maxDevPx * pxToCm * 10) / 10;
+        let score = 100 - Math.floor(maxDevCm);
+        if (score < 0) score = 0;
+
+        document.getElementById('score-box').innerText = `得点: ${score}点`;
+        document.getElementById('status-box').innerText = `展張完了`;
+        document.getElementById('result-deviation').innerText = `最大ズレ: ${maxDevCm} cm`;
+        document.getElementById('result-score').innerText = `${score}点`;
+
+        let comment = "素晴らしい直進性です！見事な操法技術！";
+        if (score < 95) comment = "わずかに右足の固定か、押し出しがブレています。体幹を意識しましょう。";
+        if (score < 85) comment = "ホースが蛇行しています。目線を火点へ真っ直ぐ向け、腰を落として押し出してください。";
+        if (score < 70) comment = "著しい曲がりです。左手のガイドレールが機能していません。再チャレンジで練習！";
+        
+        document.getElementById('result-comment').innerText = comment;
+        document.getElementById('result-screen').style.display = 'block';
+
+        draw();
+    }
 
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // 1. 直線（基準線）の描画
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+        // 理想ライン（白点線）
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
         ctx.lineWidth = 2;
-        ctx.setLineDash([5, 5]);
+        ctx.setLineDash([5, 10]);
         ctx.beginPath();
-        ctx.moveTo(startPos.x, startPos.y);
-        ctx.lineTo(targetPos.x, targetPos.y);
+        ctx.moveTo(canvas.width / 2, startY);
+        ctx.lineTo(canvas.width / 2, targetY);
         ctx.stroke();
         ctx.setLineDash([]);
 
-        // 2. 火点（標的）の描画
-        ctx.fillStyle = '#ff4444';
+        // メートルの目盛
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+        ctx.font = '11px sans-serif';
+        ctx.textAlign = 'right';
+        for (let m = 0; m <= 10; m += 2) {
+            const y = startY - (playLengthPx * (m / 10));
+            ctx.fillText(`${m}m`, canvas.width - 15, y + 4);
+            ctx.fillRect(canvas.width - 10, y, 10, 1);
+        }
+
+        // --- 火点（標的）マークの描画 ---
+        const targetRadius = 22;
+        // 白い外枠
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 3;
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
         ctx.beginPath();
-        ctx.arc(targetPos.x, targetPos.y, 15, 0, Math.PI * 2);
+        ctx.arc(canvas.width / 2, targetY, targetRadius, 0, Math.PI * 2);
         ctx.fill();
-        ctx.fillStyle = '#ffffff';
-        ctx.font = '12px sans-serif';
-        ctx.fillText('火点', targetPos.x - 12, targetPos.y + 4);
+        ctx.stroke();
+        // 赤い「火」の文字
+        ctx.fillStyle = '#ff3333';
+        ctx.font = 'bold 20px "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('火', canvas.width / 2, targetY);
 
-        // 3. ホース置き場（スタート位置）の描画
-        ctx.fillStyle = '#555';
-        ctx.fillRect(startPos.x - 20, startPos.y - 10, 40, 20);
+        // スタートライン
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, startY, canvas.width, 3);
 
-        // 4. 展長中のホースの描画
-        if (hoseDots.length > 0) {
-            ctx.strokeStyle = '#ffcc00'; // ホースの色
-            ctx.lineWidth = 6;
+        // ホース描画
+        if (hosePoints.length > 0) {
+            const currentIndex = Math.floor(rollProgress * (hosePoints.length - 1));
+            
+            // 下のライン
+            ctx.strokeStyle = '#eaeaea';
+            ctx.lineWidth = 14;
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
             ctx.beginPath();
-            ctx.moveTo(startPos.x, startPos.y);
-            for (let dot of hoseDots) {
-                ctx.lineTo(dot.x, dot.y);
+            ctx.moveTo(canvas.width / 2, startY);
+            for (let i = 0; i <= currentIndex; i++) {
+                ctx.lineTo(hosePoints[i].x, hosePoints[i].y);
             }
             ctx.stroke();
 
-            // 先端（巻かれている部分のイメージ）
-            const head = hoseDots[hoseDots.length - 1];
-            ctx.fillStyle = '#ffaa00';
+            ctx.strokeStyle = '#d0d0d0';
+            ctx.lineWidth = 10;
+            ctx.stroke();
+
+            // 上のライン
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 8;
             ctx.beginPath();
-            ctx.arc(head.x, head.y, 6, 0, Math.PI * 2);
+            ctx.moveTo(canvas.width / 2, startY);
+            for (let i = 0; i <= currentIndex; i++) {
+                ctx.lineTo(hosePoints[i].x, hosePoints[i].y);
+            }
+            ctx.stroke();
+
+            // メス金具
+            ctx.fillStyle = '#d4af37';
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, startY, 9, 0, Math.PI * 2);
             ctx.fill();
-        }
-    }
 
-    // タッチ・クリックイベント処理
-    canvas.addEventListener('touchstart', handleStart, false);
-    canvas.addEventListener('touchend', handleEnd, false);
-    // PCブラウザ用マウス対応
-    canvas.addEventListener('mousedown', (e) => handleStart({ touches: [{ clientX: e.clientX, clientY: e.clientY }], timeStamp: performance.now() }));
-    canvas.addEventListener('mouseup', (e) => handleEnd({ changedTouches: [{ clientX: e.clientX, clientY: e.clientY }], timeStamp: performance.now() }));
+            // 転がる巻本体
+            if (rollProgress < 1.0) {
+                const head = hosePoints[currentIndex];
+                const rollRadius = 18 - (10 * rollProgress);
 
-    function handleStart(e) {
-        if (gameState !== 'ready') return;
-        const touch = e.touches[0];
-        const rect = canvas.getBoundingClientRect();
-        touchStart.x = touch.clientX - rect.left;
-        touchStart.y = touch.clientY - rect.top;
-        touchStart.time = e.timeStamp;
-        document.getElementById('status-display').innerText = '煽り中...';
-    }
+                ctx.fillStyle = 'rgba(0,0,0,0.3)';
+                ctx.beginPath();
+                ctx.arc(head.x + 4, head.y + 4, rollRadius, 0, Math.PI * 2);
+                ctx.fill();
 
-    function handleEnd(e) {
-        if (gameState !== 'ready') return;
-        const touch = e.changedTouches[0];
-        const rect = canvas.getBoundingClientRect();
-        touchEnd.x = touch.clientX - rect.left;
-        touchEnd.y = touch.clientY - rect.top;
-        touchEnd.time = e.timeStamp;
+                ctx.fillStyle = '#e0e0e0';
+                ctx.beginPath();
+                ctx.arc(head.x, head.y, rollRadius, 0, Math.PI * 2);
+                ctx.fill();
 
-        // スライドベクトルの計算
-        const dx = touchEnd.x - touchStart.x;
-        const dy = touchEnd.y - touchStart.y; // 上にスライドするとマイナス
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const duration = touchEnd.time - touchStart.time;
+                ctx.strokeStyle = '#999';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.arc(head.x, head.y, rollRadius * 0.7, 0, Math.PI * 2);
+                ctx.arc(head.x, head.y, rollRadius * 0.4, 0, Math.PI * 2);
+                ctx.stroke();
+            }
 
-        if (dy >= 0 || distance < 20) {
-            document.getElementById('status-display').innerText = 'もっと上にスライドしてください';
-            return;
-        }
-
-        // 1. スピード（強さ）の判定：スライドの速さ (ピクセル / ミリ秒)
-        let speedFactor = distance / (duration || 1);
-        rollSpeed = Math.min(Math.max(speedFactor * 3, 2), 8); // 適切なゲーム速度に調整
-
-        // 2. 角度（長さ）の判定：上にスライドした長さ（煽る大きさ）
-        // スライドの「まっすぐさ（左右へのズレ）」も角度に反映
-        rollAngle = Math.atan2(-dy, dx); // 上方向を基準にするためのラジアン角
-
-        // ゲームスタート
-        gameState = 'rolling';
-        document.getElementById('status-display').innerText = '展長中！';
-        document.getElementById('instruction').style.opacity = 0;
-        
-        hoseDots = [];
-        currentLength = 0;
-        animateHose();
-    }
-
-    // ホース展長のアニメーションループ
-    function animateHose() {
-        if (gameState !== 'rolling') return;
-
-        currentLength += rollSpeed;
-
-        // 現在の先端座標を計算
-        // 理想の角度は Math.PI / 2 (真上)。そこからのズレを少しずつ蓄積させてカーブを作る
-        let angleError = (Math.PI / 2) - rollAngle;
-        
-        // 展長されるにつれて、スライド時に発生したズレの方向に曲がっていくシミュレーション
-        let currentAngle = (Math.PI / 2) - (angleError * (currentLength / 50)); 
-
-        let lastDot = hoseDots[hoseDots.length - 1] || startPos;
-        let nextX = lastDot.x - Math.cos(currentAngle) * rollSpeed;
-        let nextY = lastDot.y - Math.sin(currentAngle) * rollSpeed;
-
-        hoseDots.push({ x: nextX, y: nextY });
-
-        draw();
-
-        // 規定の長さまで伸びるか、画面上部に行ったら終了
-        if (currentLength >= maxHoseLength || nextY <= targetPos.y + 10) {
-            endGame();
+            // オス金具
+            ctx.fillStyle = '#d4af37';
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, startY - 5, 7, 0, Math.PI * 2);
+            ctx.fill();
         } else {
-            requestAnimationFrame(animateHose);
+            // 初期状態の巻ホース束
+            ctx.fillStyle = 'rgba(0,0,0,0.3)';
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2 + 3, startY - 15, 20, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, startY - 15, 20, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.strokeStyle = '#bbb';
+            ctx.lineWidth = 2;
+            for(let r = 5; r < 20; r += 4) {
+                ctx.beginPath();
+                ctx.arc(canvas.width / 2, startY - 15, r, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+
+            ctx.fillStyle = '#d4af37';
+            ctx.fillRect(canvas.width / 2 - 12, startY - 4, 24, 8);
         }
     }
 
-    // スコア計算と結果発表
-    function endGame() {
-        gameState = 'finished';
-        document.getElementById('status-display').innerText = '展長完了';
-
-        // ズレ（cm換算）のシミュレーション計算
-        // 理想の一直線（startPos.x）からの各ドットの最大ズレ（ピクセル）を取得し、1px = 0.5cm として擬似計算
-        let maxPixelError = 0;
-        for (let dot of hoseDots) {
-            let error = Math.abs(dot.x - startPos.x);
-            if (error > maxPixelError) maxPixelError = error;
-        }
-
-        // ズレをセンチメートルに換算（ゲームバランス用に調整）
-        let cmError = Math.floor(maxPixelError * 0.4); 
-        
-        // 1cmズレるごとにマイナス1点（最低0点）
-        let score = 100 - cmError;
-        if (score < 0) score = 0;
-
-        // 結果表示
-        document.getElementById('score-display').innerText = `得点: ${score}点`;
-        document.getElementById('modal-score').innerText = `${score} 点`;
-        
-        if (score === 100) {
-            document.getElementById('modal-details').innerText = `素晴らしい！一直線の完璧な展長です！`;
-        } else {
-            document.getElementById('modal-details').innerText = `基準線から最大で約 ${cmError} cm のズレが生じました。（1cmにつき-1点）`;
-        }
-        
-        modal.style.display = 'block';
-    }
-
-    function resetGame() {
-        gameState = 'ready';
-        hoseDots = [];
-        currentLength = 0;
-        document.getElementById('score-display').innerText = '得点: --';
-        document.getElementById('status-display').innerText = '準備完了';
-        document.getElementById('instruction').style.opacity = 1;
-        modal.style.display = 'none';
-        draw();
-    }
-
-    // 初回描画
-    draw();
+    resetGame();
+    window.addEventListener('resize', () => {
+        canvas.width = Math.min(window.innerWidth, 450);
+        canvas.height = window.innerHeight;
+        resetGame();
+    });
 </script>
-
 </body>
 </html>
