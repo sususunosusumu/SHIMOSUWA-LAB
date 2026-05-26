@@ -31,7 +31,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sususunosusumu.github.io/SHIMOSUWA-LAB/sampleN/index.html</loc>
+    <loc>https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/index.html</loc>
+    <lastmod>2026-05-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sususunosusumu.github.io/SHIMOSUWA-LAB/site-menu/index.html</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
