@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
+    <loc>https://sususunosusumu.github.io/SHIMOSUWA-LAB/</loc>
+  </url>
+
+  <url>
     <loc>https://sususunosusumu.github.io/SHIMOSUWA-LAB/index.html</loc>
   </url>
 
@@ -11,18 +15,6 @@
 
   <url>
     <loc>https://sususunosusumu.github.io/SHIMOSUWA-LAB/GTFS-TRAIN/index.html</loc>
-  </url>
-
-  <url>
-    <loc>https://sususunosusumu.github.io/SHIMOSUWA-LAB/appendix/index.html</loc>
-  </url>
-
-  <url>
-    <loc>https://sususunosusumu.github.io/SHIMOSUWA-LAB/sample/index.html</loc>
-  </url>
-
-  <url>
-    <loc>https://sususunosusumu.github.io/SHIMOSUWA-LAB/site-menu/index.html</loc>
   </url>
 
 </urlset>
