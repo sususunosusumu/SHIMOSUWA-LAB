@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+<title>二重巻きホース展張ゲーム</title>
+<style>
+  :root{
+    --bg:#f5f7f4; --panel:#fff; --ink:#1f2a32; --muted:#657783;
+    --fire:#d63b2a; --hose:#fbfbf3; --hoseEdge:#d2caa8; --btn:#24323b;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    overscroll-behavior:none;
+  }
+  header{padding:14px 12px 8px;text-align:center}
+  h1{margin:0 0 4px;font-size:21px;letter-spacing:.02em}
+  .sub{font-size:13px;color:var(--muted)}
+  .wrap{max-width:760px;margin:0 auto;padding:0 10px 18px}
+  .game{
+    background:var(--panel);border:1px solid #e1e7ea;border-radius:16px;
+    overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.06)
+  }
+  canvas{
+    display:block;width:100%;height:72vh;min-height:520px;max-height:820px;
+    background:linear-gradient(#fcfdfb,#eef4ee);touch-action:none;
+  }
+  .controls{
+    display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;
+    padding:10px;border-top:1px solid #e6ecef
+  }
+  .status{font-size:13px;color:var(--muted)}
+  button{
+    border:0;border-radius:10px;background:var(--btn);color:#fff;
+    font-weight:800;padding:10px 12px;cursor:pointer
+  }
+  button.secondary{background:#e8edf0;color:#25323a}
+  .result{
+    margin-top:10px;background:#fff;border:1px solid #e1e7ea;border-radius:14px;
+    padding:12px 14px;min-height:88px
+  }
+  .score{font-size:30px;font-weight:900;margin-right:8px}
+  .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:8px}
+  .card{background:#f7f9fa;border-radius:10px;padding:8px;font-size:12px;color:#60707a}
+  .card b{display:block;font-size:15px;color:#1f2a32;margin-top:2px}
+  .help{
+    display:none;margin-top:10px;background:#fffdf3;border:1px solid #eadca9;
+    border-radius:14px;padding:12px 14px;line-height:1.6;font-size:14px
+  }
+  @media(max-width:640px){
+    canvas{height:74vh;min-height:560px}
+    .controls{grid-template-columns:1fr auto}
+    .status{grid-column:1/-1}
+    .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>二重巻きホース展張ゲーム</h1>
+  <div class="sub">なぞった軌跡どおりに、白いホースが下から上へ展張する</div>
+</header>
+
+<div class="wrap">
+  <div class="game">
+    <canvas id="canvas"></canvas>
+    <div class="controls">
+      <div class="status" id="status">開始位置から火点方向へ、下から上にドラッグしてください。</div>
+      <button id="reset">リセット</button>
+      <button class="secondary" id="helpBtn">説明</button>
+    </div>
+  </div>
+
+  <div class="result" id="result">
+    <span class="score">--</span><span>まだ展張していません</span>
+    <div class="grid">
+      <div class="card">ずれ距離<b>-- cm</b></div>
+      <div class="card">到達<b>--</b></div>
+      <div class="card">軌跡<b>--</b></div>
+      <div class="card">跳ね<b>--</b></div>
+    </div>
+  </div>
+
+  <div class="help" id="help">
+    <b>遊び方</b><br>
+    画面下の開始位置から、画面上の火点へ向かってドラッグします。<br>
+    指で右へ出して途中から左へ戻せば、ホースも右へ膨らんでから左へ戻る軌跡になります。<br>
+    弱いと10m手前で止まり、強すぎる場合でもホースは10mを超えて伸びませんが、伸び切った後に先端が跳ねたり横に振れたりします。
+  </div>
+</div>
+
+<script>
+(() => {
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  const statusEl = document.getElementById('status');
+  const resultEl = document.getElementById('result');
+  const resetBtn = document.getElementById('reset');
+  const helpBtn = document.getElementById('helpBtn');
+  const helpEl = document.getElementById('help');
+
+  let W,H,dpr,start,target,pxPerM,maxLenPx;
+  let state='ready', path=[], sim=null, lastTs=0;
+
+  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+  const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+  const ease=t=>1-Math.pow(1-t,3);
+
+  function resize(){
+    dpr=Math.max(1,Math.min(2,devicePixelRatio||1));
+    const r=canvas.getBoundingClientRect();
+    canvas.width=Math.round(r.width*dpr);
+    canvas.height=Math.round(r.height*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    W=r.width; H=r.height;
+    start={x:W*0.5,y:H*0.86};
+    target={x:W*0.5,y:H*0.12};
+    maxLenPx=start.y-target.y;
+    pxPerM=maxLenPx/10;
+    draw();
+  }
+
+  function pos(e){
+    const r=canvas.getBoundingClientRect();
+    return {x:e.clientX-r.left,y:e.clientY-r.top,t:performance.now()};
+  }
+
+  function drawBase(){
+    ctx.clearRect(0,0,W,H);
+
+    ctx.save();
+    ctx.strokeStyle='#d8e5e9';
+    ctx.lineWidth=1;
+    ctx.setLineDash([4,7]);
+    ctx.fillStyle='#7d919b';
+    ctx.font='12px sans-serif';
+    ctx.textAlign='right';
+    for(let m=0;m<=10;m++){
+      const y=start.y-m*pxPerM;
+      ctx.beginPath(); ctx.moveTo(W*.16,y); ctx.lineTo(W*.84,y); ctx.stroke();
+      ctx.fillText(m+'m',W*.14,y+4);
+    }
+    ctx.restore();
+
+    ctx.save();
+    ctx.strokeStyle='#9fb4bf';
+    ctx.lineWidth=3;
+    ctx.setLineDash([12,8]);
+    ctx.beginPath(); ctx.moveTo(start.x,start.y+24); ctx.lineTo(target.x,target.y-8); ctx.stroke();
+    ctx.restore();
+
+    ctx.save();
+    ctx.fillStyle='rgba(30,115,190,.035)';
+    ctx.fillRect(start.x-28,target.y,56,start.y-target.y);
+    ctx.restore();
+
+    ctx.fillStyle='#1f2a32';
+    ctx.font='bold 14px sans-serif';
+    ctx.textAlign='center';
+    ctx.fillText('開始位置',start.x,start.y+44);
+    ctx.fillStyle='#1e73be';
+    ctx.beginPath(); ctx.arc(start.x,start.y,7,0,Math.PI*2); ctx.fill();
+
+    drawFire(target.x,target.y-26,.95);
+    ctx.fillStyle='#d63b2a';
+    ctx.font='bold 16px sans-serif';
+    ctx.fillText('火点 10m',target.x,target.y-58);
+    ctx.strokeStyle='#d63b2a';
+    ctx.lineWidth=3;
+    ctx.beginPath(); ctx.arc(target.x,target.y,18,0,Math.PI*2); ctx.stroke();
+  }
+
+  function drawFire(x,y,s){
+    ctx.save(); ctx.translate(x,y); ctx.scale(s,s);
+    ctx.fillStyle='#d63b2a';
+    ctx.beginPath();
+    ctx.moveTo(0,-28);
+    ctx.bezierCurveTo(20,-7,15,18,0,28);
+    ctx.bezierCurveTo(-19,15,-14,-10,0,-28);
+    ctx.fill();
+    ctx.fillStyle='#ffb23b';
+    ctx.beginPath();
+    ctx.moveTo(0,-12);
+    ctx.bezierCurveTo(10,1,8,16,0,22);
+    ctx.bezierCurveTo(-9,11,-7,-2,0,-12);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawStartRoll(){
+    // 表記なし。開始位置の小さな巻きホースだけ。
+    ctx.save();
+    ctx.translate(start.x,start.y);
+    for(let r=26;r>=8;r-=6){
+      ctx.strokeStyle=r%12===0?'#d0b96e':'#e8d696';
+      ctx.lineWidth=5;
+      ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.stroke();
+    }
+    ctx.fillStyle='#fff';
+    ctx.beginPath(); ctx.arc(0,0,5,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+
+  function drawDragPath(){
+    if(path.length<2)return;
+    ctx.save();
+    ctx.strokeStyle='#1e73be';
+    ctx.lineWidth=3;
+    ctx.setLineDash([5,5]);
+    ctx.beginPath(); ctx.moveTo(path[0].x,path[0].y);
+    for(const p of path.slice(1)) ctx.lineTo(p.x,p.y);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function drawHose(points,bounce=0){
+    if(!points||points.length<2)return;
+    ctx.save();
+    ctx.lineCap='round';
+    ctx.lineJoin='round';
+
+    ctx.strokeStyle='rgba(0,0,0,.14)';
+    ctx.lineWidth=18;
+    ctx.beginPath(); ctx.moveTo(points[0].x+2,points[0].y+2);
+    for(const p of points.slice(1)) ctx.lineTo(p.x+2,p.y+2);
+    ctx.stroke();
+
+    ctx.strokeStyle='#fbfbf3';
+    ctx.lineWidth=16;
+    ctx.beginPath(); ctx.moveTo(points[0].x,points[0].y);
+    for(const p of points.slice(1)) ctx.lineTo(p.x,p.y);
+    ctx.stroke();
+
+    ctx.strokeStyle='#d2caa8';
+    ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(points[0].x,points[0].y-5);
+    for(const p of points.slice(1)) ctx.lineTo(p.x,p.y-5);
+    ctx.stroke();
+
+    const end=points[points.length-1];
+    ctx.fillStyle='#b68a3a';
+    ctx.strokeStyle='#6e5528';
+    ctx.lineWidth=2;
+    ctx.beginPath();
+    ctx.ellipse(end.x,end.y-bounce,12,7,0,0,Math.PI*2);
+    ctx.fill(); ctx.stroke();
+
+    ctx.restore();
+  }
+
+  function resampleGestureToHose(raw, reachRatio, bounce){
+    // 指の軌跡を「上向き10mのホース軌跡」に変換する。
+    // 横方向はかなり敏感に反映する。
+    const first=raw[0];
+    const last=raw[raw.length-1];
+    const totalUp=Math.max(1, first.y-last.y);
+    const lateralGain=1.55;   // 感度：左右のなぞりをホースに強く反映
+    const n=46;
+    const pts=[];
+
+    // rawを進行率（上方向距離）で探す
+    const samples=raw.map(p=>({
+      u:clamp((first.y-p.y)/totalUp,0,1),
+      dx:p.x-first.x
+    })).sort((a,b)=>a.u-b.u);
+
+    function dxAt(u){
+      if(u<=samples[0].u)return samples[0].dx;
+      for(let i=1;i<samples.length;i++){
+        if(u<=samples[i].u){
+          const a=samples[i-1], b=samples[i];
+          const t=(u-a.u)/Math.max(.0001,b.u-a.u);
+          return a.dx+(b.dx-a.dx)*t;
+        }
+      }
+      return samples[samples.length-1].dx;
+    }
+
+    for(let i=0;i<n;i++){
+      const t=i/(n-1);
+      const effectiveT=t*reachRatio;
+      const dx=dxAt(t) * lateralGain * Math.pow(t,.78);
+      const x=start.x+dx;
+      const y=start.y-maxLenPx*effectiveT;
+      pts.push({x,y});
+    }
+
+    if(bounce>0){
+      const sign=Math.sign(pts[pts.length-1].x-start.x || 1);
+      pts[pts.length-1].x += sign*bounce*.55;
+      pts[pts.length-1].y = Math.max(pts[pts.length-1].y, target.y);
+    }
+
+    return pts;
+  }
+
+  function analyze(){
+    const first=path[0], last=path[path.length-1];
+    const drag=dist(first,last);
+    const dt=Math.max(80,last.t-first.t);
+    const up=first.y-last.y;
+    const forwardRatio=up/Math.max(1,drag);
+    const speed=drag/dt;
+    const power=clamp((speed*drag)/85*clamp(forwardRatio,0,1.2),.05,1.8);
+
+    // 軌跡の左右変化量
+    let lateralAbs=0, changes=0, prevSign=0;
+    for(let i=1;i<path.length;i++){
+      lateralAbs += Math.abs(path[i].x-path[i-1].x);
+      const s=Math.sign(path[i].x-path[i-1].x);
+      if(s && prevSign && s!==prevSign) changes++;
+      if(s) prevSign=s;
+    }
+    return {power, drag, dt, forwardRatio, lateralAbs, changes};
+  }
+
+  function makeSim(g){
+    let reachRatio,bounce=0;
+    if(g.power<.95){
+      reachRatio=clamp(.42+g.power*.58,.25,.985);
+    }else{
+      reachRatio=1.0;
+      bounce=clamp((g.power-1.08)*82,0,56);
+    }
+
+    const pts=resampleGestureToHose(path,reachRatio,bounce);
+    const final=pts[pts.length-1];
+    const cmPerPx=100/pxPerM;
+    const errorCm=Math.hypot(final.x-target.x,final.y-target.y)*cmPerPx;
+    let score=Math.round(clamp(100-errorCm,0,100));
+    score=clamp(score-Math.round(bounce*cmPerPx*.45),0,100);
+
+    let reachLabel='10m到達';
+    if(reachRatio<.75) reachLabel='かなり手前';
+    else if(reachRatio<.97) reachLabel='少し手前';
+
+    let pathLabel='良好';
+    const finalSideCm=(final.x-target.x)*cmPerPx;
+    if(Math.abs(finalSideCm)>20) pathLabel=finalSideCm>0?'右へずれ':'左へずれ';
+    if(g.changes>=1 && g.lateralAbs>W*.18) pathLabel='S字軌跡';
+    if(g.lateralAbs>W*.34) pathLabel='大きく蛇行';
+
+    let comment='理想的です。火点方向へ真っ直ぐ10mで安定しています。';
+    if(g.power<.95) comment='押し出す力が弱く、10m手前で止まりました。';
+    else if(bounce>8) comment='力が強く、10mで伸び切った後に先端が跳ねています。';
+    else if(pathLabel!=='良好') comment='なぞった軌跡が左右に振れ、ホースもその形に曲がっています。';
+
+    return {g,reachRatio,bounce,points:pts,final,score,errorCm,reachLabel,pathLabel,comment,t:0,duration:1150};
+  }
+
+  function visiblePoints(p){
+    const count=Math.max(2,Math.floor(2+(sim.points.length-2)*p));
+    return sim.points.slice(0,count);
+  }
+
+  function draw(){
+    drawBase();
+    if(state==='ready'){
+      drawStartRoll();
+    }else if(state==='dragging'){
+      drawStartRoll();
+      drawDragPath();
+    }else if(sim){
+      const p=state==='done'?1:ease(clamp(sim.t/sim.duration,0,1));
+      const pts=visiblePoints(p);
+      const bounceNow=(sim.bounce>0&&p>.82)?Math.sin((p-.82)/.18*Math.PI)*sim.bounce:0;
+      drawHose(pts,bounceNow);
+      if(p<.96){
+        const end=pts[pts.length-1];
+        ctx.save();
+        ctx.globalAlpha=.55;
+        ctx.translate(end.x,end.y);
+        ctx.rotate(p*22);
+        ctx.fillStyle='#e8d696';
+        ctx.strokeStyle='#d0b96e';
+        ctx.lineWidth=3;
+        ctx.beginPath(); ctx.arc(0,0,Math.max(8,20*(1-p*.6)),0,Math.PI*2);
+        ctx.fill(); ctx.stroke();
+        ctx.restore();
+      }
+    }
+  }
+
+  function updateResult(){
+    const bounceText=sim.bounce>8?'あり':'なし';
+    resultEl.innerHTML=`
+      <span class="score">${sim.score}</span><span>${sim.comment}</span>
+      <div class="grid">
+        <div class="card">ずれ距離<b>${Math.round(sim.errorCm)} cm</b></div>
+        <div class="card">到達<b>${sim.reachLabel}</b></div>
+        <div class="card">軌跡<b>${sim.pathLabel}</b></div>
+        <div class="card">跳ね<b>${bounceText}</b></div>
+      </div>`;
+    statusEl.textContent=`得点 ${sim.score}点。理想点から約${Math.round(sim.errorCm)}cmのずれです。`;
+  }
+
+  function loop(ts){
+    if(!lastTs)lastTs=ts;
+    const dt=ts-lastTs; lastTs=ts;
+    if(state==='animating'&&sim){
+      sim.t+=dt;
+      if(sim.t>=sim.duration){
+        sim.t=sim.duration; state='done'; updateResult();
+      }
+    }
+    draw();
+    requestAnimationFrame(loop);
+  }
+
+  canvas.addEventListener('pointerdown',e=>{
+    if(state==='animating')return;
+    const p=pos(e);
+    if(dist(p,start)>95 && state!=='done')return;
+    canvas.setPointerCapture(e.pointerId);
+    path=[p]; sim=null; state='dragging';
+    statusEl.textContent='指の左右の軌跡が、そのままホースの曲がりになります。';
+    draw();
+  });
+
+  canvas.addEventListener('pointermove',e=>{
+    if(state!=='dragging')return;
+    path.push(pos(e)); draw();
+  });
+
+  canvas.addEventListener('pointerup',e=>{
+    if(state!=='dragging')return;
+    path.push(pos(e));
+    if(path.length<3 || dist(path[0],path[path.length-1])<25){
+      state='ready';
+      statusEl.textContent='もう少し大きく、下から上へ押し出してください。';
+      draw(); return;
+    }
+    sim=makeSim(analyze());
+    state='animating'; lastTs=0;
+  });
+
+  function reset(){
+    state='ready'; path=[]; sim=null;
+    resultEl.innerHTML=`
+      <span class="score">--</span><span>まだ展張していません</span>
+      <div class="grid">
+        <div class="card">ずれ距離<b>-- cm</b></div>
+        <div class="card">到達<b>--</b></div>
+        <div class="card">軌跡<b>--</b></div>
+        <div class="card">跳ね<b>--</b></div>
+      </div>`;
+    statusEl.textContent='開始位置から火点方向へ、下から上にドラッグしてください。';
+    draw();
+  }
+
+  resetBtn.addEventListener('click',reset);
+  helpBtn.addEventListener('click',()=>helpEl.style.display=helpEl.style.display==='block'?'none':'block');
+  window.addEventListener('resize',resize);
+
+  resize();
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
