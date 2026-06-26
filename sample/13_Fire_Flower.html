@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>至高の情緒・立体型物花火シミュレータ</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #010103;
+            font-family: sans-serif;
+        }
+        #bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.35) contrast(1.1);
+            z-index: 0;
+            display: none;
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        #ui-panel {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            background: rgba(8, 8, 15, 0.94);
+            padding: 12px 16px;
+            border-radius: 20px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.8);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            backdrop-filter: blur(8px);
+            width: 90%;
+            max-width: 420px;
+        }
+        .ui-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+        label {
+            color: #ccc;
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        select {
+            background: #111;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 6px 10px;
+            border-radius: 15px;
+            font-size: 13px;
+            outline: none;
+            cursor: pointer;
+            flex-grow: 1;
+        }
+        .file-label {
+            background: #1a1c2e;
+            color: #00ffcc;
+            border: 1px solid #00ffcc;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            flex-grow: 1;
+        }
+        .sound-btn {
+            background: #222;
+            color: #aaa;
+            border: 1px solid #444;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+            flex-grow: 1;
+            text-align: center;
+        }
+        .sound-btn.active {
+            background: #00ffcc;
+            color: #000;
+            border-color: #00ffcc;
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="bg-image"></div>
+
+    <div id="ui-panel">
+        <div class="ui-row">
+            <label>背景画像:</label>
+            <label for="image-loader" class="file-label">📸 写真を選択する</label>
+            <input type="file" id="image-loader" accept="image/*" style="display:none;">
+        </div>
+        <div class="ui-row">
+            <label>花火種類:</label>
+            <select id="type-select">
+                <option value="katamono">💖 型物 (精密! ハート/はてな/スター)</option>
+                <option value="mangekyo">🔮 万華鏡 (自然ゆらぎ・広がり垂れる放物線)</option>
+                <option value="botan">✨ 伝統の牡丹 (立体カオス球体・色統一)</option>
+                <option value="japan">🏮 引尾丸 (高密度・三重芯3色グラデ)</option>
+                <option value="crown">👑 錦冠 (大きく流れる立体しだれ)</option>
+                <option value="hadarai">⚡ 花雷 / 万雷 (激しい雷音)</option>
+                <option value="senrin">🌌 千輪菊 (時間差小玉一斉開花)</option>
+                <option value="random">🌟 ランダム</option>
+            </select>
+        </div>
+        <div class="ui-row">
+            <label>色彩設定:</label>
+            <select id="color-select">
+                <option value="random">🌈 ランダム</option>
+                <option value="rainbow">🏳️‍🌈 虹色 (フルカラー放射)</option>
+                <option value="#FF0044">🔴 紅 (レッド)</option>
+                <option value="#00FFDD">🔵 翡翠 (シアン)</option>
+                <option value="#88FF00">🟢 若草 (グリーン)</option>
+                <option value="#FF00AA">🌸 桃 (ピンク)</option>
+                <option value="#FFEE00">🟡 黄金 (ゴールド)</option>
+                <option value="#FFFFFF">⚪ 白銀 (ホワイト)</option>
+            </select>
+        </div>
+        <div class="ui-row">
+            <label>太鼓炸裂音:</label>
+            <div id="sound-toggle" class="sound-btn">🎵 音あり (OFF中)</div>
+        </div>
+    </div>
+
+    <canvas id="fireworkCanvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('fireworkCanvas');
+        const ctx = canvas.getContext('2d');
+        const typeSelect = document.getElementById('type-select');
+        const colorSelect = document.getElementById('color-select');
+        const soundToggle = document.getElementById('sound-toggle');
+        const imageLoader = document.getElementById('image-loader');
+        const bgImage = document.getElementById('bg-image');
+
+        const dpr = Math.min(window.devicePixelRatio, 2);
+        function resizeCanvas() {
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+            ctx.scale(dpr, dpr);
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        imageLoader.addEventListener('change', (e) => {
+            const reader = new FileReader();
+            reader.onload = function(event){
+                bgImage.style.backgroundImage = `url(${event.target.result})`;
+                bgImage.style.display = 'block';
+            }
+            if(e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
+        });
+
+        const colorPalette = ['#FF0044', '#00FFDD', '#FFEE00', '#88FF00', '#AA00FF', '#FF9900', '#FFFFFF', '#FF00AA'];
+
+        // --- 🥁 音響システム（大太鼓チューニング） ---
+        let audioCtx = null;
+        let isSoundOn = false;
+
+        soundToggle.addEventListener('click', () => {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            isSoundOn = !isSoundOn;
+            if (isSoundOn) {
+                soundToggle.classList.add('active');
+                soundToggle.innerText = '🔊 太鼓音 (ON)';
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+            } else {
+                soundToggle.classList.remove('active');
+                soundToggle.innerText = '🔇 音なし (MUTED)';
+            }
+        });
+
+        function playTaikoSound(type) {
+            if (!isSoundOn || !audioCtx) return;
+            const now = audioCtx.currentTime;
+
+            const mainOsc = audioCtx.createOscillator();
+            const mainGain = audioCtx.createGain();
+            mainOsc.type = 'sine';
+
+            let startFreq = 85;
+            let endFreq = 20;
+            let volume = 1.2;
+            let duration = 0.65;
+
+            if (type === 'crown') { startFreq = 70; duration = 1.3; volume = 1.4; }
+            if (type === 'hadarai') { startFreq = 120; volume = 0.5; }
+
+            mainOsc.frequency.setValueAtTime(startFreq, now);
+            mainOsc.frequency.exponentialRampToValueAtTime(endFreq, now + duration);
+
+            const bodyDist = audioCtx.createWaveShaper();
+            const k = 35; 
+            const n = 44100;
+            const curve = new Float32Array(n);
+            for (let i = 0 ; i < n; ++i ) {
+                const x = (i * 2) / n - 1;
+                curve[i] = (3 + k) * x * 20 * (Math.PI/180) / (Math.PI + k * Math.abs(x));
+            }
+            bodyDist.curve = curve;
+
+            mainGain.gain.setValueAtTime(volume, now);
+            mainGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+            mainOsc.connect(bodyDist);
+            bodyDist.connect(mainGain);
+            mainGain.connect(audioCtx.destination);
+            mainOsc.start(now);
+            mainOsc.stop(now + duration);
+
+            const attackOsc = audioCtx.createOscillator();
+            const attackGain = audioCtx.createGain();
+            attackOsc.type = 'triangle';
+            attackOsc.frequency.setValueAtTime(130, now);
+            attackOsc.frequency.linearRampToValueAtTime(40, now + 0.03); 
+
+            attackGain.gain.setValueAtTime(volume * 0.4, now);
+            attackGain.gain.linearRampToValueAtTime(0.001, now + 0.03);
+
+            attackOsc.connect(attackGain);
+            attackGain.connect(audioCtx.destination);
+            attackOsc.start(now);
+            attackOsc.stop(now + 0.03);
+        }
+
+        // 照り返し
+        class SkyGlow {
+            constructor(x, y, color, type) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.radius = 0;
+                this.maxRadius = (type === 'crown' || type === 'botan' || type === 'japan' || type === 'mangekyo') ? 250 : 130;
+                this.alpha = 0.45;
+                this.decay = type === 'crown' ? 0.008 : 0.016;
+            }
+            update() {
+                this.radius += (this.maxRadius - this.radius) * 0.12;
+                this.alpha -= this.decay;
+            }
+            draw() {
+                if (this.alpha <= 0) return;
+                ctx.save();
+                ctx.globalCompositeOperation = 'lighter';
+                ctx.globalAlpha = this.alpha;
+                const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
+                gradient.addColorStop(0, this.color);
+                gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function rotate3D(x, y, z, angleX, angleY, angleZ) {
+            let cosX = Math.cos(angleX), sinX = Math.sin(angleX);
+            let y1 = y * cosX - z * sinX;
+            let z1 = y * sinX + z * cosX;
+            let cosY = Math.cos(angleY), sinY = Math.sin(angleY);
+            let x2 = x * cosY + z1 * sinY;
+            let z2 = -x * sinY + z1 * cosY;
+            let cosZ = Math.cos(angleZ), sinZ = Math.sin(angleZ);
+            let x3 = x2 * cosZ - y1 * sinZ;
+            let y3 = x2 * sinZ + y1 * cosZ;
+            return { x: x3, y: y3, z: z2 };
+        }
+
+        // 火花クラス
+        class Particle {
+            constructor(x, y, color, type, vx, vy, maxLife = 70) {
+                this.x = x;
+                this.y = y;
+                this.px = x; 
+                this.py = y;
+                this.color = color;
+                this.type = type;
+                this.vx = vx;
+                this.vy = vy;
+
+                this.life = maxLife;
+                this.maxLife = maxLife;
+                this.alpha = 1;
+
+                // ★【大修正】型物(katamono)は形崩れを防ぐため、lifeが残っている間は重力をほぼ無視(0)にする無重力設計！
+                this.gravity = (type === 'katamono') ? 0.0 : ((type === 'crown') ? 0.12 : ((type === 'mangekyo_trail') ? 0.06 : 0.015));
+                this.friction = (type === 'katamono') ? 0.965 : 0.956; 
+                this.baseSize = (type === 'hadarai') ? 3.5 : 1.7;
+            }
+
+            update() {
+                this.px = this.x;
+                this.py = this.y;
+                
+                // 余韻の最後（lifeが残り15フレーム以下）だけ重力をかけてフワッと落とす
+                if (this.type === 'katamono' && this.life < 15) {
+                    this.gravity = 0.06;
+                }
+
+                this.vx *= this.friction;
+                this.vy *= this.friction;
+                this.vy += this.gravity;
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                this.life--;
+                this.alpha = this.life / this.maxLife;
+            }
+
+            draw() {
+                if (this.alpha <= 0) return;
+                ctx.save();
+                ctx.globalCompositeOperation = 'lighter';
+                ctx.globalAlpha = this.alpha;
+
+                if (this.type === 'japan' || this.type === 'crown' || this.type === 'mangekyo_trail') {
+                    ctx.strokeStyle = this.color;
+                    ctx.lineWidth = this.type === 'crown' ? 2.0 : this.baseSize; 
+                    ctx.lineCap = 'round';
+                    ctx.beginPath();
+                    ctx.moveTo(this.px, this.py);
+                    ctx.lineTo(this.x, this.y);
+                    ctx.stroke();
+                } else {
+                    const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.baseSize);
+                    gradient.addColorStop(0, '#FFFFFF'); 
+                    gradient.addColorStop(0.35, this.color); 
+                    gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.baseSize, 0, Math.PI * 2);
+                    ctx.fillStyle = gradient;
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        let particles = [];
+        let glows = [];
+
+        function createFirework(x, y, forcedType = null) {
+            let selectedType = forcedType || typeSelect.value;
+            if (selectedType === 'random') {
+                const types = ['japan', 'botan', 'crown', 'katamono', 'mangekyo', 'hadarai', 'senrin'];
+                selectedType = types[Math.floor(Math.random() * types.length)];
+            }
+
+            let chosenColor = colorSelect.value;
+            let glowColor = chosenColor === 'random' ? colorPalette[Math.floor(Math.random() * colorPalette.length)] : (chosenColor === 'rainbow' ? '#FFFFFF' : chosenColor);
+
+            if (selectedType === 'crown' && (chosenColor === 'random' || chosenColor === 'rainbow')) glowColor = '#FFBB00';
+
+            if (!forcedType) playTaikoSound(selectedType);
+            glows.push(new SkyGlow(x, y, glowColor, selectedType));
+
+            const rotX = (Math.random() - 0.5) * 0.35; // 垂直傾きゆらぎ
+            const rotY = 0; 
+            const rotZ = (Math.random() - 0.5) * 0.2; 
+
+            const totalLayers = 9; 
+            const baseSpeed = 5.4;
+
+            // --- 💖 【大改修】精密正面型物花火（ハート／はてなブロック／スター） ---
+            if (selectedType === 'katamono') {
+                const shapes = ['heart', 'block', 'star'];
+                const currentShape = shapes[Math.floor(Math.random() * shapes.length)];
+                
+                const shapeCount = 155; 
+                // ご指定通りサイズを前回の半分「1.1」へ凝縮！
+                const speed = 1.1; 
+                const life = 70;
+
+                for (let i = 0; i < shapeCount; i++) {
+                    let vx3D = 0, vy3D = 0, vz3D = 0;
+                    let pColor = glowColor;
+
+                    // 1. 真・ハート型（内側までまんべんなく高密度）
+                    if (currentShape === 'heart') {
+                        // ハート曲線の数式をベースに、ランダム充填
+                        const t = Math.random() * Math.PI * 2;
+                        const r = 0.2 + Math.random() * 0.8; // 中心から外への密度
+                        vx3D = r * (16 * Math.pow(Math.sin(t), 3)) * 0.25 * speed;
+                        vy3D = -r * (13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t)) * 0.25 * speed;
+                        if (chosenColor === 'random') pColor = '#FF00AA';
+                    } 
+                    // 2. 真・はてなブロック（精密文字プログラミング）
+                    else if (currentShape === 'block') {
+                        if (i < 65) { 
+                            // 外側の四角い正方形枠（中身も適度に散らす）
+                            const rSide = Math.floor(Math.random() * 4);
+                            const edgePos = (Math.random() - 0.5) * 5.2 * speed;
+                            const internalPos = (Math.random() - 0.5) * 5.2 * speed;
+                            if (Math.random() < 0.6) { // 綺麗な輪郭線
+                                if (rSide === 0) { vx3D = edgePos; vy3D = -2.6 * speed; }
+                                if (rSide === 1) { vx3D = edgePos; vy3D = 2.6 * speed; }
+                                if (rSide === 2) { vx3D = -2.6 * speed; vy3D = edgePos; }
+                                if (rSide === 3) { vx3D = 2.6 * speed; vy3D = edgePos; }
+                            } else { // 枠の内側のまばらな火薬
+                                vx3D = internalPos; vy3D = edgePos;
+                            }
+                        } else { 
+                            // 【精密】はてなマーク「？」の格子点の完全定義（14個の基準点を等倍拡大）
+                            const questionDots = [
+                                {x:-0.8, y:-1.6}, {x:0, y:-1.9}, {x:0.8, y:-1.6}, // 上のカーブ
+                                {x:1.1, y:-1.0}, {x:0.8, y:-0.4}, {x:0.2, y:0},    // 右の丸みから中心へ
+                                {x:0, y:0.5}, {x:0, y:1.0},                      // 縦棒の傾き
+                                {x:0, y:1.8}                                     // 下の「・」
+                            ];
+                            const dot = questionDots[i % questionDots.length];
+                            // 基準点に微小なランダムを混ぜて「手仕事の火薬感」を出す
+                            vx3D = (dot.x + (Math.random() - 0.5) * 0.25) * 1.2 * speed;
+                            vy3D = (dot.y + (Math.random() - 0.5) * 0.25) * 1.2 * speed;
+                        }
+                        if (chosenColor === 'random') pColor = '#FFEE00'; 
+                    } 
+                    // 3. 真・スター（星型中身ギッシリ）
+                    else if (currentShape === 'star') {
+                        const t = Math.random() * Math.PI * 2;
+                        const r = 0.1 + Math.random() * 0.9; 
+                        const rStar = (Math.abs(Math.cos(t * 2.5)) * 0.6 + 0.4) * r;
+                        vx3D = Math.cos(t) * rStar * 4.5 * speed;
+                        vy3D = Math.sin(t) * rStar * 4.5 * speed;
+                        if (chosenColor === 'random') pColor = '#FFEE00';
+                    }
+
+                    // 厚み（球体のふっくら感）を与える立体奥行き成分
+                    vz3D = (Math.random() - 0.5) * 1.2 * speed;
+
+                    // 正面固定マトリクスで回転投影
+                    let rot = rotate3D(vx3D, vy3D, vz3D, rotX, 0, rotZ);
+
+                    if (chosenColor === 'rainbow') {
+                        pColor = `hsl(${(Math.atan2(rot.y, rot.x) * (360 / (Math.PI * 2)))}, 100%, 65%)`;
+                    }
+
+                    particles.push(new Particle(x, y, pColor, selectedType, rot.x, rot.y, life));
+                }
+            }
+            // --- 🔮 万華鏡 ---
+            else if (selectedType === 'mangekyo') {
+                const centerCount = 80;
+                for (let i = 0; i < centerCount; i++) {
+                    const u = Math.random() * 2 - 1;
+                    const phi = Math.random() * Math.PI * 2;
+                    const r = (Math.random() * Math.random() * 2.8) + 0.3; 
+
+                    let vx3D = r * Math.sqrt(1 - u*u) * Math.cos(phi);
+                    let vy3D = r * Math.sqrt(1 - u*u) * Math.sin(phi);
+                    let vz3D = r * u;
+
+                    let rot = rotate3D(vx3D, vy3D, vz3D, rotX, rotY, rotZ);
+                    const life = 48 + Math.floor(Math.random() * 16);
+
+                    let pColor = '#FF9900'; 
+                    if (Math.random() < 0.35) pColor = '#FFEE00';
+                    if (chosenColor === 'rainbow') pColor = `hsl(${(Math.atan2(rot.y, rot.x) * (360 / (Math.PI * 2)))}, 100%, 65%)`;
+
+                    particles.push(new Particle(x, y, pColor, 'mangekyo_center', rot.x, rot.y, life));
+                }
+
+                const rayBundles = 7 + Math.floor(Math.random() * 8); 
+
+                for (let b = 0; b < rayBundles; b++) {
+                    const uBundle = Math.random() * 2 - 1;
+                    const phiBundle = Math.random() * Math.PI * 2;
+
+                    let bundleColor = colorPalette[b % colorPalette.length];
+                    if (chosenColor !== 'random' && chosenColor !== 'rainbow') bundleColor = glowColor;
+
+                    const subLinesPerBundle = 3 + Math.floor(Math.random() * 4); 
+
+                    for (let l = 0; l < subLinesPerBundle; l++) {
+                        const jitterX = (Math.random() - 0.5) * 0.12;
+                        const jitterY = (Math.random() - 0.5) * 0.12;
+                        const jitterZ = (Math.random() - 0.5) * 0.12;
+                        const particlesPerLine = 4 + Math.floor(Math.random() * 5);
+
+                        for (let i = 0; i < particlesPerLine; i++) {
+                            const speed = 3.2 + (i * 0.65) + (Math.random() - 0.5) * 0.2;
+                            const life = 65 + Math.floor(Math.random() * 10); 
+
+                            let vx3D = (Math.sqrt(1 - uBundle*uBundle) * Math.cos(phiBundle) + jitterX) * speed;
+                            let vy3D = (Math.sqrt(1 - uBundle*uBundle) * Math.sin(phiBundle) + jitterY) * speed;
+                            let vz3D = (uBundle + jitterZ) * speed;
+
+                            let rot = rotate3D(vx3D, vy3D, vz3D, rotX, rotY, rotZ);
+
+                            let finalColor = bundleColor;
+                            if (chosenColor === 'rainbow') {
+                                finalColor = `hsl(${(Math.atan2(rot.y, rot.x) * (360 / (Math.PI * 2)))}, 100%, 65%)`;
+                            }
+
+                            particles.push(new Particle(x, y, finalColor, 'mangekyo_trail', rot.x, rot.y, life));
+                        }
+                    }
+                }
+            }
+            // --- ✨ 伝統の牡丹 ---
+            else if (selectedType === 'botan') {
+                const totalCount = 145; 
+                for (let i = 0; i < totalCount; i++) {
+                    const u = Math.random() * 2 - 1;
+                    const phi = Math.random() * Math.PI * 2;
+                    const speed = (0.3 + Math.random() * 0.7) * 5.4; 
+                    const life = 62 + Math.floor(Math.random() * 8);
+
+                    let vx3D = speed * Math.sqrt(1 - u*u) * Math.cos(phi);
+                    let vy3D = speed * Math.sqrt(1 - u*u) * Math.sin(phi);
+                    let vz3D = speed * u;
+
+                    let rot = rotate3D(vx3D, vy3D, vz3D, rotX, rotY, rotZ);
+
+                    let pColor = glowColor;
+                    if (chosenColor === 'rainbow') {
+                        pColor = `hsl(${(Math.atan2(rot.y, rot.x) * (360 / (Math.PI * 2)))}, 100%, 65%)`;
+                    }
+
+                    particles.push(new Particle(x, y, pColor, selectedType, rot.x, rot.y, life));
+                }
+            }
+            // --- 🏮 引尾丸 ---
+            else if (selectedType === 'japan') {
+                let colorOuter = glowColor;
+                let colorMiddle = colorPalette[(colorPalette.indexOf(glowColor) + 2) % colorPalette.length];
+                let colorInner = colorPalette[(colorPalette.indexOf(glowColor) + 4) % colorPalette.length];
+
+                if (chosenColor !== 'random' && chosenColor !== 'rainbow') {
+                    if (chosenColor === '#FF0044') { colorMiddle = '#FFEE00'; colorInner = '#00FFDD'; }
+                    if (chosenColor === '#00FFDD') { colorMiddle = '#FF00AA'; colorInner = '#FFEE00'; }
+                    if (chosenColor === '#FFEE00') { colorMiddle = '#FF0044'; colorInner = '#FFFFFF'; }
+                }
+
+                const totalCount = 165;
+                for (let i = 0; i < totalCount; i++) {
+                    const u = Math.random() * 2 - 1;
+                    const phi = Math.random() * Math.PI * 2;
+                    const speedFactor = 0.3 + Math.random() * 0.7;
+                    const speed = speedFactor * 5.4;
+                    const life = 60 + Math.floor(Math.random() * 6);
+
+                    let vx3D = speed * Math.sqrt(1 - u*u) * Math.cos(phi);
+                    let vy3D = speed * Math.sqrt(1 - u*u) * Math.sin(phi);
+                    let vz3D = speed * u;
+
+                    let rot = rotate3D(vx3D, vy3D, vz3D, rotX, rotY, rotZ);
+
+                    let pColor = colorOuter;
+                    if (speedFactor <= 0.4) {
+                        pColor = colorInner;  
+                    } else if (speedFactor <= 0.7) {
+                        pColor = colorMiddle; 
+                    }
+
+                    if (chosenColor === 'rainbow') {
+                        pColor = `hsl(${(Math.atan2(rot.y, rot.x) * (360 / (Math.PI * 2)))}, 100%, 65%)`;
+                    }
+
+                    particles.push(new Particle(x, y, pColor, selectedType, rot.x, rot.y, life));
+                }
+            }
+            // 👑 錦冠
+            else if (selectedType === 'crown') {
+                const crownCount = 225; 
+                for (let i = 0; i < crownCount; i++) {
+                    const u = Math.random() * 2 - 1;
+                    const phi = Math.random() * Math.PI * 2;
+                    const speed = (0.4 + Math.random() * 0.6) * 5.8; 
+                    const life = 105 + Math.floor(Math.random() * 25); 
+
+                    let vx3D = speed * Math.sqrt(1 - u*u) * Math.cos(phi);
+                    let vy3D = speed * Math.sqrt(1 - u*u) * Math.sin(phi);
+                    let vz3D = speed * u;
+
+                    let rot = rotate3D(vx3D, vy3D, vz3D, rotX, rotY, rotZ);
+
+                    let pColor = glowColor;
+                    if (chosenColor === 'random' || chosenColor === 'rainbow') {
+                        pColor = Math.random() < 0.7 ? '#FFB703' : '#FB8500'; 
+                    }
+                    if (chosenColor === 'rainbow') {
+                        pColor = `hsl(${(Math.atan2(rot.y, rot.x) * (360 / (Math.PI * 2)))}, 100%, 65%)`;
+                    }
+
+                    particles.push(new Particle(x, y, pColor, selectedType, rot.x, rot.y, life));
+                }
+            }
+            // ⚡ 花雷
+            else if (selectedType === 'hadarai') {
+                const count = 45;
+                for (let i = 0; i < count; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 5 + 2;
+                    let vx = Math.cos(angle) * speed;
+                    let vy = Math.sin(angle) * speed;
+                    particles.push(new Particle(x, y, '#FFEE00', selectedType, vx, vy, 30 + Math.random() * 10));
+                }
+            }
+            // 🌌 千輪菊
+            else if (selectedType === 'senrin') {
+                const subFireworkCount = 6;
+                for (let i = 0; i < subFireworkCount; i++) {
+                    const angle = (i / subFireworkCount) * Math.PI * 2 + (Math.random() - 0.5) * 0.2;
+                    const dist = 45 + Math.random() * 35;
+                    const targetX = x + Math.cos(angle) * dist;
+                    const targetY = y + Math.sin(angle) * dist;
+                    
+                    setTimeout(() => {
+                        createFirework(targetX, targetY, 'botan'); 
+                    }, 180 + Math.random() * 250);
+                }
+            }
+        }
+
+        // --- なぞり連射コントロール ---
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+        const minDistance = 70; 
+
+        function startAction(x, y) {
+            isDrawing = true;
+            lastX = x;
+            lastY = y;
+            createFirework(x, y);
+        }
+
+        function moveAction(x, y) {
+            if (!isDrawing) return;
+            const dx = x - lastX;
+            const dy = y - lastY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance > minDistance) {
+                createFirework(x, y);
+                lastX = x;
+                lastY = y;
+            }
+        }
+
+        function endAction() { isDrawing = false; }
+
+        window.addEventListener('mousedown', (e) => {
+            if (e.target.closest('#ui-panel')) return;
+            startAction(e.clientX, e.clientY);
+        });
+        window.addEventListener('mousemove', (e) => moveAction(e.clientX, e.clientY));
+        window.addEventListener('mouseup', endAction);
+
+        window.addEventListener('touchstart', (e) => {
+            if (e.target.closest('#ui-panel')) return;
+            const touch = e.touches[0];
+            startAction(touch.clientX, touch.clientY);
+        }, { passive: true });
+        window.addEventListener('touchmove', (e) => {
+            const touch = e.touches[0];
+            moveAction(touch.clientX, touch.clientY);
+        }, { passive: true });
+        window.addEventListener('touchend', endAction);
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            glows = glows.filter(g => g.alpha > 0);
+            glows.forEach(g => { g.update(); g.draw(); });
+
+            particles = particles.filter(p => p.life > 0);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
