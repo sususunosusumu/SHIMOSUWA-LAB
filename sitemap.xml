@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Public sitemap: update triggers a fresh GitHub Pages deployment. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://sususunosusumu.github.io/SHIMOSUWA-LAB/</loc>
