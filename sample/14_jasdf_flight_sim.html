@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>JASDF FLIGHT SIMULATOR</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:100%; height:100%; overflow:hidden; background:#000; }
+  body { font-family:'MS Gothic','Osaka-Mono',monospace; color:#33ff66; }
+  #gl { position:absolute; inset:0; display:block; }
+  #hud { position:absolute; inset:0; pointer-events:none; }
+
+  #title {
+    position:absolute; inset:0; background:#000c08;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    z-index:10;
+  }
+  #title .frame {
+    border:2px solid #33ff66; padding:32px 48px; text-align:center;
+    box-shadow:0 0 24px rgba(51,255,102,.25) inset;
+  }
+  #title h1 { font-size:34px; letter-spacing:6px; margin-bottom:4px; }
+  #title .sub { font-size:13px; letter-spacing:2px; opacity:.7; margin-bottom:28px; }
+  #title .select-label { font-size:14px; margin-bottom:12px; letter-spacing:2px; }
+  .plane-item {
+    font-size:18px; padding:8px 24px; margin:4px 0; cursor:pointer;
+    border:1px solid transparent; letter-spacing:2px; pointer-events:auto;
+  }
+  .plane-item.sel { border:1px solid #33ff66; background:rgba(51,255,102,.12); }
+  .plane-item .spec { display:block; font-size:11px; opacity:.6; letter-spacing:1px; }
+  #title .hint { margin-top:24px; font-size:12px; opacity:.75; line-height:1.9; }
+  #title .start { margin-top:18px; font-size:16px; animation:blink 1s step-end infinite; }
+  @keyframes blink { 50% { opacity:0; } }
+
+  #result {
+    position:absolute; inset:0; display:none; z-index:9;
+    align-items:center; justify-content:center; flex-direction:column;
+    background:rgba(0,0,0,.55);
+  }
+  #result .box { border:2px solid #33ff66; background:#000c08; padding:28px 56px; text-align:center; }
+  #result h2 { font-size:30px; letter-spacing:6px; margin-bottom:14px; }
+  #result .detail { font-size:14px; line-height:2; opacity:.85; }
+  #result .again { margin-top:20px; font-size:14px; animation:blink 1s step-end infinite; }
+  #result.crash h2 { color:#ff5544; }
+  #result.crash .box { border-color:#ff5544; }
+
+  /* ---------- タッチ操作UI ---------- */
+  #touch { position:absolute; inset:0; pointer-events:none; z-index:5; display:none; }
+  #touch.show { display:block; }
+  .tbtn {
+    position:absolute; width:54px; height:54px; pointer-events:auto;
+    border:1px solid rgba(51,255,102,.7); background:rgba(0,22,12,.55); color:#33ff66;
+    border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    font-size:19px; line-height:1; user-select:none; -webkit-user-select:none; touch-action:none;
+  }
+  .tbtn small { font-size:8px; opacity:.75; margin-top:2px; letter-spacing:0; }
+  .tbtn.on { background:rgba(51,255,102,.38); }
+  @media (max-width:720px){
+    #title .frame { padding:16px 18px; }
+    #title h1 { font-size:22px; letter-spacing:3px; }
+    #title .sub { font-size:10px; }
+    .plane-item { font-size:14px; padding:6px 12px; }
+    #title .hint { font-size:10px; line-height:1.7; }
+    #result .box { padding:18px 24px; }
+    #result h2 { font-size:22px; }
+  }
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<canvas id="hud"></canvas>
+
+<div id="touch">
+  <div class="tbtn hold" data-code="ArrowUp"    style="left:86px;  bottom:44%;">▲<small>機首下げ</small></div>
+  <div class="tbtn hold" data-code="ArrowDown"  style="left:86px;  bottom:calc(44% - 120px);">▼<small>機首上げ</small></div>
+  <div class="tbtn hold" data-code="ArrowLeft"  style="left:26px;  bottom:calc(44% - 60px);">◀<small>ロール</small></div>
+  <div class="tbtn hold" data-code="ArrowRight" style="left:146px; bottom:calc(44% - 60px);">▶<small>ロール</small></div>
+  <div class="tbtn hold" data-code="KeyZ" style="right:152px; bottom:calc(44% - 60px);">Z<small>ラダー</small></div>
+  <div class="tbtn hold" data-code="KeyC" style="right:26px;  bottom:calc(44% - 60px);">C<small>ラダー</small></div>
+  <div class="tbtn hold" data-code="KeyA" style="right:89px;  bottom:44%;">A<small>加速</small></div>
+  <div class="tbtn hold" data-code="KeyS" style="right:89px;  bottom:calc(44% - 120px);">S<small>減速</small></div>
+  <div class="tbtn tap"  data-code="KeyF" style="right:26px;  bottom:calc(44% + 76px);">F<small>A/B</small></div>
+  <div class="tbtn tap"  data-code="KeyB" style="right:89px;  bottom:calc(44% + 76px);">B<small>ﾌﾞﾚｰｷ</small></div>
+  <div class="tbtn tap"  data-code="KeyG" style="right:152px; bottom:calc(44% + 76px);">G<small>ｷﾞｱ</small></div>
+  <div class="tbtn tap"  data-code="KeyV" style="right:26px;  top:56px;">V<small>視点</small></div>
+  <div class="tbtn tap"  data-code="KeyQ" style="right:89px;  top:56px;">Q<small>自動着陸</small></div>
+  <div class="tbtn tap"  data-code="SENS" style="right:152px; top:56px;">感<small>感度</small></div>
+</div>
+
+<div id="title">
+  <div class="frame">
+    <h1>JASDF FLIGHT SIM</h1>
+    <div class="sub">— HTML EDITION / RETRO STYLE —</div>
+    <div class="select-label">■ 機体を選択してください ■</div>
+    <div id="planeList"></div>
+    <div class="hint">
+      ↑↓ 機首 / ←→ ロール / Z・C ラダー<br>
+      A 加速 ・ S 減速 ・ F アフターバーナー<br>
+      B ブレーキ ・ G ギア ・ V 視点(4種) ・ 1〜3 操縦感度<br>
+      オービット視点はマウスドラッグで回転・ホイールでズーム<br>
+      （発進と同時にエンジン音が有効になります）
+    </div>
+    <div class="start">ENTER または クリックで発進</div>
+  </div>
+</div>
+
+<div id="result">
+  <div class="box">
+    <h2 id="resTitle">MISSION CLEAR</h2>
+    <div class="detail" id="resDetail"></div>
+    <div class="again">[ R ] キーでタイトルへ戻る</div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+"use strict";
+/* =========================================================
+   JASDF FLIGHT SIMULATOR  v2
+   - WebAudio: エンジン/ギア/接地/失速警報/風切り音
+   - 揚力・迎え角ベースの簡易空力モデル
+   - 計器パネル（速度計/姿勢儀/高度計/ギアランプ/燃料/マップ)
+   - 地形バリエーション + Zファイティング対策
+   ========================================================= */
+
+const DEG = Math.PI/180;
+
+/* ---------- 機体データ ---------- */
+/* thrust: 最大推力加速度[m/s^2], kl:揚力係数, cla:揚力傾斜, clmax:最大CL,
+   kind:誘導抗力係数, align:機軸への経路追従率, pitch/roll/yaw:角速度[deg/s] */
+const AIRCRAFT = [
+  { id:"f15", name:"F-15J EAGLE",   spec:"高機動・高出力の制空戦闘機",
+    thrust:9.0, abMult:1.8, drag:0.000035, kl:0.00125, cl0:0.12, cla:4.0, clmax:1.35,
+    kind:0.00006, kside:0.00025, gLim:88,
+    ctlP:1.35, dampP:3.0, stabP:2.5, trimAoa:0.020, noseDown:0.22,
+    ctlR:10.5, dampR:4.0, ctlY:0.30, dampY:2.0, stabY:3.5, fuelRate:2.2 },
+  { id:"f2",  name:"F-2",           spec:"バランス型の支援戦闘機",
+    thrust:8.0, abMult:1.7, drag:0.000039, kl:0.00135, cl0:0.14, cla:4.2, clmax:1.45,
+    kind:0.00006, kside:0.00025, gLim:88,
+    ctlP:1.50, dampP:3.0, stabP:2.3, trimAoa:0.021, noseDown:0.22,
+    ctlR:12.6, dampR:4.2, ctlY:0.34, dampY:2.0, stabY:3.6, fuelRate:2.0 },
+  { id:"f35", name:"F-35A LIGHTNING II", spec:"高性能・操作感は重め",
+    thrust:8.5, abMult:1.75, drag:0.000052, kl:0.00120, cl0:0.12, cla:3.8, clmax:1.30,
+    kind:0.00007, kside:0.00025, gLim:88,
+    ctlP:1.15, dampP:3.2, stabP:2.6, trimAoa:0.020, noseDown:0.24,
+    ctlR:8.4, dampR:4.0, ctlY:0.24, dampY:2.1, stabY:3.4, fuelRate:2.4 },
+  { id:"f4",  name:"F-4EJ改 PHANTOM II", spec:"旧式・低機動・レトロ",
+    thrust:7.0, abMult:1.6, drag:0.000036, kl:0.00105, cl0:0.10, cla:3.6, clmax:1.15,
+    kind:0.00008, kside:0.00020, gLim:70,
+    ctlP:0.95, dampP:2.8, stabP:2.2, trimAoa:0.022, noseDown:0.26,
+    ctlR:7.0, dampR:4.0, ctlY:0.20, dampY:1.8, stabY:3.0, fuelRate:2.6 },
+];
+for(const p of AIRCRAFT){
+  p.aoaStall = (p.clmax - p.cl0) / p.cla;                       // 失速迎え角[rad]
+  p.stallSpd = Math.sqrt(9.8/(p.kl*p.clmax));                   // 水平失速速度[m/s]
+}
+
+let mode = "title";
+let selIdx = 0;
+let plane = AIRCRAFT[0];
+let sens = 0.70;    // 操縦感度 (1:LOW 2:MID 3:HIGH で切替)
+
+/* ---------- three.js ---------- */
+const glCanvas = document.getElementById("gl");
+const renderer = new THREE.WebGLRenderer({
+  canvas:glCanvas, antialias:true, logarithmicDepthBuffer:true   // ちらつき(Z-fighting)対策
+});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x7fb8e8);
+scene.fog = new THREE.Fog(0x7fb8e8, 4000, 30000);
+
+const camera = new THREE.PerspectiveCamera(70, 1, 0.5, 80000);
+
+const sun = new THREE.DirectionalLight(0xffffff, 1.0);
+sun.position.set(6000, 9000, 3000);
+scene.add(sun);
+scene.add(new THREE.AmbientLight(0xa8c8e8, 0.55));
+
+/* ---------- マップ ---------- */
+const mountains = [];
+
+function buildMap(){
+  // 海
+  const sea = new THREE.Mesh(
+    new THREE.PlaneGeometry(140000,140000),
+    new THREE.MeshLambertMaterial({color:0x1f5f9f}));
+  sea.rotation.x = -Math.PI/2; sea.position.y = -2;
+  scene.add(sea);
+
+  // 陸地
+  const land = new THREE.Mesh(
+    new THREE.PlaneGeometry(46000,46000),
+    new THREE.MeshLambertMaterial({color:0x4d8f3a}));
+  land.rotation.x = -Math.PI/2;
+  scene.add(land);
+
+  // 田畑パッチワーク（景色の単調さ対策）
+  const fieldColors = [0x568f3d, 0x6aa348, 0x477f34, 0x8fae4a, 0xa8a052, 0x5f9a44];
+  const rng = mulberry(12345);
+  for(let i=0;i<52;i++){
+    const w = 500 + rng()*1400, h = 500 + rng()*1400;
+    const x = (rng()*2-1)*15000, z = (rng()*2-1)*15000;
+    if(Math.abs(x)<900 && Math.abs(z)<2400) continue;      // 空港域は除外
+    const f = new THREE.Mesh(new THREE.PlaneGeometry(w,h),
+      new THREE.MeshLambertMaterial({color:fieldColors[i%fieldColors.length]}));
+    f.rotation.x = -Math.PI/2; f.position.set(x, 0.12, z);
+    scene.add(f);
+  }
+
+  // 道路（十字）
+  const roadMat = new THREE.MeshLambertMaterial({color:0x30343a});
+  const roadA = new THREE.Mesh(new THREE.PlaneGeometry(30000,26), roadMat);
+  roadA.rotation.x=-Math.PI/2; roadA.position.set(0,0.2,-3400); scene.add(roadA);
+  const roadB = new THREE.Mesh(new THREE.PlaneGeometry(26,30000), roadMat);
+  roadB.rotation.x=-Math.PI/2; roadB.position.set(-5200,0.2,0); scene.add(roadB);
+
+  // 湖
+  const lake = new THREE.Mesh(new THREE.CircleGeometry(1300, 24),
+    new THREE.MeshLambertMaterial({color:0x2a6fae}));
+  lake.rotation.x=-Math.PI/2; lake.position.set(6200,0.14,-9200); scene.add(lake);
+
+  // 樹木（インスタンシング）
+  {
+    const g = new THREE.ConeGeometry(6, 16, 6);
+    const m = new THREE.MeshLambertMaterial({color:0x2f6b2a, flatShading:true});
+    const inst = new THREE.InstancedMesh(g, m, 320);
+    const mat4 = new THREE.Matrix4();
+    let n=0;
+    while(n<320){
+      const x=(rng()*2-1)*13000, z=(rng()*2-1)*13000;
+      if(Math.abs(x)<900 && Math.abs(z)<2400) continue;
+      mat4.makeTranslation(x, 8, z);
+      inst.setMatrixAt(n++, mat4);
+    }
+    scene.add(inst);
+  }
+
+  // 市街地（箱の群れ）
+  {
+    const g = new THREE.BoxGeometry(1,1,1);
+    const m = new THREE.MeshLambertMaterial({color:0x9aa4b0});
+    const inst = new THREE.InstancedMesh(g, m, 70);
+    const mat4 = new THREE.Matrix4();
+    for(let i=0;i<70;i++){
+      const x=-8600+(rng()*2-1)*1400, z=-6400+(rng()*2-1)*1400;
+      const w=60+rng()*90, hgt=40+rng()*180, d=60+rng()*90;
+      mat4.makeScale(w,hgt,d).setPosition(x, hgt/2, z);
+      inst.setMatrixAt(i, mat4);
+    }
+    scene.add(inst);
+  }
+
+  // 雲（半透明の平板）
+  {
+    const cm = new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:0.75,
+      side:THREE.DoubleSide, depthWrite:false});
+    for(let i=0;i<22;i++){
+      const s = 700 + rng()*1600;
+      const c = new THREE.Mesh(new THREE.PlaneGeometry(s, s*0.6), cm);
+      c.rotation.x = -Math.PI/2;
+      c.position.set((rng()*2-1)*20000, 2200+rng()*1200, (rng()*2-1)*20000);
+      scene.add(c);
+    }
+  }
+
+  // 山
+  const mtnMat = new THREE.MeshLambertMaterial({color:0x6b7f52, flatShading:true});
+  const mtnDefs = [
+    [ 9000,  4000, 1900, 1500], [11500,  1000, 2300, 1900], [13000,  6000, 2600, 2100],
+    [ 8000, 10000, 2000, 1400], [-10000, 12000, 2500, 1800], [-13000,  8000, 2100, 1500],
+    [ 4000, 15000, 2800, 2200], [-4000, 17000, 2400, 1700], [15000, -6000, 2000, 1600],
+  ];
+  for(const [x,z,r,h] of mtnDefs){
+    const m = new THREE.Mesh(new THREE.ConeGeometry(r, h, 7), mtnMat);
+    m.position.set(x, h/2, z);
+    scene.add(m);
+    mountains.push({x,z,r,h});
+  }
+
+  /* ---- 空港（全面コンクリート） ---- */
+  const pad = new THREE.Mesh(new THREE.PlaneGeometry(900, 3800),
+    new THREE.MeshLambertMaterial({color:0x9a9aa2}));
+  pad.rotation.x=-Math.PI/2; pad.position.set(120, 0.35, 0);
+  scene.add(pad);
+
+  // 滑走路（アスファルト）
+  const rw = new THREE.Mesh(new THREE.PlaneGeometry(60,3000),
+    new THREE.MeshLambertMaterial({color:0x3c3c44}));
+  rw.rotation.x = -Math.PI/2; rw.position.y = 0.6;
+  scene.add(rw);
+
+  // 中央線・スレッショルド
+  const lineMat = new THREE.MeshBasicMaterial({color:0xdddddd});
+  for(let z=-1400; z<=1400; z+=120){
+    const l = new THREE.Mesh(new THREE.PlaneGeometry(1.8,50), lineMat);
+    l.rotation.x = -Math.PI/2; l.position.set(0,0.85,z);
+    scene.add(l);
+  }
+  for(const zz of [-1450, 1450]){
+    for(let i=-3;i<=3;i++){
+      if(i===0) continue;
+      const t = new THREE.Mesh(new THREE.PlaneGeometry(4,40), lineMat);
+      t.rotation.x = -Math.PI/2; t.position.set(i*7,0.85,zz);
+      scene.add(t);
+    }
+  }
+  // 誘導路（コンクリートよりやや暗い帯）
+  const twMat = new THREE.MeshLambertMaterial({color:0x74747c});
+  const tw1 = new THREE.Mesh(new THREE.PlaneGeometry(24, 3000), twMat);
+  tw1.rotation.x=-Math.PI/2; tw1.position.set(150,0.5,0); scene.add(tw1);
+  for(const zz of [-1350, 0, 1350]){
+    const c = new THREE.Mesh(new THREE.PlaneGeometry(120,24), twMat);
+    c.rotation.x=-Math.PI/2; c.position.set(90,0.5,zz); scene.add(c);
+  }
+
+  // 建物・管制塔
+  const bMat = new THREE.MeshLambertMaterial({color:0xb8b8c0});
+  const hangar = new THREE.Mesh(new THREE.BoxGeometry(120,26,70), bMat);
+  hangar.position.set(360,13,-1180); scene.add(hangar);
+  const bldg = new THREE.Mesh(new THREE.BoxGeometry(60,18,40), bMat);
+  bldg.position.set(360,9,-1050); scene.add(bldg);
+  const towerBase = new THREE.Mesh(new THREE.BoxGeometry(14,55,14), bMat);
+  towerBase.position.set(300,27.5,-1000); scene.add(towerBase);
+  const towerTop = new THREE.Mesh(new THREE.BoxGeometry(24,12,24),
+    new THREE.MeshLambertMaterial({color:0x557799}));
+  towerTop.position.set(300,61,-1000); scene.add(towerTop);
+}
+function mulberry(seed){ // 再現性のある簡易乱数
+  return function(){ seed|=0; seed=(seed+0x6D2B79F5)|0;
+    let t=Math.imul(seed^(seed>>>15),1|seed);
+    t=(t+Math.imul(t^(t>>>7),61|t))^t;
+    return ((t^(t>>>14))>>>0)/4294967296; };
+}
+buildMap();
+
+/* ---------- 自機モデル（機種別ローポリ） ---------- */
+const ship = new THREE.Group();
+scene.add(ship);
+const abFlame = new THREE.Mesh(new THREE.ConeGeometry(0.9,5,7),
+  new THREE.MeshBasicMaterial({color:0xff8830}));
+abFlame.rotation.x = -Math.PI/2; abFlame.position.z = 10.6;
+abFlame.visible = false;
+
+function buildShip(id){
+  while(ship.children.length) ship.remove(ship.children[0]);
+  const scheme = {
+    f15:{body:0x9fb0c0, wing:0x7d8ea0}, f2:{body:0x3f6fa8, wing:0x33608f},
+    f35:{body:0x5a6570, wing:0x4a545e}, f4:{body:0x7a8468, wing:0x66705a} }[id];
+  const bm = new THREE.MeshLambertMaterial({color:scheme.body, flatShading:true});
+  const wm = new THREE.MeshLambertMaterial({color:scheme.wing, flatShading:true});
+  const add = mesh => { ship.add(mesh); return mesh; };
+  // 胴体・機首・キャノピー
+  const body=add(new THREE.Mesh(new THREE.CylinderGeometry(1.1,1.4,16,8),bm)); body.rotation.x=Math.PI/2;
+  const nose=add(new THREE.Mesh(new THREE.ConeGeometry(1.1,4,8),bm)); nose.rotation.x=Math.PI/2; nose.position.z=-10;
+  const canopy=add(new THREE.Mesh(new THREE.SphereGeometry(1.0,8,6),
+    new THREE.MeshLambertMaterial({color:0x203a55})));
+  canopy.scale.set(0.8,0.7,2.2); canopy.position.set(0,0.9,-5);
+  // 主翼（機種で形を変える）
+  if(id==="f2"){
+    const w=add(new THREE.Mesh(new THREE.BoxGeometry(15,0.35,5.5),wm)); w.position.z=1.5;
+  } else if(id==="f4"){
+    const wl=add(new THREE.Mesh(new THREE.BoxGeometry(7,0.35,4.5),wm)); wl.position.set(-4.6,0.35,1); wl.rotation.z= 0.10;
+    const wr=add(new THREE.Mesh(new THREE.BoxGeometry(7,0.35,4.5),wm)); wr.position.set( 4.6,0.35,1); wr.rotation.z=-0.10;
+    add(new THREE.Mesh(new THREE.BoxGeometry(3.5,0.4,4.8),wm)).position.z=1;
+  } else {
+    const w=add(new THREE.Mesh(new THREE.BoxGeometry(14,0.35,4.5),wm)); w.position.z=1;
+  }
+  // 水平尾翼（F-4は下反角つきスタビレーター）
+  if(id==="f4"){
+    const hl=add(new THREE.Mesh(new THREE.BoxGeometry(3.4,0.3,2.2),wm)); hl.position.set(-2.4,0.2,7); hl.rotation.z=-0.40;
+    const hr=add(new THREE.Mesh(new THREE.BoxGeometry(3.4,0.3,2.2),wm)); hr.position.set( 2.4,0.2,7); hr.rotation.z= 0.40;
+  } else {
+    add(new THREE.Mesh(new THREE.BoxGeometry(6.5,0.3,2.2),wm)).position.z=7;
+  }
+  // 垂直尾翼（F-15:双垂直尾翼 / F-35:外傾双尾翼）
+  if(id==="f15"){
+    for(const sx of [-1,1]){
+      const v=add(new THREE.Mesh(new THREE.BoxGeometry(0.3,3.2,2.6),wm)); v.position.set(sx*2.0,1.8,7);
+    }
+  } else if(id==="f35"){
+    for(const sx of [-1,1]){
+      const v=add(new THREE.Mesh(new THREE.BoxGeometry(0.3,2.8,2.4),wm));
+      v.position.set(sx*1.6,1.6,7); v.rotation.z=-sx*0.35;
+    }
+  } else {
+    add(new THREE.Mesh(new THREE.BoxGeometry(0.3,3.4,2.8),wm)).position.set(0,1.9,7);
+  }
+  // インテーク
+  for(const sx of [-1,1]){
+    add(new THREE.Mesh(new THREE.BoxGeometry(1.0,1.4,4.5),wm)).position.set(sx*1.6,-0.2,-1.5);
+  }
+  ship.add(abFlame);
+}
+buildShip("f15");
+
+/* ---------- 飛行状態 ---------- */
+const S = {};
+function resetFlight(){
+  S.pos = new THREE.Vector3(0, 2.4, -1400);
+  S.quat = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0), Math.PI); // 機首+Z
+  S.vel = new THREE.Vector3(0,0,0);
+  S.angVel = new THREE.Vector3(0,0,0);   // 機体軸角速度 x:ピッチ y:ヨー z:ロール
+  S.gForce = 1;
+  S.speed = 0;
+  S.vs = 0;
+  S.aoa = 0;
+  S.throttle = 0;
+  S.rpm = 0;               // エンジンのスプール（推力の遅れ）
+  S.ab = false;
+  S.brake = false;
+  S.gear = true;
+  S.gearPos = 1;           // 0=上げ 1=下げ（遷移アニメーション）
+  S.fuel = 100;
+  S.onGround = true;
+  S.stall = false;
+  S.airborneOnce = false;
+  S.viewMode = 0;          // 0:コックピット 1:チェイス 2:オービット 3:管制塔
+  S.orbYaw = 0.7; S.orbPitch = 0.28; S.orbDist = 62;
+  S.camP = new THREE.Vector3(0, 15, -1448);
+  S.ctl = {e:0, a:0, r:0};   // なめらか化した舵位置
+  S.trail = []; S.trailT = 0;
+  S.ap = false; S.apDir = 1; S.apWp = false; S.apCap = false;
+  S.time = 0;
+  S.msg = ""; S.msgT = 0;
+}
+
+/* ---------- WebAudio ---------- */
+let AC = null;
+const snd = {};
+function initAudio(){
+  if(AC){ AC.resume(); return; }
+  try{
+    AC = new (window.AudioContext||window.webkitAudioContext)();
+  }catch(e){ AC=null; return; }
+  const master = AC.createGain(); master.gain.value = 0.65; master.connect(AC.destination);
+  snd.master = master;
+
+  // ノイズバッファ（共用）
+  const len = AC.sampleRate*2;
+  const buf = AC.createBuffer(1,len,AC.sampleRate);
+  const d = buf.getChannelData(0);
+  for(let i=0;i<len;i++) d[i]=Math.random()*2-1;
+  snd.noiseBuf = buf;
+
+  // エンジン低音（ノイズ→ローパス）
+  const nsrc = AC.createBufferSource(); nsrc.buffer=buf; nsrc.loop=true;
+  const lp = AC.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=300;
+  const ng = AC.createGain(); ng.gain.value=0;
+  nsrc.connect(lp); lp.connect(ng); ng.connect(master); nsrc.start();
+  snd.engLP=lp; snd.engGain=ng;
+
+  // タービン高音（のこぎり波→バンドパス）
+  const osc=AC.createOscillator(); osc.type="sawtooth"; osc.frequency.value=70;
+  const bp=AC.createBiquadFilter(); bp.type="bandpass"; bp.frequency.value=700; bp.Q.value=2.5;
+  const og=AC.createGain(); og.gain.value=0;
+  osc.connect(bp); bp.connect(og); og.connect(master); osc.start();
+  snd.whine=osc; snd.whineBP=bp; snd.whineGain=og;
+
+  // 風切り音（ノイズ→ハイパス）
+  const wsrc = AC.createBufferSource(); wsrc.buffer=buf; wsrc.loop=true;
+  const hp = AC.createBiquadFilter(); hp.type="highpass"; hp.frequency.value=1400;
+  const wg = AC.createGain(); wg.gain.value=0;
+  wsrc.connect(hp); hp.connect(wg); wg.connect(master); wsrc.start();
+  snd.windGain = wg;
+
+  // 失速警報
+  const b=AC.createOscillator(); b.type="square"; b.frequency.value=650;
+  const bg=AC.createGain(); bg.gain.value=0;
+  b.connect(bg); bg.connect(master); b.start();
+  snd.beepGain=bg;
+}
+function updateAudio(){
+  if(!AC) return;
+  if(mode!=="flight"){
+    snd.engGain.gain.value *= 0.85;
+    snd.whineGain.gain.value *= 0.85;
+    snd.windGain.gain.value *= 0.85;
+    snd.beepGain.gain.value = 0;
+    return;
+  }
+  const r = S.rpm, sp = S.speed;
+  snd.whine.frequency.value = 60 + r*260 + sp*0.12;
+  snd.whineBP.frequency.value = 500 + r*2200;
+  snd.whineGain.gain.value = (0.04 + r*0.10) * (S.fuel>0?1:0.2);
+  snd.engLP.frequency.value = 250 + r*900 + (S.ab?600:0);
+  snd.engGain.gain.value = (0.04 + r*0.15 + ((S.ab&&S.fuel>0)?0.20:0)) * (S.fuel>0?1:0.25);
+  snd.windGain.gain.value = Math.min(0.16, sp/700*0.16) + (S.brake&&!S.onGround? 0.05:0);
+  snd.beepGain.gain.value = (S.stall && Math.floor(S.time*5)%2===0) ? 0.10 : 0;
+}
+function playGearSound(down){
+  if(!AC) return;
+  const t0 = AC.currentTime;
+  const o = AC.createOscillator(); o.type="square";
+  o.frequency.setValueAtTime(110, t0);
+  o.frequency.linearRampToValueAtTime(down?85:135, t0+1.5);
+  const g = AC.createGain();
+  g.gain.setValueAtTime(0.001,t0);
+  g.gain.linearRampToValueAtTime(0.06,t0+0.1);
+  g.gain.setValueAtTime(0.06,t0+1.35);
+  g.gain.linearRampToValueAtTime(0.0001,t0+1.5);
+  o.connect(g); g.connect(snd.master); o.start(t0); o.stop(t0+1.55);
+  // ロック時のクランク音
+  const s = AC.createBufferSource(); s.buffer = snd.noiseBuf;
+  const f = AC.createBiquadFilter(); f.type="lowpass"; f.frequency.value=240;
+  const cg = AC.createGain();
+  cg.gain.setValueAtTime(0.0001, t0+1.5);
+  cg.gain.linearRampToValueAtTime(0.45, t0+1.52);
+  cg.gain.exponentialRampToValueAtTime(0.001, t0+1.72);
+  s.connect(f); f.connect(cg); cg.connect(snd.master); s.start(t0+1.5); s.stop(t0+1.75);
+}
+function playOneShot(dur, freq, gain, type){
+  if(!AC) return;
+  const t0 = AC.currentTime;
+  const s = AC.createBufferSource(); s.buffer = snd.noiseBuf;
+  const f = AC.createBiquadFilter(); f.type = type||"bandpass"; f.frequency.value = freq;
+  const g = AC.createGain();
+  g.gain.setValueAtTime(gain, t0);
+  g.gain.exponentialRampToValueAtTime(0.001, t0+dur);
+  s.connect(f); f.connect(g); g.connect(snd.master); s.start(t0); s.stop(t0+dur+0.05);
+}
+
+/* ---------- 入力 ---------- */
+let keys = {};
+window.addEventListener("keydown", e=>{
+  if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"," "].includes(e.key)) e.preventDefault();
+  if(mode==="title"){
+    if(e.key==="ArrowUp"){ selIdx=(selIdx+AIRCRAFT.length-1)%AIRCRAFT.length; renderTitle(); }
+    if(e.key==="ArrowDown"){ selIdx=(selIdx+1)%AIRCRAFT.length; renderTitle(); }
+    if(e.key==="Enter"){ startFlight(); }
+    return;
+  }
+  if(mode==="result"){
+    if(e.key==="r"||e.key==="R") backToTitle();
+    return;
+  }
+  if(e.repeat){ keys[e.code]=true; return; }
+  uiAction(e.code);
+  keys[e.code]=true;
+});
+window.addEventListener("keyup", e=>{ keys[e.code]=false; });
+
+/* オービット視点のマウス操作 */
+let dragging=false, lastMX=0, lastMY=0;
+window.addEventListener("mousedown", e=>{ dragging=true; lastMX=e.clientX; lastMY=e.clientY; });
+window.addEventListener("mouseup",   ()=>{ dragging=false; });
+window.addEventListener("mousemove", e=>{
+  if(!dragging || mode!=="flight" || S.viewMode!==2) return;
+  S.orbYaw   -= (e.clientX-lastMX)*0.006;
+  S.orbPitch  = THREE.MathUtils.clamp(S.orbPitch + (e.clientY-lastMY)*0.005, -0.15, 1.25);
+  lastMX=e.clientX; lastMY=e.clientY;
+});
+window.addEventListener("wheel", e=>{
+  if(mode!=="flight" || S.viewMode!==2) return;
+  S.orbDist = THREE.MathUtils.clamp(S.orbDist*(1+Math.sign(e.deltaY)*0.12), 22, 260);
+}, {passive:true});
+window.addEventListener("touchstart", e=>{
+  if(e.target!==glCanvas) return;
+  dragging=true; lastMX=e.touches[0].clientX; lastMY=e.touches[0].clientY;
+}, {passive:true});
+window.addEventListener("touchmove", e=>{
+  if(!dragging || mode!=="flight" || S.viewMode!==2 || e.target!==glCanvas) return;
+  const t=e.touches[0];
+  S.orbYaw   -= (t.clientX-lastMX)*0.006;
+  S.orbPitch  = THREE.MathUtils.clamp(S.orbPitch + (t.clientY-lastMY)*0.005, -0.15, 1.25);
+  lastMX=t.clientX; lastMY=t.clientY;
+}, {passive:true});
+window.addEventListener("touchend", ()=>{ dragging=false; });
+
+/* ---------- タッチ操作ボタン ---------- */
+const touchEl = document.getElementById("touch");
+const isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints>0;
+function updateTouchUI(){ touchEl.className = (isTouch && mode==="flight") ? "show" : ""; }
+for(const btn of document.querySelectorAll(".tbtn")){
+  const code = btn.dataset.code;
+  const hold = btn.classList.contains("hold");
+  const down = e=>{
+    e.preventDefault();
+    btn.classList.add("on");
+    if(hold) keys[code]=true; else uiAction(code);
+  };
+  const up = e=>{
+    if(e.cancelable) e.preventDefault();
+    btn.classList.remove("on");
+    if(hold) keys[code]=false;
+  };
+  btn.addEventListener("pointerdown", down);
+  btn.addEventListener("pointerup", up);
+  btn.addEventListener("pointercancel", up);
+  btn.addEventListener("pointerleave", up);
+}
+
+function setMsg(t){ S.msg=t; S.msgT=2.2; }
+
+/* ---------- トグル系操作（キーボード/タッチ共通） ---------- */
+function uiAction(code){
+  if(mode!=="flight") return;
+  if(code==="KeyF"){ S.ab = !S.ab; setMsg(S.ab?"AFTERBURNER ON":"AFTERBURNER OFF"); }
+  if(code==="KeyB"){ S.brake = !S.brake; setMsg(S.brake?(S.onGround?"WHEEL BRAKE":"AIR BRAKE"):"BRAKE OFF"); if(AC&&S.brake) playOneShot(0.15, 500, 0.08, "bandpass"); }
+  if(code==="KeyG"){
+    if(S.onGround && S.gear){ setMsg("CANNOT RETRACT GEAR ON GROUND"); }
+    else { S.gear = !S.gear; setMsg(S.gear?"GEAR DOWN":"GEAR UP"); playGearSound(S.gear); }
+  }
+  if(code==="KeyV"){
+    S.viewMode = (S.viewMode+1)%4;
+    setMsg(["COCKPIT VIEW","CHASE VIEW","ORBIT VIEW (ドラッグで回転)","TOWER VIEW"][S.viewMode]);
+  }
+  if(code==="KeyQ"){ toggleAP(); }
+  if(code==="Digit1"){ sens=0.45; setMsg("CONTROL SENS: LOW"); }
+  if(code==="Digit2"){ sens=0.70; setMsg("CONTROL SENS: MID"); }
+  if(code==="Digit3"){ sens=1.00; setMsg("CONTROL SENS: HIGH"); }
+  if(code==="SENS"){
+    sens = sens<0.6 ? 0.70 : (sens<0.9 ? 1.00 : 0.45);
+    setMsg("CONTROL SENS: "+(sens<0.6?"LOW":(sens<0.9?"MID":"HIGH")));
+  }
+}
+
+/* ---------- オートパイロット（自動着陸） ---------- */
+function toggleAP(){
+  if(!S.ap){
+    if(S.onGround){ setMsg("AP: 離陸後に有効になります"); return; }
+    S.ap = true;
+    S.apDir = S.pos.z < 0 ? 1 : -1;    // 手前側の滑走路端へ着陸方向を選ぶ
+    S.apCap = false;
+    S.ab = false;
+    setMsg("AUTOPILOT: AUTO-LAND → RWY "+(S.apDir>0?"18":"36"));
+  } else {
+    S.ap = false; setMsg("AUTOPILOT OFF");
+  }
+}
+function apGuidance(dt){
+  const P = plane;
+  const {heading} = attitude();
+  const bank = bankAngle();
+  const wrap = a => ((a%360)+540)%360-180;
+  const alt = Math.max(0, S.pos.y - 2.4);
+  const runHdg = S.apDir>0 ? 180 : 0;
+
+  if(S.onGround){
+    // 接地後：スロットル0・ブレーキ・中心線維持で停止まで
+    S.throttle = 0; S.brake = true; S.ab = false;
+    const hdgTgt = runHdg + S.apDir*THREE.MathUtils.clamp(S.pos.x*0.06, -20, 20);
+    S.ctl.e = 0; S.ctl.a = 0;
+    S.ctl.r = THREE.MathUtils.clamp(-wrap(hdgTgt-heading)*0.05, -0.6, 0.6);
+    return;
+  }
+
+  const tdZ = -S.apDir*1250;                    // 接地目標点
+  const d = (tdZ - S.pos.z) * S.apDir;          // 接地点までの前方距離
+  const xtk = S.pos.x;                           // 中心線からの横ずれ
+  const committed = d < 1500 && alt < 90;        // 最終進入は継続
+  const onFinalOK = d > 1200 && d < 30000 &&
+        Math.abs(wrap(heading - runHdg)) < 70 &&
+        Math.abs(xtk) < Math.max(260, d*0.09) &&
+        alt < d*0.105 + 40;
+  const wasWp = S.apWp;
+  S.apWp = !committed && !onFinalOK;
+  if(S.apWp && !wasWp) S.apCap = false;   // ゴーアラウンド時は再度WPへ回り込む
+
+  let hdgTgt, altTgt, spdTgt, vyTgt;
+  const icp = THREE.MathUtils.clamp((xtk + S.vel.x*3.5)*0.04, -35, 35);  // 横ずれ+横速度のリード補償
+  if(S.apWp){
+    // 進入コースの起点(11km手前・高度520m)へ回り込む。
+    // 一度WP近傍に達したら以後は滑走路方位を保持（旋回半径の大きい機体の周回を防ぐ）
+    const wpZ = tdZ - S.apDir*11000;
+    const distWp = Math.hypot(S.pos.x, S.pos.z - wpZ);
+    if(distWp < 3200) S.apCap = true;
+    hdgTgt = (S.apCap || distWp <= 2600)
+      ? runHdg + S.apDir*icp
+      : Math.atan2(-S.pos.x, -(wpZ - S.pos.z))/DEG;
+    altTgt = 520; spdTgt = P.stallSpd*1.5;
+    vyTgt = THREE.MathUtils.clamp((altTgt-alt)*0.20, -7.5, 4.5);
+  } else {
+    // 最終進入：中心線へのインターセプト＋3.5度グライドスロープ
+    hdgTgt = runHdg + S.apDir*icp;
+    altTgt = Math.max(10, d*Math.tan(3.5*DEG));
+    spdTgt = d>4000 ? P.stallSpd*1.35 : P.stallSpd*1.27;
+    vyTgt = THREE.MathUtils.clamp(-S.speed*Math.tan(3.5*DEG) + (altTgt-alt)*0.15, -8.5, 3.5);
+    if(d<9000 && !S.gear){ S.gear = true; playGearSound(true); setMsg("AP: GEAR DOWN"); }
+    if(alt < 16){ vyTgt = -1.0 - alt*0.08; spdTgt = P.stallSpd*1.18; }   // フレア
+  }
+  S.ab = false; S.brake = false;
+  if(alt < 6 && !S.apWp) S.throttle = Math.max(0, S.throttle - 0.9*dt);
+  else S.throttle = THREE.MathUtils.clamp(S.throttle + (spdTgt - S.speed)*0.04*dt, 0, 1);
+
+  // 内側ループ：バンク・昇降率をエルロン/エレベータで追従
+  const hdgErr = wrap(hdgTgt - heading);
+  const bankTgt = THREE.MathUtils.clamp(-hdgErr*1.1, -32, 32)*DEG;
+  S.ctl.a = THREE.MathUtils.clamp((bankTgt - bank)*2.0 - S.angVel.z*2.0, -1, 1);
+  S.ctl.e = THREE.MathUtils.clamp((vyTgt - S.vs)*0.30 - S.angVel.x*2.5 + Math.abs(bank)*0.35, -1, 1);
+  S.ctl.r = THREE.MathUtils.clamp(-hdgErr*0.008, -0.25, 0.25);
+}
+
+/* ---------- 画面遷移 ---------- */
+const titleEl = document.getElementById("title");
+const listEl = document.getElementById("planeList");
+function renderTitle(){
+  listEl.innerHTML = "";
+  AIRCRAFT.forEach((p,i)=>{
+    const d = document.createElement("div");
+    d.className = "plane-item"+(i===selIdx?" sel":"");
+    d.innerHTML = (i===selIdx?"▶ ":"&nbsp;&nbsp;")+p.name+"<span class='spec'>"+p.spec+"</span>";
+    d.onclick = ()=>{ if(i===selIdx){ startFlight(); } else { selIdx=i; renderTitle(); } };
+    listEl.appendChild(d);
+  });
+}
+renderTitle();
+
+function startFlight(){
+  plane = AIRCRAFT[selIdx];
+  buildShip(plane.id);
+  resetFlight();
+  keys = {};
+  initAudio();
+  titleEl.style.display = "none";
+  document.getElementById("result").style.display = "none";
+  mode = "flight";
+  updateTouchUI();
+  setMsg(plane.name+" — CLEARED FOR TAKEOFF");
+}
+function backToTitle(){
+  document.getElementById("result").style.display = "none";
+  titleEl.style.display = "flex";
+  mode = "title";
+  updateTouchUI();
+}
+function endFlight(clear, reason){
+  mode = "result";
+  updateTouchUI();
+  if(!clear) playOneShot(1.0, 120, 0.6, "lowpass");
+  const r = document.getElementById("result");
+  r.className = clear ? "" : "crash";
+  document.getElementById("resTitle").textContent = clear ? "MISSION CLEAR" : "CRASHED";
+  document.getElementById("resDetail").innerHTML =
+    reason + "<br>機体: " + plane.name +
+    "<br>飛行時間: " + S.time.toFixed(0) + " 秒　残燃料: " + S.fuel.toFixed(0) + " %";
+  r.style.display = "flex";
+}
+
+/* ---------- 補助 ---------- */
+const _f = new THREE.Vector3(), _u = new THREE.Vector3();
+function forwardVec(){ return _f.set(0,0,-1).applyQuaternion(S.quat); }
+function upVec(){ return _u.set(0,1,0).applyQuaternion(S.quat); }
+function attitude(){
+  const f = forwardVec();
+  const pitch = Math.asin(THREE.MathUtils.clamp(f.y,-1,1));
+  const heading = (Math.atan2(f.x, -f.z)*180/Math.PI+360)%360;
+  return {pitch, heading};
+}
+function bankAngle(){
+  const wing = new THREE.Vector3(1,0,0).applyQuaternion(S.quat);
+  return Math.atan2(wing.y, Math.hypot(wing.x,wing.z));
+}
+function onRunway(){
+  return Math.abs(S.pos.x) <= 34 && Math.abs(S.pos.z) <= 1520;
+}
+
+/* ---------- 物理演算 ---------- */
+function bodyRot(ax, ay, az, ang){
+  return new THREE.Quaternion().setFromAxisAngle(
+    new THREE.Vector3(ax,ay,az).applyQuaternion(S.quat), ang);
+}
+function stepFlight(dt){
+  S.time += dt;
+  if(S.msgT>0) S.msgT-=dt;
+  const P = plane;
+
+  // スロットルとエンジンスプール
+  if(!S.ap && keys["KeyA"]) S.throttle = Math.min(1, S.throttle + 0.45*dt);
+  if(!S.ap && keys["KeyS"]) S.throttle = Math.max(0, S.throttle - 0.55*dt);
+  S.rpm += (S.throttle - S.rpm) * Math.min(1, dt*1.4);
+
+  // ギア遷移
+  const gearTarget = S.gear ? 1 : 0;
+  if(S.gearPos !== gearTarget){
+    const dir = Math.sign(gearTarget - S.gearPos);
+    S.gearPos = THREE.MathUtils.clamp(S.gearPos + dir*dt/1.5, 0, 1);
+  }
+
+  // 燃料
+  if(S.fuel>0){
+    S.fuel -= P.fuelRate * S.throttle * (S.ab?3:1) * dt * 0.08;
+    if(S.fuel<=0){ S.fuel=0; S.ab=false; setMsg("FUEL EMPTY"); }
+  }
+  const thrustAcc = P.thrust * S.rpm * (S.ab && S.rpm>0.55 ? P.abMult:1) * (S.fuel>0?1:0);
+
+  // 操縦入力：キーを押すと舵がなめらかに切れていく（短押しで微調整が可能）
+  const eTgt = (keys["ArrowDown"]?1:0) - (keys["ArrowUp"]?1:0);
+  const aTgt = (keys["ArrowLeft"]?1:0) - (keys["ArrowRight"]?1:0);
+  const rTgt = (keys["KeyZ"]?1:0) - (keys["KeyC"]?1:0);
+  const atk = 3.2, rel = 7.0;   // 舵の切り込み速度 / 戻り速度
+  const smooth = (cur,tgt)=>{
+    if(tgt!==0) return THREE.MathUtils.clamp(cur + tgt*atk*dt, -1, 1);
+    if(cur>0) return Math.max(0, cur - rel*dt);
+    return Math.min(0, cur + rel*dt);
+  };
+  if(S.ap && (eTgt!==0 || aTgt!==0 || rTgt!==0 || keys["KeyA"] || keys["KeyS"])){
+    S.ap = false; setMsg("AUTOPILOT OFF (手動操作)");
+  }
+  if(S.ap){
+    apGuidance(dt);                    // APが S.ctl とスロットル等を直接制御
+  } else {
+    S.ctl.e = smooth(S.ctl.e, eTgt);
+    S.ctl.a = smooth(S.ctl.a, aTgt);
+    S.ctl.r = smooth(S.ctl.r, rTgt);
+  }
+  const gain = S.ap ? 1 : sens;
+  const elevIn = S.ctl.e * gain;
+  const ailIn  = S.ctl.a * gain;
+  const rudIn  = S.ctl.r * gain;
+
+  const gearH = 2.4;
+  const spd = S.onGround ? S.speed : S.vel.length();
+  // 舵の効き＝動圧に比例。低速では舵が重く、効かない
+  const qEff = THREE.MathUtils.clamp((spd/180)*(spd/180), 0, 1.4);
+
+  if(S.onGround){
+    /* ===== 地上 ===== */
+    const steer = rudIn * 26 * DEG * THREE.MathUtils.clamp(S.speed/60,0,1) * dt;
+    S.quat.premultiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0), steer));
+
+    // ローテーション：エレベータのモーメントが前輪荷重を上回って初めて機首が上がる
+    let pitchMom = elevIn * P.ctlP * qEff * (elevIn>0 ? 1 : 0.6)
+                 - P.noseDown
+                 - P.dampP * S.angVel.x;
+    S.angVel.x += pitchMom * dt;
+    const att0 = attitude();
+    if(att0.pitch<=0 && S.angVel.x<0) S.angVel.x = 0;        // 前輪が接地して止まる
+    if(att0.pitch>=15*DEG && S.angVel.x>0) S.angVel.x = 0;   // 尾部接触の防止
+    S.angVel.y = 0; S.angVel.z = 0;
+    S.quat.premultiply(bodyRot(1,0,0, S.angVel.x*dt)).normalize();
+
+    let acc = thrustAcc - P.drag*S.speed*S.speed - 0.8;
+    if(S.brake) acc -= 7.5;
+    S.speed = Math.max(0, S.speed + acc*dt);
+    const f = forwardVec();
+    S.vel.copy(f).multiplyScalar(S.speed);
+    S.pos.addScaledVector(S.vel, dt);
+    S.pos.y = gearH;
+    S.vs = 0; S.aoa = 0; S.stall = false; S.gForce = 1;
+
+    // 揚力が重力を上回ったら浮上
+    const {pitch} = attitude();
+    const clg = Math.min(P.cl0 + P.cla*Math.max(0,pitch), P.clmax);
+    const liftg = P.kl * S.speed*S.speed * clg;
+    if(liftg > 9.9 && pitch > 2*DEG){
+      S.onGround = false; S.airborneOnce = true; setMsg("AIRBORNE");
+      S.vel.copy(f).multiplyScalar(S.speed);
+    }
+    if(!onRunway() && S.speed > 8){ endFlight(false,"滑走路を逸脱しました"); return; }
+    if(S.airborneOnce && S.speed < 1 && S.throttle < 0.05){
+      endFlight(true,"着陸成功。任務完了です。"); return;
+    }
+  } else {
+    /* ===== 空中：回転力学（舵→モーメント→角加速度）+ 揚力モデル ===== */
+    const f = forwardVec().clone();
+    const u = upVec().clone();
+    const rgt = new THREE.Vector3(1,0,0).applyQuaternion(S.quat);
+    const vhat = S.vel.clone().normalize();
+
+    // 迎え角と横滑り角
+    S.aoa = -Math.asin(THREE.MathUtils.clamp(vhat.dot(u), -1, 1));
+    const beta = Math.asin(THREE.MathUtils.clamp(vhat.dot(rgt), -1, 1));
+
+    const stalledAoa = S.aoa > P.aoaStall;
+    S.stall = stalledAoa || spd < P.stallSpd*0.9;
+    const ctlStall = S.stall ? 0.5 : 1;
+
+    /* --- 回転運動 --- */
+    // ピッチ：舵 + 縦静安定（機首は気流方向に戻ろうとする） + 空力減衰
+    let pitchAcc = elevIn * P.ctlP * qEff * ctlStall
+                 - P.stabP * (S.aoa - P.trimAoa) * qEff
+                 - P.dampP * S.angVel.x;
+    // ロール：舵 + 上反角効果（横滑り→ロール） + 減衰
+    let rollAcc  = ailIn * P.ctlR * qEff * ctlStall
+                 + 0.3 * beta * qEff
+                 - P.dampR * S.angVel.z;
+    // ヨー：舵 + 方向静安定（風見鶏効果） + 減衰
+    let yawAcc   = rudIn * P.ctlY * qEff * ctlStall
+                 - P.stabY * beta * qEff
+                 - P.dampY * S.angVel.y;
+    if(stalledAoa){
+      pitchAcc -= 0.8;                       // 失速による機首下げ
+      rollAcc  += (Math.random()-0.5)*2.5;   // バフェット・ウィングロック
+    }
+    S.angVel.x += pitchAcc*dt;
+    S.angVel.y += yawAcc*dt;
+    S.angVel.z += rollAcc*dt;
+    S.quat.premultiply(bodyRot(1,0,0, S.angVel.x*dt))
+          .premultiply(bodyRot(0,1,0, S.angVel.y*dt))
+          .premultiply(bodyRot(0,0,1, S.angVel.z*dt))
+          .normalize();
+
+    /* --- 並進運動 --- */
+    let CL = P.cl0 + P.cla * S.aoa;
+    if(stalledAoa) CL = P.clmax * 0.55;
+    CL = THREE.MathUtils.clamp(CL, -0.5, P.clmax);
+    const q2 = spd*spd;
+    // G制限（構造限界）
+    if(P.kl*q2*Math.abs(CL) > P.gLim) CL = Math.sign(CL)*P.gLim/(P.kl*q2);
+    const lift = P.kl * q2 * CL;
+    S.gForce = lift/9.8;
+
+    let liftDir = u.clone().sub(vhat.clone().multiplyScalar(u.dot(vhat)));
+    if(liftDir.lengthSq()<1e-6) liftDir = u.clone(); else liftDir.normalize();
+
+    let dragAcc = P.drag*q2 + P.kind*CL*CL*q2;
+    if(S.brake) dragAcc += 0.02*spd + 3.0;
+    dragAcc += 1.6 * S.gearPos;
+
+    const acc = new THREE.Vector3();
+    acc.addScaledVector(f, thrustAcc);
+    acc.addScaledVector(liftDir, lift);
+    acc.addScaledVector(rgt, -P.kside * beta * q2);   // 横滑りを戻す横力
+    acc.addScaledVector(vhat, -dragAcc);
+    acc.y -= 9.8;
+    S.vel.addScaledVector(acc, dt);
+
+    S.pos.addScaledVector(S.vel, dt);
+    S.vs = S.vel.y;
+    S.speed = S.vel.length();
+
+    /* 接地判定 */
+    if(S.pos.y <= gearH){
+      const {pitch} = attitude();
+      const bank = bankAngle();
+      const hSpeed = Math.hypot(S.vel.x, S.vel.z);
+      const bad =
+        (S.gearPos < 0.95)       ? "ギアを出さずに接地（胴体着陸）" :
+        (!onRunway())            ? "滑走路外に接地" :
+        (S.vs < -10.5)           ? "降下率過大でハードランディング" :
+        (Math.abs(bank) > 14*DEG)? "バンク角過大で翼端接地" :
+        (pitch < -4*DEG)         ? "機首から接地" :
+        (pitch > 16*DEG)         ? "尾部から接地" :
+        (hSpeed > 140)           ? "接地速度過大" : null;
+      if(bad){ endFlight(false, bad + "（墜落）"); return; }
+      S.onGround = true; S.pos.y = gearH;
+      S.speed = hSpeed;
+      S.angVel.set(0,0,0);
+      const fh = forwardVec().clone(); fh.y = 0; fh.normalize();
+      const m = new THREE.Matrix4().lookAt(new THREE.Vector3(0,0,0), fh, new THREE.Vector3(0,1,0));
+      S.quat.setFromRotationMatrix(m);
+      S.vel.copy(fh).multiplyScalar(S.speed);
+      playOneShot(0.35, 900, 0.35, "bandpass");
+      setMsg("TOUCHDOWN");
+    }
+
+    // 山との衝突
+    for(const mt of mountains){
+      const d = Math.hypot(S.pos.x-mt.x, S.pos.z-mt.z);
+      if(d < mt.r){
+        const hLimit = mt.h * (1 - d/mt.r);
+        if(S.pos.y < hLimit){ endFlight(false,"山岳に激突"); return; }
+      }
+    }
+    if(Math.abs(S.pos.x)>60000 || Math.abs(S.pos.z)>60000){
+      endFlight(false,"作戦空域を離脱"); return;
+    }
+  }
+
+  /* 航跡（ミニマップ用） */
+  S.trailT += dt;
+  if(S.trailT > 0.7){ S.trailT = 0; S.trail.push([S.pos.x, S.pos.z]); if(S.trail.length>90) S.trail.shift(); }
+
+  /* モデル・カメラ */
+  ship.position.copy(S.pos);
+  ship.quaternion.copy(S.quat);
+  abFlame.visible = S.ab && S.rpm>0.55 && S.fuel>0;
+  ship.visible = S.viewMode!==0;
+
+  let fov = 70;
+  if(S.viewMode===0){
+    camera.position.copy(S.pos).add(upVec().clone().multiplyScalar(1.2));
+    camera.quaternion.copy(S.quat);
+  } else if(S.viewMode===1){
+    // チェイス視点（なめらかに追従）
+    const tgt = S.pos.clone()
+      .add(forwardVec().clone().multiplyScalar(-42))
+      .add(new THREE.Vector3(0,13,0));
+    tgt.y = Math.max(tgt.y, 3);
+    S.camP.lerp(tgt, Math.min(1, dt*4));
+    camera.position.copy(S.camP);
+    camera.lookAt(S.pos);
+  } else if(S.viewMode===2){
+    // オービット視点（マウスで自由に回転）
+    const cp = Math.cos(S.orbPitch), sp = Math.sin(S.orbPitch);
+    const off = new THREE.Vector3(Math.sin(S.orbYaw)*cp, sp, Math.cos(S.orbYaw)*cp)
+      .multiplyScalar(S.orbDist);
+    const p = S.pos.clone().add(off);
+    p.y = Math.max(p.y, 2.5);
+    camera.position.copy(p);
+    camera.lookAt(S.pos);
+  } else {
+    // 管制塔から追尾（距離に応じて自動ズーム）
+    camera.position.set(300, 70, -1000);
+    camera.lookAt(S.pos);
+    const dist = camera.position.distanceTo(S.pos);
+    fov = THREE.MathUtils.clamp(4600/Math.max(dist,60), 5, 55);
+  }
+  if(Math.abs(camera.fov-fov)>0.01){ camera.fov=fov; camera.updateProjectionMatrix(); }
+}
+
+/* ---------- HUD / 計器パネル ---------- */
+const hudCanvas = document.getElementById("hud");
+const hctx = hudCanvas.getContext("2d");
+const GRN="#33ff66", AMB="#ffcc33", RED="#ff5544", DIM="#1b3a26";
+
+function drawHUD(){
+  const W = hudCanvas.width, H = hudCanvas.height;
+  hctx.clearRect(0,0,W,H);
+  if(mode!=="flight") return;
+
+  const cockpit = S.viewMode===0;
+  const panelH = cockpit ? Math.min(H*0.32, 320) : 0;
+  const cx = W/2, cy = (H - panelH)/2;
+  hctx.lineWidth = 2;
+  hctx.font = "16px 'MS Gothic', monospace";
+  hctx.strokeStyle = GRN; hctx.fillStyle = GRN;
+
+  const {pitch, heading} = attitude();
+  const bank = bankAngle();
+  const blink = Math.floor(S.time*4)%2===0;
+  const spdKmh = S.speed*3.6;
+
+  if(cockpit){
+    let shx=0, shy=0;
+    if(S.stall){ shx=(Math.random()-0.5)*6; shy=(Math.random()-0.5)*6; }
+    /* 水平線・ピッチラダー */
+    hctx.save();
+    hctx.translate(cx+shx, cy+shy);
+    hctx.rotate(bank);
+    const ppd = H/70;
+    hctx.beginPath();
+    hctx.rect(-W*0.30, -H*0.28, W*0.60, H*0.56); hctx.clip();
+    for(let d=-90; d<=90; d+=10){
+      const y = (pitch/DEG - d) * ppd;
+      if(Math.abs(y) > H*0.30) continue;
+      const wid = d===0 ? W*0.28 : W*0.09;
+      hctx.globalAlpha = d===0 ? 0.9 : 0.6;
+      hctx.beginPath();
+      hctx.moveTo(-wid, y); hctx.lineTo(-40, y);
+      hctx.moveTo( 40, y); hctx.lineTo( wid, y);
+      hctx.stroke();
+      if(d!==0){
+        hctx.globalAlpha = 0.7;
+        hctx.fillText(d, wid+8, y+5);
+        hctx.fillText(d, -wid-30, y+5);
+      }
+    }
+    hctx.restore();
+    hctx.globalAlpha = 1;
+    /* 中央マーカー */
+    hctx.beginPath();
+    hctx.moveTo(cx-26,cy); hctx.lineTo(cx-8,cy); hctx.lineTo(cx,cy+8); hctx.lineTo(cx+8,cy); hctx.lineTo(cx+26,cy);
+    hctx.moveTo(cx,cy-10); hctx.lineTo(cx,cy-4);
+    hctx.stroke();
+
+    /* HUD数値（速度/高度/方位/G） */
+    hctx.strokeRect(cx-W*0.28-110, cy-18, 110, 36);
+    hctx.textAlign="right";
+    hctx.fillText(spdKmh.toFixed(0), cx-W*0.28-12, cy+6);
+    hctx.textAlign="left";
+    hctx.fillText("km/h", cx-W*0.28-106, cy-26);
+    hctx.fillStyle = S.gForce>7 ? AMB : GRN;
+    hctx.fillText("G "+S.gForce.toFixed(1), cx-W*0.28-106, cy+44);
+    hctx.fillStyle = GRN;
+
+    hctx.strokeRect(cx+W*0.28, cy-18, 110, 36);
+    hctx.textAlign="right";
+    hctx.fillText(S.pos.y.toFixed(0), cx+W*0.28+98, cy+6);
+    hctx.textAlign="left";
+    hctx.fillText("ALT m", cx+W*0.28+4, cy-26);
+    hctx.fillStyle = S.vs<-8 ? AMB : GRN;
+    hctx.fillText((S.vs>=0?"+":"")+S.vs.toFixed(1)+" m/s", cx+W*0.28+4, cy+44);
+    hctx.fillStyle = GRN;
+
+    hctx.textAlign="center";
+    hctx.strokeRect(cx-42, 18, 84, 30);
+    hctx.fillText(heading.toFixed(0).padStart(3,"0")+"°", cx, 40);
+  } else {
+    /* 外部視点：上部インフォバー */
+    hctx.fillStyle="rgba(0,10,5,0.55)";
+    hctx.fillRect(0,0,W,44);
+    hctx.font="15px monospace"; hctx.textAlign="left";
+    let ix = 20;
+    const info = [
+      ["SPD "+spdKmh.toFixed(0)+" km/h", GRN],
+      ["ALT "+S.pos.y.toFixed(0)+" m", GRN],
+      ["HDG "+heading.toFixed(0).padStart(3,"0")+"°", GRN],
+      ["V/S "+(S.vs>=0?"+":"")+S.vs.toFixed(1), S.vs<-8?AMB:GRN],
+      ["G "+S.gForce.toFixed(1), S.gForce>7?AMB:GRN],
+      ["GEAR "+(S.gearPos>0.95?"DOWN":(S.gearPos<0.05?"UP":"TRANS")), S.gearPos>0.95?GRN:AMB],
+      ["THR "+(S.throttle*100).toFixed(0)+"%", GRN],
+      ["AP "+(S.ap?"AUTO-LAND":"OFF"), S.ap?GRN:"#666a70"],
+    ];
+    for(const [txt,col] of info){
+      hctx.fillStyle=col; hctx.fillText(txt, ix, 28);
+      ix += hctx.measureText(txt).width + 26;
+    }
+    hctx.textAlign="right"; hctx.fillStyle="#8a949e";
+    hctx.fillText(["","CHASE","ORBIT","TOWER"][S.viewMode]+" VIEW  [V]切替", W-20, 28);
+    hctx.font = "16px 'MS Gothic', monospace";
+  }
+
+  /* 警告（全視点共通） */
+  hctx.textAlign="center";
+  if(S.stall && blink){
+    hctx.fillStyle=RED; hctx.font="bold 26px monospace";
+    hctx.fillText("STALL", cx, cy-H*0.20);
+  }
+  if(!S.onGround && S.pos.y<150 && S.vs<-12 && blink){
+    hctx.fillStyle=RED; hctx.font="bold 26px monospace";
+    hctx.fillText("PULL UP", cx, cy-H*0.14);
+  }
+  if(S.gearPos<0.95 && !S.onGround && S.pos.y<200 && S.vs<0 && blink){
+    hctx.fillStyle=AMB; hctx.font="bold 20px monospace";
+    hctx.fillText("GEAR !", cx, cy+H*0.16);
+  }
+  if(S.ap){
+    hctx.fillStyle = GRN; hctx.font = "bold 15px monospace";
+    hctx.fillText("◆ AP: AUTO-LAND"+(S.apWp?" — 進入コースへ誘導中":" — 最終進入")+" ◆",
+      cx, cockpit ? 96 : 96);
+  }
+  if(S.msgT>0){
+    hctx.fillStyle=GRN; hctx.font="18px monospace";
+    hctx.fillText(S.msg, cx, cockpit ? H*0.10 : 74);
+  }
+  hctx.font = "16px 'MS Gothic', monospace";
+
+  if(cockpit) drawPanel(W, H, panelH, pitch, bank, heading, spdKmh);
+}
+
+/* ============ 計器パネル ============ */
+function drawPanel(W, H, Ph, pitch, bank, heading, spdKmh){
+  const py = H - Ph;
+  const grad = hctx.createLinearGradient(0,py,0,H);
+  grad.addColorStop(0,"#1e2328"); grad.addColorStop(1,"#0b0e11");
+  hctx.fillStyle = grad; hctx.fillRect(0,py,W,Ph);
+  hctx.fillStyle="#242a30";
+  hctx.beginPath();
+  hctx.moveTo(0,py); hctx.quadraticCurveTo(W/2, py-16, W, py);
+  hctx.lineTo(W,py+10); hctx.quadraticCurveTo(W/2, py-4, 0, py+10);
+  hctx.closePath(); hctx.fill();
+
+  const compact = W < 880;   // 狭い画面では主要計器のみ表示
+  const r = compact ? Math.min(Ph*0.30, 46, W*0.055) : Math.min(Ph*0.30, 64);
+  const iy = py + Ph*0.44;
+  const X = f => W*f;
+  const pos = compact
+    ? {asi:0.10, adi:0.29, alt:0.48, ann:0.645}
+    : {asi:0.068, adi:0.178, alt:0.288, ann:0.383, hsi:0.478, vsi:0.578, rpm:0.668, fuel:0.728};
+
+  /* ==== 汎用ヘルパー ==== */
+  function dial(x,y,r2){
+    hctx.beginPath(); hctx.arc(x,y,r2+5,0,Math.PI*2); hctx.fillStyle="#3a4149"; hctx.fill();
+    hctx.beginPath(); hctx.arc(x,y,r2+2,0,Math.PI*2); hctx.fillStyle="#181c20"; hctx.fill();
+    hctx.beginPath(); hctx.arc(x,y,r2,0,Math.PI*2); hctx.fillStyle="#0a0d10"; hctx.fill();
+    hctx.strokeStyle="#454d56"; hctx.lineWidth=1.5; hctx.stroke();
+  }
+  function needle(x,y,ang,len,w,color){
+    hctx.save(); hctx.translate(x,y); hctx.rotate(ang);
+    hctx.fillStyle=color||"#e8eef2";
+    hctx.beginPath();
+    hctx.moveTo(-w,6); hctx.lineTo(-w*0.4,-len); hctx.lineTo(w*0.4,-len); hctx.lineTo(w,6);
+    hctx.closePath(); hctx.fill();
+    hctx.restore();
+  }
+  function hub(x,y){ hctx.beginPath(); hctx.arc(x,y,4.5,0,Math.PI*2);
+    hctx.fillStyle="#2c333a"; hctx.fill(); hctx.strokeStyle="#5a636d"; hctx.lineWidth=1; hctx.stroke(); }
+  function tick(x,y,r2,angDeg,len,w,color){
+    const a=angDeg*DEG;
+    hctx.strokeStyle=color; hctx.lineWidth=w;
+    hctx.beginPath();
+    hctx.moveTo(x+Math.sin(a)*(r2-len), y-Math.cos(a)*(r2-len));
+    hctx.lineTo(x+Math.sin(a)*(r2-2),  y-Math.cos(a)*(r2-2));
+    hctx.stroke();
+  }
+  function dialNum(x,y,r2,angDeg,txt,size){
+    const a=angDeg*DEG, rr=r2-((size||10)+10);
+    hctx.fillStyle="#c8d0d8"; hctx.font=(size||10)+"px monospace"; hctx.textAlign="center";
+    hctx.fillText(txt, x+Math.sin(a)*rr, y-Math.cos(a)*rr+3.5);
+  }
+  function label(x,y,txt){ hctx.fillStyle="#8a949e"; hctx.font="11px monospace";
+    hctx.textAlign="center"; hctx.fillText(txt,x,y); }
+  function digital(x,y,w,txt,color){
+    hctx.fillStyle="#04120a"; hctx.fillRect(x-w/2,y-9,w,18);
+    hctx.strokeStyle="#2a323a"; hctx.lineWidth=1; hctx.strokeRect(x-w/2,y-9,w,18);
+    hctx.fillStyle=color||GRN; hctx.font="12px monospace"; hctx.textAlign="center";
+    hctx.fillText(txt,x,y+4);
+  }
+
+  /* ==== 各計器 ==== */
+  // 速度計 0〜2600 km/h
+  (function(x,y,r2){
+    dial(x,y,r2);
+    const a=v=> -150 + v/2600*300;
+    for(let v=0;v<=2600;v+=100) tick(x,y,r2,a(v), v%400===0?10:5, v%400===0?2:1, "#c8d0d8");
+    for(let v=0;v<=2400;v+=400) dialNum(x,y,r2,a(v),(v/100).toFixed(0),10);
+    tick(x,y,r2,a(plane.stallSpd*3.6),13,3,"#ff5544");   // 失速レッドライン
+    digital(x,y+r2*0.45,58,spdKmh.toFixed(0));
+    needle(x,y,a(Math.min(spdKmh,2600))*DEG,r2-14,2.6);
+    hub(x,y);
+    label(x,y+r2+16,"AIRSPEED x100km/h");
+  })(X(pos.asi), iy, r);
+
+  // 姿勢儀（ADI）
+  (function(x,y,r2){
+    dial(x,y,r2);
+    hctx.save();
+    hctx.beginPath(); hctx.arc(x,y,r2-2,0,Math.PI*2); hctx.clip();
+    hctx.translate(x,y); hctx.rotate(bank);
+    const ppd=r2/32;
+    const off=pitch/DEG*ppd;
+    hctx.fillStyle="#2a5f9e"; hctx.fillRect(-r2*2,-r2*3+off,r2*4,r2*3);
+    hctx.fillStyle="#6e522c"; hctx.fillRect(-r2*2,off,r2*4,r2*3);
+    hctx.strokeStyle="#ffffff"; hctx.lineWidth=2;
+    hctx.beginPath(); hctx.moveTo(-r2,off); hctx.lineTo(r2,off); hctx.stroke();
+    hctx.lineWidth=1.2; hctx.font="8px monospace"; hctx.fillStyle="#ffffff"; hctx.textAlign="center";
+    for(let d=-30; d<=30; d+=10){
+      if(d===0) continue;
+      const yy = off - d*ppd;
+      const w2 = d%20===0 ? r2*0.42 : r2*0.26;
+      hctx.strokeStyle="#ffffff";
+      hctx.beginPath(); hctx.moveTo(-w2,yy); hctx.lineTo(w2,yy); hctx.stroke();
+      if(d%20===0){ hctx.fillText(Math.abs(d), -w2-10, yy+3); hctx.fillText(Math.abs(d), w2+10, yy+3); }
+    }
+    hctx.restore();
+    for(const bb of [-60,-45,-30,-20,-10,0,10,20,30,45,60])
+      tick(x,y,r2, bb, bb===0?11:(Math.abs(bb)%30===0?8:5), 2, "#e8eef2");
+    hctx.save(); hctx.translate(x,y); hctx.rotate(bank);
+    hctx.fillStyle=AMB;
+    hctx.beginPath(); hctx.moveTo(0,-r2+12); hctx.lineTo(-5,-r2+22); hctx.lineTo(5,-r2+22);
+    hctx.closePath(); hctx.fill();
+    hctx.restore();
+    hctx.strokeStyle=AMB; hctx.lineWidth=3;
+    hctx.beginPath();
+    hctx.moveTo(x-r2*0.5,y); hctx.lineTo(x-r2*0.15,y); hctx.lineTo(x,y+6);
+    hctx.lineTo(x+r2*0.15,y); hctx.lineTo(x+r2*0.5,y); hctx.stroke();
+    hub(x,y);
+    label(x,y+r2+16,"ATTITUDE");
+  })(X(pos.adi), iy, r);
+
+  // 高度計（2針式）
+  (function(x,y,r2){
+    dial(x,y,r2);
+    for(let i=0;i<50;i++) tick(x,y,r2,i*7.2, i%5===0?9:4, i%5===0?1.8:1, "#c8d0d8");
+    for(let i=0;i<10;i++) dialNum(x,y,r2,i*36,i.toString(),11);
+    const alt=Math.max(0,S.pos.y);
+    digital(x,y+r2*0.45,66,alt.toFixed(0)+"m");
+    needle(x,y,(alt%10000)/10000*Math.PI*2, r2*0.5, 3.4, "#c8d0d8");
+    needle(x,y,(alt%1000)/1000*Math.PI*2, r2-14, 2.2);
+    hub(x,y);
+    label(x,y+r2+16,"ALT 長針x100m/短針x1000m");
+  })(X(pos.alt), iy, r);
+
+  // アナンシエータ（警告灯パネル）＋ギアランプ
+  (function(x){
+    const bw=compact?84:98, bh=Ph*0.82, by=py+Ph*0.09;
+    hctx.fillStyle="#12161a"; hctx.fillRect(x-bw/2,by,bw,bh);
+    hctx.strokeStyle="#454d56"; hctx.lineWidth=1.5; hctx.strokeRect(x-bw/2,by,bw,bh);
+    hctx.fillStyle="#8a949e"; hctx.font="10px monospace"; hctx.textAlign="center";
+    hctx.fillText("ANNUN", x, by+13);
+    const gy=by+34;
+    hctx.fillText("GEAR", x, gy-9);
+    const transit=S.gearPos>0.05&&S.gearPos<0.95;
+    for(const [dx,dy] of [[-22,6],[0,-2],[22,6]]){
+      hctx.beginPath(); hctx.arc(x+dx,gy+dy+6,6,0,Math.PI*2);
+      hctx.fillStyle = transit ? (Math.floor(S.time*3)%2?RED:"#3a1210")
+                     : (S.gearPos>=0.95?GRN:"#15251c");
+      hctx.fill(); hctx.strokeStyle="#3a444c"; hctx.lineWidth=1.2; hctx.stroke();
+    }
+    const items=[
+      ["AP",       S.ap,           GRN],
+      ["A/B",      S.ab&&S.fuel>0, AMB],
+      ["BRAKE",    S.brake,        AMB],
+      ["STALL",    S.stall,        RED],
+      ["FUEL LOW", S.fuel<20,      RED],
+    ];
+    const ly0=gy+28;
+    const lh=Math.max(10, Math.min(16, (by+bh-16-ly0)/items.length - 4)), gap=4;
+    items.forEach((it,i)=>{
+      const ly=ly0+i*(lh+gap);
+      hctx.fillStyle = it[1]? it[2] : "#1a1f24";
+      hctx.fillRect(x-bw/2+8, ly, bw-16, lh);
+      hctx.strokeStyle="#3a444c"; hctx.lineWidth=1; hctx.strokeRect(x-bw/2+8,ly,bw-16,lh);
+      hctx.fillStyle = it[1]? "#14100a" : "#565e66";
+      hctx.font="10px monospace";
+      hctx.fillText(it[0], x, ly+lh*0.72);
+    });
+    hctx.fillStyle="#8a949e"; hctx.font="10px monospace";
+    const sTxt = sens<0.6?"LOW":(sens<0.9?"MID":"HIGH");
+    hctx.fillText("SENS:"+sTxt+" [1-3]", x, by+bh-8);
+  })(X(pos.ann));
+
+  if(!compact){
+  // 方位計（回転コンパスカード）
+  (function(x,y,r2){
+    dial(x,y,r2);
+    hctx.save();
+    hctx.translate(x,y); hctx.rotate(-heading*DEG);
+    for(let d=0;d<360;d+=10){
+      const a2=d*DEG, len=d%30===0?9:5;
+      hctx.strokeStyle="#c8d0d8"; hctx.lineWidth=d%90===0?2:1.2;
+      hctx.beginPath();
+      hctx.moveTo(Math.sin(a2)*(r2-len), -Math.cos(a2)*(r2-len));
+      hctx.lineTo(Math.sin(a2)*(r2-2),  -Math.cos(a2)*(r2-2));
+      hctx.stroke();
+      if(d%30===0){
+        const txt = d%90===0 ? "NESW"[d/90] : (d/10).toString();
+        hctx.fillStyle = d%90===0 ? "#ffd070" : "#c8d0d8";
+        hctx.font=(d%90===0?11:9)+"px monospace"; hctx.textAlign="center";
+        hctx.save();
+        hctx.translate(Math.sin(a2)*(r2-18), -Math.cos(a2)*(r2-18));
+        hctx.rotate(a2);
+        hctx.fillText(txt,0,3);
+        hctx.restore();
+      }
+    }
+    hctx.restore();
+    hctx.strokeStyle=AMB; hctx.lineWidth=2;
+    hctx.beginPath(); hctx.moveTo(x,y-r2+2); hctx.lineTo(x,y-r2+12); hctx.stroke();
+    hctx.fillStyle=AMB;
+    hctx.beginPath();
+    hctx.moveTo(x,y-8); hctx.lineTo(x-5,y+6); hctx.lineTo(x,y+2); hctx.lineTo(x+5,y+6);
+    hctx.closePath(); hctx.fill();
+    digital(x,y+r2*0.5,46,heading.toFixed(0).padStart(3,"0")+"°");
+    label(x,y+r2+16,"HDG");
+  })(X(pos.hsi), iy, r*0.94);
+
+  // 昇降計（VSI）
+  (function(x,y,r2){
+    dial(x,y,r2);
+    const a=v=> -90 + (v/30)*150;
+    for(let v=-30;v<=30;v+=5) tick(x,y,r2,a(v), v%10===0?9:5, v%10===0?1.8:1, "#c8d0d8");
+    for(let v=-30;v<=30;v+=10) dialNum(x,y,r2,a(v),Math.abs(v).toString(),9);
+    digital(x,y+r2*0.5,58,(S.vs>=0?"+":"")+S.vs.toFixed(1));
+    needle(x,y,a(THREE.MathUtils.clamp(S.vs,-30,30))*DEG,r2-13,2.4);
+    hub(x,y);
+    label(x,y+r2+16,"V/S m/s 上+/下-");
+  })(X(pos.vsi), iy, r*0.94);
+
+  // エンジン回転計
+  (function(x,y,r2){
+    dial(x,y,r2);
+    const a=v=> -135 + v*270;
+    for(let v=0;v<=100;v+=10) tick(x,y,r2,a(v/100), v%20===0?9:5, v%20===0?1.8:1, v>=96?"#ff5544":"#c8d0d8");
+    for(let v=0;v<=100;v+=20) dialNum(x,y,r2,a(v/100),v.toString(),9);
+    digital(x,y+r2*0.5,50,(S.rpm*100).toFixed(0)+"%");
+    needle(x,y,a(S.rpm)*DEG,r2-13,2.4);
+    hub(x,y);
+    label(x,y+r2+16,"ENG RPM / THR "+(S.throttle*100).toFixed(0)+"%");
+  })(X(pos.rpm), iy, r*0.9);
+
+  // 燃料計（縦バー）
+  (function(x,y,r2){
+    const fh2=r2*1.7, fy=y-fh2/2;
+    hctx.fillStyle="#181c20"; hctx.fillRect(x-11,fy-3,22,fh2+6);
+    hctx.strokeStyle="#454d56"; hctx.lineWidth=1.5; hctx.strokeRect(x-11,fy-3,22,fh2+6);
+    for(let i=0;i<=4;i++){
+      hctx.strokeStyle="#5a636d"; hctx.lineWidth=1;
+      hctx.beginPath(); hctx.moveTo(x-11,fy+fh2*i/4); hctx.lineTo(x-5,fy+fh2*i/4); hctx.stroke();
+    }
+    hctx.fillStyle = S.fuel<20?RED:GRN;
+    const fl=fh2*(S.fuel/100);
+    hctx.fillRect(x-8,fy+fh2-fl,16,fl);
+    digital(x,fy-16,44,S.fuel.toFixed(0)+"%",S.fuel<20?RED:GRN);
+    label(x,fy+fh2+18,"FUEL");
+  })(X(pos.fuel), iy, r);
+  }  // !compact
+
+  // 戦術マップ
+  (function(){
+    const ms = Math.min(Ph*0.86, compact ? Math.max(96, W*0.24) : 250);
+    const mx = W*0.988 - ms, my = py + (Ph-ms)/2;
+    hctx.fillStyle="#061a2e"; hctx.fillRect(mx,my,ms,ms);
+    hctx.save();
+    hctx.beginPath(); hctx.rect(mx,my,ms,ms); hctx.clip();
+    const sc = ms/40000;
+    const px = x => mx+ms/2 + x*sc;
+    const pz = z => my+ms/2 + z*sc;
+    hctx.fillStyle="#0c2a12";
+    hctx.fillRect(px(-23000), pz(-23000), 46000*sc, 46000*sc);
+    hctx.strokeStyle="rgba(51,255,102,0.10)"; hctx.lineWidth=1;
+    for(let g=-20000; g<=20000; g+=10000){
+      hctx.beginPath(); hctx.moveTo(px(g),my); hctx.lineTo(px(g),my+ms); hctx.stroke();
+      hctx.beginPath(); hctx.moveTo(mx,pz(g)); hctx.lineTo(mx+ms,pz(g)); hctx.stroke();
+    }
+    hctx.strokeStyle="#3a4148"; hctx.lineWidth=1.4;
+    hctx.beginPath(); hctx.moveTo(px(-15000),pz(-3400)); hctx.lineTo(px(15000),pz(-3400)); hctx.stroke();
+    hctx.beginPath(); hctx.moveTo(px(-5200),pz(-15000)); hctx.lineTo(px(-5200),pz(15000)); hctx.stroke();
+    hctx.fillStyle="#123a66";
+    hctx.beginPath(); hctx.arc(px(6200),pz(-9200),Math.max(2,1300*sc),0,Math.PI*2); hctx.fill();
+    hctx.fillStyle="#39424c";
+    hctx.fillRect(px(-10000),pz(-7800),2800*sc,2800*sc);
+    for(const mt of mountains){
+      const mr=mt.r*sc;
+      hctx.fillStyle="#26421e";
+      hctx.beginPath();
+      hctx.moveTo(px(mt.x),pz(mt.z)-mr);
+      hctx.lineTo(px(mt.x)-mr,pz(mt.z)+mr*0.8);
+      hctx.lineTo(px(mt.x)+mr,pz(mt.z)+mr*0.8);
+      hctx.closePath(); hctx.fill();
+      hctx.fillStyle="#3d5c2e";
+      hctx.beginPath();
+      hctx.moveTo(px(mt.x),pz(mt.z)-mr);
+      hctx.lineTo(px(mt.x)+mr,pz(mt.z)+mr*0.8);
+      hctx.lineTo(px(mt.x)+mr*0.25,pz(mt.z)+mr*0.8);
+      hctx.closePath(); hctx.fill();
+    }
+    hctx.fillStyle="#6a6a72";
+    hctx.fillRect(px(-330),pz(-1900),900*sc,3800*sc);
+    hctx.strokeStyle="#ffffff"; hctx.lineWidth=2;
+    hctx.beginPath(); hctx.moveTo(px(0),pz(-1500)); hctx.lineTo(px(0),pz(1500)); hctx.stroke();
+    if(S.trail.length>1){
+      hctx.strokeStyle="rgba(255,204,51,0.6)"; hctx.lineWidth=1.2;
+      hctx.beginPath();
+      hctx.moveTo(px(S.trail[0][0]), pz(S.trail[0][1]));
+      for(let i=1;i<S.trail.length;i++) hctx.lineTo(px(S.trail[i][0]), pz(S.trail[i][1]));
+      hctx.stroke();
+    }
+    const ax=THREE.MathUtils.clamp(px(S.pos.x),mx+6,mx+ms-6);
+    const ay=THREE.MathUtils.clamp(pz(S.pos.z),my+6,my+ms-6);
+    hctx.save();
+    hctx.translate(ax,ay); hctx.rotate(heading*DEG);
+    hctx.fillStyle=AMB;
+    hctx.beginPath();
+    hctx.moveTo(0,-7); hctx.lineTo(5,6); hctx.lineTo(0,3); hctx.lineTo(-5,6);
+    hctx.closePath(); hctx.fill();
+    hctx.restore();
+    hctx.restore();
+    hctx.strokeStyle="#33ff66"; hctx.lineWidth=2; hctx.strokeRect(mx,my,ms,ms);
+    hctx.fillStyle="#8a949e"; hctx.font="10px monospace"; hctx.textAlign="left";
+    hctx.fillText("TACTICAL MAP 40km / GRID 10km", mx+4, my+13);
+    hctx.fillStyle=GRN; hctx.font="bold 11px monospace";
+    hctx.fillText("N", mx+ms-16, my+15);
+    hctx.strokeStyle=GRN; hctx.lineWidth=1.5;
+    hctx.beginPath(); hctx.moveTo(mx+ms-12,my+22); hctx.lineTo(mx+ms-16,my+29); hctx.lineTo(mx+ms-8,my+29);
+    hctx.closePath(); hctx.stroke();
+  })();
+}
+
+/* ---------- リサイズ・メインループ ---------- */
+function resize(){
+  const w = window.innerWidth, h = window.innerHeight;
+  renderer.setSize(w,h);
+  camera.aspect = w/h; camera.updateProjectionMatrix();
+  hudCanvas.width = w; hudCanvas.height = h;
+}
+window.addEventListener("resize", resize);
+resize();
+
+let last = performance.now();
+function loop(now){
+  requestAnimationFrame(loop);
+  let dt = (now-last)/1000; last = now;
+  dt = Math.min(dt, 0.05);
+  if(mode==="flight") stepFlight(dt);
+  updateAudio();
+  renderer.render(scene, camera);
+  drawHUD();
+}
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
