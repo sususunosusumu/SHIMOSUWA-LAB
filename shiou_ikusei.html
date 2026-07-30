@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="子ども長持ち・夏祭りのひとこと動画撮影ガイド">
+  <title>子ども長持ち｜ひとこと動画 撮影ガイド</title>
+  <style>
+    :root{--navy:#173454;--red:#e9473f;--orange:#ff8a32;--cream:#fffaf0;--muted:#5d6b78}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(circle at 10% 20%,rgba(255,207,91,.12) 0 3px,transparent 4px) 0 0/28px 28px,var(--cream);color:var(--navy);font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;-webkit-font-smoothing:antialiased}
+    .wrap{width:min(calc(100% - 32px),840px);margin:auto}
+    .hero{position:relative;overflow:hidden;padding:44px 0 72px;color:#fff;text-align:center;background:radial-gradient(circle at 16% 15%,rgba(255,255,255,.16) 0 3px,transparent 4px) 0 0/34px 34px,linear-gradient(145deg,#f14d43,#f06442 46%,#ff9a3c)}
+    .lanterns{position:absolute;inset:12px 0 auto;display:flex;justify-content:space-around;max-width:760px;margin:auto;opacity:.5;font-size:36px}
+    .hero-inner{position:relative;z-index:1}
+    .eyebrow,.kicker{margin:0 0 8px;font-size:13px;font-weight:800;letter-spacing:.13em}
+    .eyebrow{color:#fff4ad}
+    h1{margin:0;font-size:clamp(35px,8.5vw,62px);line-height:1.2;letter-spacing:.03em;text-shadow:0 3px 0 rgba(139,37,29,.22)}
+    .lead{max-width:650px;margin:20px auto 0;font-size:clamp(16px,3.5vw,20px);font-weight:700;line-height:1.85}
+    .soft-note{display:inline-block;margin:16px auto 0;padding:8px 14px;border:1px solid rgba(255,255,255,.65);border-radius:999px;background:rgba(126,34,27,.16);font-size:13px;line-height:1.6}
+    .drive-button{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px 10px;width:min(100%,430px);min-height:72px;margin:24px auto 0;padding:13px 24px;border:3px solid #fff;border-radius:18px;background:var(--navy);color:#fff;box-shadow:0 7px 0 rgba(87,24,19,.28);font-size:19px;font-weight:800;text-decoration:none;transition:.15s}
+    .drive-button b{font-size:25px}.drive-button small{flex-basis:100%;color:#d8e8f4;font-size:11px;font-weight:500}
+    .drive-button:active{transform:translateY(5px);box-shadow:0 2px 0 rgba(87,24,19,.28)}
+    .drive-button:focus-visible,summary:focus-visible{outline:4px solid #ffe261;outline-offset:4px}
+    .wave{position:absolute;bottom:-1px;left:-5%;width:110%;height:32px;background:var(--cream);clip-path:polygon(0 60%,8% 35%,16% 65%,25% 28%,34% 57%,43% 30%,52% 62%,62% 34%,72% 65%,82% 31%,91% 58%,100% 30%,100% 100%,0 100%)}
+    .content{padding:28px 0 60px}.section{margin:42px 0}
+    .section-heading{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+    .number{display:grid;flex:0 0 48px;width:48px;height:48px;place-items:center;border-radius:50%;background:var(--red);color:#fff;box-shadow:0 4px 0 #b92f2a;font-size:24px;font-weight:900}
+    .kicker{color:var(--red)}.section-heading h2,.ok-title h2{margin:0;font-size:clamp(24px,5vw,34px);line-height:1.3}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .step{padding:22px 18px;border:1px solid #f0dfc2;border-radius:20px;background:#fff;box-shadow:0 5px 16px rgba(67,45,16,.07)}
+    .step-icon{display:block;margin-bottom:10px;font-size:32px}.step h3{margin:0 0 7px;color:var(--red);font-size:18px}
+    .step p,.tip p{margin:0;color:var(--muted);font-size:14px;line-height:1.8}
+    .example{margin-top:16px;padding:18px;border:2px dashed #f3a23d;border-radius:16px;background:#fff6d8;text-align:center}
+    .example span{color:#a75413;font-size:12px;font-weight:800}.example p{margin:4px 0 0;font-size:clamp(18px,4vw,24px);font-weight:900}
+    .ok-section{position:relative;overflow:hidden;padding:28px;border-radius:26px;background:var(--navy);color:#fff;box-shadow:0 8px 0 #10273f}
+    .ok-section:after{content:"🏮";position:absolute;right:-15px;bottom:-25px;opacity:.13;font-size:110px;transform:rotate(-12deg)}
+    .ok-title{display:flex;align-items:center;gap:14px}.ok-title>span{color:#ffdf68;font-size:48px;font-weight:900}
+    .ok-title p{margin:0 0 4px;color:#ffdf68;font-size:12px;font-weight:800;letter-spacing:.08em}
+    .ok-list{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;margin:22px 0 0;padding:0;list-style:none}
+    .ok-list li{display:flex;align-items:flex-start;gap:8px;font-size:14px;line-height:1.65}.ok-list b{color:#ffdf68}
+    .anytime-note{position:relative;z-index:1;margin:20px 0 0;padding:15px 17px;border:1px solid rgba(255,223,104,.45);border-radius:14px;background:rgba(255,255,255,.09);font-size:14px;font-weight:700;line-height:1.8}
+    .phrases{margin-top:60px}.intro{margin:-4px 0 22px;color:var(--muted);line-height:1.8}
+    .phrase-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+    details{overflow:hidden;border:1px solid #e9ded0;border-radius:18px;background:#fff;box-shadow:0 4px 12px rgba(67,45,16,.06)}
+    summary{display:flex;align-items:center;gap:10px;min-height:64px;padding:17px;cursor:pointer;font-size:17px;font-weight:900;list-style:none;user-select:none}
+    summary::-webkit-details-marker{display:none}.phrase-icon{display:grid;width:38px;height:38px;place-items:center;border-radius:12px;background:#fff1e3}
+    .chevron{margin-left:auto;font-size:22px;transition:.2s}details[open] .chevron{transform:rotate(180deg)}
+    details ul{margin:0;padding:4px 17px 17px;list-style:none}details li{padding:10px 2px;border-top:1px dashed #e9ded0;color:#34485e;font-size:14px;font-weight:700;line-height:1.55}
+    .orange summary{color:#b84a0c}.blue summary{color:#2265a5}.green summary{color:#26805a}.red summary{color:#bd3430}.purple summary{color:#7b4aaa}.yellow summary{color:#96711a}
+    .tip{display:flex;gap:14px;padding:22px;border:2px solid #f0d382;border-radius:20px;background:#fff9df}.tip>span{font-size:28px}.tip h2{margin:0 0 7px;font-size:18px}
+    .final-cta{margin:48px 0 10px;padding:28px 20px;border-radius:24px;background:linear-gradient(135deg,#f65e4c,#f49438);color:#fff;text-align:center}.final-cta p{margin:0;font-weight:800}.final-cta .drive-button{min-height:60px;margin-top:15px}
+    footer{padding:30px 20px 42px;background:var(--navy);color:#fff;text-align:center}footer p{margin:0 0 5px;color:#ffdf68;font-size:20px;font-weight:900}footer span{color:#d8e4ec;font-size:13px}
+    @media(max-width:680px){.hero{padding-top:38px}.lanterns{font-size:26px}.steps,.phrase-grid,.ok-list{grid-template-columns:1fr}.step{display:flex;gap:14px;padding:18px}.step-icon{flex:0 0 auto;margin:0}.ok-section{padding:24px 20px}.ok-title>span{font-size:40px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="lanterns" aria-hidden="true"><span>🏮</span><span>🏮</span><span>🏮</span></div>
+    <div class="wrap hero-inner">
+      <p class="eyebrow">子ども長持ち・夏祭り</p>
+      <h1>ひとこと動画を<br>撮ってください！</h1>
+      <p class="lead">お子さんの名前と、今日の意気込みや楽しみにしていることをスマホで撮影してください。</p>
+      <p class="soft-note">もちろん、できる範囲で大丈夫です。撮影できなくても問題ありません。</p>
+      <a class="drive-button" href="https://drive.google.com/drive/folders/1-UZsydR-VZIYBr_86lsdv_R9zD12cAER?usp=drive_link" target="_blank" rel="noopener noreferrer"><b>📤</b>撮った動画を投稿する<small>いつものGoogleドライブが開きます</small></a>
+    </div>
+    <div class="wave" aria-hidden="true"></div>
+  </header>
+
+  <main class="wrap content">
+    <section class="section">
+      <div class="section-heading"><span class="number">1</span><div><p class="kicker">かんたん3ステップ</p><h2>動画の撮り方</h2></div></div>
+      <div class="steps">
+        <article class="step"><span class="step-icon">📱</span><div><h3>スマホで撮影</h3><p>できれば全身が入るように撮影してください。難しければ、上半身だけでも大丈夫です。</p></div></article>
+        <article class="step"><span class="step-icon">🎤</span><div><h3>名前＋ひとこと</h3><p>「〇〇です！」のあとに、意気込みや楽しみなことをひとこと言ってもらいます。</p></div></article>
+        <article class="step"><span class="step-icon">☁️</span><div><h3>ドライブへ投稿</h3><p>撮影した動画を、いつも写真を投稿しているGoogleドライブへ入れてください。</p></div></article>
+      </div>
+      <div class="example"><span>たとえば</span><p>「○○です！ 長持ち、頑張るぞー！」</p></div>
+    </section>
+
+    <section class="ok-section">
+      <div class="ok-title"><span>◎</span><div><p>きちんとできなくても大丈夫</p><h2>無理のない範囲でお願いします</h2></div></div>
+      <ul class="ok-list">
+        <li><b>✓</b>法被に着替える前でも、着替えた後でもOK</li>
+        <li><b>✓</b>服装は何でもOK</li>
+        <li><b>✓</b>大きな声で叫ばなくてもOK</li>
+        <li><b>✓</b>短いひとことだけでもOK</li>
+        <li><b>✓</b>長持ちの途中や、ご飯を食べる時間に撮ってもOK</li>
+        <li><b>✓</b>当日撮れなかった場合は、花笠踊りの練習の時でもOK</li>
+      </ul>
+      <p class="anytime-note">長持ちの時にいないお子さんや、その場で撮れなかったお子さんも、別の機会で大丈夫です。忙しい場合は無理をせず、可能な範囲でのご協力をお願いします。</p>
+    </section>
+
+    <section class="section phrases">
+      <div class="section-heading"><span class="number">2</span><div><p class="kicker">迷ったときはこちら</p><h2>ひとことアイデア</h2></div></div>
+      <p class="intro">言うことに迷ったら、下から好きなフレーズを選んでください。もちろん、自分で考えた言葉でも大歓迎です！</p>
+      <div class="phrase-grid">
+        <details class="orange" open>
+          <summary><span class="phrase-icon">🔥</span>元気に頑張る<span class="chevron">⌄</span></summary>
+          <ul><li>「長持ち、頑張るぞー！」</li><li>「いっぱい声を出すぞー！」</li><li>「大きな声で頑張るぞー！」</li><li>「最後まで頑張るぞー！」</li><li>「元気いっぱい頑張るぞー！」</li><li>「みんなで力を合わせるぞー！」</li><li>「最後まで歩くぞー！」</li><li>「疲れても頑張るぞー！」</li><li>「笑顔で頑張ります！」</li><li>「一生懸命頑張ります！」</li><li>「今日の主役になるぞー！」</li><li>「全力で楽しむぞー！」</li></ul>
+        </details>
+        <details class="blue">
+          <summary><span class="phrase-icon">🏮</span>お祭りを楽しむ<span class="chevron">⌄</span></summary>
+          <ul><li>「夏祭りを楽しむぞー！」</li><li>「みんなと一緒に楽しみます！」</li><li>「友だちといっぱい楽しむぞー！」</li><li>「最高の思い出をつくるぞー！」</li><li>「お祭り、大好き！」</li><li>「いっぱい笑いたいです！」</li><li>「夜までいっぱい遊ぶぞー！」</li><li>「みんなで盛り上がろう！」</li><li>「今年の夏も最高にするぞー！」</li><li>「お祭りを遊びつくすぞー！」</li></ul>
+        </details>
+        <details class="green">
+          <summary><span class="phrase-icon">🥤</span>食べ物・飲み物<span class="chevron">⌄</span></summary>
+          <ul><li>「お肉をいっぱい食べたいです！」</li><li>「焼きそばが食べたいです！」</li><li>「かき氷を食べるぞー！」</li><li>「ポテトが食べたいです！」</li><li>「フランクフルトが楽しみです！」</li><li>「ジュースをいっぱい飲むぞー！」</li><li>「ラムネを飲みたいです！」</li><li>「おなかいっぱい食べるぞー！」</li><li>「頑張った後のお肉が楽しみです！」</li><li>「今日の目標は、おかわりです！」</li></ul>
+        </details>
+        <details class="red">
+          <summary><span class="phrase-icon">📣</span>長持ち・掛け声<span class="chevron">⌄</span></summary>
+          <ul><li>「長持ち、いくぞー！」</li><li>「わっしょい、わっしょい！」</li><li>「声を合わせるぞー！」</li><li>「みんなで担ぐぞー！」</li><li>「町中に声を響かせるぞー！」</li><li>「大きな声で、わっしょーい！」</li><li>「力を合わせて、出発だー！」</li><li>「今年の長持ちも最高だー！」</li><li>「みんな、ついてこーい！」</li><li>「元気を町に届けるぞー！」</li></ul>
+        </details>
+        <details class="purple">
+          <summary><span class="phrase-icon">👑</span>でっかい夢・おもしろ宣言<span class="chevron">⌄</span></summary>
+          <ul><li>「天下を取るぞー！」</li><li>「海賊王になるぞー！」</li><li>「今日から俺が大将だー！」</li><li>「この町のヒーローになるぞー！」</li><li>「長持ち界の伝説になるぞー！」</li><li>「祭りの王様になるぞー！」</li><li>「世界一の声を出すぞー！」</li><li>「今日、一番目立つぞー！」</li><li>「主役はわたしだー！」</li><li>「カメラを独り占めするぞー！」</li><li>「長持ちを宇宙まで届けるぞー！」</li><li>「かき氷を百杯食べるぞー！」</li><li>「お肉を山ほど食べるぞー！」</li><li>「暑さなんか吹き飛ばすぞー！」</li><li>「宿題のことは、今日は忘れます！」</li><li>「明日の筋肉痛には負けないぞー！」</li></ul>
+        </details>
+        <details class="yellow">
+          <summary><span class="phrase-icon">🌱</span>短く・言いやすく<span class="chevron">⌄</span></summary>
+          <ul><li>「頑張ります！」</li><li>「楽しみです！」</li><li>「わっしょい！」</li><li>「お肉が食べたいです！」</li><li>「かき氷が好きです！」</li><li>「いっぱい歩きます！」</li><li>「大きな声を出します！」</li><li>「よろしくお願いします！」</li><li>「楽しむぞー！」</li><li>「いくぞー！」</li><li>「イエーイ！」</li><li>「お祭り大好き！」</li></ul>
+        </details>
+      </div>
+    </section>
+
+    <section class="tip"><span>💡</span><div><h2>言葉が出にくいときは、質問してみてください</h2><p>「今日、何を頑張る？」「何を食べたい？」など、大人が質問して、お子さんが短く答える形でも大丈夫です。</p></div></section>
+    <section class="final-cta"><p>撮影できたら、こちらから投稿してください</p><a class="drive-button" href="https://drive.google.com/drive/folders/1-UZsydR-VZIYBr_86lsdv_R9zD12cAER?usp=drive_link" target="_blank" rel="noopener noreferrer"><b>📤</b>Googleドライブを開く</a></section>
+  </main>
+
+  <footer><p>ご協力ありがとうございます！</p><span>みんなで楽しい夏祭りにしましょう 🏮</span></footer>
+</body>
+</html>
