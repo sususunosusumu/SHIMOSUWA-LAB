@@ -13,6 +13,9 @@ for k in keys:
   for s in x.get('sourceIds',[]):assert s in ids['sources'],(k,x['id'],s)
 for r in d['performances']:
  assert r['schoolId'] in ids['schools']
+ assert r['level'] in ('中学校','高等学校')
+ assert r['performed'] in (True,False,None)
+ if r['award'] in ('辞退','欠場'):assert r['performed'] is False
  assert r['eventId'] in ids['events']
  assert not r['conductorId'] or r['conductorId'] in ids['conductors']
  assert r['status'] in ('確認済み','一部確認','未確認')

@@ -13,7 +13,7 @@ HTML・CSS・JavaScript・JSONだけで動作するGitHub Pages用の静的サ�
 ## 現在の収録範囲（2026-10-09）
 
 - 諏訪地区の中学校は現行17校・旧校1校。高校部門は公立・私立・旧校・資料上の名称と合同団体を登録。
-- 2009〜2026年度の公式HTML大会記録を中心に7,937件。
+- 2009〜2026年度の公式HTML大会記録を中心に7,937件（辞退・欠場等も大会履歴として含む）。
 - 長野県吹奏楽連盟の地区・ブロック・県大会、確認できた中部日本大会。2026年度のアンコンなど未来の未開催結果は収録していません。
 - 指揮者476識別項目（学校内の同表記で整理。人物数を意味しません）、曲目4,682項目（抜粋・編曲の違いを維持）、大会310項目、出典314件。
 - 学校一覧は長野県教育委員会「公立中学校一覧」を参照。県立諏訪清陵高校附属中学校も対象に含めています。
@@ -30,7 +30,7 @@ HTML・CSS・JavaScript・JSONだけで動作するGitHub Pages用の静的サ�
 | conductors | id, name, normalizedName, schoolId, aliases, identityStatus, appointments, sourceIds |
 | works | id, title, composer, arranger, aliases, sourceIds |
 | events | id, year, name, family, level, stage, label, date, venue, sourceIds |
-| performances | id, schoolId, eventId, year, level, division, divisionRaw, conductorId, pieces, award, recommendation, ensemble, ensembleCategory, size, sourceIds, status, rawRow, note |
+| performances | id, schoolId, eventId, year, level, division, divisionRaw, conductorId, pieces, award, recommendation, ensemble, ensembleCategory, size, sourceIds, status, performed, participationStatus, rawRow, note |
 | sources | id, title, url, publisher, checkedAt |
 | coverage | year, level, family, status, recordCount, note |
 | eventStatuses | 大会中止・未開催などを出典付きで将来追加するための領域 |
@@ -48,9 +48,9 @@ HTML・CSS・JavaScript・JSONだけで動作するGitHub Pages用の静的サ�
 
 ## 集計の定義
 
-- 演奏回数：大会段階ごとの演奏記録数。同曲の地区・県演奏は2件。
+- 演奏回数：大会段階ごとの演奏記録数。辞退・欠場98件と実演未確認2件は実演統計から除外し、受賞・演奏結果を確認した7,837件を集計対象にします。同曲の地区・県演奏は2件。
 - 代表推薦：公式表の「代表」を確認した記録数。上位大会実出場や異なる年度の進出回数とは別。
-- 年度別参加学校数：登録済み記録内の学校IDの重複を除いた数。
+- 年度別参加学校数：登録済み記録内の学校・合同団体IDの重複を除いた数。辞退・欠場・実演未確認を除外します。
 - 指揮者統計：確認できる大会記録のみ。同表記の他校指揮者は別集計。
 - 編成・人数：資料の編成表記に基づき整理。空白人数は除外。
 - 中部日本の賞（優勝・準優勝・優秀・努力など）は原表記を保持し、金銀銅へ換算しません。
