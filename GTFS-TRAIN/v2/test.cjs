@@ -17,3 +17,8 @@ console.log('Model checks passed');
 assert.ok(M.stations('full','both').includes('みどり湖')&&M.stations('full','both').includes('辰野'));
 assert.equal(M.color({name:'普通',stops:[['辰野']]}),'#007e9a');
 assert.equal(M.color({name:'特急あずさ',stops:[['辰野']]}),'#af287a');
+const fixture=[{id:'a',number:'A',name:'普通',direction:'down',stops:[['下諏訪','06:00','06:00'],['岡谷','06:05','06:05']]},{id:'b',number:'B',name:'普通',direction:'down',stops:[['岡谷','06:10','06:10'],['松本','06:30','06:30']]}];
+assert.equal(M.connections(fixture,'下諏訪','松本',350,400,5)[0].wait,5);
+assert.equal(M.connections(fixture,'下諏訪','松本',350,400,10).length,0);
+assert.equal(M.connections(fixture,'松本','下諏訪',350,400,5).length,0);
+assert.equal(M.connections(fixture,'下諏訪','岡谷',350,400,5)[0].legs.length,1);
