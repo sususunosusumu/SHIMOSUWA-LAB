@@ -14,3 +14,6 @@ assert.deepEqual(M.stations('suwa','midori'),['岡谷','下諏訪','上諏訪','
 assert.ok(!M.stations('full','tatsuno').includes('みどり湖'));
 for(const t of data.trains){let last=-1;for(const s of t.stops){const m=M.minutes(s[2]||s[1]);assert.notEqual(m,null);assert.ok(m>=last);last=m;}}
 console.log('Model checks passed');
+assert.ok(M.stations('full','both').includes('みどり湖')&&M.stations('full','both').includes('辰野'));
+assert.equal(M.color({name:'普通',stops:[['辰野']]}),'#007e9a');
+assert.equal(M.color({name:'特急あずさ',stops:[['辰野']]}),'#af287a');
