@@ -1,0 +1,10 @@
+const assert=require('node:assert/strict'),M=require('./model'),data=require('./data.json'),rail=require('./rail.json');
+const at=s=>Date.parse(s+'+09:00');
+assert(M.holiday('2026-10-12',data));assert(!M.holiday('2026-10-13',data));
+let b=M.buses(data,at('2026-10-12T00:00:00'),'station').filter(x=>M.day(x.dep)==='2026-10-12');assert.deepEqual(b.map(x=>x.station),['08:25','12:41']);
+b=M.buses(data,at('2026-10-13T00:00:00'),'school').filter(x=>M.day(x.dep)==='2026-10-13');assert.equal(b.length,7);assert(!b.some(x=>x.school==='12:48'));assert(b.some(x=>x.school==='08:34'));
+assert.equal(M.buses(data,at('2026-11-01T00:00:00'),'school').length,0);assert.equal(M.trains(rail,at('2026-11-01T00:00:00')).length,0);
+let ts=M.trains(rail,at('2026-10-13T17:00:00'));assert(ts.length);assert(ts.every(t=>t.days[rail.dates.indexOf(t.date)]==='1'));assert(ts.every((t,i)=>!i||t.dep>=ts[i-1].dep));
+const school={id:'school'},station={id:'station'};assert.equal(M.duration(school,station,'walk'),30);assert.equal(M.duration(station,school,'walk'),38);
+let trips=M.ground(school,station,at('2026-10-13T15:50:00'),['walk','bus'],data);assert(trips[0].mode==='bus');assert.equal(trips[0].wait,8);assert.equal(trips[0].arr,at('2026-10-13T16:06:00'));
+console.log('PASS: holidays, corrected bus services, expiry, rail calendar, order, slope and waiting times');
