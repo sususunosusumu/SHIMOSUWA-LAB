@@ -1,13 +1,13 @@
 'use strict';
 const $=id=>document.getElementById(id), M=RailModel;
 let data, sources, selected=null, mode='table', playing=null, simulated=false, clockMinute=300;
-const state={station:'下諏訪',direction:'both',service:'auto',range:'suwa',route:'midori',zoom:'1',height:'48',start:'05:00',end:'23:59',kinds:['local','azusa']};
+const state={station:'松本',direction:'both',service:'auto',range:'full',route:'midori',zoom:'1',height:'48',start:'05:00',end:'23:59',kinds:['local','azusa']};
 const today=()=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 function nowMinute(){const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Tokyo',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(new Date()).split(':').map(Number);return parts[0]*60+parts[1];}
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const direction=t=>t.direction==='up'?'上り':'下り';
+const direction=t=>t.direction==='up'?'東京方面':'松本方面';
 const endLabel=t=>`${t.stops[0][0]} → ${t.stops.at(-1)[0]}（収録区間）`;
-function save(){try{localStorage.setItem('shimosuwa-rail-v2',JSON.stringify({...state,mode}));}catch{}}
+function save(){try{localStorage.setItem('shimosuwa-rail-v2',JSON.stringify({...state,mode,layoutVersion:2}));}catch{}}
 function span(){return [M.minutes(state.start),M.minutes(state.end)];}
 function validSpan(){const [a,b]=span();return a!==null&&b!==null&&a<b;}
 function trains(){return M.select(data,state);}
@@ -30,18 +30,18 @@ function renderTimeline(events){let mark=false;const now=markerTime(),next=now==
  const rows=events.map(e=>{let before='';if(now!==null&&!mark&&e.minute>=now){mark=true;before=`<div class="time-marker" id="timeMarker">${simulated?'再生':'現在'} ${M.time(now)}</div>`;}const remain=now!==null&&e.minute>=now?`${Math.ceil(e.minute-now)}分後（予定・未確認）`:'';return before+`<article class="${e.train.id===selected?'selected':''}" style="--color:${M.colors[M.kind(e.train)]}" data-minute="${e.minute}"><time>${M.time(e.minute)}</time><div>${button(e.train)}<small>${esc(endLabel(e.train))}</small><small>${e===next?'次の停車記録 · ':''}${remain}</small></div></article>`;}).join('');
  $('view').innerHTML=`<div class="timeline">${rows||'<p class="empty">この駅の停車記録はありません。</p>'}${now!==null&&!mark?`<div id="timeMarker" class="time-marker">${simulated?'再生':'現在'} ${M.time(now)} · 以降の記録はありません</div>`:''}</div>`;
 }
-function renderDiagram(ts,a,b){const ss=M.stations(state.range,state.route),h=Number(state.height),w=Math.max(900,$('view').clientWidth)*Number(state.zoom),H=ss.length*h+80,x=m=>110+(m-a)/(b-a)*(w-140),y=st=>50+ss.indexOf(st)*h;
+function renderDiagram(ts,a,b){const ss=M.stations(state.range,state.route),h=Number(state.height),w=Math.max(900,$('view').clientWidth)*Number(state.zoom),H=ss.length*h+140,x=m=>110+(m-a)/(b-a)*(w-140),y=st=>110+ss.indexOf(st)*h;
  const branchOther=state.route==='midori'?M.branch:['みどり湖'];
  const relevant=ts.filter(t=>!t.stops.some(s=>branchOther.includes(s[0]))&&t.stops.filter(s=>ss.includes(s[0])).length>=2);
- let svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${H}" role="img" aria-label="駅と時刻を結ぶ参考ダイヤグラム"><defs><clipPath id="plot"><rect x="110" y="30" width="${w-140}" height="${H-50}"/></clipPath></defs>`;
- for(let m=Math.ceil(a/30)*30;m<=b;m+=30)svg+=`<line x1="${x(m)}" x2="${x(m)}" y1="30" y2="${H-30}" stroke="#e1eae5"/><text x="${x(m)}" y="21" text-anchor="middle">${M.time(m)}</text>`;
+ let svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${H}" role="img" aria-label="駅と時刻を結ぶ参考ダイヤグラム"><defs><clipPath id="plot"><rect x="110" y="90" width="${w-140}" height="${H-120}"/></clipPath></defs>`;
+ for(let m=Math.ceil(a/30)*30;m<=b;m+=30)svg+=`<line x1="${x(m)}" x2="${x(m)}" y1="90" y2="${H-30}" stroke="#e1eae5"/><text class="axis-time" transform="translate(${x(m)+4} 78) rotate(-90)" text-anchor="start">${M.time(m)}</text>`;
  ss.forEach(st=>svg+=`<line x1="110" x2="${w-30}" y1="${y(st)}" y2="${y(st)}" stroke="${st===state.station?'#cba548':'#dce7e1'}"/><text x="100" y="${y(st)+4}" text-anchor="end" font-weight="${st===state.station?'700':'400'}">${esc(st)}</text>`);
  svg+='<g clip-path="url(#plot)">';
  relevant.sort((x,y)=>Number(x.id===selected)-Number(y.id===selected)).forEach(t=>{const points=t.stops.filter(s=>ss.includes(s[0])&&M.minutes(s[2]||s[1])!==null);const p=points.map(s=>`${x(M.minutes(s[2]||s[1]))},${y(s[0])}`).join(' ');const c=M.colors[M.kind(t)],sel=t.id===selected;svg+=`<polyline points="${p}" fill="none" stroke="transparent" stroke-width="14" tabindex="0" role="button" class="train-path" aria-label="${esc(t.number+' '+t.name+' '+direction(t))}" data-train="${esc(t.id)}"><title>${esc(t.number+' '+t.name+' '+endLabel(t))}</title></polyline><polyline points="${p}" fill="none" stroke="${c}" stroke-width="${sel?5:1.8}" opacity="${selected&&!sel?.25:1}" pointer-events="none"/>`;
  if(sel)points.forEach(s=>svg+=`<circle cx="${x(M.minutes(s[2]||s[1]))}" cy="${y(s[0])}" r="4" fill="${c}" pointer-events="none"/>`);
  });
- const now=state.date===today()?nowMinute():null;if(now!==null)svg+=`<line id="realTimeLine" x1="${x(now)}" x2="${x(now)}" y1="30" y2="${H-30}" stroke="#c53f38" stroke-width="2"/><text x="${x(now)+5}" y="42" fill="#c53f38">現在 ${M.time(now)}</text>`;
- if(simulated)svg+=`<line id="timeMarker" x1="${x(clockMinute)}" x2="${x(clockMinute)}" y1="30" y2="${H-30}" stroke="#cf8116" stroke-width="3"/><text x="${x(clockMinute)+5}" y="60" fill="#a76610">再生 ${M.time(clockMinute)}</text>`;
+ const now=state.date===today()?nowMinute():null;if(now!==null)svg+=`<line id="realTimeLine" x1="${x(now)}" x2="${x(now)}" y1="90" y2="${H-30}" stroke="#c53f38" stroke-width="2"/><text x="${x(now)+5}" y="102" fill="#c53f38">現在 ${M.time(now)}</text>`;
+ if(simulated)svg+=`<line id="timeMarker" x1="${x(clockMinute)}" x2="${x(clockMinute)}" y1="90" y2="${H-30}" stroke="#cf8116" stroke-width="3"/><text x="${x(clockMinute)+5}" y="${H-36}" fill="#a76610">再生 ${M.time(clockMinute)}</text>`;
  svg+='</g></svg>';
  $('view').innerHTML=`<p class="diagram-caption">${ss[0]}〜${ss.at(-1)} · ${state.route==='midori'?'みどり湖':'辰野'}経由 · 縦軸は駅順（距離ではありません）。通過時刻・現在位置は未収録。</p>${svg}<div class="diagram-caption">表示中の列車記録：${relevant.filter(t=>t.stops.some(s=>ss.includes(s[0])&&M.minutes(s[2]||s[1])>=a&&M.minutes(s[2]||s[1])<=b)).map(button).join(' ')||'該当記録なし'}</div>`;
 }
@@ -54,8 +54,8 @@ function sync(){for(const k of ['station','date','direction','service','range','
 function stop(){clearInterval(playing);playing=null;$('play').textContent='時間再生';}
 function current(){stop();simulated=false;const n=nowMinute();clockMinute=n;$('cursor').value=n;$('clock').textContent=M.time(n);render();if(mode==='timeline')$('timeMarker')?.scrollIntoView({block:'nearest'});else if(mode==='diagram'){const [a,b]=span();$('view').scrollLeft=Math.max(0,110+(n-a)/(b-a)*(Math.max(900,$('view').clientWidth)*Number(state.zoom)-140)-$('view').clientWidth/2);}else{const cells=[...$('view').querySelectorAll('[data-minute]')].filter(e=>Number(e.dataset.minute)>=n).sort((a,b)=>Number(a.dataset.minute)-Number(b.dataset.minute));cells[0]?.scrollIntoView({block:'nearest',inline:'center'});}}
 async function init(){try{const results=await Promise.all(['data.json','sources.json'].map(async path=>{const r=await fetch(path);if(!r.ok)throw Error(path);return r.json();}));[data,sources]=results;
- state.date=today();try{const saved=JSON.parse(localStorage.getItem('shimosuwa-rail-v2')||'null');if(saved){for(const k of ['station','direction','service','range','route','zoom','height','start','end'])if(typeof saved[k]==='string')state[k]=saved[k];if(Array.isArray(saved.kinds))state.kinds=saved.kinds.filter(k=>M.colors[k]);if(['table','timeline','diagram'].includes(saved.mode))mode=saved.mode;}}catch{}
- const stationList=[...M.order,...M.branch];if(!stationList.includes(state.station))state.station='下諏訪';$('station').innerHTML=stationList.map(s=>`<option>${esc(s)}</option>`).join('');sync();for(const k of ['direction','service','range','route','zoom','height'])if(!$(k).value){state[k]={direction:'both',service:'auto',range:'suwa',route:'midori',zoom:'1',height:'48'}[k];}sync();
+ state.date=today();try{const saved=JSON.parse(localStorage.getItem('shimosuwa-rail-v2')||'null');if(saved){if(saved.layoutVersion!==2){saved.station='松本';saved.range='full';}for(const k of ['station','direction','service','range','route','zoom','height','start','end'])if(typeof saved[k]==='string')state[k]=saved[k];if(Array.isArray(saved.kinds))state.kinds=saved.kinds.filter(k=>M.colors[k]);if(['table','timeline','diagram'].includes(saved.mode))mode=saved.mode;}}catch{}
+ const stationList=[...M.order,...M.branch];if(!stationList.includes(state.station))state.station='松本';$('station').innerHTML=stationList.map(s=>`<option>${esc(s)}</option>`).join('');sync();for(const k of ['direction','service','range','route','zoom','height'])if(!$(k).value){state[k]={direction:'both',service:'auto',range:'full',route:'midori',zoom:'1',height:'48'}[k];}sync();
  $('sourceInfo').innerHTML=`<p>更新・調査日：${esc(sources.updated)} ／ データ版：${esc(sources.feedVersion)}<br>GTFS上の収録期間：${esc(sources.coverageStart)}〜${esc(sources.coverageEnd)}（有効性を保証する期間ではありません）</p><p>${esc(sources.description)}</p><p>${esc(sources.revision.october)} 公式に確認できた改正日は${esc(sources.revision.confirmedDate)}です。2026年10月版の公式時刻表は閲覧可能ですが、自動取得・全列車の照合・運転日の反映は未実装です。</p><ul>${sources.limitations.map(s=>`<li>${esc(s)}</li>`).join('')}</ul><ul>${sources.links.map(s=>`<li><a target="_blank" rel="noopener" href="${esc(s.url)}">${esc(s.label)}</a></li>`).join('')}</ul>`;
  for(const k of ['station','date','direction','service','range','route','zoom','height','start','end'])$(k).addEventListener('change',()=>{state[k]=$(k).value;stop();render();});
  $('filters').addEventListener('change',()=>{state.kinds=[...document.querySelectorAll('#filters input:checked')].map(e=>e.value);render();});document.querySelectorAll('[data-mode]').forEach(e=>e.onclick=()=>{stop();mode=e.dataset.mode;render();});
