@@ -1,0 +1,46 @@
+{
+  "updated": "2026-10-12",
+  "status": "reference",
+  "feedVersion": "2026-05-coordinate-v2",
+  "coverageStart": "2026-05-01",
+  "coverageEnd": "2027-03-31",
+  "sourceArchive": "../jr_east_chuo_shinonoi_gtfs_coord_verified_clean.zip",
+  "description": "既存リポジトリの公式PDF由来GTFSを変換。元PDF・抽出実施日は未収録。2026年10月公式版との全列車照合は未実施。",
+  "limitations": [
+    "貨物列車の時刻・運転日は未収録です。選択しても架空の列車は追加しません。",
+    "祝日・臨時列車・特定日の時刻変更は未検証です。曜日だけで運転を確定できません。",
+    "同じ列車番号の複数レコードは統合せず別記録として表示します。件数は実際の列車本数とは限りません。",
+    "詳細の始発・終着は収録区間の端です。実際の始発・終着を確認できないため未確認と表示します。",
+    "通過時刻は未収録です。空欄は非停車・別経路・データ欠損を区別できません。",
+    "到着・発車が同時刻のデータが多く、停車時間の精度は未確認です。",
+    "座標は規則的な仮値のため利用しません。ダイヤの縦軸は等間隔の駅順であり距離ではありません。"
+  ],
+  "revision": {
+    "october": "中央本線・篠ノ井線の2026年10月一斉改正の有無・適用日は確認できていません。月版の公開を改正日とは扱いません。",
+    "confirmedDate": "2026-03-14",
+    "officialOctoberAvailable": true
+  },
+  "links": [
+    {
+      "label": "JR東日本 下諏訪駅の公式時刻表",
+      "url": "https://timetables.jreast.co.jp/timetable/list0823.html"
+    },
+    {
+      "label": "JR東日本 2026年10月版 中央本線下り（土休日）",
+      "url": "https://timetables.jreast.co.jp/2610/timetable-v/223d2p.html"
+    },
+    {
+      "label": "JR東日本 2026年3月ダイヤ改正（3月14日適用）",
+      "url": "https://www.jreast.co.jp/press/2025/20251212_ho02.pdf"
+    },
+    {
+      "label": "JR貨物 2026年3月改正（3月14日適用）",
+      "url": "https://www.jrfreight.co.jp/info/2025/files/20251212_01.pdf"
+    },
+    {
+      "label": "JR貨物 公式コンテナ時刻表の案内",
+      "url": "https://www.jrfreight.co.jp/service/area"
+    }
+  ],
+  "sourceSha256": "d996e7ae9987d9cc7e6067d676bb60018c70b334d5568d6b6f750b657019e953"
+}
