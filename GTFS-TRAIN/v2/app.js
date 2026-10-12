@@ -114,6 +114,6 @@ async function init(){try{const results=await Promise.all(['data.json','sources.
  $('clear').onclick=()=>{selected=null;render();};$('now').onclick=current;
  $('cursor').oninput=()=>{stop();simulated=true;clockMinute=Number($('cursor').value);$('clock').textContent=M.time(clockMinute);render();};
  $('play').onclick=()=>{if(playing){stop();return;}if(!validSpan())return;const [a,b]=span();simulated=true;if(clockMinute<a||clockMinute>=b)clockMinute=a;$('play').textContent='一時停止';playing=setInterval(()=>{clockMinute=Math.min(b,clockMinute+1);$('cursor').value=clockMinute;$('clock').textContent=M.time(clockMinute);render();if(clockMinute>=b)stop();},300);render();};
- render();setInterval(()=>{if(!simulated&&state.date===today()&&mode!=='table')render();},30000);
+ render();setInterval(()=>{if(!simulated&&state.date===today()&&['timeline','diagram','explorer'].includes(mode))render();},30000);
  }catch(err){$('status').textContent='データを読み込めませんでした。ページを再読み込みしてください。';$('view').innerHTML='<p class="empty error">開発版のデータ取得に失敗しました。</p>';console.error(err);}}
 init();
