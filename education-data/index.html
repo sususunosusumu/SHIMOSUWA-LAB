@@ -78,7 +78,7 @@ const rr=regions.filter(r=>g==="all"||r[1]==="base"||r[1]===g);
 const fmt=n=>(Number.isInteger(n)?String(n):n.toFixed(1));
 document.getElementById("regionRows").innerHTML=rr.map(([name,type])=>{
 const n=data[name],valid=Number.isFinite(n),delta=valid&&Number.isFinite(baseline)?n-baseline:null;
-return '<tr class="'+(name==="長野県"?"highlight":"")+'"><td><b>'+name+'</b></td><td>'+(type==="base"?"基準":type==="metro"?"大都市圏":"同規模県候補")+'</td><td>'+(valid?'<strong>'+fmt(n)+'</strong> '+unit:'<span class="missing">'+(absent?"当該年度の対象外":"数値照合中")+'</span>')+'</td><td>'+(delta===null?"—":(delta>0?"+":"")+fmt(delta)+(irt?" 点":" pt"))+'</td><td><a href="'+(valid?provenance[y]:links[y])+'" target="_blank" rel="noopener">'+(valid?"数値の出典":"一次資料")+" ↗</a></td></tr>'
+return '<tr class="'+(name==="長野県"?"highlight":"")+'"><td><b>'+name+'</b></td><td>'+(type==="base"?"基準":type==="metro"?"大都市圏":"同規模県候補")+'</td><td>'+(valid?'<strong>'+fmt(n)+'</strong> '+unit:'<span class="missing">'+(absent?"当該年度の対象外":"数値照合中")+'</span>')+'</td><td>'+(delta===null?"—":(delta>0?"+":"")+fmt(delta)+(irt?" 点":" pt"))+'</td><td><a href="'+(valid?provenance[y]:links[y])+'" target="_blank" rel="noopener">'+(valid?"数値の出典":"一次資料")+' ↗</a></td></tr>'
 }).join("");
 const validRows=rr.map(([name])=>({name,n:data[name]})).filter(x=>Number.isFinite(x.n));
 const min=irt?400:0,max=irt?600:100;
