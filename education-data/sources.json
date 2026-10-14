@@ -1,0 +1,1976 @@
+[
+  {
+    "year": 2025,
+    "code": "01",
+    "name": "北海道",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/01_hokkaido/01m_25rs.xlsx",
+    "sha256": "dabfe530a0106e82d34af7ea9f073ebe62ab90d2537658babbb27554cd9a9348"
+  },
+  {
+    "year": 2025,
+    "code": "01",
+    "name": "北海道",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/01_hokkaido/01m_25a.xlsx",
+    "sha256": "16ee158d85858a0d9e0f18bb4b73626567a9fec9fb94074fafe3a8bed352dfc4"
+  },
+  {
+    "year": 2025,
+    "code": "02",
+    "name": "青森県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/02_aomori/02m_25rs.xlsx",
+    "sha256": "27deb63c334d10443d6ac67f655fcdd9a3e9710b35241e318a7f8bb020dd5794"
+  },
+  {
+    "year": 2025,
+    "code": "02",
+    "name": "青森県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/02_aomori/02m_25a.xlsx",
+    "sha256": "7fd785c0ce58858bac40e321550a657807aeb9ac5bb095207b010e3f8566e1d5"
+  },
+  {
+    "year": 2025,
+    "code": "03",
+    "name": "岩手県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/03_iwate/03m_25rs.xlsx",
+    "sha256": "adb4d1616512e2d3968164f6fcc9627e14c294ca603e8af0dbb2b0a348295906"
+  },
+  {
+    "year": 2025,
+    "code": "03",
+    "name": "岩手県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/03_iwate/03m_25a.xlsx",
+    "sha256": "90ff4887a42dc3a4e29be829bcb137f62afa709ad459b7d8ed4afd83779f372b"
+  },
+  {
+    "year": 2025,
+    "code": "04",
+    "name": "宮城県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/04_miyagi/04m_25rs.xlsx",
+    "sha256": "3da689a8897c95cdb44e9d0735829576dd2ac78d94d6d1e853733127ca00f66a"
+  },
+  {
+    "year": 2025,
+    "code": "04",
+    "name": "宮城県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/04_miyagi/04m_25a.xlsx",
+    "sha256": "3706d2d6b44eb743b93f6068d4e360ea52151a2da2b1699b6ccefdbf3514ea37"
+  },
+  {
+    "year": 2025,
+    "code": "05",
+    "name": "秋田県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/05_akita/05m_25rs.xlsx",
+    "sha256": "70e00c9f7667b2d6f74c19defe30df3444338babdd3b17c33c4328a0a31118ac"
+  },
+  {
+    "year": 2025,
+    "code": "05",
+    "name": "秋田県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/05_akita/05m_25a.xlsx",
+    "sha256": "fd1d9a2eecf638b1ffff7b6ca7fe92b4a391f397c61e099d656853ba6f38fcc8"
+  },
+  {
+    "year": 2025,
+    "code": "06",
+    "name": "山形県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/06_yamagata/06m_25rs.xlsx",
+    "sha256": "53e385eb1ff163b30bdae2d235d5339be2f019bd20e1943535366d17fc966bf7"
+  },
+  {
+    "year": 2025,
+    "code": "06",
+    "name": "山形県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/06_yamagata/06m_25a.xlsx",
+    "sha256": "cbe1ab9dc96747aec018e34f81961805ed1116491699678c7d4f16abf6b34e70"
+  },
+  {
+    "year": 2025,
+    "code": "07",
+    "name": "福島県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/07_fukushima/07m_25rs.xlsx",
+    "sha256": "0aa1ffac96a2c8065ec64a4e90d8c3c5feac477c2209371c6b73b47747bb79a0"
+  },
+  {
+    "year": 2025,
+    "code": "07",
+    "name": "福島県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/07_fukushima/07m_25a.xlsx",
+    "sha256": "674ef8c92f2c87d2785e21fcf9d027b620f01e4239727be37c6385a1647e293f"
+  },
+  {
+    "year": 2025,
+    "code": "08",
+    "name": "茨城県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/08_ibaraki/08m_25rs.xlsx",
+    "sha256": "155fd081d805e6a08cc1b3c0f41e94d9d9480827c8f5839f4151e49ed4bc7150"
+  },
+  {
+    "year": 2025,
+    "code": "08",
+    "name": "茨城県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/08_ibaraki/08m_25a.xlsx",
+    "sha256": "08c965f42397f325fb59c363b8fb8f8f908320e8393c76aeb6d3cca5106ee68d"
+  },
+  {
+    "year": 2025,
+    "code": "09",
+    "name": "栃木県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/09_tochigi/09m_25rs.xlsx",
+    "sha256": "1e235b20ca1991d4d53ad3e6a008b900b13613a53b0551d9bd3e2f382da3ce53"
+  },
+  {
+    "year": 2025,
+    "code": "09",
+    "name": "栃木県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/09_tochigi/09m_25a.xlsx",
+    "sha256": "ba2449f180426e5b0cca1f7c012ef873a160055439a04d799b12fc4c22e42504"
+  },
+  {
+    "year": 2025,
+    "code": "10",
+    "name": "群馬県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/10_gunma/10m_25rs.xlsx",
+    "sha256": "25fe450af1045eba65945fd0c92c2e6536a1d364e8d42eff59fd60480c71276e"
+  },
+  {
+    "year": 2025,
+    "code": "10",
+    "name": "群馬県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/10_gunma/10m_25a.xlsx",
+    "sha256": "2e97361d16b64fdb06604c2f1acce5c426f764abbd5a42ae7458b76f560b3fd7"
+  },
+  {
+    "year": 2025,
+    "code": "11",
+    "name": "埼玉県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/11_saitama/11m_25rs.xlsx",
+    "sha256": "be752536682fa7f90b01eae9e37e339ee08a960657fc4a13b4d42fc726666720"
+  },
+  {
+    "year": 2025,
+    "code": "11",
+    "name": "埼玉県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/11_saitama/11m_25a.xlsx",
+    "sha256": "063456b7d6cc0dcb8eee21a81bc526f9707c60db1eff4f1fffea1c652513e083"
+  },
+  {
+    "year": 2025,
+    "code": "12",
+    "name": "千葉県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/12_chiba/12m_25rs.xlsx",
+    "sha256": "e63d3bd78825fafa4b3c1f9cbba9bb2b6eedb948b79dd161bae505d07c41c116"
+  },
+  {
+    "year": 2025,
+    "code": "12",
+    "name": "千葉県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/12_chiba/12m_25a.xlsx",
+    "sha256": "5b2f9858d893664456599b3b713a062fff35958c29d7f2a88d1c4c7cca948c6a"
+  },
+  {
+    "year": 2025,
+    "code": "13",
+    "name": "東京都",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/13_tokyo/13m_25rs.xlsx",
+    "sha256": "39e28e811d9b4773812e8d1b088c45cf64d6da352453b94c7af5bfdd5e3e228c"
+  },
+  {
+    "year": 2025,
+    "code": "13",
+    "name": "東京都",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/13_tokyo/13m_25a.xlsx",
+    "sha256": "cccded70165172bd996c9938501bd803091009c2a1cfa7cad91c897b179f917f"
+  },
+  {
+    "year": 2025,
+    "code": "14",
+    "name": "神奈川県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/14_kanagawa/14m_25rs.xlsx",
+    "sha256": "14f3a4becded48d7ffdfb5a96c7d23fdf27f257bf39934f0a06961438fe2e7c4"
+  },
+  {
+    "year": 2025,
+    "code": "14",
+    "name": "神奈川県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/14_kanagawa/14m_25a.xlsx",
+    "sha256": "a9b9559da6bf9fcd9aa4029ed3f04a72da98edc2b5be81ee652a07e11e11d7d6"
+  },
+  {
+    "year": 2025,
+    "code": "15",
+    "name": "新潟県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/15_niigata/15m_25rs.xlsx",
+    "sha256": "d51a72c7c564e4c79b454fa8a4222011568728929fa60e2db3daf052e0f0d16d"
+  },
+  {
+    "year": 2025,
+    "code": "15",
+    "name": "新潟県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/15_niigata/15m_25a.xlsx",
+    "sha256": "ba430ad716dd0321202d488ffba2d93237a851ebecd70b688241a405c0b54181"
+  },
+  {
+    "year": 2025,
+    "code": "16",
+    "name": "富山県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/16_toyama/16m_25rs.xlsx",
+    "sha256": "36675c7482be8289c96061bc8842a26ee66fd43206874831622c96072f6753ad"
+  },
+  {
+    "year": 2025,
+    "code": "16",
+    "name": "富山県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/16_toyama/16m_25a.xlsx",
+    "sha256": "e2607c3912b1d403d8b8997bb1fbb624b02f47f63fa9d49403db3cc08cef7e2b"
+  },
+  {
+    "year": 2025,
+    "code": "17",
+    "name": "石川県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/17_ishikawa/17m_25rs.xlsx",
+    "sha256": "028a60250b47612dc337d265ccb8ae0ebc985e8e0cabe37602fec031bba140ba"
+  },
+  {
+    "year": 2025,
+    "code": "17",
+    "name": "石川県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/17_ishikawa/17m_25a.xlsx",
+    "sha256": "d8aff25062c3294b88126b0207252ae80ddbc84b7736d028875afea05bb88d79"
+  },
+  {
+    "year": 2025,
+    "code": "18",
+    "name": "福井県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/18_fukui/18m_25rs.xlsx",
+    "sha256": "762e2abf0ab2f5614c2d7b0002533918df27d6fa18cd0f95980a4f076594f6da"
+  },
+  {
+    "year": 2025,
+    "code": "18",
+    "name": "福井県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/18_fukui/18m_25a.xlsx",
+    "sha256": "250ba5e555190963af022efa946f1e4fc85f39ee7152e1c4e572f506cd9034b4"
+  },
+  {
+    "year": 2025,
+    "code": "19",
+    "name": "山梨県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/19_yamanashi/19m_25rs.xlsx",
+    "sha256": "f6847728aa8c3f92b4fe203753ae66c3afea95b0ce1f19a56b21495ae0086258"
+  },
+  {
+    "year": 2025,
+    "code": "19",
+    "name": "山梨県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/19_yamanashi/19m_25a.xlsx",
+    "sha256": "bd1948a842fc47ef93b2392c7e7504cbf658831a33e20ec53e6f3bb1dcda78b7"
+  },
+  {
+    "year": 2025,
+    "code": "20",
+    "name": "長野県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/20_nagano/20m_25rs.xlsx",
+    "sha256": "2b337b9a182be6ca4183a34cd52c117b000d072da59f2f5fc276b2bf4a24e8ad"
+  },
+  {
+    "year": 2025,
+    "code": "20",
+    "name": "長野県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/20_nagano/20m_25a.xlsx",
+    "sha256": "621d6e0ef11939fdef2e4dbf17a249171b33b9c512e2d056a2ebdcb51915c464"
+  },
+  {
+    "year": 2025,
+    "code": "21",
+    "name": "岐阜県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/21_gifu/21m_25rs.xlsx",
+    "sha256": "6eee0125e8384605c5704bc43bc1c98c4d80f73ab2fe71299a9d6ae564d2beff"
+  },
+  {
+    "year": 2025,
+    "code": "21",
+    "name": "岐阜県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/21_gifu/21m_25a.xlsx",
+    "sha256": "9a3dfa25eb5349bab091e5638c3fbf4d18e05c997f33991e7c0c7b66844bb6b4"
+  },
+  {
+    "year": 2025,
+    "code": "22",
+    "name": "静岡県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/22_shizuoka/22m_25rs.xlsx",
+    "sha256": "7dd2cd4612086fb131894a8bcfa90c0c937de214746af18736db46e38edf475d"
+  },
+  {
+    "year": 2025,
+    "code": "22",
+    "name": "静岡県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/22_shizuoka/22m_25a.xlsx",
+    "sha256": "0d84a5224c4f2b33e2f4217301465eb245b513f4adefd1081220e1c0e42a1ad1"
+  },
+  {
+    "year": 2025,
+    "code": "23",
+    "name": "愛知県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/23_aichi/23m_25rs.xlsx",
+    "sha256": "04ddbda22676399398296c59878c2a36d2bd7204558d3ed3c2afe736a13af514"
+  },
+  {
+    "year": 2025,
+    "code": "23",
+    "name": "愛知県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/23_aichi/23m_25a.xlsx",
+    "sha256": "cf3f0b61f47f9de1661b25696c979e6d0fff09e6a2551973680d74f08dcb6df4"
+  },
+  {
+    "year": 2025,
+    "code": "24",
+    "name": "三重県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/24_mie/24m_25rs.xlsx",
+    "sha256": "9556b83b37fd20004332c9fa6c61e2afd2a13c9b4433e814800dfee36be70176"
+  },
+  {
+    "year": 2025,
+    "code": "24",
+    "name": "三重県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/24_mie/24m_25a.xlsx",
+    "sha256": "eee3a775b1bac763e723cd37f37092ca4fbc0d3eb3bace311d1c0efaaca350a7"
+  },
+  {
+    "year": 2025,
+    "code": "25",
+    "name": "滋賀県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/25_shiga/25m_25rs.xlsx",
+    "sha256": "d766faaa7ce05c8e80ee31a05ee10b33e86714d4bcdfdbf0832e4a7fa4e4d474"
+  },
+  {
+    "year": 2025,
+    "code": "25",
+    "name": "滋賀県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/25_shiga/25m_25a.xlsx",
+    "sha256": "e69a01a39420357f6bea1556ceb24232046810c3f99cc8cec88c4499b44c06e7"
+  },
+  {
+    "year": 2025,
+    "code": "26",
+    "name": "京都府",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/26_kyoto/26m_25rs.xlsx",
+    "sha256": "0f735085b724404f58f0118dc07e7c5a8a734593262c228395b557d1042cb9f1"
+  },
+  {
+    "year": 2025,
+    "code": "26",
+    "name": "京都府",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/26_kyoto/26m_25a.xlsx",
+    "sha256": "0f3efd6bb9c40d5ec511f6092bf9bdc8a37edb4d2c1dcac333be8ab4ddea0104"
+  },
+  {
+    "year": 2025,
+    "code": "27",
+    "name": "大阪府",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/27_osaka/27m_25rs.xlsx",
+    "sha256": "ecc835bacf5ff9b10cb6565d5ec97204688a9c0bcf8c9440d8a60afb89887e7b"
+  },
+  {
+    "year": 2025,
+    "code": "27",
+    "name": "大阪府",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/27_osaka/27m_25a.xlsx",
+    "sha256": "202f5077c15597d208151a7f3975ed98573f0112d93a73378ee02c58fa4052c5"
+  },
+  {
+    "year": 2025,
+    "code": "28",
+    "name": "兵庫県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/28_hyougo/28m_25rs.xlsx",
+    "sha256": "a54b63b18247e4b4c55a1a63a87d320c265cdd205151794301fed74c0d44c8c0"
+  },
+  {
+    "year": 2025,
+    "code": "28",
+    "name": "兵庫県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/28_hyougo/28m_25a.xlsx",
+    "sha256": "f7ec5b97565f6fe099f2ef61a0ea4cc6d98ad5b808d7566a0afb78ca2ff3a201"
+  },
+  {
+    "year": 2025,
+    "code": "29",
+    "name": "奈良県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/29_nara/29m_25rs.xlsx",
+    "sha256": "4ac3775b60567bcdbfb9c3888eb7333de7d8e96dc4664094a12af96de9d91ca7"
+  },
+  {
+    "year": 2025,
+    "code": "29",
+    "name": "奈良県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/29_nara/29m_25a.xlsx",
+    "sha256": "3da85d92ceeb778088b27fc8152465119fa317bdc48528d9024a8882c7ab6859"
+  },
+  {
+    "year": 2025,
+    "code": "30",
+    "name": "和歌山県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/30_wakayama/30m_25rs.xlsx",
+    "sha256": "3e19d6603c2a5dfb72ecc39173e91ef522440ffd4ea967f085d735b2bd663935"
+  },
+  {
+    "year": 2025,
+    "code": "30",
+    "name": "和歌山県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/30_wakayama/30m_25a.xlsx",
+    "sha256": "ea9caaf7d3353bef7e7ed8c82dcea38a3254ddd776f8942c8517657aca6a6ea6"
+  },
+  {
+    "year": 2025,
+    "code": "31",
+    "name": "鳥取県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/31_tottori/31m_25rs.xlsx",
+    "sha256": "ebca1ea238ab1724240cc0b908f93e091e121ed8169bdb63ca53cdbda2d2bf2b"
+  },
+  {
+    "year": 2025,
+    "code": "31",
+    "name": "鳥取県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/31_tottori/31m_25a.xlsx",
+    "sha256": "162fc93d9bbd6dad05f8e685cdbb11b4f3d5e5f080f518f47ed1c4c7c44a69a9"
+  },
+  {
+    "year": 2025,
+    "code": "32",
+    "name": "島根県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/32_shimane/32m_25rs.xlsx",
+    "sha256": "be145d57c07b7166436a3cd6604b832b3ab0a29574600652564da55cf0081abc"
+  },
+  {
+    "year": 2025,
+    "code": "32",
+    "name": "島根県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/32_shimane/32m_25a.xlsx",
+    "sha256": "842ead310b646f91df56d25238ce3365e21c83f9e9caf94ad8e69b09a13bbf92"
+  },
+  {
+    "year": 2025,
+    "code": "33",
+    "name": "岡山県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/33_okayama/33m_25rs.xlsx",
+    "sha256": "eb0e5eef6363adefb9c908567366fb1fb49cea060e29caa154f278dd6ef7fc9e"
+  },
+  {
+    "year": 2025,
+    "code": "33",
+    "name": "岡山県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/33_okayama/33m_25a.xlsx",
+    "sha256": "85a32513260b5cbaf6ed9d23a2d880e7da28967605e9105ff10b32eeaecedd14"
+  },
+  {
+    "year": 2025,
+    "code": "34",
+    "name": "広島県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/34_hiroshima/34m_25rs.xlsx",
+    "sha256": "417d3e7cf229178e23d3ca85eed155340eed4f327bff070040f24e3e8b34ca38"
+  },
+  {
+    "year": 2025,
+    "code": "34",
+    "name": "広島県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/34_hiroshima/34m_25a.xlsx",
+    "sha256": "2cae0eee753f41a1d24bf826af4e84fbf39f2c5cfc3639eaf00d9288b8b91b25"
+  },
+  {
+    "year": 2025,
+    "code": "35",
+    "name": "山口県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/35_yamaguchi/35m_25rs.xlsx",
+    "sha256": "7b5d2a389216925988e618802e2377b655362dd67d2c3f6ab1090cb8546625f4"
+  },
+  {
+    "year": 2025,
+    "code": "35",
+    "name": "山口県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/35_yamaguchi/35m_25a.xlsx",
+    "sha256": "d1cb4ce4950b16a69e0dd886c58cf36a0c6c0ab99c05a09a9a23bfa5745c3d8f"
+  },
+  {
+    "year": 2025,
+    "code": "36",
+    "name": "徳島県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/36_tokushima/36m_25rs.xlsx",
+    "sha256": "a3e7a4440acac54987430f3fc07aaa5353112281a3668375643322b2072ffe11"
+  },
+  {
+    "year": 2025,
+    "code": "36",
+    "name": "徳島県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/36_tokushima/36m_25a.xlsx",
+    "sha256": "8e75232d788d9037fdb7cfb6afc7974d6af9a6eb2f2ee7b193780eee02566fda"
+  },
+  {
+    "year": 2025,
+    "code": "37",
+    "name": "香川県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/37_kagawa/37m_25rs.xlsx",
+    "sha256": "6f7bf6b1243c59c63a8bc487fc39dd4699d91f3de4a8a78f32eef879515c6e8f"
+  },
+  {
+    "year": 2025,
+    "code": "37",
+    "name": "香川県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/37_kagawa/37m_25a.xlsx",
+    "sha256": "7e15af2d9cd819e124fd8c3985cdffae13100e5d7047856415845a0711f125f6"
+  },
+  {
+    "year": 2025,
+    "code": "38",
+    "name": "愛媛県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/38_ehime/38m_25rs.xlsx",
+    "sha256": "ace1b8e6aae4855ceaeb533a8f11b80e29d66a60100307914444d6b98992407c"
+  },
+  {
+    "year": 2025,
+    "code": "38",
+    "name": "愛媛県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/38_ehime/38m_25a.xlsx",
+    "sha256": "4eab23eba4a9fd9c793e3b376357f422581848f556f78fd292bd75258946e362"
+  },
+  {
+    "year": 2025,
+    "code": "39",
+    "name": "高知県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/39_kouchi/39m_25rs.xlsx",
+    "sha256": "f0dfbfafe872b1cdcb4ee03a3e5cb319f30c30cee4e6bd576013eee4208079d7"
+  },
+  {
+    "year": 2025,
+    "code": "39",
+    "name": "高知県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/39_kouchi/39m_25a.xlsx",
+    "sha256": "58b7b701dcdc192edb63958a9f8ddbf26476c8ff19b0070b49650079293d4c87"
+  },
+  {
+    "year": 2025,
+    "code": "40",
+    "name": "福岡県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/40_fukuoka/40m_25rs.xlsx",
+    "sha256": "6217787bffdfa31f7e77e39022b49efa725ef08d72a4a1c2832826860b6145e3"
+  },
+  {
+    "year": 2025,
+    "code": "40",
+    "name": "福岡県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/40_fukuoka/40m_25a.xlsx",
+    "sha256": "12a28c2658e1c971c9ee304e0ca2f7aeed67d0917af5f3ec0125a708b3cdec7d"
+  },
+  {
+    "year": 2025,
+    "code": "41",
+    "name": "佐賀県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/41_saga/41m_25rs.xlsx",
+    "sha256": "8ea8c67f99e635e9569dacbd0cd34e6c1e5b457854b7f749a65fd115fb871dc4"
+  },
+  {
+    "year": 2025,
+    "code": "41",
+    "name": "佐賀県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/41_saga/41m_25a.xlsx",
+    "sha256": "98f0581b3f53a4e6d0768f5f82e90c59e1b3c491015bc8d7286a55247086d657"
+  },
+  {
+    "year": 2025,
+    "code": "42",
+    "name": "長崎県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/42_nagasaki/42m_25rs.xlsx",
+    "sha256": "71995b7ac83c0212eeafe493b194d6ff1ac3c887a0fc77b5ac21316abbee8496"
+  },
+  {
+    "year": 2025,
+    "code": "42",
+    "name": "長崎県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/42_nagasaki/42m_25a.xlsx",
+    "sha256": "7a44d4cd54107bf321ad355f2f5f695f8441b5813443a0f7abce6827944b4bd2"
+  },
+  {
+    "year": 2025,
+    "code": "43",
+    "name": "熊本県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/43_kumamoto/43m_25rs.xlsx",
+    "sha256": "bd8990c1a8c8ace93c401eeaf1b149dd82aab47f47e561c6b690775bce91f5f6"
+  },
+  {
+    "year": 2025,
+    "code": "43",
+    "name": "熊本県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/43_kumamoto/43m_25a.xlsx",
+    "sha256": "c1f958233b9fcdbe3e69c21fb01706e95552cf0fcfe46896974e7f7785450230"
+  },
+  {
+    "year": 2025,
+    "code": "44",
+    "name": "大分県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/44_ohita/44m_25rs.xlsx",
+    "sha256": "3226210b93072dee3be3487001350372126d3b6f54aae05009ac45865c24d661"
+  },
+  {
+    "year": 2025,
+    "code": "44",
+    "name": "大分県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/44_ohita/44m_25a.xlsx",
+    "sha256": "79c3614d9076fb308f4ac960825590989a86206a5f4d3477bf5916114393d736"
+  },
+  {
+    "year": 2025,
+    "code": "45",
+    "name": "宮崎県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/45_miyazaki/45m_25rs.xlsx",
+    "sha256": "95eee20a0238bd988ec615b4e2df65cb907df9b241cacabb3c5a7f1ae1c9c330"
+  },
+  {
+    "year": 2025,
+    "code": "45",
+    "name": "宮崎県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/45_miyazaki/45m_25a.xlsx",
+    "sha256": "7e3da4ffa24d0c3df0729622563b1fb186ee3e1007b9ef0499c4a33b190bf8bc"
+  },
+  {
+    "year": 2025,
+    "code": "46",
+    "name": "鹿児島県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/46_kagoshima/46m_25rs.xlsx",
+    "sha256": "2602416b161c4fa269c79d5c9a04e14964cf5d38d601410550a6a0b937edf808"
+  },
+  {
+    "year": 2025,
+    "code": "46",
+    "name": "鹿児島県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/46_kagoshima/46m_25a.xlsx",
+    "sha256": "8ea9cab2b293d1dcf9dc695152c8e2f0a66d7312c23ebf4b51a0c91e0738367b"
+  },
+  {
+    "year": 2025,
+    "code": "47",
+    "name": "沖縄県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/47_okinawa/47m_25rs.xlsx",
+    "sha256": "9b6c0032601476a65cfb98c5cb979e5e1b8c5f8541569a45bb450bf341638e38"
+  },
+  {
+    "year": 2025,
+    "code": "47",
+    "name": "沖縄県",
+    "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/47_okinawa/47m_25a.xlsx",
+    "sha256": "d8eadc68c560c22825478cee9d92f89eca6ae8e563e212e724a6d3bb03476219"
+  },
+  {
+    "year": 2026,
+    "code": "01",
+    "name": "北海道",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/01_hokkaido/01m_26r.xlsx",
+    "sha256": "6add3d7d4a9c95e4116c294b79a1b1489ecc810d4b3bda58f09ea2e4414b9824"
+  },
+  {
+    "year": 2026,
+    "code": "01",
+    "name": "北海道",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/01_hokkaido/01m_26a.xlsx",
+    "sha256": "b974a3aeb1e5cbeebf941957e1f22f75b253d578ed8897d8d6565b45ad3ead3c"
+  },
+  {
+    "year": 2026,
+    "code": "02",
+    "name": "青森県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/02_aomori/02m_26r.xlsx",
+    "sha256": "993ab467436a8d45313697cd5c13158f3b5157b6c8fb6dc8ae824dd3a5170c58"
+  },
+  {
+    "year": 2026,
+    "code": "02",
+    "name": "青森県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/02_aomori/02m_26a.xlsx",
+    "sha256": "1369937071c113be5a0b57c3018ac27c3fc046a19a5361cb5e330294a248c136"
+  },
+  {
+    "year": 2026,
+    "code": "03",
+    "name": "岩手県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/03_iwate/03m_26r.xlsx",
+    "sha256": "01dfa113532a733c715266ee59845d110eed05cb8637c23dc300aee8fa0a1e4c"
+  },
+  {
+    "year": 2026,
+    "code": "03",
+    "name": "岩手県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/03_iwate/03m_26a.xlsx",
+    "sha256": "603c95493c8c25c04437784bff39f86e94c168144b211f786a30fb9c9d834127"
+  },
+  {
+    "year": 2026,
+    "code": "04",
+    "name": "宮城県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/04_miyagi/04m_26r.xlsx",
+    "sha256": "9613a87c88e90cd70d620ddc4f2c434f97b03aa05e9424c0bb65050656c0c322"
+  },
+  {
+    "year": 2026,
+    "code": "04",
+    "name": "宮城県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/04_miyagi/04m_26a.xlsx",
+    "sha256": "7a13ea310e6a6b844cf3483affe8e9bb2e37537395e20604ea75c849ea67768c"
+  },
+  {
+    "year": 2026,
+    "code": "05",
+    "name": "秋田県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/05_akita/05m_26r.xlsx",
+    "sha256": "1989fb0df42cbcd89931eb51c5ea96e7f6a8d1f471bcc7222af6e13dcf3117da"
+  },
+  {
+    "year": 2026,
+    "code": "05",
+    "name": "秋田県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/05_akita/05m_26a.xlsx",
+    "sha256": "18b6c45dd39e11284df5482f7011319645af4ac9889f406668a8d2ff56f623ab"
+  },
+  {
+    "year": 2026,
+    "code": "06",
+    "name": "山形県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/06_yamagata/06m_26r.xlsx",
+    "sha256": "b31f48d2e645e45beac35a6d0642ee87dba7a780763d99c2c3dfb2bd751a2a7b"
+  },
+  {
+    "year": 2026,
+    "code": "06",
+    "name": "山形県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/06_yamagata/06m_26a.xlsx",
+    "sha256": "84b8168eea629cd6184689590b4a6c446d0bf78522b1fbfc710070a822ef23e2"
+  },
+  {
+    "year": 2026,
+    "code": "07",
+    "name": "福島県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/07_fukushima/07m_26r.xlsx",
+    "sha256": "ec5cb72559aab96fc9eb871634a2e59bafde81447f4186b29ed38cfe692e266b"
+  },
+  {
+    "year": 2026,
+    "code": "07",
+    "name": "福島県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/07_fukushima/07m_26a.xlsx",
+    "sha256": "755b31591a2b2c3f9f9658f6b56637681cca2d4cacd4924e81b2232c72a58c92"
+  },
+  {
+    "year": 2026,
+    "code": "08",
+    "name": "茨城県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/08_ibaraki/08m_26r.xlsx",
+    "sha256": "2a0efb2de7a889ae0c30820c789ca45868906997e0bbdf30816d788007c1eb90"
+  },
+  {
+    "year": 2026,
+    "code": "08",
+    "name": "茨城県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/08_ibaraki/08m_26a.xlsx",
+    "sha256": "de69c5a9c7bb390b87fa6135c8a8050c7f6a7a51a13cd5c1c83997b6eb6bc2d8"
+  },
+  {
+    "year": 2026,
+    "code": "09",
+    "name": "栃木県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/09_tochigi/09m_26r.xlsx",
+    "sha256": "3acbfabb57d62f39c56fb6189cab120e795fc2861ca6bfecbf9b110c066dcd4f"
+  },
+  {
+    "year": 2026,
+    "code": "09",
+    "name": "栃木県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/09_tochigi/09m_26a.xlsx",
+    "sha256": "445a1c980f5b46995151123d7aa9809b833a63d2921a0d154bbd1989a197c731"
+  },
+  {
+    "year": 2026,
+    "code": "10",
+    "name": "群馬県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/10_gunma/10m_26r.xlsx",
+    "sha256": "307cdcebb936961baf6073aa4329d85d883da11d237793b7439effbfbf456fcd"
+  },
+  {
+    "year": 2026,
+    "code": "10",
+    "name": "群馬県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/10_gunma/10m_26a.xlsx",
+    "sha256": "8bbf3c72dca6cf7a15428a15f8de29da1dc6ffbbae94539943d3cc9f22fe247c"
+  },
+  {
+    "year": 2026,
+    "code": "11",
+    "name": "埼玉県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/11_saitama/11m_26r.xlsx",
+    "sha256": "00a870c2792c47ba30ce130e80e833aefe247d3d57dff548cd5556249badba2b"
+  },
+  {
+    "year": 2026,
+    "code": "11",
+    "name": "埼玉県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/11_saitama/11m_26a.xlsx",
+    "sha256": "4448ff5b576af7d46281774a0d0128e084e3fe679b32f8b21f1a8977d855a905"
+  },
+  {
+    "year": 2026,
+    "code": "12",
+    "name": "千葉県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/12_chiba/12m_26r.xlsx",
+    "sha256": "d788700921b75b44b846905f775518ceb73090971e8c6240141f307a33d26bee"
+  },
+  {
+    "year": 2026,
+    "code": "12",
+    "name": "千葉県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/12_chiba/12m_26a.xlsx",
+    "sha256": "cf2f16d8d0bfbcd2d6863a99445e78ad1ab2ec083b2f05d0a325ec7f43a6fe59"
+  },
+  {
+    "year": 2026,
+    "code": "13",
+    "name": "東京都",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/13_tokyo/13m_26r.xlsx",
+    "sha256": "e73a4d29a5a5893a2b50cdbb2d42c625907ca9d5c51d5a306a786fc1566185c4"
+  },
+  {
+    "year": 2026,
+    "code": "13",
+    "name": "東京都",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/13_tokyo/13m_26a.xlsx",
+    "sha256": "a4bdfffc6aea7bf3023c7c59dad00f0dce6cd381614e600f9cd5fb0e27bd3bd2"
+  },
+  {
+    "year": 2026,
+    "code": "14",
+    "name": "神奈川県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/14_kanagawa/14m_26r.xlsx",
+    "sha256": "edfb2bf09c97ba3664e231464871d7d6ab89fab2e21e6bf1d76314b80682b339"
+  },
+  {
+    "year": 2026,
+    "code": "14",
+    "name": "神奈川県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/14_kanagawa/14m_26a.xlsx",
+    "sha256": "16dd4e539b3618e67b094746589676adc0576551121dc3c636f91254b04cbfb9"
+  },
+  {
+    "year": 2026,
+    "code": "15",
+    "name": "新潟県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/15_niigata/15m_26r.xlsx",
+    "sha256": "fe7fa35b9efad979fb3f6aa15e6a9b0d37241ea9a4444b7bd3eadf43f86d4ceb"
+  },
+  {
+    "year": 2026,
+    "code": "15",
+    "name": "新潟県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/15_niigata/15m_26a.xlsx",
+    "sha256": "3369b8d193d6715a6ca3fec1d6ba84c906fc488a3ff8d015b07babdafbeb70df"
+  },
+  {
+    "year": 2026,
+    "code": "16",
+    "name": "富山県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/16_toyama/16m_26r.xlsx",
+    "sha256": "012349080626c37028a452323b13ccd09155696bd54890e8f4f4d86d895f5dee"
+  },
+  {
+    "year": 2026,
+    "code": "16",
+    "name": "富山県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/16_toyama/16m_26a.xlsx",
+    "sha256": "96b2b7153ceee1b9113505ca5b3453eb783334a108d048febef842c97e788c3d"
+  },
+  {
+    "year": 2026,
+    "code": "17",
+    "name": "石川県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/17_ishikawa/17m_26r.xlsx",
+    "sha256": "d2638c68d3346a809622b54f7a1640cf8796ad66f8ba5b76fdc77d45b35a30bb"
+  },
+  {
+    "year": 2026,
+    "code": "17",
+    "name": "石川県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/17_ishikawa/17m_26a.xlsx",
+    "sha256": "12d282ffa4bf7588c32e56f77b328b65fab7430889ddff09a4bb8159f5a9fa7c"
+  },
+  {
+    "year": 2026,
+    "code": "18",
+    "name": "福井県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/18_fukui/18m_26r.xlsx",
+    "sha256": "8da190e24ee88aefabfe327f7f746b304225bbdf76261448780e1c26a470edc7"
+  },
+  {
+    "year": 2026,
+    "code": "18",
+    "name": "福井県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/18_fukui/18m_26a.xlsx",
+    "sha256": "c542d589ca82dc7daf1b13570dbc556c2d39f150feb82102f26259e45995093e"
+  },
+  {
+    "year": 2026,
+    "code": "19",
+    "name": "山梨県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/19_yamanashi/19m_26r.xlsx",
+    "sha256": "22c9aaa152e20cfc2a4605ad13d5b135cd496416b10233dbee99dbd549dcfbe1"
+  },
+  {
+    "year": 2026,
+    "code": "19",
+    "name": "山梨県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/19_yamanashi/19m_26a.xlsx",
+    "sha256": "e0418587368590da7ee30f9d1e5c35db6d00c9f9733a94125237cb8b057c42ec"
+  },
+  {
+    "year": 2026,
+    "code": "20",
+    "name": "長野県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/20_nagano/20m_26r.xlsx",
+    "sha256": "681c3b77e2b4657f1e552cf651f59f36f2d1768b425df23fd7f4b6b2674a319f"
+  },
+  {
+    "year": 2026,
+    "code": "20",
+    "name": "長野県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/20_nagano/20m_26a.xlsx",
+    "sha256": "3822366b3e0c316e92d0ea369741ca81c5657fc67001416c6b524f1b292d0454"
+  },
+  {
+    "year": 2026,
+    "code": "21",
+    "name": "岐阜県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/21_gifu/21m_26r.xlsx",
+    "sha256": "d8035b109fed40ff1f146ac1731f00c31f684fdabde9e89524178a2d1e94c9b4"
+  },
+  {
+    "year": 2026,
+    "code": "21",
+    "name": "岐阜県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/21_gifu/21m_26a.xlsx",
+    "sha256": "613dfb0229d89512c1b80bac2e1e97a9d0fd5cefcb5703fe227daded70386cd9"
+  },
+  {
+    "year": 2026,
+    "code": "22",
+    "name": "静岡県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/22_shizuoka/22m_26r.xlsx",
+    "sha256": "9589dad96ca344702e323f84323a25f2a9932127e86b2388864c9553693e85ca"
+  },
+  {
+    "year": 2026,
+    "code": "22",
+    "name": "静岡県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/22_shizuoka/22m_26a.xlsx",
+    "sha256": "476e0863eb86cdb0b1f67d9128e006be14982247e2e7327686018c6853abb48b"
+  },
+  {
+    "year": 2026,
+    "code": "23",
+    "name": "愛知県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/23_aichi/23m_26r.xlsx",
+    "sha256": "ce263b104adc1caa99a7ed822dbb5b4912072ed7eb4289f7074ce412fea1ce6b"
+  },
+  {
+    "year": 2026,
+    "code": "23",
+    "name": "愛知県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/23_aichi/23m_26a.xlsx",
+    "sha256": "ecfe78799316230d9a24f660f31017330784104fe34a8d688efc68027deb573c"
+  },
+  {
+    "year": 2026,
+    "code": "24",
+    "name": "三重県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/24_mie/24m_26r.xlsx",
+    "sha256": "41d8d7e94122d67a0a601ea55b8f9dbd0fc9bed654e13bd533cf8cb8e551063d"
+  },
+  {
+    "year": 2026,
+    "code": "24",
+    "name": "三重県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/24_mie/24m_26a.xlsx",
+    "sha256": "4b720f6aae655021b4ee4778dccb225972e51a43edfad21da52a74d58fc5c3d1"
+  },
+  {
+    "year": 2026,
+    "code": "25",
+    "name": "滋賀県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/25_shiga/25m_26r.xlsx",
+    "sha256": "e1b1744d9eee3a974886e37b060e1e3e01b457b47ca7fa56fdc329e7fdfe37ae"
+  },
+  {
+    "year": 2026,
+    "code": "25",
+    "name": "滋賀県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/25_shiga/25m_26a.xlsx",
+    "sha256": "4fabc99b142a10bc47201aa9873441dcbe8cf7bbfd940d3bad53ff4e0333edef"
+  },
+  {
+    "year": 2026,
+    "code": "26",
+    "name": "京都府",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/26_kyoto/26m_26r.xlsx",
+    "sha256": "de126aef0be040c191764d1c47ddcbed5d27d75906fee75487d2a9c4d7753a1b"
+  },
+  {
+    "year": 2026,
+    "code": "26",
+    "name": "京都府",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/26_kyoto/26m_26a.xlsx",
+    "sha256": "10c881e99ee251392fe104ce7329ca71463d43ef247131ee5756197728ab79a7"
+  },
+  {
+    "year": 2026,
+    "code": "27",
+    "name": "大阪府",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/27_osaka/27m_26r.xlsx",
+    "sha256": "4959e500f4a8899255d9674a47de14d374c1bc84e1d6936908cab10a583106ca"
+  },
+  {
+    "year": 2026,
+    "code": "27",
+    "name": "大阪府",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/27_osaka/27m_26a.xlsx",
+    "sha256": "5750b940b1424ba9ff92d46b50f6c737ee3a93e9f5db2a22da55d4402c478da4"
+  },
+  {
+    "year": 2026,
+    "code": "28",
+    "name": "兵庫県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/28_hyougo/28m_26r.xlsx",
+    "sha256": "d20aaaeaef75dccd85080051f85fd0c963c48084195b1171a1696f354b105ba4"
+  },
+  {
+    "year": 2026,
+    "code": "28",
+    "name": "兵庫県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/28_hyougo/28m_26a.xlsx",
+    "sha256": "e409824224a02b18cc9a80ddb6e2cbd1f0358f61dcfbce6998b8f57dd3a15c1b"
+  },
+  {
+    "year": 2026,
+    "code": "29",
+    "name": "奈良県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/29_nara/29m_26r.xlsx",
+    "sha256": "105ad394a69af58f14ac13a900978c0fcef40c15632745054d02837775f71b2c"
+  },
+  {
+    "year": 2026,
+    "code": "29",
+    "name": "奈良県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/29_nara/29m_26a.xlsx",
+    "sha256": "95e0c03e69a7ad7a536da9be38cbcadd7c832c8cdd26cb3da5f2cdeb4fee288c"
+  },
+  {
+    "year": 2026,
+    "code": "30",
+    "name": "和歌山県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/30_wakayama/30m_26r.xlsx",
+    "sha256": "0fbd689d7c2dd14b25b560be82e322cca52d821484e1a076a332c9cdb2dc6ac6"
+  },
+  {
+    "year": 2026,
+    "code": "30",
+    "name": "和歌山県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/30_wakayama/30m_26a.xlsx",
+    "sha256": "c3a7e2420a62a5fc4c3a6bd132e055461f901cbd395b06ffb178b6ef7767ecc6"
+  },
+  {
+    "year": 2026,
+    "code": "31",
+    "name": "鳥取県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/31_tottori/31m_26r.xlsx",
+    "sha256": "b7855a7611428d7577c04a415fe523e8aa289d16af7de379d87147bdd3ebbc5d"
+  },
+  {
+    "year": 2026,
+    "code": "31",
+    "name": "鳥取県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/31_tottori/31m_26a.xlsx",
+    "sha256": "3b076056045fb6d92c9523eb57ef0229c192b7d0bdf7d9aeee84923f175693bb"
+  },
+  {
+    "year": 2026,
+    "code": "32",
+    "name": "島根県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/32_shimane/32m_26r.xlsx",
+    "sha256": "91df97003d630b7fa4fadb5b0811a33274e868249f9c6299c9d4c2209e9b51c6"
+  },
+  {
+    "year": 2026,
+    "code": "32",
+    "name": "島根県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/32_shimane/32m_26a.xlsx",
+    "sha256": "8e45117ccd068e12e8773cf49a73a5f1565fd0bf4836da769a102f63c898c499"
+  },
+  {
+    "year": 2026,
+    "code": "33",
+    "name": "岡山県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/33_okayama/33m_26r.xlsx",
+    "sha256": "1707d06258de6c2c7dbb04aa56bbbbc3fe50fc6f5bc8c21b1111454442ccb119"
+  },
+  {
+    "year": 2026,
+    "code": "33",
+    "name": "岡山県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/33_okayama/33m_26a.xlsx",
+    "sha256": "448201a213b327dab9009b31fdd80287a2c53b29191c1a2f4611f5bf7d623e4b"
+  },
+  {
+    "year": 2026,
+    "code": "34",
+    "name": "広島県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/34_hiroshima/34m_26r.xlsx",
+    "sha256": "9d0b5d8839f36202e8bcd76f31f6c519aba6825869e647f1e830beafec1d0db6"
+  },
+  {
+    "year": 2026,
+    "code": "34",
+    "name": "広島県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/34_hiroshima/34m_26a.xlsx",
+    "sha256": "8651814e466970eb3864f339ab45ee6323f8a48a063426adf2fa3366799bd18b"
+  },
+  {
+    "year": 2026,
+    "code": "35",
+    "name": "山口県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/35_yamaguchi/35m_26r.xlsx",
+    "sha256": "00b4754a0e655af68a9d94080128179116a7961f193d27cb32eee0af9548dbae"
+  },
+  {
+    "year": 2026,
+    "code": "35",
+    "name": "山口県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/35_yamaguchi/35m_26a.xlsx",
+    "sha256": "510941523a9ee7f3a3f96f4e41616f6434e8304b924f3d8de3bc2ed755e6067e"
+  },
+  {
+    "year": 2026,
+    "code": "36",
+    "name": "徳島県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/36_tokushima/36m_26r.xlsx",
+    "sha256": "904ae00d5d2c2aa8e564a26f3cefa781fe1f8eb0c4350792d247cc58eccc1f49"
+  },
+  {
+    "year": 2026,
+    "code": "36",
+    "name": "徳島県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/36_tokushima/36m_26a.xlsx",
+    "sha256": "9b4e782e6259ba8498c503030034a841bbd6fdeaa13dafb8f813c737eb1eca2d"
+  },
+  {
+    "year": 2026,
+    "code": "37",
+    "name": "香川県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/37_kagawa/37m_26r.xlsx",
+    "sha256": "56533bdb4813b9c7a4b588917d6cc33e4ec73ee7c1261f47ddb2514731f24c6c"
+  },
+  {
+    "year": 2026,
+    "code": "37",
+    "name": "香川県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/37_kagawa/37m_26a.xlsx",
+    "sha256": "38c8d0850fc5971026cdc64ac7b67be24cb7befc388831954921efac531e2730"
+  },
+  {
+    "year": 2026,
+    "code": "38",
+    "name": "愛媛県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/38_ehime/38m_26r.xlsx",
+    "sha256": "551de5e2d4b8b6c2bf4a497bacaf2bbac5eca51508ceb87ea53cc3f31e1a74f4"
+  },
+  {
+    "year": 2026,
+    "code": "38",
+    "name": "愛媛県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/38_ehime/38m_26a.xlsx",
+    "sha256": "4bc365b877817892483d95c850a96b5f9e067e8115ce73e870387e97dfaaf363"
+  },
+  {
+    "year": 2026,
+    "code": "39",
+    "name": "高知県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/39_kouchi/39m_26r.xlsx",
+    "sha256": "0d8eb70f1ebd9970624642ec56dc90433d67604913981af5fb80b779324f39eb"
+  },
+  {
+    "year": 2026,
+    "code": "39",
+    "name": "高知県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/39_kouchi/39m_26a.xlsx",
+    "sha256": "aa63de94b3864c392767f24be7b594cfdf26e2f81f0bc8594441b515ea5f1b61"
+  },
+  {
+    "year": 2026,
+    "code": "40",
+    "name": "福岡県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/40_fukuoka/40m_26r.xlsx",
+    "sha256": "27bf8fece11ea0744399f9d5edf104bd228c1e6fba708ad92348fcf94df41179"
+  },
+  {
+    "year": 2026,
+    "code": "40",
+    "name": "福岡県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/40_fukuoka/40m_26a.xlsx",
+    "sha256": "3627f005ab7d214bcb6f796f1bb1a63050c74241e3951242e056c326d91a9fec"
+  },
+  {
+    "year": 2026,
+    "code": "41",
+    "name": "佐賀県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/41_saga/41m_26r.xlsx",
+    "sha256": "522a5ee6b41aa6a8b8144106191a1835fd99029214281187d798eb7c72a68ea1"
+  },
+  {
+    "year": 2026,
+    "code": "41",
+    "name": "佐賀県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/41_saga/41m_26a.xlsx",
+    "sha256": "041eaed884a1f6fe97e06a308d20807f6066e29f72acd75ba53efe08abf617fd"
+  },
+  {
+    "year": 2026,
+    "code": "42",
+    "name": "長崎県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/42_nagasaki/42m_26r.xlsx",
+    "sha256": "12cc348523c2f9b939a0e3099e7313a61d8d2f08dd4292ff0895d4d9e0cb9423"
+  },
+  {
+    "year": 2026,
+    "code": "42",
+    "name": "長崎県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/42_nagasaki/42m_26a.xlsx",
+    "sha256": "f71b68bb7cde681382acf2d5f4aaccafee906644f8854100404f7a13da428b20"
+  },
+  {
+    "year": 2026,
+    "code": "43",
+    "name": "熊本県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/43_kumamoto/43m_26r.xlsx",
+    "sha256": "b042529fc55ac86f6b5676b1172b688ab9264f7ae5b48460ecc2a05e327801f7"
+  },
+  {
+    "year": 2026,
+    "code": "43",
+    "name": "熊本県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/43_kumamoto/43m_26a.xlsx",
+    "sha256": "0a2e73bca3fe0f29d68242a48c0c21d77f06979b626edd6ee07684eeafe6ddff"
+  },
+  {
+    "year": 2026,
+    "code": "44",
+    "name": "大分県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/44_ohita/44m_26r.xlsx",
+    "sha256": "7ede3c07013b114467a8a23193d070cff4f7657019dea43ff140ce1fcc27daa9"
+  },
+  {
+    "year": 2026,
+    "code": "44",
+    "name": "大分県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/44_ohita/44m_26a.xlsx",
+    "sha256": "3e849d52edb586c162157a008297544b46e86fde060ec45321784c5feecfe203"
+  },
+  {
+    "year": 2026,
+    "code": "45",
+    "name": "宮崎県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/45_miyazaki/45m_26r.xlsx",
+    "sha256": "3498baacea0b2cbad0938c4bc00020bb558eb69ed855cd90aa2125afe7dd3da9"
+  },
+  {
+    "year": 2026,
+    "code": "45",
+    "name": "宮崎県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/45_miyazaki/45m_26a.xlsx",
+    "sha256": "a34e028e3d25979d680be2bf886c7e4e4304cde375755169e9f8d8f103e7962e"
+  },
+  {
+    "year": 2026,
+    "code": "46",
+    "name": "鹿児島県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/46_kagoshima/46m_26r.xlsx",
+    "sha256": "7b81f15a2f62c8c00ab50e24200db1c6af251886150c39221e425bdc62a996ab"
+  },
+  {
+    "year": 2026,
+    "code": "46",
+    "name": "鹿児島県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/46_kagoshima/46m_26a.xlsx",
+    "sha256": "ed44537de081199f024f69e42e13565b1d54c9d5866a32ef68eb0c1b764da8f9"
+  },
+  {
+    "year": 2026,
+    "code": "47",
+    "name": "沖縄県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/47_okinawa/47m_26r.xlsx",
+    "sha256": "45469578375842db6574f861bbb38a811f4debd210c9de686fbd55c61fcab953"
+  },
+  {
+    "year": 2026,
+    "code": "47",
+    "name": "沖縄県",
+    "url": "https://www.nier.go.jp/26chousakekkahoukoku/factsheet/47_okinawa/47m_26a.xlsx",
+    "sha256": "c32b288775abb7aa9d0680fb9685a407bcb504db1dfe0d08f75acb375750f418"
+  },
+  {
+    "year": 2024,
+    "code": "01",
+    "name": "北海道",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/01_hokkaido/01m_24r.xlsx",
+    "sha256": "bbbc5ebaeb021b95074e0cc3a10d99a29e00ab8d7ea7932bade600bb32c69c82"
+  },
+  {
+    "year": 2024,
+    "code": "01",
+    "name": "北海道",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/01_hokkaido/01m_24a.xlsx",
+    "sha256": "6dd98682cf69bb308504392a7473cb6e84e839816143a550f9ebb44c681b697c"
+  },
+  {
+    "year": 2024,
+    "code": "02",
+    "name": "青森県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/02_aomori/02m_24r.xlsx",
+    "sha256": "4b3c4e0f2fd61937e9863dff8c3a2abc721a96dd134a03305df1bd45ee60e3e4"
+  },
+  {
+    "year": 2024,
+    "code": "02",
+    "name": "青森県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/02_aomori/02m_24a.xlsx",
+    "sha256": "3a9fd871bef58f01ccaa5a3fa9e056bbf2a15f5b688a0032a59f588f1b71adc3"
+  },
+  {
+    "year": 2024,
+    "code": "03",
+    "name": "岩手県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/03_iwate/03m_24r.xlsx",
+    "sha256": "9e40bc1b1e57b40839b9e51407adaa01e853b72108b7477cd2d71b4aa7ff6373"
+  },
+  {
+    "year": 2024,
+    "code": "03",
+    "name": "岩手県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/03_iwate/03m_24a.xlsx",
+    "sha256": "1e6147a8f143b82f611361787e4bd1f314510d49827987f8a3085c7d3ad0baab"
+  },
+  {
+    "year": 2024,
+    "code": "04",
+    "name": "宮城県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/04_miyagi/04m_24r.xlsx",
+    "sha256": "d46344a4b941452a45097ae3b0e84cc7b5e7d9c7ca38c3c9a53d09433628af18"
+  },
+  {
+    "year": 2024,
+    "code": "04",
+    "name": "宮城県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/04_miyagi/04m_24a.xlsx",
+    "sha256": "982e00e9a89efa4507686ceccb7e1372592bcb5b9e402eac5910fbe3ed61c45e"
+  },
+  {
+    "year": 2024,
+    "code": "05",
+    "name": "秋田県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/05_akita/05m_24r.xlsx",
+    "sha256": "5a969dd3980f22712e493fc2c94a7ff42f3c280e372ff8b1e4cd4c3d0bf6ed74"
+  },
+  {
+    "year": 2024,
+    "code": "05",
+    "name": "秋田県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/05_akita/05m_24a.xlsx",
+    "sha256": "438ba16d63f5c28c5ba7ffaee9f469801026d8d76f5d3a6aaf4e89876fd334d7"
+  },
+  {
+    "year": 2024,
+    "code": "06",
+    "name": "山形県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/06_yamagata/06m_24r.xlsx",
+    "sha256": "825683b0d006eb9e64cb07d5c27580add9ab35df6cb3b876a66eb5e56ea0cac5"
+  },
+  {
+    "year": 2024,
+    "code": "06",
+    "name": "山形県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/06_yamagata/06m_24a.xlsx",
+    "sha256": "f3715328009739a57a6e032ff6ecb30c8f53fa7a0bf395c84b499c5d82be8f2f"
+  },
+  {
+    "year": 2024,
+    "code": "07",
+    "name": "福島県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/07_fukushima/07m_24r.xlsx",
+    "sha256": "ab71ddecfaeeeb96f5c066d8aa2a48564f3bc9e2f2e6724f94a2e3c36ea656c2"
+  },
+  {
+    "year": 2024,
+    "code": "07",
+    "name": "福島県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/07_fukushima/07m_24a.xlsx",
+    "sha256": "448c0147771bee5cb18e142a04bc787b30cdeaa31b7b6b3f0caab07fce70d1b0"
+  },
+  {
+    "year": 2024,
+    "code": "08",
+    "name": "茨城県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/08_ibaraki/08m_24r.xlsx",
+    "sha256": "38b1b96361d695825ca6a15f8597cb0cd6bbcd6be360198ddf300fb2a86faef4"
+  },
+  {
+    "year": 2024,
+    "code": "08",
+    "name": "茨城県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/08_ibaraki/08m_24a.xlsx",
+    "sha256": "8dc5c89395fa2df617ee0d28304c5078b949bbfa91ef4c9d4c78b3dd2ec18e7c"
+  },
+  {
+    "year": 2024,
+    "code": "09",
+    "name": "栃木県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/09_tochigi/09m_24r.xlsx",
+    "sha256": "b67d670bad62a4457ac838667a2d35221834b38e4fe627207d7c32e1cf40db0c"
+  },
+  {
+    "year": 2024,
+    "code": "09",
+    "name": "栃木県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/09_tochigi/09m_24a.xlsx",
+    "sha256": "abdf531fcadbf257397429a4113ce9f261c031abae3bf6acaab1f4447847c46c"
+  },
+  {
+    "year": 2024,
+    "code": "10",
+    "name": "群馬県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/10_gunma/10m_24r.xlsx",
+    "sha256": "bd48234a81901ea09fdca05a620a3f80e2ceec623bbd658b150ca72e32da2804"
+  },
+  {
+    "year": 2024,
+    "code": "10",
+    "name": "群馬県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/10_gunma/10m_24a.xlsx",
+    "sha256": "6fae9d0d64bbe6ca23cb3ce9d1cd340f40fddc532be05b3e5d553d3a248cf754"
+  },
+  {
+    "year": 2024,
+    "code": "11",
+    "name": "埼玉県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/11_saitama/11m_24r.xlsx",
+    "sha256": "4e63c4a82693099ef28e44c385f54d46635cd14d2716e956d49e77882278c657"
+  },
+  {
+    "year": 2024,
+    "code": "11",
+    "name": "埼玉県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/11_saitama/11m_24a.xlsx",
+    "sha256": "afc53073bbc6c9c77b521ba75b982d317b09085d7737ddbad95c1bfb0cc68590"
+  },
+  {
+    "year": 2024,
+    "code": "12",
+    "name": "千葉県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/12_chiba/12m_24r.xlsx",
+    "sha256": "ddfd7011745e9fc2b5f850ee9c1a88d85af30ee296e715307c292e6f46e7e765"
+  },
+  {
+    "year": 2024,
+    "code": "12",
+    "name": "千葉県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/12_chiba/12m_24a.xlsx",
+    "sha256": "c5ad785625cd75f029d74d708dc2387e15c3c69d79e8b82cf130a1d57ef773a1"
+  },
+  {
+    "year": 2024,
+    "code": "13",
+    "name": "東京都",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/13_tokyo/13m_24r.xlsx",
+    "sha256": "88d08b712021a5027d9a1c65d5e54656a2743d2eb4c8c0b9b6e68cb050c9d3e7"
+  },
+  {
+    "year": 2024,
+    "code": "13",
+    "name": "東京都",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/13_tokyo/13m_24a.xlsx",
+    "sha256": "94c78bcc5e56f975149ae5fd2fd10fc12bd78a6ebbd8acb784a56fe2ed0af554"
+  },
+  {
+    "year": 2024,
+    "code": "14",
+    "name": "神奈川県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/14_kanagawa/14m_24r.xlsx",
+    "sha256": "ca70ed06d4acf38a3564e0d964d0fe86f50694d44b3587e88cff8208f92b539e"
+  },
+  {
+    "year": 2024,
+    "code": "14",
+    "name": "神奈川県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/14_kanagawa/14m_24a.xlsx",
+    "sha256": "a353c51f75eabcdb18fcfedf364432563e1e40a1616ccf906b9ea969207a5031"
+  },
+  {
+    "year": 2024,
+    "code": "15",
+    "name": "新潟県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/15_niigata/15m_24r.xlsx",
+    "sha256": "15f2e9072db27a7e26a6f5bbfb366a9321c220691c6c04d9904029d73d8ffc32"
+  },
+  {
+    "year": 2024,
+    "code": "15",
+    "name": "新潟県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/15_niigata/15m_24a.xlsx",
+    "sha256": "90189c06f3309ee85047eadd27dbf1c8fb0e124dbb453deb0c0cafb185902bf2"
+  },
+  {
+    "year": 2024,
+    "code": "16",
+    "name": "富山県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/16_toyama/16m_24r.xlsx",
+    "sha256": "3ade772a7b976bba9c85532c4f0660eeefbb0af515163402e2dc8922b63fa256"
+  },
+  {
+    "year": 2024,
+    "code": "16",
+    "name": "富山県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/16_toyama/16m_24a.xlsx",
+    "sha256": "5877ef21b3278c7e2468ffa5058bdaec3f85f02ea0fc4ef67c650e065adb7029"
+  },
+  {
+    "year": 2024,
+    "code": "17",
+    "name": "石川県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/17_ishikawa/17m_24r.xlsx",
+    "sha256": "2bf711b5b03d87813f99580ba79b2870b87e5f6335b750a599285849b11bd967"
+  },
+  {
+    "year": 2024,
+    "code": "17",
+    "name": "石川県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/17_ishikawa/17m_24a.xlsx",
+    "sha256": "74e1ae635957caf7152b198a2f6cbd84d88373f3e55f52400026bc25351ad49d"
+  },
+  {
+    "year": 2024,
+    "code": "18",
+    "name": "福井県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/18_fukui/18m_24r.xlsx",
+    "sha256": "387c2fa6eb42234be9f201c6591ed7da6e54f82d0f94f0cbd6127a44a2fd949b"
+  },
+  {
+    "year": 2024,
+    "code": "18",
+    "name": "福井県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/18_fukui/18m_24a.xlsx",
+    "sha256": "7a5552fdf5eed7231c84e9a1050a68d1dbd4bb4cc8f5b4df0e21b1b6ed987739"
+  },
+  {
+    "year": 2024,
+    "code": "19",
+    "name": "山梨県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/19_yamanashi/19m_24r.xlsx",
+    "sha256": "81924c6a1a8d1b877bbb9496c7cb041a41964cb20ba6aef5839964cc256e7fd2"
+  },
+  {
+    "year": 2024,
+    "code": "19",
+    "name": "山梨県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/19_yamanashi/19m_24a.xlsx",
+    "sha256": "4f6467a3aec8ca724f19a4d9c1f1a7c255c6a58e64a31a2f584cde90849746f0"
+  },
+  {
+    "year": 2024,
+    "code": "20",
+    "name": "長野県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/20_nagano/20m_24r.xlsx",
+    "sha256": "9cde9c20d40da9a3403012761fc401e1c910c8243e2eda8eec383b8857feb41e"
+  },
+  {
+    "year": 2024,
+    "code": "20",
+    "name": "長野県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/20_nagano/20m_24a.xlsx",
+    "sha256": "61f907f306dffefea1e5a5fc9da95b185b26e69a038f42609479b09459b126bf"
+  },
+  {
+    "year": 2024,
+    "code": "21",
+    "name": "岐阜県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/21_gifu/21m_24r.xlsx",
+    "sha256": "f44d8c1214926ede07dd460eca4c6969483e7ac782d5d563aa4e66ac7b6d2c82"
+  },
+  {
+    "year": 2024,
+    "code": "21",
+    "name": "岐阜県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/21_gifu/21m_24a.xlsx",
+    "sha256": "7805c803d2b504eee3e648999d208e655a8f32e00a33d1c62b6e4b08952b25cf"
+  },
+  {
+    "year": 2024,
+    "code": "22",
+    "name": "静岡県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/22_shizuoka/22m_24r.xlsx",
+    "sha256": "1303f57aae21aae07f7a45a78a9af48eef67412b5a9b723b4b4494e4adf203ec"
+  },
+  {
+    "year": 2024,
+    "code": "22",
+    "name": "静岡県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/22_shizuoka/22m_24a.xlsx",
+    "sha256": "83d3ddff74e576fbb8e92e0abc89b4975499c640ce25dc656d8c18f03f18a926"
+  },
+  {
+    "year": 2024,
+    "code": "23",
+    "name": "愛知県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/23_aichi/23m_24r.xlsx",
+    "sha256": "3b6cf9aca49433b5972d24215dac21612ca199c37de14f223d58a5137aa40a65"
+  },
+  {
+    "year": 2024,
+    "code": "23",
+    "name": "愛知県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/23_aichi/23m_24a.xlsx",
+    "sha256": "0ff379a2f7678f0fe9e331905486bb85b377dfc0536be069d0806ee201ed59c3"
+  },
+  {
+    "year": 2024,
+    "code": "24",
+    "name": "三重県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/24_mie/24m_24r.xlsx",
+    "sha256": "0fe798d3272cbd7edffa667aca785c77b455cdc3ad619738aec3503a020cc568"
+  },
+  {
+    "year": 2024,
+    "code": "24",
+    "name": "三重県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/24_mie/24m_24a.xlsx",
+    "sha256": "bedb4ce64a196695ecd00c9cf73aaf7f0127425ba7a92edbdfdcb4bbf63e692e"
+  },
+  {
+    "year": 2024,
+    "code": "25",
+    "name": "滋賀県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/25_shiga/25m_24r.xlsx",
+    "sha256": "638ab6ee64a172a4480b6b9d9956f568779cb2ac7680bed144bc6e392bad947a"
+  },
+  {
+    "year": 2024,
+    "code": "25",
+    "name": "滋賀県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/25_shiga/25m_24a.xlsx",
+    "sha256": "357251f31e36905330cff5df0db71dfc41d67ff3303f912c1c89d0f6a472313a"
+  },
+  {
+    "year": 2024,
+    "code": "26",
+    "name": "京都府",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/26_kyoto/26m_24r.xlsx",
+    "sha256": "5d8aa4cf1e9e2e6f430d173a5775db74f829c92c4164a0e64962c0622dec8494"
+  },
+  {
+    "year": 2024,
+    "code": "26",
+    "name": "京都府",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/26_kyoto/26m_24a.xlsx",
+    "sha256": "ca78e7d4dd56f88a879c0c8277f9af14f977c79ee20b3ff12d360368c70f4751"
+  },
+  {
+    "year": 2024,
+    "code": "27",
+    "name": "大阪府",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/27_osaka/27m_24r.xlsx",
+    "sha256": "6ccbbd499582cb821eca013111313df391445cb9975f83630acc27f7bd48eb0b"
+  },
+  {
+    "year": 2024,
+    "code": "27",
+    "name": "大阪府",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/27_osaka/27m_24a.xlsx",
+    "sha256": "8ff978d9ba7a3871e79824c42b08bb8b0612719a2c9355d476fca13db71d3de1"
+  },
+  {
+    "year": 2024,
+    "code": "28",
+    "name": "兵庫県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/28_hyougo/28m_24r.xlsx",
+    "sha256": "52bb82f11ec1ccdd1769871551e73212e6342eb67ecdf3406e1d9c3336a6d68b"
+  },
+  {
+    "year": 2024,
+    "code": "28",
+    "name": "兵庫県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/28_hyougo/28m_24a.xlsx",
+    "sha256": "53d9a0ee26a5293a34985c8a4efd4d7169d82656612adab5bb7fa4935c57b4fa"
+  },
+  {
+    "year": 2024,
+    "code": "29",
+    "name": "奈良県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/29_nara/29m_24r.xlsx",
+    "sha256": "6bb5c26c26d32ad2c8d8ea033ddd6734c52790baa4ec67ba3c8c6adecc767dbe"
+  },
+  {
+    "year": 2024,
+    "code": "29",
+    "name": "奈良県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/29_nara/29m_24a.xlsx",
+    "sha256": "cfc4d0d7e8218eba1501e9f8c85b292330eaedf129f38047945b0b8a46c6e5db"
+  },
+  {
+    "year": 2024,
+    "code": "30",
+    "name": "和歌山県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/30_wakayama/30m_24r.xlsx",
+    "sha256": "1601eb693ade1db4758be73246a798e9ec0b93c48938b004b1ebce47ab288dc7"
+  },
+  {
+    "year": 2024,
+    "code": "30",
+    "name": "和歌山県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/30_wakayama/30m_24a.xlsx",
+    "sha256": "5c99ff02247559c94d705ebb514139e9617e0c9807a857336c9be48c57c38b0d"
+  },
+  {
+    "year": 2024,
+    "code": "31",
+    "name": "鳥取県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/31_tottori/31m_24r.xlsx",
+    "sha256": "fbf5ccd64a2eaa1d7758a196c4771a0e81bd691b342e68a4cf301b7301dad4e2"
+  },
+  {
+    "year": 2024,
+    "code": "31",
+    "name": "鳥取県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/31_tottori/31m_24a.xlsx",
+    "sha256": "c218de6d682d2fbe3e27cb03a1e06a1b6609138b10b4f1b635fdded4cac3a826"
+  },
+  {
+    "year": 2024,
+    "code": "32",
+    "name": "島根県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/32_shimane/32m_24r.xlsx",
+    "sha256": "3ac7750086fe21803af2c38fa2435db8a358384944243a3d5c34f1c14c1595f8"
+  },
+  {
+    "year": 2024,
+    "code": "32",
+    "name": "島根県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/32_shimane/32m_24a.xlsx",
+    "sha256": "c863af4d9ec4eed22c70b985c203d5bb8930a636a517d8511b76f988723147d8"
+  },
+  {
+    "year": 2024,
+    "code": "33",
+    "name": "岡山県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/33_okayama/33m_24r.xlsx",
+    "sha256": "21555e852360d4403c353599453088685b3984e3d28282059490b9be2e24aeed"
+  },
+  {
+    "year": 2024,
+    "code": "33",
+    "name": "岡山県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/33_okayama/33m_24a.xlsx",
+    "sha256": "a6ac1b52c4867c6b57551b375da2d33d2f6c988482ea83af2a493bac73f58df8"
+  },
+  {
+    "year": 2024,
+    "code": "34",
+    "name": "広島県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/34_hiroshima/34m_24r.xlsx",
+    "sha256": "177421e5e2b0f2803cfe2f0012b43f9fa804ad512e21ad219183f604b302da65"
+  },
+  {
+    "year": 2024,
+    "code": "34",
+    "name": "広島県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/34_hiroshima/34m_24a.xlsx",
+    "sha256": "d24f89fc2e11b3e5903f1b29e995c9956bca7714adae426a0d6f9ff622b1fa26"
+  },
+  {
+    "year": 2024,
+    "code": "35",
+    "name": "山口県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/35_yamaguchi/35m_24r.xlsx",
+    "sha256": "759d9383326897c27077358cce70c31826929c87f37253b73f2c8cad72573828"
+  },
+  {
+    "year": 2024,
+    "code": "35",
+    "name": "山口県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/35_yamaguchi/35m_24a.xlsx",
+    "sha256": "d45baeeaf653a696c81405f6f72f001e397fefa3126360ced43cb6feba3140c3"
+  },
+  {
+    "year": 2024,
+    "code": "36",
+    "name": "徳島県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/36_tokushima/36m_24r.xlsx",
+    "sha256": "9625393bbe4b623d17239060c705b1fa7730de456d5e9eb57aedd8edc1ed2b78"
+  },
+  {
+    "year": 2024,
+    "code": "36",
+    "name": "徳島県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/36_tokushima/36m_24a.xlsx",
+    "sha256": "8c007f942a8e9546ca61289a05832f30cf9535f488cd2ec696897a3ddd855225"
+  },
+  {
+    "year": 2024,
+    "code": "37",
+    "name": "香川県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/37_kagawa/37m_24r.xlsx",
+    "sha256": "e2f88c9ef6f2232473ae26aee684b3933716ff0590d0d737b4e01905c256a95e"
+  },
+  {
+    "year": 2024,
+    "code": "37",
+    "name": "香川県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/37_kagawa/37m_24a.xlsx",
+    "sha256": "dfba3029e0550491bbfe260f951331bec393e2d84f5009e970eac8746df69bb3"
+  },
+  {
+    "year": 2024,
+    "code": "38",
+    "name": "愛媛県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/38_ehime/38m_24r.xlsx",
+    "sha256": "8911df125a06613c9bd7b12539cef844a27e990b7751ef96c6162205c72ecac3"
+  },
+  {
+    "year": 2024,
+    "code": "38",
+    "name": "愛媛県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/38_ehime/38m_24a.xlsx",
+    "sha256": "dcf98ecd95a6b3a99c5b3f21322ebf26757ee2374f16ede40142a4f321b4eb8e"
+  },
+  {
+    "year": 2024,
+    "code": "39",
+    "name": "高知県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/39_kouchi/39m_24r.xlsx",
+    "sha256": "3f56813e0bb8c4f36ca11831fd4ccecc9f91d7f0ccac6e47d5f6c90b4e066afe"
+  },
+  {
+    "year": 2024,
+    "code": "39",
+    "name": "高知県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/39_kouchi/39m_24a.xlsx",
+    "sha256": "bc7e6d94f07d15d9c5eda7a047fb0e7da21c651581267f835ffc2748cd62d5cf"
+  },
+  {
+    "year": 2024,
+    "code": "40",
+    "name": "福岡県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/40_fukuoka/40m_24r.xlsx",
+    "sha256": "b35f66e691bb297560b46dee92f52f477c6654f2980bf4f3600610c5a5ace8d6"
+  },
+  {
+    "year": 2024,
+    "code": "40",
+    "name": "福岡県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/40_fukuoka/40m_24a.xlsx",
+    "sha256": "b4ecccf0463286cff8ad7406c52853926f5a432f9559f1ee6b4fc2661f480dda"
+  },
+  {
+    "year": 2024,
+    "code": "41",
+    "name": "佐賀県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/41_saga/41m_24r.xlsx",
+    "sha256": "3f5314dbe9987fee67b4a27e1b7885b3fbea398054568065985d0a9a6c6a5fe6"
+  },
+  {
+    "year": 2024,
+    "code": "41",
+    "name": "佐賀県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/41_saga/41m_24a.xlsx",
+    "sha256": "74a435033dfdae938f29ba6eea42346ad4a0fadad0a316e50e7c25e819fa8d2e"
+  },
+  {
+    "year": 2024,
+    "code": "42",
+    "name": "長崎県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/42_nagasaki/42m_24r.xlsx",
+    "sha256": "19a695eeba20c60df85d66a7527b3a053b120e69dc1096e330d8a98e48a09aa2"
+  },
+  {
+    "year": 2024,
+    "code": "42",
+    "name": "長崎県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/42_nagasaki/42m_24a.xlsx",
+    "sha256": "2dae1cdad96a6d86bf2745d838749aff3801abcdae4a39fb75ebc870309f198e"
+  },
+  {
+    "year": 2024,
+    "code": "43",
+    "name": "熊本県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/43_kumamoto/43m_24r.xlsx",
+    "sha256": "9ba6e92165758eb25a7b370b396a07b2fe3438a1d31edc9808b5ad7908caa057"
+  },
+  {
+    "year": 2024,
+    "code": "43",
+    "name": "熊本県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/43_kumamoto/43m_24a.xlsx",
+    "sha256": "a5079cb8b90c21591f118b5eadfffee53e4131f60ec74ccae82c5984e434af1a"
+  },
+  {
+    "year": 2024,
+    "code": "44",
+    "name": "大分県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/44_ohita/44m_24r.xlsx",
+    "sha256": "b68f616a90d8bda36c62b612e200d87d1b2de4cdd5f4b43acc5fb638c4808e17"
+  },
+  {
+    "year": 2024,
+    "code": "44",
+    "name": "大分県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/44_ohita/44m_24a.xlsx",
+    "sha256": "6195318da2a7fc57ed2560f8bc235db6ebcca990dcade4cd79c5c81907a2cd99"
+  },
+  {
+    "year": 2024,
+    "code": "45",
+    "name": "宮崎県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/45_miyazaki/45m_24r.xlsx",
+    "sha256": "2474f7b41a27e2b9dcc3a6580e5538727b7f9ed4d78f072cdb7b1d6765fe0cd5"
+  },
+  {
+    "year": 2024,
+    "code": "45",
+    "name": "宮崎県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/45_miyazaki/45m_24a.xlsx",
+    "sha256": "fa44985871dbd852a86f8d60da60489e79eecfc852111b4979b16be2d928ec94"
+  },
+  {
+    "year": 2024,
+    "code": "46",
+    "name": "鹿児島県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/46_kagoshima/46m_24r.xlsx",
+    "sha256": "2f3f15d52ee9b396f0fe1162bf85864560083f904fcc35bfa0728814600085c3"
+  },
+  {
+    "year": 2024,
+    "code": "46",
+    "name": "鹿児島県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/46_kagoshima/46m_24a.xlsx",
+    "sha256": "bc33b1809826023a5ec192320d895af25e00fe179a575cabbeba7ade4d1e8e96"
+  },
+  {
+    "year": 2024,
+    "code": "47",
+    "name": "沖縄県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/47_okinawa/47m_24r.xlsx",
+    "sha256": "9c7ffd6a459d2bc67f404c903e0d87983c44cbdd69add7bd87ba005f14d60500"
+  },
+  {
+    "year": 2024,
+    "code": "47",
+    "name": "沖縄県",
+    "url": "https://warp.da.ndl.go.jp/20251213/20251203143749/https://www.nier.go.jp/24chousakekkahoukoku/factsheet/47_okinawa/47m_24a.xlsx",
+    "sha256": "ad7d2404d173a1be91ce901034ab0b6306379e31025156cb89b2521e1912c1f5"
+  }
+]
