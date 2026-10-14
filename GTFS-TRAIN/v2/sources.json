@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-12",
+  "updated": "2026-10-14",
   "status": "reference",
   "feedVersion": "2026-05-coordinate-v2",
   "coverageStart": "2026-05-01",
@@ -13,7 +13,8 @@
     "詳細の始発・終着は収録区間の端です。実際の始発・終着を確認できないため未確認と表示します。",
     "通過時刻は未収録です。空欄は非停車・別経路・データ欠損を区別できません。",
     "到着・発車が同時刻のデータが多く、停車時間の精度は未確認です。",
-    "座標は規則的な仮値のため利用しません。ダイヤの縦軸は等間隔の駅順であり距離ではありません。"
+    "座標は規則的な仮値のため利用しません。ダイヤの縦軸は等間隔の駅順であり距離ではありません。",
+    "臨時列車フィルターは番号による暫定候補の切替です。実際の運転日・分類の網羅性は未確認です。"
   ],
   "revision": {
     "october": "中央本線・篠ノ井線の2026年10月一斉改正の有無・適用日は確認できていません。月版の公開を改正日とは扱いません。",
@@ -42,5 +43,10 @@
       "url": "https://www.jrfreight.co.jp/service/area"
     }
   ],
-  "sourceSha256": "d996e7ae9987d9cc7e6067d676bb60018c70b334d5568d6b6f750b657019e953"
+  "sourceSha256": "d996e7ae9987d9cc7e6067d676bb60018c70b334d5568d6b6f750b657019e953",
+  "temporaryFilter": {
+    "method": "explicit temporary flag when available; otherwise 4-digit passenger train number starting 8 or 9",
+    "status": "provisional",
+    "operationDatesVerified": false
+  }
 }

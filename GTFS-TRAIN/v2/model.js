@@ -17,7 +17,8 @@ const RailModel = (() => {
   return ids;
  }
  function stations(range,route){let list=[...order];if(route==='tatsuno')list.splice(6,1,...branch);if(route==='both')list.splice(7,0,...branch);const bounds={suwa:['岡谷','茅野'],wide:['塩尻','富士見'],full:['松本','小淵沢']}[range];return list.slice(list.indexOf(bounds[0]),list.indexOf(bounds[1])+1);}
- function select(data,state){const ids=active(data,state.date,state.service);return data.trains.filter(t=>ids.has(t.service)&&(state.direction==='both'||t.direction===state.direction)&&state.kinds.includes(kind(t)));}
+ function temporary(t){if(typeof t.temporary==='boolean')return t.temporary;return /^[89]\d{3}[A-Z]*$/.test(t.number||'');}
+ function select(data,state){const ids=active(data,state.date,state.service);return data.trains.filter(t=>ids.has(t.service)&&(state.direction==='both'||t.direction===state.direction)&&kind(t)!=='freight'&&state.kinds.includes(kind(t))&&(state.includeTemporary!==false||!temporary(t)));}
  function stationEvents(trains,station,start,end){return trains.flatMap(t=>t.stops.filter(s=>s[0]===station).map(s=>({train:t,stop:s,minute:minutes(s[2]||s[1])}))).filter(e=>e.minute!==null&&e.minute>=start&&e.minute<=end).sort((a,b)=>a.minute-b.minute);}
  function connections(trains,origin,destination,start,end,minWait=5){
   if(origin===destination)return [];const results=[],seen=new Set();
@@ -32,6 +33,6 @@ const RailModel = (() => {
   }
   return results.filter(r=>r.arrival!==null&&r.arrival>=r.departure).sort((a,b)=>a.departure-b.departure||a.arrival-b.arrival||a.legs.length-b.legs.length).slice(0,30);
  }
- return {order,branch,colors,minutes,time,kind,via,color,routeLabel,connections,active,stations,select,stationEvents};
+ return {order,branch,colors,minutes,time,kind,via,color,routeLabel,connections,active,stations,temporary,select,stationEvents};
 })();
 if(typeof module!=='undefined')module.exports=RailModel;
