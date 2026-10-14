@@ -48,5 +48,7 @@
     "method": "explicit temporary flag when available; otherwise 4-digit passenger train number starting 8 or 9",
     "status": "provisional",
     "operationDatesVerified": false
-  }
+  },
+  "applicationRevision": "2026.10.14-02",
+  "applicationUpdated": "2026-10-14"
 }
