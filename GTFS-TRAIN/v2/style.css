@@ -9,3 +9,5 @@
 .timetable{width:max-content;table-layout:fixed}.timetable th,.timetable td{min-width:120px;width:120px;max-width:120px}.timetable th:first-child{min-width:105px;width:105px;max-width:105px}.timetable thead th{padding:4px}.timetable .train-button{width:112px;white-space:normal;overflow-wrap:anywhere;line-height:1.25;font-size:14px;padding:3px 5px}.timetable .train-button small{font-size:11px;line-height:1.35;margin-top:2px}
 
 .connection-station-header{height:34px;line-height:1.15}.connection-station-header span{transform:translateX(calc(var(--station-gap,68px) / -2));font-size:11px;white-space:normal;overflow-wrap:anywhere;padding:0 2px}.connection-station-header span:first-child{transform:none}
+
+.timeline-heading{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.shimosuwa-arrival{display:inline-flex;align-items:baseline;gap:7px;padding:4px 10px;border:1px solid #edc4af;border-radius:6px;background:#fff2e8;color:#9c452b;font-size:13px;white-space:nowrap}.shimosuwa-arrival strong{font-size:16px;font-variant-numeric:tabular-nums}
