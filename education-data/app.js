@@ -7,11 +7,12 @@ const prefs=Object.keys(DATA.years['2026']).filter(n=>n!=='全国平均').sort((
 const metros=['東京都','大阪府','福岡県','京都府'];
 const peers=prefs.filter(n=>n!=='長野県'&&Math.abs(DATA.population[n]/DATA.population['長野県']-1)<=.2);
 const subjects={2024:['国語','数学'],2025:['国語','数学','理科'],2026:['国語','数学','英語４技能','英語３技能']};
+const subjectChoices=['国語','数学','理科','社会','英語４技能','英語３技能'];
 function selectedRegions(){let group=$('group').value;return ['全国平均','長野県',...(group==='all'?prefs:group==='metro'?metros:group==='peer'?peers:[...metros,...peers])].filter((n,i,a)=>a.indexOf(n)===i);}
 function options(values,labels){return values.map(v=>`<option value="${escapeHTML(v)}">${escapeHTML(labels?labels(v):v)}</option>`).join('');}
 function source(r){return `<details class="details"><summary>出典・詳細</summary><p><a href="${escapeHTML(r.source)}" target="_blank" rel="noopener">公式集計ファイル ↗</a><br>${escapeHTML(r.sheet)} / ${escapeHTML(r.cell||r.cells)}${r.question?`<br>設問 ${escapeHTML(r.question)}：${escapeHTML(r.text)}<br>${escapeHTML(r.definition)}<br>割合：${r.parts.map(fmt).join(' + ')}％${r.counts?`<br>回答人数：${r.counts.join(' + ')} / 母数 ${r.n.toLocaleString('ja-JP')}`:''}`:''}</p></details>`;}
 function delta(r,b){return r&&b&&typeof r.value==='number'&&typeof b.value==='number'?r.value-b.value:null;}
-function setAcademicOptions(){const previous=$('subject').value; $('subject').innerHTML=options(subjects[$('year').value],v=>v==='理科'?v+'（平均IRTスコア）':v.startsWith('英語')?v+'（平均IRTスコア）':v); if(subjects[$('year').value].includes(previous))$('subject').value=previous;}
+function setAcademicOptions(){const previous=$('subject').value; $('subject').innerHTML=options(subjectChoices,v=>v==='理科'?v+'（2025年度・IRT）':v==='社会'?v+'（この調査では対象外）':v.startsWith('英語')?v+'（2026年度・IRT）':v); if(subjectChoices.includes(previous))$('subject').value=previous;}
 function setQuestionOptions(id){const old=$(id).value,qs=DATA.years[$('year').value]['長野県'].questions;$(id).innerHTML=options(Object.keys(DATA.metrics).filter(k=>qs[k]),k=>DATA.metrics[k].label);if(qs[old])$(id).value=old;}
 function barChart(rows,title,irt=false){
  const width=860,left=110,right=80,top=40,rowHeight=30,height=top+rows.length*rowHeight+50;
@@ -22,6 +23,17 @@ function barChart(rows,title,irt=false){
  return `<h3>${escapeHTML(title)}</h3>${irt?'<p class="tiny">県は平均IRTスコアの公表幅、全国は集計ファイルの公表値。横軸は350〜650。片側が開いた公表幅は境界と矢印で表示。幅を点数に変換していません。</p>':'<p class="tiny">平均正答率（％）、横軸は0〜100。</p>'}${svg}</svg>`;
 }
 function renderAcademic(){const y=$('year').value,s=$('subject').value,rs=DATA.years[y],b=rs['全国平均'].academic[s],irt=s==='理科'||s.startsWith('英語');
+ if(!b){
+  const social=s==='社会';
+  const reason=social?'社会は全国学力・学習状況調査の教科調査に含まれていません。2024〜2026年度の都道府県別成績・全国平均は存在しないため、数値を表示しません。':`${y}年度の中学校では${s.startsWith('英語')?'英語':s}の教科調査を実施していません。掲載している3年度では${s==='理科'?'2025年度に理科（CBT・IRT）':'2026年度に英語（CBT・IRT）'}を実施しています。`;
+  const availableYear=s==='理科'?'2025':'2026';
+  $('metricTitle').textContent=s+'：調査対象外';
+  $('availability').innerHTML=`<strong>${y}年度 ${s}：調査対象外</strong><br>${reason}${social?'':`<br><button class="pill" id="availableSubjectYear">${availableYear}年度の${s}を見る</button>`}`;
+  $('regionRows').innerHTML=selectedRegions().map(n=>`<tr class="${n==='長野県'?'highlight':''}"><td><b>${n}</b></td><td>調査対象外</td><td>—</td><td class="details">教科調査を実施していません</td><td><a href="https://www.nier.go.jp/${y.slice(2)}chousakekkahoukoku/" target="_blank" rel="noopener">公式の調査資料 ↗</a></td></tr>`).join('');
+  $('dataBars').innerHTML=`<h3>${y}年度 ${s}</h3><p>${reason}</p>${social?'<p class="tiny">別の調査で社会を掲載する場合は、対象学年・調査範囲・尺度が異なるため、この全国調査と区別する必要があります。</p>':''}`;
+  if(!social)$('availableSubjectYear').addEventListener('click',()=>{$('year').value=availableYear;$('year').dispatchEvent(new Event('change'));});
+  return;
+ }
  $('metricTitle').textContent=`${s}：${irt?'平均IRTスコア':'平均正答率（％）'}`;
  $('availability').innerHTML=`<strong>${y}年度・全国と47都道府県の実数値を収録。</strong> ${irt?'県の平均は公表幅をそのまま表示。幅の中点や順位は作成しません。':'県は整数、全国は小数1桁の公表値。差は公表値同士の差（pt）です。'}${s==='英語４技能'?'<br>全国は国公私立の当日実施抽出校、県は公立の当日・期間内実施合算。対象が異なるため全国との差は表示しません。':''}`;
  $('regionRows').innerHTML=selectedRegions().map(n=>{const r=rs[n].academic[s],d=s==='英語４技能'?null:delta(r,b);return `<tr class="${n==='長野県'?'highlight':''}"><td><b>${n}</b></td><td><strong>${fmt(r.value)}</strong> ${r.unit}${r.bands?`<details class="details"><summary>IRTバンド分布</summary><p>バンド1〜5の割合（％）：${r.bands.map(fmt).join(' / ')}<br>同一年度・同一技能内で比較。</p></details>`:''}</td><td>${d===null?'幅・対象のため算出しない':signed(d)+' pt'}</td><td class="details">${r.scope}<br>集計生徒数 ${r.n.toLocaleString('ja-JP')}人</td><td>${source(r)}</td></tr>`;}).join('');
