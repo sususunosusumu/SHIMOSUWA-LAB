@@ -7,22 +7,32 @@ const prefs=Object.keys(DATA.years['2026']).filter(n=>n!=='全国平均').sort((
 const metros=['東京都','大阪府','福岡県','京都府'];
 const peers=prefs.filter(n=>n!=='長野県'&&Math.abs(DATA.population[n]/DATA.population['長野県']-1)<=.2);
 const subjects={2024:['国語','数学'],2025:['国語','数学','理科'],2026:['国語','数学','英語４技能','英語３技能']};
-const subjectChoices=['国語','数学','理科','社会','英語４技能','英語３技能'];
+const subjectChoices=['全教科合計','国語','数学','理科','社会','英語４技能','英語３技能'];
 function selectedRegions(){let group=$('group').value;return ['全国平均','長野県',...(group==='all'?prefs:group==='metro'?metros:group==='peer'?peers:[...metros,...peers])].filter((n,i,a)=>a.indexOf(n)===i);}
 function options(values,labels){return values.map(v=>`<option value="${escapeHTML(v)}">${escapeHTML(labels?labels(v):v)}</option>`).join('');}
 function source(r){return `<details class="details"><summary>出典・詳細</summary><p><a href="${escapeHTML(r.source)}" target="_blank" rel="noopener">公式集計ファイル ↗</a><br>${escapeHTML(r.sheet)} / ${escapeHTML(r.cell||r.cells)}${r.question?`<br>設問 ${escapeHTML(r.question)}：${escapeHTML(r.text)}<br>${escapeHTML(r.definition)}<br>割合：${r.parts.map(fmt).join(' + ')}％${r.counts?`<br>回答人数：${r.counts.join(' + ')} / 母数 ${r.n.toLocaleString('ja-JP')}`:''}`:''}</p></details>`;}
 function delta(r,b){return r&&b&&typeof r.value==='number'&&typeof b.value==='number'?r.value-b.value:null;}
-function setAcademicOptions(){const previous=$('subject').value; $('subject').innerHTML=options(subjectChoices,v=>v==='理科'?v+'（2025年度・IRT）':v==='社会'?v+'（この調査では対象外）':v.startsWith('英語')?v+'（2026年度・IRT）':v); if(subjectChoices.includes(previous))$('subject').value=previous;}
+function setAcademicOptions(){const previous=$('subject').value; $('subject').innerHTML=options(subjectChoices,v=>v==='全教科合計'?v+'・一覧':v==='理科'?v+'（2025年度・IRT）':v==='社会'?v+'（この調査では対象外）':v.startsWith('英語')?v+'（2026年度・IRT）':v); if(subjectChoices.includes(previous))$('subject').value=previous;}
 function setQuestionOptions(id){const old=$(id).value,qs=DATA.years[$('year').value]['長野県'].questions;$(id).innerHTML=options(Object.keys(DATA.metrics).filter(k=>qs[k]),k=>DATA.metrics[k].label);if(qs[old])$(id).value=old;}
-function barChart(rows,title,irt=false){
+function barChart(rows,title,irt=false,total=false){
  const width=860,left=110,right=80,top=40,rowHeight=30,height=top+rows.length*rowHeight+50;
- const min=irt?350:0,max=irt?650:100,x=v=>left+(v-min)/(max-min)*(width-left-right);
+ const min=irt?350:0,max=irt?650:total?200:100,x=v=>left+(v-min)/(max-min)*(width-left-right);
  let svg=`<svg class="chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHTML(title)}"><title>${escapeHTML(title)}</title>`;
- for(let tick=min;tick<=max;tick+=irt?50:20)svg+=`<line x1="${x(tick)}" x2="${x(tick)}" y1="25" y2="${height-35}" stroke="#dbe4dd"/><text x="${x(tick)}" y="${height-12}" text-anchor="middle">${tick}</text>`;
+ for(let tick=min;tick<=max;tick+=irt||total?50:20)svg+=`<line x1="${x(tick)}" x2="${x(tick)}" y1="25" y2="${height-35}" stroke="#dbe4dd"/><text x="${x(tick)}" y="${height-12}" text-anchor="middle">${tick}</text>`;
  rows.forEach(([name,r],i)=>{const cy=top+i*rowHeight,color=name==='長野県'?'#16624e':'#91b3a5';svg+=`<text x="${left-12}" y="${cy+5}" text-anchor="end">${escapeHTML(name)}</text>`;if(typeof r.value==='number')svg+=`<rect x="${x(min)}" y="${cy-7}" width="${Math.max(0,x(r.value)-x(min))}" height="16" rx="4" fill="${color}"/>`;else{const [a,b]=r.value.split('～').map(v=>v.trim());if(a&&b){svg+=`<line x1="${x(Number(a))}" x2="${x(Number(b))}" y1="${cy}" y2="${cy}" stroke="${color}" stroke-width="8"/>`;}else{const bound=x(Number(a||b)),direction=a?1:-1,end=bound+direction*20;svg+=`<path d="M ${bound} ${cy-6} V ${cy+6} M ${bound} ${cy} H ${end} l ${-direction*6} -4 M ${end} ${cy} l ${-direction*6} 4" fill="none" stroke="${color}" stroke-width="2"/>`;}}svg+=`<text x="${width-right+12}" y="${cy+5}">${fmt(r.value)}</text>`;});
- return `<h3>${escapeHTML(title)}</h3>${irt?'<p class="tiny">県は平均IRTスコアの公表幅、全国は集計ファイルの公表値。横軸は350〜650。片側が開いた公表幅は境界と矢印で表示。幅を点数に変換していません。</p>':'<p class="tiny">平均正答率（％）、横軸は0〜100。</p>'}${svg}</svg>`;
+ return `<h3>${escapeHTML(title)}</h3>${irt?'<p class="tiny">県は平均IRTスコアの公表幅、全国は集計ファイルの公表値。横軸は350〜650。片側が開いた公表幅は境界と矢印で表示。幅を点数に変換していません。</p>':total?'<p class="tiny">国語正答率＋数学正答率を各100点相当として足した参考値（0〜200）。公式の総得点・個人の平均総点ではありません。2025・2026年度は全教科合計ではなく2教科のみです。</p>':'<p class="tiny">平均正答率（％）、横軸は0〜100。</p>'}${svg}</svg>`;
+}
+function restoreAcademicTable(){const header=$('regionRows').closest('table').querySelector('thead');header.innerHTML='<tr><th>地域</th><th id="metricTitle">指標</th><th>全国との差</th><th>集計対象</th><th>出典・検算情報</th></tr>';}
+function renderAllSubjects(){const year=$('year').value,rs=DATA.years[year],all=year==='2024',columns=subjects[year],national=rs['全国平均'].academic,base=national['国語'].value+national['数学'].value;
+ $('availability').innerHTML=`<strong>${year}年度・全教科の一覧と合計。</strong><br>${all?'実施教科は国語・数学の2教科。両教科の正答率を足し、各100点相当・合計200点相当の参考値として表示します。':'全教科の合計は算出できません。国語・数学は正答率、理科・英語はIRT尺度で、直接足すと意味のない値になるためです。国語＋数学だけの参考合計を別に表示します。'}<br>公式の総得点・個人の平均総点ではありません。科目ごとに集計生徒が異なり、公表値の丸めも含みます。${year==='2026'?'<br>英語は4技能と参考の3技能を併記し、2教科として数えたり合算したりしません。4技能の全国と県は集計対象が異なります。':''}`;
+ $('regionRows').closest('table').querySelector('thead').innerHTML=`<tr><th>地域</th>${columns.map(s=>`<th>${s}<br>${s==='理科'||s.startsWith('英語')?'IRTスコア':'正答率（％）'}</th>`).join('')}<th>全教科合計<br>参考値</th>${all?'':'<th>国語＋数学のみ<br>参考合計（200点相当）</th>'}<th>2教科合計の<br>全国との差（点相当）</th><th>計算・出典</th></tr>`;
+ const chartRows=[];
+ $('regionRows').innerHTML=selectedRegions().map(name=>{const a=rs[name].academic,sum=Number((a['国語'].value+a['数学'].value).toFixed(1));chartRows.push([name,{value:sum}]);return `<tr class="${name==='長野県'?'highlight':''}"><td><b>${name}</b></td>${columns.map(s=>`<td>${fmt(a[s].value)}</td>`).join('')}<td>${all?`<strong>${fmt(sum)}</strong> / 200点相当`:'算出不可（尺度が異なる）'}</td>${all?'':`<td><strong>${fmt(sum)}</strong> / 200点相当</td>`}<td>${signed(sum-base)}</td><td><p class="tiny">国語 ${fmt(a['国語'].value)} ＋ 数学 ${fmt(a['数学'].value)} ＝ ${fmt(sum)}。正答率の合計で、正答数の合計ではありません。</p>${columns.map(s=>`<span class="details">${s}</span>${source(a[s])}`).join('')}</td></tr>`;}).join('');
+ $('dataBars').innerHTML=barChart(chartRows,`${year}年度 国語＋数学の参考合計`,false,true);
 }
 function renderAcademic(){const y=$('year').value,s=$('subject').value,rs=DATA.years[y],b=rs['全国平均'].academic[s],irt=s==='理科'||s.startsWith('英語');
+ if(s==='全教科合計'){renderAllSubjects();return;}
+ restoreAcademicTable();
  if(!b){
   const social=s==='社会';
   const reason=social?'社会は全国学力・学習状況調査の教科調査に含まれていません。2024〜2026年度の都道府県別成績・全国平均は存在しないため、数値を表示しません。':`${y}年度の中学校では${s.startsWith('英語')?'英語':s}の教科調査を実施していません。掲載している3年度では${s==='理科'?'2025年度に理科（CBT・IRT）':'2026年度に英語（CBT・IRT）'}を実施しています。`;
