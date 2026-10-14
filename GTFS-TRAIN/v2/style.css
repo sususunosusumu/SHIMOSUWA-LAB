@@ -15,3 +15,5 @@
 .timeline-time-column{display:flex;flex-direction:column;align-items:flex-start;gap:7px;flex:0 0 76px}.timeline-time-column time{color:var(--color)}.shimosuwa-stop-mark{display:inline-block;padding:3px 6px;border:1px solid #dfb099;border-radius:5px;background:#fff2e8;color:#9c452b;font-size:11px;font-weight:750;line-height:1.3;white-space:nowrap}
 
 .shimosuwa-stop-summary{display:flex;flex-direction:column;align-items:center;gap:4px}.shimosuwa-arrival-time{color:#9c452b;font-size:12px;font-weight:750;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+.shimosuwa-stop-summary{border:1px solid #dfb099;border-radius:5px;background:#fff2e8;padding:4px 6px;gap:4px}.shimosuwa-stop-summary .shimosuwa-stop-mark{border:0;background:transparent;padding:0}
