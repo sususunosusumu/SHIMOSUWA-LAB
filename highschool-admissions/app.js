@@ -1,128 +1,121 @@
 'use strict';
-const $=id=>document.getElementById(id);
-const fmt=(v,d=0)=>v==null?'—':Number(v).toLocaleString('ja-JP',{minimumFractionDigits:d,maximumFractionDigits:d});
+const $=id=>document.getElementById(id),fmt=(v,d=0)=>v==null?'—':Number(v).toLocaleString('ja-JP',{minimumFractionDigits:d,maximumFractionDigits:d});
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const colors=['#087d79','#c36c31','#4e68bd','#a84d7b','#708d2a','#7d59a0'];
-const regions=['北信','東信','南信','中信'];
-const metrics={applicants:['志願者数','人'],capacity:['募集枠','人'],examinees:['受検者数','人'],accepted:['選抜合格者数','人'],annual_capacity:['年間募集定員','人'],annual_accepted:['最終合格者計（前期＋後期＋再募集）','人'],enrolled:['年間実入学者数','人'],ratio:['志願倍率','倍'],fill:['年間定員充足率','%'],under:['年間定員割れ募集単位数','件']};
-let data,visible=[];
-const trend={regions:new Set(['南信']),schools:new Set()},comparison={regions:new Set(['南信']),schools:new Set()};
-const sum=(rs,fn)=>{const vs=rs.map(fn).filter(v=>v!=null);return vs.length?vs.reduce((a,b)=>a+b,0):null;};
-function value(r,key,stage='both'){
- if(key==='annual_capacity')return r.annual_capacity;
- if(key==='annual_accepted')return sum([r.early.accepted,r.late.accepted,r.additional_accepted],x=>x);
+const districts=[['北信','第1通学区（北信）'],['東信','第2通学区（東信）'],['南信','第3通学区（南信）'],['中信','第4通学区（中信）']];
+const metrics={quota:['募集人数','人'],applicants:['志願者数','人'],examinees:['受検者数','人'],accepted:['合格者数','人'],enrolled:['年間実入学者数','人'],ratio:['志願倍率','倍'],fill:['年間定員充足率','%']};
+const state={districts:new Set(['南信']),schools:new Set(),programs:new Set(),metrics:new Set(['quota','applicants'])};
+let data,programs=new Map(),resultRows=[],targets=[];
+const sum=(values)=>{const valid=values.filter(v=>v!=null);return valid.length?valid.reduce((a,b)=>a+b,0):null;};
+const sortJa=(a,b)=>a.localeCompare(b,'ja');
+function schoolCandidates(){return [...new Set(data.records.filter(r=>state.districts.has(r.region)).map(r=>r.school))].sort(sortJa);}
+function programCandidates(){return [...programs.values()].filter(p=>state.schools.has(p.school)&&state.districts.has(p.region)).sort((a,b)=>sortJa(a.school,b.school)||sortJa(a.department,b.department));}
+function reconcilePrograms(before){const candidates=programCandidates();state.programs=new Set(candidates.filter(p=>state.programs.has(p.program_id)||!before.has(p.program_id)).map(p=>p.program_id));}
+function setDistricts(next){const oldSchools=new Set(schoolCandidates()),oldPrograms=new Set(programCandidates().map(p=>p.program_id));state.districts=new Set(next);state.schools=new Set(schoolCandidates().filter(name=>state.schools.has(name)||!oldSchools.has(name)));reconcilePrograms(oldPrograms);}
+function setSchools(next){const before=new Set(programCandidates().map(p=>p.program_id));state.schools=new Set([...next].filter(name=>schoolCandidates().includes(name)));reconcilePrograms(before);}
+function selectedRows(year,school=null){return data.records.filter(r=>r.year===year&&state.districts.has(r.region)&&state.schools.has(r.school)&&state.programs.has(r.program_id)&&(!school||r.school===school));}
+function stageName(){return $('stage').value==='early'?'前期':$('stage').value==='late'?'後期':'前期＋後期';}
+function metricLabel(key){const phase=$('stage').value;
+ if(key==='quota')return phase==='both'?'年間募集定員':stageName()+' 募集枠';
+ if(key==='accepted')return phase==='both'?'最終合格者計（再募集含む）':stageName()+' 合格者数';
+ if(key==='ratio')return phase==='both'?'延べ志願者／年間定員（参考）':stageName()+' 志願倍率';
+ if(['applicants','examinees'].includes(key))return stageName()+' '+metrics[key][0]+(phase==='both'?'（延べ）':'');
+ return metrics[key][0];
+}
+function value(r,key,phase=$('stage').value){
  if(key==='enrolled')return r.enrolled;
  if(key==='fill')return r.annual_capacity>0&&r.enrolled!=null?r.enrolled/r.annual_capacity*100:null;
- if(key==='under')return r.enrolled==null?null:Number(r.enrolled<r.annual_capacity);
- if(stage==='both'){
-  if(key==='capacity')return r.annual_capacity;
-  if(key==='ratio'){const n=value(r,'applicants','both');return r.annual_capacity>0&&n!=null?n/r.annual_capacity:null;}
-  return sum([r.early[key],r.late[key]],x=>x);
- }
- const s=r[stage];if(key==='ratio')return s.capacity>0&&s.applicants!=null?s.applicants/s.capacity:null;return s[key]??null;
+ if(key==='quota')return phase==='both'?r.annual_capacity:r[phase].capacity;
+ if(key==='ratio'){const n=value(r,'applicants',phase),d=value(r,'quota',phase);return d>0&&n!=null?n/d:null;}
+ const field=key==='accepted'?'accepted':key;
+ if(phase==='both')return sum([r.early[field],r.late[field],...(key==='accepted'?[r.additional_accepted]:[])]);
+ return r[phase][field]??null;
 }
-function aggregate(rs,key,stage='both'){
- if(key==='ratio'){const eligible=rs.filter(r=>value(r,'capacity',stage)>0&&value(r,'applicants',stage)!=null),cap=sum(eligible,r=>value(r,'capacity',stage)),app=sum(eligible,r=>value(r,'applicants',stage));return cap>0&&app!=null?app/cap:null;}
- if(key==='fill'){const eligible=rs.filter(r=>r.enrolled!=null),cap=sum(eligible,r=>r.annual_capacity),n=sum(eligible,r=>r.enrolled);return cap>0&&n!=null?n/cap*100:null;}
- return sum(rs,r=>value(r,key,stage));
+function aggregate(rows,key,phase=$('stage').value){
+ if(key==='ratio'){const valid=rows.filter(r=>value(r,'quota',phase)>0&&value(r,'applicants',phase)!=null),n=sum(valid.map(r=>value(r,'applicants',phase))),d=sum(valid.map(r=>value(r,'quota',phase)));return d>0&&n!=null?n/d:null;}
+ if(key==='fill'){const valid=rows.filter(r=>r.enrolled!=null),n=sum(valid.map(r=>r.enrolled)),d=sum(valid.map(r=>r.annual_capacity));return d>0&&n!=null?n/d*100:null;}
+ return sum(rows.map(r=>value(r,key,phase)));
 }
-function filteredRows(state,year,department){return data.records.filter(r=>r.year===year&&state.regions.has(r.region)&&(!state.schools.size||state.schools.has(r.school))&&(!department||r.department===department));}
-function trendRows(year){return filteredRows(trend,year,$('department').value);}
-function comparisonRows(){return filteredRows(comparison,+$('compareYear').value,$('compareDepartment').value).filter(r=>!$('underOnly').checked||value(r,'under')===1);}
-function previous(r){return data.records.find(x=>x.year===r.year-1&&x.program_id===r.program_id);}
-function delta(r,key,stage=$('compareStage').value){const prev=previous(r);if(!prev)return null;const a=key==='capacityDelta'?r.annual_capacity:value(r,'applicants',stage),b=key==='capacityDelta'?prev.annual_capacity:value(prev,'applicants',stage);return a!=null&&b!=null?a-b:null;}
-function sortValue(r,key){if(key==='school')return r.school;if(key.endsWith('Delta'))return delta(r,key);if(key==='shortage')return r.enrolled==null?null:Math.max(0,r.annual_capacity-r.enrolled);return value(r,key,$('compareStage').value);}
-function yearLabel(y){return `${y}年度（令和${y-2018}年度・${y}年4月入学）`;}
-function stageLabel(stage){return stage==='early'?'前期':stage==='late'?'後期':'前期＋後期';}
-function labelMetric(k,stage=$('stage').value){
- if(stage==='both')return ({capacity:'年間募集定員',applicants:'前期＋後期 志願者数（延べ）',examinees:'前期＋後期 受検者数（延べ）',accepted:'前期＋後期 合格者数（再募集除く）',ratio:'延べ志願者／年間定員'})[k]||metrics[k][0];
- return ['capacity','applicants','examinees','accepted','ratio'].includes(k)?`${stageLabel(stage)} ${metrics[k][0]}`:metrics[k][0];
+function renderPickers(){
+ $('districtList').innerHTML=districts.map(([id,name])=>`<label><input type="checkbox" data-district="${id}" ${state.districts.has(id)?'checked':''}>${name}</label>`).join('');
+ $('districtCount').textContent=`${state.districts.size} / 4学区`;
+ const candidates=schoolCandidates(),q=$('schoolQuery').value.trim().replace(/\s/g,'');
+ $('schoolList').innerHTML=candidates.filter(name=>name.includes(q)).map(name=>`<label><input type="checkbox" data-school="${esc(name)}" ${state.schools.has(name)?'checked':''}>${esc(name)}</label>`).join('')||'<p class="caption">学校候補がありません。学区・検索条件を確認してください。</p>';
+ $('schoolCount').textContent=`${state.schools.size} / ${candidates.length}校を選択`;
+ const available=programCandidates();
+ $('programList').innerHTML=[...state.schools].sort(sortJa).map(school=>{const ps=available.filter(p=>p.school===school);if(!ps.length)return '';return `<div class="program-group"><strong>${esc(school)}</strong><div class="program-options">`+ps.map(p=>`<label><input type="checkbox" data-program="${esc(p.program_id)}" ${state.programs.has(p.program_id)?'checked':''} aria-label="${esc(p.school+' '+p.department)}">${esc(p.department)}</label>`).join('')+'</div></div>';}).join('')||'<p class="caption">学校を選ぶと、その学校の学科が表示されます。</p>';
+ $('programCount').textContent=`${state.programs.size} / ${available.length}募集単位を選択`;
+ renderMetrics();
 }
-function metricKeys(){return ['metric','metric2','metric3'].map(id=>$(id).value).filter((k,i,a)=>k&&a.indexOf(k)===i);}
-function renderPickers(kind){const t=kind==='trend',state=t?trend:comparison,list=t?'trendSchoolList':'schoolList',chips=t?'trendSchoolChips':'schoolChips',q=$(t?'query':'compareQuery').value.trim().replace(/\s/g,''),year=t?null:+$('compareYear').value;
- $(t?'trendRegions':'compareRegions').innerHTML=regions.map(region=>`<label><input type="checkbox" data-region="${region}" ${state.regions.has(region)?'checked':''}>${region}</label>`).join('');
- const candidates=[...new Set(data.records.filter(r=>(year==null||r.year===year)&&state.regions.has(r.region)&&r.school.includes(q)).map(r=>r.school))].sort((a,b)=>a.localeCompare(b,'ja'));
- $(list).innerHTML=candidates.map(name=>`<label><input type="checkbox" data-school="${esc(name)}" ${state.schools.has(name)?'checked':''}>${esc(name)}</label>`).join('')||'<p class="caption">学校候補がありません。地域・年度・検索条件を確認してください。</p>';
- $(chips).innerHTML=[...state.schools].map(name=>`<button data-remove-school="${esc(name)}">${esc(name)} ×</button>`).join('');
+function renderMetrics(){$('metricList').innerHTML=Object.keys(metrics).map(key=>`<label><input type="checkbox" data-metric="${key}" ${state.metrics.has(key)?'checked':''}>${esc(metricLabel(key))}</label>`).join('');}
+function targetColor(i){const first=['#087d79','#c36c31','#4e68bd','#a84d7b','#708d2a','#7d59a0'];return first[i]||`hsl(${(i*137.508)%360} 62% 35%)`;}
+function buildResults(){
+ if($('groupMode').value==='schools')targets=[...state.schools].sort(sortJa).filter(s=>programCandidates().some(p=>p.school===s&&state.programs.has(p.program_id))).map((name,i)=>({name,school:name,color:targetColor(i)}));
+ else targets=[{name:'選択対象の合計',school:null,color:targetColor(0)}];
+ resultRows=targets.flatMap(target=>data.years.map(year=>{const rows=selectedRows(year,target.school);return {year,target:target.name,count:rows.length,values:Object.fromEntries([...state.metrics].map(key=>[key,aggregate(rows,key)])),sourceIds:[...new Set(rows.map(r=>r.source_id))]};}));
 }
-function updateTrend(){const y=+$('year').value,stage=$('stage').value,rs=trendRows(y),scope=[...trend.regions].join('・')||'地域未選択';
- $('scope').textContent=`トレンド専用：${scope} / ${trend.schools.size?trend.schools.size+'校を選択':'学校指定なし・地域全体'} / ${stageLabel(stage)} / カードは${y}年4月入学実績`;
- $('chartContext').textContent=`2021〜2026年4月入学の推移。${stage==='both'?'前期＋後期の志願・受検は重複を含む延べ人数。募集枠は年間定員を使用（前後期の枠を足さない）。倍率は延べ志願者÷年間定員で、選抜ごとの競争率とは異なります。':stageLabel(stage)+'選抜の指標を表示。'} 最終合格者計は前期・後期・再募集の合格者数で、実入学者とは異なります。`;
- ['metric','metric2','metric3'].forEach(id=>{for(const opt of $(id).options){if(opt.value)opt.textContent=labelMetric(opt.value)+'（'+metrics[opt.value][1]+'）';}});
- const stats=[[labelMetric('capacity'),aggregate(rs,'capacity',stage),'人'],[labelMetric('applicants'),aggregate(rs,'applicants',stage),'人'],['最終合格者計（再募集含む）',aggregate(rs,'annual_accepted',stage),'人'],['年間実入学者数（5月1日）',aggregate(rs,'enrolled',stage),'人']];
- $('kpis').innerHTML=stats.map(([label,v,unit])=>`<div class="kpi"><span>${label}</span><strong>${fmt(v)}<small>${unit}</small></strong></div>`).join('');renderPickers('trend');renderChart();saveURL();
-}
-function updateComparison(){const mode=$('compareStage').value;for(const opt of $('sort').options){if(opt.value==='ratio')opt.textContent=mode==='both'?'延べ志願／年間定員順（参考）':'倍率ランキング';if(opt.value==='applicants')opt.textContent=mode==='both'?'志願者数ランキング（前後期延べ）':'志願者数ランキング';}
- const rs=comparisonRows(),key=$('sort').value;
- visible=(comparison.schools.size?rs:[]).sort((a,b)=>{const av=sortValue(a,key),bv=sortValue(b,key);if(av==null)return bv==null?0:1;if(bv==null)return -1;return key==='school'?av.localeCompare(bv,'ja'):($('direction').value==='asc'?av-bv:bv-av)||a.program_id.localeCompare(b.program_id,'ja');});
- $('rowCount').textContent=`比較表専用：${[...comparison.regions].join('・')||'地域未選択'} / 選択 ${comparison.schools.size}校 / 表示 ${visible.length}学科・募集単位 / 順位・増減は${stageLabel($('compareStage').value)}`;
- renderPickers('comparison');renderTable();saveURL();
-}
-function renderTable(){const year=+$('compareYear').value,mode=$('compareStage').value,stages=mode==='both'?['early','late']:[mode],names={early:'前期選抜',late:'後期選抜'};
- $('tableContext').textContent=`比較表：${yearLabel(year)} ｜ ${mode==='both'?'前期＋後期（内訳と延べ合計）':names[mode]+'のみ'}`;
- $('tableAsOf').textContent=`選抜結果：公表済み ／ 実入学者数：${year}年5月1日現在 ／ 1番のトレンドとは独立した条件`;
- $('tableCaption').textContent=`${year}年度入学の比較表。${mode==='both'?'志願者・受検者の合計は延べ人数です。':'年間実績は選抜区分にかかわらず通年の値です。'}`;
- const combined=mode==='both'?'<th colspan="3">前期＋後期（延べ）</th>':'';
- $('tableHead').innerHTML='<tr><th rowspan="2">学校 / 学科</th><th rowspan="2">年間定員</th>'+stages.map(s=>`<th colspan="5" class="stage-group ${s}">${names[s]} のみ（人・倍）</th>`).join('')+combined+'<th colspan="3">年間実績</th><th rowspan="2">年間定員<br>前年比</th><th rowspan="2">'+stageLabel(mode)+'志願者<br>前年比</th><th rowspan="2">出典</th></tr><tr>'+stages.map(()=>'<th>募集枠</th><th>志願者</th><th>受検者</th><th>合格者</th><th>志願倍率</th>').join('')+(mode==='both'?'<th>志願者（延べ）</th><th>受検者（延べ）</th><th>延べ志願／定員※</th>':'')+'<th>最終合格者計※</th><th>実入学者</th><th>充足率</th></tr>';
- const dtext=v=>v==null?'—':`${v>0?'+':''}${fmt(v)}`;
- $('rows').innerHTML=visible.map(r=>{const source=data.sources.find(s=>s.id===r.source_id);return `<tr><td class="program"><strong>${esc(r.school)}</strong><span>${esc(r.department)}</span></td><td class="annual">${fmt(r.annual_capacity)}</td>`+stages.map(s=>`<td>${fmt(r[s].capacity)}</td><td>${fmt(r[s].applicants)}</td><td>${fmt(r[s].examinees)}</td><td>${fmt(r[s].accepted)}</td><td>${fmt(value(r,'ratio',s),2)}</td>`).join('')+(mode==='both'?`<td>${fmt(value(r,'applicants','both'))}</td><td>${fmt(value(r,'examinees','both'))}</td><td>${fmt(value(r,'ratio','both'),2)}</td>`:'')+`<td>${fmt(value(r,'annual_accepted'))}</td><td>${fmt(r.enrolled)}</td><td><span class="${value(r,'under')===1?'low':''}">${r.enrolled==null?'—':fmt(value(r,'fill'),1)+'%'}</span></td><td>${dtext(delta(r,'capacityDelta'))}</td><td>${dtext(delta(r,'applicantDelta'))}</td><td><a href="${source.url}#page=${r.source_page}" target="_blank" rel="noopener" aria-label="${esc(r.school)}の公式資料 ${r.source_page}ページ">PDF ↗</a></td></tr>`;}).join('')+(!visible.length?`<tr><td colspan="${8+stages.length*5+(mode==='both'?3:0)}" class="empty">${comparison.schools.size?'条件に該当する学科がありません。比較表の年度・地域・学科を確認してください。':'比較表の地域から、比較したい学校を選んでください。'}</td></tr>`:'');$('download').disabled=!visible.length;
-}
-function renderChart(){const keys=metricKeys(),units=[...new Set(keys.map(k=>metrics[k][1]))];if(units.includes('人')){units.splice(units.indexOf('人'),1);units.unshift('人');}
- let targets;
- if(trend.schools.size)targets=[...trend.schools].map(name=>({name,rows:y=>trendRows(y).filter(r=>r.school===name)}));
- else if($('trendGroup').value==='regions')targets=[...trend.regions].map(region=>({name:region+'の合計',rows:y=>trendRows(y).filter(r=>r.region===region)}));
- else targets=[{name:([...trend.regions].join('＋')||'地域未選択')+'の合計',rows:trendRows}];
- const series=targets.flatMap((t,ti)=>keys.map((k,ki)=>({name:t.name,key:k,unit:metrics[k][1],color:colors[ti],dash:['','8 4','2 4'][ki],values:data.years.map(y=>aggregate(t.rows(y),k,$('stage').value))})));
- const W=Math.max(580,Math.min(1040,$('chart').clientWidth||1040)),H=320,L=75,R=units.length>2?150:units.length>1?80:25,T=36,B=45,plotRight=W-R;
- const maxes=units.map(u=>Math.max(1,...series.filter(s=>s.unit===u).flatMap(s=>s.values.filter(v=>v!=null)))*1.1);
- const x=i=>L+i*(plotRight-L)/(data.years.length-1),y=(v,u)=>H-B-v/maxes[units.indexOf(u)]*(H-T-B);
- const axisName=i=>i===0?'左軸':i===1?'右軸':'右外軸';
- let svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(keys.map(k=>labelMetric(k)).join('・'))}の年度推移。${units.map((u,i)=>axisName(i)+' '+u).join('、')}。数値表は直後。">`;
- units.forEach((u,ui)=>{const xx=ui===0?L:plotRight+(ui-1)*70,anchor=ui===0?'end':'start';svg+=`<text x="${xx}" y="15" text-anchor="${ui===0?'start':anchor}" font-size="15" fill="#172f35">${axisName(ui)}：${u}</text><line x1="${xx}" y1="${T}" x2="${xx}" y2="${H-B}" stroke="#b7ccc4"/>`;
- for(let i=0;i<5;i++){const v=maxes[ui]*i/4,yy=y(v,u);if(ui===0)svg+=`<line x1="${L}" y1="${yy}" x2="${plotRight}" y2="${yy}" stroke="#e5ece7"/>`;svg+=`<text x="${xx+(ui===0?-10:10)}" y="${yy+4}" text-anchor="${anchor}" font-size="14" fill="#597174">${fmt(v,['倍','%'].includes(u)?1:0)}</text>`;}});
- data.years.forEach((yr,i)=>svg+=`<text x="${x(i)}" y="${H-15}" text-anchor="middle" font-size="15" fill="#597174">${yr}</text>`);
- series.forEach(s=>{let segment=[];const draw=()=>{if(segment.length)svg+=`<polyline points="${segment.join(' ')}" fill="none" stroke="${s.color}" stroke-width="2.5" stroke-dasharray="${s.dash}"/>`;segment=[];};s.values.forEach((v,i)=>{if(v==null){draw();return;}segment.push(`${x(i)},${y(v,s.unit)}`);});draw();s.values.forEach((v,i)=>{if(v!=null)svg+=`<circle cx="${x(i)}" cy="${y(v,s.unit)}" r="3" fill="white" stroke="${s.color}" stroke-width="1.5"><title>${esc(s.name)} / ${esc(labelMetric(s.key))} / ${data.years[i]}年度 ${fmt(v,['倍','%'].includes(s.unit)?2:0)}${s.unit}</title></circle>`;});});svg+='</svg>';
+function renderChart(){const keys=[...state.metrics],units=[...new Set(keys.map(key=>metrics[key][1]))];if(units.includes('人')){units.splice(units.indexOf('人'),1);units.unshift('人');}
+ const series=targets.flatMap(target=>keys.map((key,mi)=>({name:target.name,key,unit:metrics[key][1],color:target.color,dash:['','8 4','2 4'][mi],values:data.years.map(year=>resultRows.find(r=>r.year===year&&r.target===target.name)?.values[key]??null)})));
+ if(!series.some(s=>s.values.some(v=>v!=null))){$('chart').innerHTML='<div class="chart-empty">学区・学校・学科を選ぶと、ここに年度推移を表示します。<br>未実施の選抜など、記録のない項目は「—」として扱います。</div>';$('legend').innerHTML='';return;}
+ const W=Math.max(540,Math.min(1080,$('chart').clientWidth||1080)),H=330,L=75,R=units.length>2?150:units.length>1?85:30,T=35,B=43,right=W-R;
+ const maxes=units.map(unit=>Math.max(1,...series.filter(s=>s.unit===unit).flatMap(s=>s.values.filter(v=>v!=null)))*1.1),x=i=>L+i*(right-L)/(data.years.length-1),y=(v,unit)=>H-B-v/maxes[units.indexOf(unit)]*(H-T-B),axisName=i=>i===0?'左軸':i===1?'右軸':'右外軸';
+ let svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="選択対象の年度推移。${esc(keys.map(metricLabel).join('・'))}。${units.map((u,i)=>axisName(i)+' '+u).join('、')}。同じ数値を下の表に表示。">`;
+ units.forEach((unit,ui)=>{const xx=ui===0?L:right+(ui-1)*70;svg+=`<text x="${xx}" y="16" font-size="14" fill="#172f35">${axisName(ui)}：${unit}</text><line x1="${xx}" x2="${xx}" y1="${T}" y2="${H-B}" stroke="#bdcec4"/>`;for(let i=0;i<5;i++){const v=maxes[ui]*i/4,yy=y(v,unit);if(ui===0)svg+=`<line x1="${L}" x2="${right}" y1="${yy}" y2="${yy}" stroke="#e6ede7"/>`;svg+=`<text x="${xx+(ui===0?-10:10)}" y="${yy+4}" text-anchor="${ui===0?'end':'start'}" font-size="12" fill="#597174">${fmt(v,['倍','%'].includes(unit)?1:0)}</text>`;}});
+ data.years.forEach((yr,i)=>svg+=`<text x="${x(i)}" y="${H-12}" text-anchor="middle" font-size="13" fill="#597174">${yr}</text>`);
+ series.forEach(s=>{let segment=[];const draw=()=>{if(segment.length)svg+=`<polyline points="${segment.join(' ')}" fill="none" stroke="${s.color}" stroke-width="2.5" stroke-dasharray="${s.dash}"/>`;segment=[];};s.values.forEach((v,i)=>{if(v==null){draw();return;}segment.push(`${x(i)},${y(v,s.unit)}`);});draw();s.values.forEach((v,i)=>{if(v!=null)svg+=`<circle cx="${x(i)}" cy="${y(v,s.unit)}" r="3" fill="white" stroke="${s.color}" stroke-width="1.5"><title>${esc(s.name+' / '+metricLabel(s.key))} / ${data.years[i]}年度 ${fmt(v,['倍','%'].includes(s.unit)?2:0)}${s.unit}</title></circle>`;});});svg+='</svg>';
  $('chart').innerHTML=svg;
- $('legend').innerHTML=series.map(s=>`<span><svg width="27" height="12" aria-hidden="true"><line x1="0" x2="27" y1="6" y2="6" stroke="${s.color}" stroke-width="3" stroke-dasharray="${s.dash}"/></svg> ${esc(s.name)} · ${esc(labelMetric(s.key))}（${axisName(units.indexOf(s.unit))}・${s.unit}）</span>`).join('');
- $('trendTable').innerHTML=`<table><thead><tr><th>対象 / 指標 / 軸</th>${data.years.map(y=>`<th>${y}年度</th>`).join('')}</tr></thead><tbody>${series.map(s=>`<tr><td>${esc(s.name+' / '+labelMetric(s.key)+' / '+axisName(units.indexOf(s.unit)))}</td>${s.values.map(v=>`<td>${fmt(v,['倍','%'].includes(s.unit)?2:0)}${v==null?'':s.unit}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+ $('legend').innerHTML='<div class="legend-section school-legend">'+targets.map(t=>`<span><i style="background:${t.color}"></i>${esc(t.name)}</span>`).join('')+'</div><div class="legend-section">'+keys.map((key,i)=>`<span><svg width="26" height="12" aria-hidden="true"><line x1="0" x2="26" y1="6" y2="6" stroke="#26494a" stroke-width="2.5" stroke-dasharray="${['','8 4','2 4'][i]}"/></svg>${esc(metricLabel(key))}（${axisName(units.indexOf(metrics[key][1]))}）</span>`).join('')+'</div>';
 }
-function saveURL(){const p=new URLSearchParams({view:'independent'});['year','stage','trendGroup','department','query','metric','metric2','metric3','compareYear','compareStage','compareDepartment','compareQuery','sort','direction'].forEach(k=>p.set(k,$(k).value));p.set('tr',[...trend.regions].join(','));p.set('cr',[...comparison.regions].join(','));trend.schools.forEach(name=>p.append('ts',name));comparison.schools.forEach(name=>p.append('cs',name));if($('underOnly').checked)p.set('under','1');history.replaceState(null,'','#'+p);}
-function download(){const stage=$('compareStage').value,fields=['入学年度','実入学者基準日','表の選抜条件','地域','学校','学科','年間定員',...['前期','後期'].flatMap(s=>['募集枠','志願者','受検者','合格者','志願倍率'].map(k=>s+k)),'前期後期志願者（延べ）','前期後期受検者（延べ）','延べ志願者÷年間定員','最終合格者計（前期後期再募集）','年間実入学者','年間充足率%','出典URL','ページ'];
- const rows=visible.map(r=>[r.year,`${r.year}-05-01`,stageLabel(stage),r.region,r.school,r.department,r.annual_capacity,...['early','late'].flatMap(s=>[r[s].capacity,r[s].applicants,r[s].examinees,r[s].accepted,value(r,'ratio',s)]),value(r,'applicants','both'),value(r,'examinees','both'),value(r,'ratio','both'),value(r,'annual_accepted'),r.enrolled,value(r,'fill'),data.sources.find(x=>x.id===r.source_id).url,r.source_page]);
- const csv='\uFEFF'+[fields,...rows].map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=`nagano-comparison-${$('compareYear').value}-${stage}.csv`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-function changeSchool(kind,name,checked){const state=kind==='trend'?trend:comparison,status=$(kind==='trend'?'trendStatus':'selectionStatus');status.textContent='';if(checked&&state.schools.size>=6){status.textContent='学校は最大6校です。選択を外して追加してください。';renderPickers(kind);return;}if(checked)state.schools.add(name);else state.schools.delete(name);(kind==='trend'?updateTrend:updateComparison)();}
-function bindPicker(kind){const t=kind==='trend',state=t?trend:comparison,update=t?updateTrend:updateComparison;
- $(t?'trendRegions':'compareRegions').onchange=e=>{const region=e.target.dataset.region;if(!region)return;if(e.target.checked)state.regions.add(region);else state.regions.delete(region);state.schools=new Set([...state.schools].filter(name=>data.records.some(r=>r.school===name&&state.regions.has(r.region))));update();};
- $(t?'trendSchoolList':'schoolList').onchange=e=>{if(e.target.dataset.school)changeSchool(kind,e.target.dataset.school,e.target.checked);};
- $(t?'trendSchoolChips':'schoolChips').onclick=e=>{if(e.target.dataset.removeSchool)changeSchool(kind,e.target.dataset.removeSchool,false);};
- $(t?'query':'compareQuery').oninput=()=>{renderPickers(kind);saveURL();};
+function renderTable(){const keys=[...state.metrics];$('tableCaption').textContent=`2021〜2026年度（4月入学） / ${stageName()} / グラフと同じ対象・集計方法`;
+ $('tableHead').innerHTML='<tr><th>入学年度</th><th>対象</th>'+keys.map(k=>`<th>${esc(metricLabel(k))}<br>（${metrics[k][1]}）</th>`).join('')+'<th>元資料</th></tr>';
+ const hasData=resultRows.some(r=>r.count>0);
+ $('tableRows').innerHTML=hasData?resultRows.map(row=>`<tr><td>${row.year}</td><td>${esc(row.target)}<small>${row.count}募集単位</small></td>`+keys.map(k=>`<td>${fmt(row.values[k],['倍','%'].includes(metrics[k][1])?2:0)}</td>`).join('')+`<td>${row.sourceIds.map(id=>{const source=data.sources.find(s=>s.id===id);return `<a href="${source.url}" target="_blank" rel="noopener" aria-label="${row.year}年度の公式資料">PDF ↗</a>`;}).join(' ')||'—'}</td></tr>`).join(''):`<tr><td colspan="${keys.length+3}" style="text-align:center">対象を選択してください。</td></tr>`;
+ $('download').disabled=!hasData;
 }
-async function init(){try{const response=await fetch('data/admissions.json');if(!response.ok)throw Error(response.status);data=await response.json();
- const options=[...data.years].reverse().map(y=>`<option value="${y}">${yearLabel(y)}</option>`).join('');$('year').innerHTML=options;$('compareYear').innerHTML=options;
- ['metric','metric2','metric3'].forEach((id,i)=>{$(id).innerHTML=(i?'<option value="">表示しない</option>':'')+Object.entries(metrics).map(([k,[name,unit]])=>`<option value="${k}">${esc(name)}（${unit}）</option>`).join('');});$('metric').value='annual_capacity';$('metric2').value='annual_accepted';$('metric3').value='enrolled';
- const departments=[...new Set(data.records.map(r=>r.department))].sort((a,b)=>a.localeCompare(b,'ja'));['department','compareDepartment'].forEach(id=>$(id).insertAdjacentHTML('beforeend',departments.map(d=>`<option>${esc(d)}</option>`).join('')));
- const p=new URLSearchParams(location.hash.slice(1));['year','stage','trendGroup','department','query','metric','metric2','metric3','compareYear','compareStage','compareDepartment','compareQuery','sort','direction'].forEach(k=>{if(p.has(k)){const old=$(k).value;$(k).value=p.get(k);if(!$(k).value&&!['query','compareQuery','department','compareDepartment','metric2','metric3'].includes(k))$(k).value=old;}});
- const validSchool=name=>data.records.some(r=>r.school===name);
- if(p.get('view')==='independent'){
-  if(p.has('tr'))trend.regions=new Set(p.get('tr').split(',').filter(r=>regions.includes(r)));
-  if(p.has('cr'))comparison.regions=new Set(p.get('cr').split(',').filter(r=>regions.includes(r)));
-  trend.schools=new Set(p.getAll('ts').filter(validSchool).slice(0,6));comparison.schools=new Set(p.getAll('cs').filter(validSchool).slice(0,6));
+function update(){renderPickers();buildResults();renderChart();renderTable();
+ const districtText=districts.filter(([id])=>state.districts.has(id)).map(([,label])=>label).join('・')||'学区未選択';
+ $('scope').textContent=`${districtText} / ${state.schools.size}校・${state.programs.size}募集単位 / ${$('groupMode').value==='total'?'全体合計':'学校ごと'} / ${stageName()}`;
+ $('explanation').textContent=$('stage').value==='both'?'前期＋後期の志願者・受検者は重複を含む延べ人数です。募集人数は年間定員、最終合格者計は再募集も含みます。実入学者・充足率は年間の値です。':'募集・志願・受検・合格・倍率は'+stageName()+'選抜の値です。実入学者・充足率は選抜区分にかかわらず年間の値です。';
+ saveURL();
+}
+function encodeSelection(p,prefix,candidates,chosen){const omitted=candidates.filter(id=>!chosen.has(id)),included=candidates.filter(id=>chosen.has(id));const exclusion=omitted.length<included.length;p.set(prefix+'Mode',exclusion?'all':'selected');(exclusion?omitted:included).forEach(id=>p.append(prefix,id));}
+function decodeSelection(p,prefix,candidates){const ids=new Set(p.getAll(prefix));return new Set(candidates.filter(id=>p.get(prefix+'Mode')==='all'?!ids.has(id):ids.has(id)));}
+function serialize(){const p=new URLSearchParams({view:'explorer',districts:[...state.districts].join(','),stage:$('stage').value,group:$('groupMode').value,metrics:[...state.metrics].join(',')});encodeSelection(p,'school',schoolCandidates(),state.schools);encodeSelection(p,'program',programCandidates().map(p=>p.program_id),state.programs);return p;}
+function saveURL(){history.replaceState(null,'','#'+serialize());}
+function restore(p){
+ if(p.get('view')==='explorer'){
+  if(p.has('districts'))state.districts=new Set(p.get('districts').split(',').filter(id=>districts.some(([d])=>d===id)));
+  state.schools=decodeSelection(p,'school',schoolCandidates());state.programs=decodeSelection(p,'program',programCandidates().map(p=>p.program_id));
+  const keys=(p.get('metrics')||'').split(',').filter(k=>metrics[k]);state.metrics=new Set(keys.length?keys.slice(0,3):['quota','applicants']);
+  if(['both','early','late'].includes(p.get('stage')))$('stage').value=p.get('stage');if(['total','schools'].includes(p.get('group')))$('groupMode').value=p.get('group');
  }else{
-  // Older shared links become the trend's initial conditions only. Comparison starts independently.
-  if(p.has('region'))trend.regions=new Set(p.get('region')?[p.get('region')].filter(r=>regions.includes(r)):regions);
-  trend.schools=new Set(p.getAll('school').filter(validSchool).slice(0,6));
-  trend.schools.forEach(name=>data.records.filter(r=>r.school===name).forEach(r=>trend.regions.add(r.region)));
-  if(!p.has('metric2')&&$('metric').value==='applicants')$('metric2').value='capacity';
+  const ds=p.get('tr')??p.get('region');if(ds!=null)state.districts=new Set(ds?ds.split(',').filter(id=>districts.some(([d])=>d===id)):districts.map(([d])=>d));
+  const oldSchools=p.getAll('ts').length?p.getAll('ts'):p.getAll('school');state.schools=new Set(schoolCandidates().filter(s=>!oldSchools.length||oldSchools.includes(s)));
+  state.programs=new Set(programCandidates().filter(pr=>!p.get('department')||pr.department===p.get('department')).map(pr=>pr.program_id));
+  if(['both','early','late'].includes(p.get('stage')))$('stage').value=p.get('stage');
  }
- for(const state of [trend,comparison])state.schools=new Set([...state.schools].filter(name=>data.records.some(r=>r.school===name&&state.regions.has(r.region))));
- $('underOnly').checked=p.get('under')==='1';
- $('notes').innerHTML=data.notes.filter(n=>!n.includes('合算しない')).map(n=>`<li>${esc(n)}</li>`).join('')+'<li>両方表示の志願者・受検者は前期＋後期の延べ人数です。同じ人を重複して含みます。</li><li>両方の募集人数は年間定員を使用。前期の未充足分が後期へ回るため、前後期の募集枠の単純合計は使用しません。</li><li>最終合格者計＝前期＋後期＋再募集の合格者数。内進等を含む実入学者数とは異なります。再募集を除く前後期合格者数も指標で選べます。</li><li>延べ志願者÷年間定員は合算用の参考指標で、選抜ごとの競争率や合格確率ではありません。</li>';
- $('sourceList').innerHTML=data.sources.map(s=>`<li><a href="${s.url}" target="_blank" rel="noopener">${esc(s.title)} ↗</a></li>`).join('')+'<li><a href="https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/r8konyushi.html" target="_blank" rel="noopener">2026年4月入学者用・令和8年度入試情報 ↗</a></li>';
- ['year','stage','trendGroup','department','metric','metric2','metric3'].forEach(k=>$(k).onchange=updateTrend);
- ['compareYear','compareStage','compareDepartment','sort','direction','underOnly'].forEach(k=>$(k).onchange=updateComparison);
- bindPicker('trend');bindPicker('comparison');
- $('resetTrend').onclick=()=>{trend.regions=new Set(['南信']);trend.schools.clear();$('stage').value='both';$('department').value='';$('query').value='';updateTrend();};
- $('clearSchools').onclick=()=>{comparison.schools.clear();updateComparison();};$('download').onclick=download;
- window.addEventListener('resize',renderChart);updateTrend();updateComparison();
+}
+function reset(){state.districts=new Set(['南信']);state.schools=new Set(schoolCandidates());state.programs=new Set(programCandidates().map(p=>p.program_id));state.metrics=new Set(['quota','applicants']);$('stage').value='both';$('groupMode').value='total';$('schoolQuery').value='';$('status').textContent='';update();}
+function bulk(action){$('status').textContent='';
+ if(action==='district-all')setDistricts(districts.map(([id])=>id));if(action==='district-none')setDistricts([]);
+ if(action==='school-all')setSchools(schoolCandidates());if(action==='school-none')setSchools([]);
+ if(action==='program-all')state.programs=new Set(programCandidates().map(p=>p.program_id));if(action==='program-none')state.programs.clear();update();
+}
+function csvText(){const keys=[...state.metrics],head=['入学年度','選抜区分','集計方法','対象','募集単位数',...keys.map(k=>metricLabel(k)+'（'+metrics[k][1]+'）'),'出典URL'];
+ const rows=resultRows.map(row=>[row.year,stageName(),$('groupMode').value==='total'?'全体合計':'学校ごと',row.target,row.count,...keys.map(k=>row.values[k]),row.sourceIds.map(id=>data.sources.find(s=>s.id===id).url).join(' ')]);
+ return '\uFEFF'+[head,...rows].map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');
+}
+function download(){const url=URL.createObjectURL(new Blob([csvText()],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='nagano-admissions-trend.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function indexData(){
+ programs.clear();
+ for(const r of data.records){if(r.school==='伊那弥生ヶ丘'){r.source_school=r.school;r.source_program_id=r.program_id;r.school='伊那弥生ケ丘';r.program_id=r.program_id.replace('伊那弥生ヶ丘|','伊那弥生ケ丘|');}programs.set(r.program_id,{program_id:r.program_id,school:r.school,department:r.department,region:r.region});}
+}
+async function init(){try{const response=await fetch('data/admissions.json');if(!response.ok)throw Error(response.status);data=await response.json();indexData();
+ state.schools=new Set(schoolCandidates());state.programs=new Set(programCandidates().map(p=>p.program_id));restore(new URLSearchParams(location.hash.slice(1)));
+ $('sourceList').innerHTML=data.sources.map(s=>`<li><a href="${s.url}" target="_blank" rel="noopener">${esc(s.title)} ↗</a></li>`).join('');
+ $('districtList').onchange=e=>{const id=e.target.dataset.district;if(!id)return;const next=new Set(state.districts);if(e.target.checked)next.add(id);else next.delete(id);setDistricts(next);update();};
+ $('schoolList').onchange=e=>{const id=e.target.dataset.school;if(!id)return;const next=new Set(state.schools);if(e.target.checked)next.add(id);else next.delete(id);setSchools(next);update();};
+ $('programList').onchange=e=>{const id=e.target.dataset.program;if(!id)return;if(e.target.checked)state.programs.add(id);else state.programs.delete(id);update();};
+ $('metricList').onchange=e=>{const id=e.target.dataset.metric;if(!id)return;$('status').textContent='';if(e.target.checked&&state.metrics.size>=3){$('status').textContent='表示する数字は最大3つです。どれかを外してから選んでください。';renderMetrics();return;}if(!e.target.checked&&state.metrics.size===1){$('status').textContent='表示する数字を1つ以上選んでください。';renderMetrics();return;}if(e.target.checked)state.metrics.add(id);else state.metrics.delete(id);update();};
+ document.querySelectorAll('[data-bulk]').forEach(button=>button.onclick=()=>bulk(button.dataset.bulk));$('schoolQuery').oninput=renderPickers;$('stage').onchange=update;$('groupMode').onchange=update;$('reset').onclick=reset;$('download').onclick=download;window.addEventListener('resize',renderChart);update();
  }catch(e){$('error').textContent='データを読み込めませんでした。再読み込みしてください。ローカルではHTTPサーバーで開いてください。';console.error(e);}}
 init();
