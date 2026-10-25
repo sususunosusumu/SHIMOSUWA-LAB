@@ -1,0 +1,3653 @@
+{
+  "admission_year": 2027,
+  "exam_fiscal_year": 2026,
+  "status": "provisional_capacity",
+  "checked_at": "2026-10-25",
+  "note": "募集枠のみを収録。前年定員と新しい募集枠から算出した仮値。正式な募集定員は2026年11月に決定予定。志願予定調査を確定志願者として収録しない。",
+  "sources": [
+    {
+      "id": "capacity-provisional-2027",
+      "title": "令和9年度入学志願予定数調査・募集人員の仮値（2026年度実施）",
+      "url": "https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r9/documents/r9_yotei1_kekka.pdf",
+      "published": "2026-10-23",
+      "accessed": "2026-10-25",
+      "sha256": "e25be2429ea032311bbba575a4609957d2c47291dcfcca2c5abc8e0012b774f1"
+    }
+  ],
+  "records": [
+    {
+      "year": 2027,
+      "school": "飯山",
+      "school_id": "飯山",
+      "department": "普通",
+      "program_id": "飯山|普通",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "飯山",
+      "school_id": "飯山",
+      "department": "自然科学探究人文科学探究",
+      "program_id": "飯山|自然科学探究人文科学探究",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "飯山",
+      "school_id": "飯山",
+      "department": "スポーツ科学",
+      "program_id": "飯山|スポーツ科学",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 36,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 4,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "下高井農林",
+      "school_id": "下高井農林",
+      "department": "農業/地域創造農学",
+      "program_id": "下高井農林|農業/地域創造農学",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 40,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 40,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "中野立志館",
+      "school_id": "中野立志館",
+      "department": "総合",
+      "program_id": "中野立志館|総合",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 160,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 96,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 64,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "中野西",
+      "school_id": "中野西",
+      "department": "普通",
+      "program_id": "中野西|普通",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 160,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 80,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 80,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "須坂東",
+      "school_id": "須坂東",
+      "department": "普通",
+      "program_id": "須坂東|普通",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 120,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 72,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "須坂",
+      "school_id": "須坂",
+      "department": "普通",
+      "program_id": "須坂|普通",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 240,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 240,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "須坂創成",
+      "school_id": "須坂創成",
+      "department": "農業/食料生産・環境創造",
+      "program_id": "須坂創成|農業/食料生産環境創造",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 120,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 72,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "須坂創成",
+      "school_id": "須坂創成",
+      "department": "工業/創造工学",
+      "program_id": "須坂創成|工業/創造工学",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "須坂創成",
+      "school_id": "須坂創成",
+      "department": "商業/商業",
+      "program_id": "須坂創成|商業/商業",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "北部",
+      "school_id": "北部",
+      "department": "普通",
+      "program_id": "北部|普通",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 40,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 40,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "長野吉田",
+      "school_id": "長野吉田",
+      "department": "普通",
+      "program_id": "長野吉田|普通",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 240,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 240,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "長野",
+      "school_id": "長野",
+      "department": "普通",
+      "program_id": "長野|普通",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 280,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 280,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "長野西",
+      "school_id": "長野西",
+      "department": "普通",
+      "program_id": "長野西|普通",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 200,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 200,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "長野西",
+      "school_id": "長野西",
+      "department": "国際教養",
+      "program_id": "長野西|国際教養",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 36,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 4,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "長野商業",
+      "school_id": "長野商業",
+      "department": "商業/商業会計",
+      "program_id": "長野商業|商業/商業会計",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 200,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 120,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 80,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "長野東",
+      "school_id": "長野東",
+      "department": "普通",
+      "program_id": "長野東|普通",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 160,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 112,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "長野工業",
+      "school_id": "長野工業",
+      "department": "工業/機械工学",
+      "program_id": "長野工業|工業/機械工学",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "長野工業",
+      "school_id": "長野工業",
+      "department": "工業/電気電子工学",
+      "program_id": "長野工業|工業/電気電子工学",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "長野工業",
+      "school_id": "長野工業",
+      "department": "工業/物質化学",
+      "program_id": "長野工業|工業/物質化学",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "長野工業",
+      "school_id": "長野工業",
+      "department": "工業/情報工学",
+      "program_id": "長野工業|工業/情報工学",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "長野工業",
+      "school_id": "長野工業",
+      "department": "工業/土木工学",
+      "program_id": "長野工業|工業/土木工学",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "長野工業",
+      "school_id": "長野工業",
+      "department": "工業/建築学",
+      "program_id": "長野工業|工業/建築学",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "長野西中条校",
+      "school_id": "長野西中条校",
+      "department": "普通",
+      "program_id": "長野西中条校|普通",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 20,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 20,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "篠ノ井犀峡校",
+      "school_id": "篠ノ井犀峡校",
+      "department": "普通",
+      "program_id": "篠ノ井犀峡校|普通",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "市立長野",
+      "school_id": "市立長野",
+      "department": "総合",
+      "program_id": "市立長野|総合",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 160,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 50,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 110,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "長野南",
+      "school_id": "長野南",
+      "department": "普通",
+      "program_id": "長野南|普通",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 200,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 80,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 120,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "篠ノ井",
+      "school_id": "篠ノ井",
+      "department": "普通",
+      "program_id": "篠ノ井|普通",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 200,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 200,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "更級農業",
+      "school_id": "更級農業",
+      "department": "農業/地域園芸植物活用食農科学",
+      "program_id": "更級農業|農業/地域園芸植物活用食農科学",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 120,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 72,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "松代",
+      "school_id": "松代",
+      "department": "普通",
+      "program_id": "松代|普通",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "松代",
+      "school_id": "松代",
+      "department": "商業/商業",
+      "program_id": "松代|商業/商業",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "屋代",
+      "school_id": "屋代",
+      "department": "普通",
+      "program_id": "屋代|普通",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 240,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 240,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "屋代",
+      "school_id": "屋代",
+      "department": "理数",
+      "program_id": "屋代|理数",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 36,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 4,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "屋代南",
+      "school_id": "屋代南",
+      "department": "普通",
+      "program_id": "屋代南|普通",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "屋代南",
+      "school_id": "屋代南",
+      "department": "家庭/ライフデザイン",
+      "program_id": "屋代南|家庭/ライフデザイン",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "坂城",
+      "school_id": "坂城",
+      "department": "普通",
+      "program_id": "坂城|普通",
+      "region": "北信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 2,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "上田千曲",
+      "school_id": "上田千曲",
+      "department": "工業/メカニカル工学",
+      "program_id": "上田千曲|工業/メカニカル工学",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "上田千曲",
+      "school_id": "上田千曲",
+      "department": "工業/電気",
+      "program_id": "上田千曲|工業/電気",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "上田千曲",
+      "school_id": "上田千曲",
+      "department": "工業/建築",
+      "program_id": "上田千曲|工業/建築",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "上田千曲",
+      "school_id": "上田千曲",
+      "department": "商業/商業",
+      "program_id": "上田千曲|商業/商業",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "上田千曲",
+      "school_id": "上田千曲",
+      "department": "家庭/生活福祉",
+      "program_id": "上田千曲|家庭/生活福祉",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "上田千曲",
+      "school_id": "上田千曲",
+      "department": "家庭/食物栄養",
+      "program_id": "上田千曲|家庭/食物栄養",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "上田",
+      "school_id": "上田",
+      "department": "普通",
+      "program_id": "上田|普通",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 280,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 280,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "上田染谷丘",
+      "school_id": "上田染谷丘",
+      "department": "普通",
+      "program_id": "上田染谷丘|普通",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 240,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 240,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "上田染谷丘",
+      "school_id": "上田染谷丘",
+      "department": "国際教養",
+      "program_id": "上田染谷丘|国際教養",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 8,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "上田東",
+      "school_id": "上田東",
+      "department": "普通",
+      "program_id": "上田東|普通",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 240,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 240,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "丸子修学館",
+      "school_id": "丸子修学館",
+      "department": "総合",
+      "program_id": "丸子修学館|総合",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 200,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 120,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 80,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "蓼科",
+      "school_id": "蓼科",
+      "department": "普通",
+      "program_id": "蓼科|普通",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 40,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 40,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "小諸義塾",
+      "school_id": "小諸義塾",
+      "department": "普通",
+      "program_id": "小諸義塾|普通",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 120,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 60,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 60,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "小諸義塾",
+      "school_id": "小諸義塾",
+      "department": "商業/ビジネス",
+      "program_id": "小諸義塾|商業/ビジネス",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 120,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 72,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "小諸義塾",
+      "school_id": "小諸義塾",
+      "department": "音楽",
+      "program_id": "小諸義塾|音楽",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 36,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 4,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "軽井沢",
+      "school_id": "軽井沢",
+      "department": "普通",
+      "program_id": "軽井沢|普通",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "佐久平総合技術",
+      "school_id": "佐久平総合技術",
+      "department": "農業/食料マネジメント・生物サービス・食農クリエイト",
+      "program_id": "佐久平総合技術|農業/食料マネジメント生物サービス食農クリエイト",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 120,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 72,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "佐久平総合技術",
+      "school_id": "佐久平総合技術",
+      "department": "工業/機械システム",
+      "program_id": "佐久平総合技術|工業/機械システム",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "佐久平総合技術",
+      "school_id": "佐久平総合技術",
+      "department": "工業/電気情報",
+      "program_id": "佐久平総合技術|工業/電気情報",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "佐久平総合技術",
+      "school_id": "佐久平総合技術",
+      "department": "創造実践",
+      "program_id": "佐久平総合技術|創造実践",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 40,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 40,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "岩村田",
+      "school_id": "岩村田",
+      "department": "普通",
+      "program_id": "岩村田|普通",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 200,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 200,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "野沢北",
+      "school_id": "野沢北",
+      "department": "普通",
+      "program_id": "野沢北|普通",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 160,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 160,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "野沢北",
+      "school_id": "野沢北",
+      "department": "理数",
+      "program_id": "野沢北|理数",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 36,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 4,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "野沢南",
+      "school_id": "野沢南",
+      "department": "普通",
+      "program_id": "野沢南|普通",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 160,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 160,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "小海",
+      "school_id": "小海",
+      "department": "普通",
+      "program_id": "小海|普通",
+      "region": "東信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 3,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 40,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 40,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "富士見",
+      "school_id": "富士見",
+      "department": "普通",
+      "program_id": "富士見|普通",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "富士見",
+      "school_id": "富士見",
+      "department": "農業/園芸",
+      "program_id": "富士見|農業/園芸",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "茅野",
+      "school_id": "茅野",
+      "department": "普通",
+      "program_id": "茅野|普通",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "諏訪実業",
+      "school_id": "諏訪実業",
+      "department": "商業/商業・会計情報",
+      "program_id": "諏訪実業|商業/商業会計情報",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "諏訪実業",
+      "school_id": "諏訪実業",
+      "department": "家庭/服飾",
+      "program_id": "諏訪実業|家庭/服飾",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "諏訪清陵",
+      "school_id": "諏訪清陵",
+      "department": "普通",
+      "program_id": "諏訪清陵|普通",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 240,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 240,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "諏訪二葉",
+      "school_id": "諏訪二葉",
+      "department": "普通",
+      "program_id": "諏訪二葉|普通",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 200,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 200,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "下諏訪向陽",
+      "school_id": "下諏訪向陽",
+      "department": "普通",
+      "program_id": "下諏訪向陽|普通",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 200,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 120,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 80,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "岡谷東",
+      "school_id": "岡谷東",
+      "department": "普通",
+      "program_id": "岡谷東|普通",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 120,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 72,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "岡谷南",
+      "school_id": "岡谷南",
+      "department": "普通",
+      "program_id": "岡谷南|普通",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 160,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 160,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "岡谷工業",
+      "school_id": "岡谷工業",
+      "department": "工業/機械工学",
+      "program_id": "岡谷工業|工業/機械工学",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "岡谷工業",
+      "school_id": "岡谷工業",
+      "department": "工業/電気工学",
+      "program_id": "岡谷工業|工業/電気工学",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "岡谷工業",
+      "school_id": "岡谷工業",
+      "department": "工業/電子機械",
+      "program_id": "岡谷工業|工業/電子機械",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "岡谷工業",
+      "school_id": "岡谷工業",
+      "department": "工業/情報技術",
+      "program_id": "岡谷工業|工業/情報技術",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "辰野",
+      "school_id": "辰野",
+      "department": "普通",
+      "program_id": "辰野|普通",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "辰野",
+      "school_id": "辰野",
+      "department": "商業/商業",
+      "program_id": "辰野|商業/商業",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "上伊那農業",
+      "school_id": "上伊那農業",
+      "department": "農業/つくるマネジメント・流通マネジメント・くらしマネジメント",
+      "program_id": "上伊那農業|農業/つくるマネジメント流通マネジメントくらしマネジメント",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 120,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 72,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "高遠",
+      "school_id": "高遠",
+      "department": "普通",
+      "program_id": "高遠|普通",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "伊那北",
+      "school_id": "伊那北",
+      "department": "普通",
+      "program_id": "伊那北|普通",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 160,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 160,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "伊那北",
+      "school_id": "伊那北",
+      "department": "理数",
+      "program_id": "伊那北|理数",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 36,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 4,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "伊那弥生ケ丘",
+      "school_id": "伊那弥生ケ丘",
+      "department": "普通",
+      "program_id": "伊那弥生ケ丘|普通",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 160,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 160,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "赤穂",
+      "school_id": "赤穂",
+      "department": "普通",
+      "program_id": "赤穂|普通",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 120,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 120,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "赤穂",
+      "school_id": "赤穂",
+      "department": "商業/商業",
+      "program_id": "赤穂|商業/商業",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "駒ケ根工業",
+      "school_id": "駒ケ根工業",
+      "department": "工業/機械・電気・情報技術",
+      "program_id": "駒ケ根工業|工業/機械電気情報技術",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 120,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 72,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "松川",
+      "school_id": "松川",
+      "department": "普通",
+      "program_id": "松川|普通",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 40,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 40,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "飯田",
+      "school_id": "飯田",
+      "department": "普通",
+      "program_id": "飯田|普通",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 200,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 200,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "飯田",
+      "school_id": "飯田",
+      "department": "理数",
+      "program_id": "飯田|理数",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 28,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 12,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "飯田風越",
+      "school_id": "飯田風越",
+      "department": "普通",
+      "program_id": "飯田風越|普通",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 160,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 160,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "飯田風越",
+      "school_id": "飯田風越",
+      "department": "国際教養",
+      "program_id": "飯田風越|国際教養",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 36,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 4,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "飯田OIDE長姫",
+      "school_id": "飯田OIDE長姫",
+      "department": "工業/機械工学",
+      "program_id": "飯田OIDE長姫|工業/機械工学",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "飯田OIDE長姫",
+      "school_id": "飯田OIDE長姫",
+      "department": "工業/電子機械工学",
+      "program_id": "飯田OIDE長姫|工業/電子機械工学",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "飯田OIDE長姫",
+      "school_id": "飯田OIDE長姫",
+      "department": "工業/電気電子工学",
+      "program_id": "飯田OIDE長姫|工業/電気電子工学",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "飯田OIDE長姫",
+      "school_id": "飯田OIDE長姫",
+      "department": "工業/社会基盤工学",
+      "program_id": "飯田OIDE長姫|工業/社会基盤工学",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "飯田OIDE長姫",
+      "school_id": "飯田OIDE長姫",
+      "department": "工業/建築学",
+      "program_id": "飯田OIDE長姫|工業/建築学",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "飯田OIDE長姫",
+      "school_id": "飯田OIDE長姫",
+      "department": "商業/商業",
+      "program_id": "飯田OIDE長姫|商業/商業",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "下伊那農業",
+      "school_id": "下伊那農業",
+      "department": "農業/栽培科学",
+      "program_id": "下伊那農業|農業/栽培科学",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "下伊那農業",
+      "school_id": "下伊那農業",
+      "department": "農業/地域資源",
+      "program_id": "下伊那農業|農業/地域資源",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "下伊那農業",
+      "school_id": "下伊那農業",
+      "department": "農業/生物活用",
+      "program_id": "下伊那農業|農業/生物活用",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "阿智",
+      "school_id": "阿智",
+      "department": "普通",
+      "program_id": "阿智|普通",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 40,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 40,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "阿南",
+      "school_id": "阿南",
+      "department": "普通",
+      "program_id": "阿南|普通",
+      "region": "南信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 4,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "蘇南",
+      "school_id": "蘇南",
+      "department": "総合",
+      "program_id": "蘇南|総合",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "木曽青峰",
+      "school_id": "木曽青峰",
+      "department": "普通",
+      "program_id": "木曽青峰|普通",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 40,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "木曽青峰",
+      "school_id": "木曽青峰",
+      "department": "農業/森林環境",
+      "program_id": "木曽青峰|農業/森林環境",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "木曽青峰",
+      "school_id": "木曽青峰",
+      "department": "工業/インテリア",
+      "program_id": "木曽青峰|工業/インテリア",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "木曽青峰",
+      "school_id": "木曽青峰",
+      "department": "理数",
+      "program_id": "木曽青峰|理数",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 30,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 10,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "塩尻志学館",
+      "school_id": "塩尻志学館",
+      "department": "総合",
+      "program_id": "塩尻志学館|総合",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 200,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 120,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 80,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "田川",
+      "school_id": "田川",
+      "department": "普通",
+      "program_id": "田川|普通",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 160,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 96,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 64,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "梓川",
+      "school_id": "梓川",
+      "department": "普通",
+      "program_id": "梓川|普通",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 120,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 72,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "松本工業",
+      "school_id": "松本工業",
+      "department": "工業/機械",
+      "program_id": "松本工業|工業/機械",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "松本工業",
+      "school_id": "松本工業",
+      "department": "工業/電気",
+      "program_id": "松本工業|工業/電気",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "松本工業",
+      "school_id": "松本工業",
+      "department": "工業/電子工業",
+      "program_id": "松本工業|工業/電子工業",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "松本県ケ丘",
+      "school_id": "松本県ケ丘",
+      "department": "普通",
+      "program_id": "松本県ケ丘|普通",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 240,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 240,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "松本県ケ丘",
+      "school_id": "松本県ケ丘",
+      "department": "自然探究・国際探究",
+      "program_id": "松本県ケ丘|自然探究国際探究",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 64,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "松本美須々ケ丘",
+      "school_id": "松本美須々ケ丘",
+      "department": "普通",
+      "program_id": "松本美須々ケ丘|普通",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 280,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 280,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "松本深志",
+      "school_id": "松本深志",
+      "department": "普通",
+      "program_id": "松本深志|普通",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 280,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 280,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "松本蟻ケ崎",
+      "school_id": "松本蟻ケ崎",
+      "department": "普通",
+      "program_id": "松本蟻ケ崎|普通",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 280,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 280,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "明科",
+      "school_id": "明科",
+      "department": "普通",
+      "program_id": "明科|普通",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 40,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 40,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "豊科",
+      "school_id": "豊科",
+      "department": "普通",
+      "program_id": "豊科|普通",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 200,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": null,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 200,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "南安曇農業",
+      "school_id": "南安曇農業",
+      "department": "農業/グリーンサイエンス",
+      "program_id": "南安曇農業|農業/グリーンサイエンス",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "南安曇農業",
+      "school_id": "南安曇農業",
+      "department": "農業/環境クリエイト",
+      "program_id": "南安曇農業|農業/環境クリエイト",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "南安曇農業",
+      "school_id": "南安曇農業",
+      "department": "農業/生物工学",
+      "program_id": "南安曇農業|農業/生物工学",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 16,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "穂高商業",
+      "school_id": "穂高商業",
+      "department": "商業/商業・情報マネジメント",
+      "program_id": "穂高商業|商業/商業情報マネジメント",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "池田工業",
+      "school_id": "池田工業",
+      "department": "工業/機械・電気学・建築学",
+      "program_id": "池田工業|工業/機械電気学建築学",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 32,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "大町岳陽",
+      "school_id": "大町岳陽",
+      "department": "普通",
+      "program_id": "大町岳陽|普通",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 120,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 48,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 72,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "大町岳陽",
+      "school_id": "大町岳陽",
+      "department": "学究",
+      "program_id": "大町岳陽|学究",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 56,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 24,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "白馬",
+      "school_id": "白馬",
+      "department": "普通",
+      "program_id": "白馬|普通",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 20,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 20,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    },
+    {
+      "year": 2027,
+      "school": "白馬",
+      "school_id": "白馬",
+      "department": "国際観光",
+      "program_id": "白馬|国際観光",
+      "region": "中信",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "status": "provisional_capacity",
+      "source_id": "capacity-provisional-2027",
+      "source_page": 5,
+      "as_of": "2026-10-23",
+      "early": {
+        "capacity": 30,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      },
+      "late": {
+        "capacity": 10,
+        "applicants": null,
+        "examinees": null,
+        "accepted": null
+      }
+    }
+  ],
+  "checks": [
+    {
+      "region": "北信",
+      "early_capacity": 1378,
+      "late_capacity": 2622
+    },
+    {
+      "region": "東信",
+      "early_capacity": 788,
+      "late_capacity": 1812
+    },
+    {
+      "region": "南信",
+      "early_capacity": 1204,
+      "late_capacity": 2236
+    },
+    {
+      "region": "中信",
+      "early_capacity": 960,
+      "late_capacity": 1960
+    }
+  ]
+}
