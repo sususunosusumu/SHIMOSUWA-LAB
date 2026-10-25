@@ -1,0 +1,299 @@
+{
+  "provider": "家庭教師のあすなろ 北陸・甲信",
+  "edition": "2026年度入学向け版",
+  "checked_at": "2026-10-25",
+  "source_url": "https://www.asunaro-kk.com/hokuriku/nagano-public/",
+  "scope": "対応付けを確認できた普通・理数の掲載値。民間の独自調査による参考値で、県公式統計ではない。",
+  "records": [
+    {
+      "school": "長野",
+      "department": "普通",
+      "value": 70
+    },
+    {
+      "school": "松本深志",
+      "department": "普通",
+      "value": 69
+    },
+    {
+      "school": "屋代",
+      "department": "理数",
+      "value": 68
+    },
+    {
+      "school": "伊那北",
+      "department": "理数",
+      "value": 67
+    },
+    {
+      "school": "屋代",
+      "department": "普通",
+      "value": 66
+    },
+    {
+      "school": "上田",
+      "department": "普通",
+      "value": 65
+    },
+    {
+      "school": "飯田",
+      "department": "理数",
+      "value": 65
+    },
+    {
+      "school": "野沢北",
+      "department": "理数",
+      "value": 65
+    },
+    {
+      "school": "松本県ケ丘",
+      "department": "普通",
+      "value": 64
+    },
+    {
+      "school": "諏訪清陵",
+      "department": "普通",
+      "value": 64
+    },
+    {
+      "school": "伊那北",
+      "department": "普通",
+      "value": 62
+    },
+    {
+      "school": "松本蟻ケ崎",
+      "department": "普通",
+      "value": 61
+    },
+    {
+      "school": "須坂",
+      "department": "普通",
+      "value": 61
+    },
+    {
+      "school": "飯田",
+      "department": "普通",
+      "value": 61
+    },
+    {
+      "school": "野沢北",
+      "department": "普通",
+      "value": 61
+    },
+    {
+      "school": "長野吉田",
+      "department": "普通",
+      "value": 60
+    },
+    {
+      "school": "上田染谷丘",
+      "department": "普通",
+      "value": 58
+    },
+    {
+      "school": "岩村田",
+      "department": "普通",
+      "value": 57
+    },
+    {
+      "school": "松本美須々ケ丘",
+      "department": "普通",
+      "value": 57
+    },
+    {
+      "school": "諏訪二葉",
+      "department": "普通",
+      "value": 57
+    },
+    {
+      "school": "大町岳陽",
+      "department": "普通",
+      "value": 56
+    },
+    {
+      "school": "長野西",
+      "department": "普通",
+      "value": 56
+    },
+    {
+      "school": "伊那弥生ケ丘",
+      "department": "普通",
+      "value": 55
+    },
+    {
+      "school": "岡谷南",
+      "department": "普通",
+      "value": 53
+    },
+    {
+      "school": "篠ノ井",
+      "department": "普通",
+      "value": 53
+    },
+    {
+      "school": "豊科",
+      "department": "普通",
+      "value": 53
+    },
+    {
+      "school": "木曽青峰",
+      "department": "理数",
+      "value": 53
+    },
+    {
+      "school": "上田東",
+      "department": "普通",
+      "value": 52
+    },
+    {
+      "school": "飯田風越",
+      "department": "普通",
+      "value": 51
+    },
+    {
+      "school": "赤穂",
+      "department": "普通",
+      "value": 50
+    },
+    {
+      "school": "長野東",
+      "department": "普通",
+      "value": 50
+    },
+    {
+      "school": "飯山",
+      "department": "普通",
+      "value": 50
+    },
+    {
+      "school": "木曽青峰",
+      "department": "普通",
+      "value": 50
+    },
+    {
+      "school": "中野西",
+      "department": "普通",
+      "value": 49
+    },
+    {
+      "school": "長野南",
+      "department": "普通",
+      "value": 47
+    },
+    {
+      "school": "田川",
+      "department": "普通",
+      "value": 47
+    },
+    {
+      "school": "野沢南",
+      "department": "普通",
+      "value": 47
+    },
+    {
+      "school": "下諏訪向陽",
+      "department": "普通",
+      "value": 46
+    },
+    {
+      "school": "小諸",
+      "department": "普通",
+      "value": 46
+    },
+    {
+      "school": "須坂東",
+      "department": "普通",
+      "value": 43
+    },
+    {
+      "school": "岡谷東",
+      "department": "普通",
+      "value": 42
+    },
+    {
+      "school": "小海",
+      "department": "普通",
+      "value": 42
+    },
+    {
+      "school": "松代",
+      "department": "普通",
+      "value": 42
+    },
+    {
+      "school": "屋代南",
+      "department": "普通",
+      "value": 40
+    },
+    {
+      "school": "辰野",
+      "department": "普通",
+      "value": 40
+    },
+    {
+      "school": "阿智",
+      "department": "普通",
+      "value": 39
+    },
+    {
+      "school": "梓川",
+      "department": "普通",
+      "value": 39
+    },
+    {
+      "school": "軽井沢",
+      "department": "普通",
+      "value": 39
+    },
+    {
+      "school": "明科",
+      "department": "普通",
+      "value": 39
+    },
+    {
+      "school": "蓼科",
+      "department": "普通",
+      "value": 39
+    },
+    {
+      "school": "高遠",
+      "department": "普通",
+      "value": 38
+    },
+    {
+      "school": "松川",
+      "department": "普通",
+      "value": 38
+    },
+    {
+      "school": "白馬",
+      "department": "普通",
+      "value": 38
+    },
+    {
+      "school": "富士見",
+      "department": "普通",
+      "value": 38
+    },
+    {
+      "school": "北部",
+      "department": "普通",
+      "value": 38
+    },
+    {
+      "school": "阿南",
+      "department": "普通",
+      "value": 37
+    },
+    {
+      "school": "茅野",
+      "department": "普通",
+      "value": 37
+    },
+    {
+      "school": "坂城",
+      "department": "普通",
+      "value": 37
+    }
+  ]
+}
