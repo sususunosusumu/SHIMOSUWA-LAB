@@ -14,3 +14,21 @@ for a,b in zip(d['records'],rows):
   expected=a[k] if k in a else a[k.split('_')[0]][k.split('_')[1]]
   assert v==('' if expected is None else str(expected)),(k,v,expected)
 print(f"PASS: {len(keys)} unique records, 24 district checks, JSON/CSV consistent")
+# Supplemental current-year records contain provisional capacities, never admissions results.
+plans=json.loads((root/'data/current-capacity.json').read_text())
+assert plans['exam_fiscal_year']==plans['admission_year']-1==2026
+assert len(plans['checks'])==4
+assert len({r['program_id'] for r in plans['records']})==len(plans['records'])
+for r in plans['records']:
+ assert r['year']==2027 and r['status']=='provisional_capacity'
+ assert r['enrolled'] is None and r['additional_accepted'] is None
+ assert all(r[s][k] is None for s in ['early','late'] for k in ['applicants','examinees','accepted'])
+ assert r['annual_capacity']==sum(r[s]['capacity'] or 0 for s in ['early','late'])
+for c in plans['checks']:
+ for s in ['early','late']:
+  assert sum(r[s]['capacity'] or 0 for r in plans['records'] if r['region']==c['region'])==c[s+'_capacity']
+scores=json.loads((root/'data/deviation-latest.json').read_text())
+assert scores['source_url'].startswith('https://www.asunaro-kk.com/')
+assert len({(r['school'],r['department']) for r in scores['records']})==len(scores['records'])
+assert all(0<r['value']<100 and r['department'] in ['普通','理数'] for r in scores['records'])
+print(f"PASS: {len(plans['records'])} capacity-only provisional records; {len(scores['records'])} sourced latest deviation values")
