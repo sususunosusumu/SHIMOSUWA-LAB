@@ -32,3 +32,24 @@ assert scores['source_url'].startswith('https://www.asunaro-kk.com/')
 assert len({(r['school'],r['department']) for r in scores['records']})==len(scores['records'])
 assert all(0<r['value']<100 and r['department'] in ['普通','理数'] for r in scores['records'])
 print(f"PASS: {len(plans['records'])} capacity-only provisional records; {len(scores['records'])} sourced latest deviation values")
+
+private=json.loads((root/'data/private-admissions.json').read_text())
+private_records=private['records']
+assert len(private_records)==130
+assert len({(r['year'],r['program_id']) for r in private_records})==130
+assert {r['year'] for r in private_records}==set(range(2021,2027))
+private_sources={s['id'] for s in private['sources']}
+for r in private_records:
+    assert set(r.get('source_ids',[r['source_id']]))<=private_sources
+    assert set(r.get('field_sources',{}).values())<=private_sources
+    if r['year']<2026:
+        assert r['early']['examinees'] is None and r['late']['examinees'] is None
+    assert r['enrolled'] is None and r['late']['accepted'] is None
+with (root/'data/private-admissions.csv').open(encoding='utf-8-sig',newline='') as f:
+    exported=list(csv.DictReader(f))
+assert len(exported)==len(private_records)
+for row,r in zip(exported,private_records):
+    assert int(row['入学年'])==r['year'] and row['学校']==r['school'] and row['学科']==r['department']
+    for column,key in [('推薦志願','applicants'),('推薦受験','examinees'),('推薦合格','accepted')]:
+        assert row[column]==('' if r['early'][key] is None else str(r['early'][key]))
+print('PASS: 130 private school/program-year records; six years, provenance, missing outcomes and CSV consistent')
