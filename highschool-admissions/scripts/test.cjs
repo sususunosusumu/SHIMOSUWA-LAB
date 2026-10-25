@@ -1,9 +1,9 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
 const root=path.resolve(__dirname,'..'),elements=new Proxy({},{get:(o,k)=>o[k]??(o[k]={value:'',innerHTML:'',textContent:'',clientWidth:1000})});elements.stage.value='both';elements.groupMode.value='total';
-const ctx=vm.createContext({document:{getElementById:id=>elements[id]},history:{replaceState(){}},URLSearchParams,payload:JSON.parse(fs.readFileSync(path.join(root,'data/admissions.json'),'utf8')),assert,console});
+const ctx=vm.createContext({document:{getElementById:id=>elements[id]},history:{replaceState(){}},URLSearchParams,payload:JSON.parse(fs.readFileSync(path.join(root,'data/admissions.json'),'utf8')),planPayload:JSON.parse(fs.readFileSync(path.join(root,'data/current-capacity.json'),'utf8')),scorePayload:JSON.parse(fs.readFileSync(path.join(root,'data/deviation-latest.json'),'utf8')),assert,console});
 vm.runInContext(fs.readFileSync(path.join(root,'app.js'),'utf8').replace(/init\(\);\s*$/,''),ctx);
 vm.runInContext(`
-data=payload;indexData();assert.ok(!data.records.some(r=>r.school==='伊那弥生ヶ丘'));
+data=payload;plans=planPayload;deviation=scorePayload;data.records.push(...plans.records);data.sources.push(...plans.sources);data.years.push(plans.admission_year);for(const s of deviation.records)deviationMap.set(scoreKey(s.school,s.department),s);indexData();assert.ok(!data.records.some(r=>r.school==='伊那弥生ヶ丘'));
 state.districts.clear();setDistricts(['北信','中信']);
 assert.ok(state.schools.size>6);assert.ok([...state.schools].every(s=>data.records.some(r=>r.school===s&&['北信','中信'].includes(r.region))));
 assert.equal(state.programs.size,programCandidates().length);
@@ -16,11 +16,15 @@ const r=selectedRows(2026)[0];assert.equal(value(r,'quota','both'),40);assert.eq
 const rollover=data.records.find(r=>r.early.capacity+r.late.capacity!==r.annual_capacity&&r.early.capacity&&r.late.capacity);assert.equal(value(rollover,'quota','both'),rollover.annual_capacity);
 state.programs.clear();assert.equal(selectedRows(2026).length,0);assert.equal(aggregate(selectedRows(2026),'quota'),null);
 setSchools([]);setSchools(['伊那北','下諏訪向陽']);const selected=[...state.programs];const encoded=serialize().toString();state.schools.clear();state.programs.clear();restore(new URLSearchParams(encoded));assert.deepEqual([...state.programs].sort(),selected.sort());assert.equal(state.schools.size,2);
-$('groupMode').value='total';buildResults();const totals=new Map(resultRows.map(row=>[row.year,row.values]));assert.equal(resultRows.length,6);renderTable();renderChart();assert.ok($('tableRows').innerHTML.includes('2026'));
-$('groupMode').value='schools';buildResults();assert.equal(resultRows.length,12);for(const yr of data.years)for(const key of state.metrics)assert.equal(sum(resultRows.filter(r=>r.year===yr).map(r=>r.values[key])),totals.get(yr)[key]);
+$('groupMode').value='total';buildResults();const totals=new Map(resultRows.map(row=>[row.year,row.values]));assert.equal(resultRows.length,7);renderTable();renderChart();assert.ok($('tableRows').innerHTML.includes('2025年度'));assert.ok($('tableRows').innerHTML.includes('2026年度'));assert.equal(examYear(2026),2025);assert.equal(examYear(2027),2026);
+$('groupMode').value='schools';buildResults();assert.equal(resultRows.length,14);for(const yr of data.years)for(const key of state.metrics)assert.equal(sum(resultRows.filter(r=>r.year===yr).map(r=>r.values[key])),totals.get(yr)[key]);
 assert.ok(csvText().includes('伊那北'));assert.ok(!csvText().includes('松本深志'));
-state.metrics=new Set(['quota','ratio','fill']);buildResults();renderChart();assert.ok($('chart').innerHTML.includes('右外軸：%'));assert.ok($('chart').innerHTML.includes('右軸：倍'));
+state.metrics=new Set(['quota','ratio','fill']);buildResults();renderChart();assert.ok($('chart').innerHTML.includes('右外軸：%'));assert.ok($('chart').innerHTML.includes('右軸：倍'));assert.ok($('chart').innerHTML.includes('data-reference="倍"'));assert.ok($('chart').innerHTML.includes('100%＝1.00倍'));assert.ok($('chart').innerHTML.includes('data-reference="%"'));
+for(const r of plans.records)for(const phase of ['both','early','late'])for(const key of ['applicants','examinees','accepted','enrolled','ratio','fill'])assert.equal(value(r,key,phase),null);
+assert.ok(resultRows.filter(r=>r.year===2027).every(r=>r.values.ratio===null&&r.values.fill===null));
+state.metrics=new Set(['quota','applicants']);buildResults();renderChart();assert.ok($('chart').innerHTML.includes('data-provisional="true"'));assert.ok(!$('chart').innerHTML.includes('data-reference="倍"'));
+renderDeviation();assert.ok($('deviationRows').innerHTML.includes('掲載元'));assert.ok(!$('deviationRows').innerHTML.includes('全体平均'));assert.ok(csvText().includes('受験実施年度'));
 setDistricts([]);assert.equal(state.schools.size,0);assert.equal(state.programs.size,0);buildResults();renderChart();renderTable();assert.ok($('chart').innerHTML.includes('chart-empty'));
 const empty=serialize();restore(empty);assert.equal(state.districts.size,0);assert.equal(state.schools.size,0);assert.equal(state.programs.size,0);
-console.log('PASS: district-school-program cascade, unlimited bulk selection, subset/exclusion, empty selection, URL restoration, total vs school sums, phase values, multi-axis chart and shared numeric table');
+console.log('PASS: fiscal-year mapping, provisional future values hidden, ratio/fill reference lines, latest score provenance; district-school-program cascade, unlimited bulk selection, subset/exclusion, empty selection, URL restoration, total vs school sums, phase values, multi-axis chart and shared numeric table');
 `,ctx);
