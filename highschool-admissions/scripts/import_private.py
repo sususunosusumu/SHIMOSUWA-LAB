@@ -21,8 +21,11 @@ for i in range(2,len(table)-3,2):
 assert len(records)==21
 for phase,field,total in [('early','applicants',4942),('early','examinees',4937),('early','accepted',4735),('late','applicants',4740),('late','examinees',4647)]:assert sum(r[phase][field] for r in records)==total
 payload=dict(records=records,sources=[dict(id='private2026',title='令和8年度 私立全日制高校入学者選抜の状況（2026年3月6日正午時点）',url='https://www.pref.nagano.lg.jp/ken-manabi/press/documents/20260310_press_besshi.pdf',page_url='https://www.pref.nagano.lg.jp/ken-manabi/press/20260310press-2.html')],notes=['私立は2025年度実施・2026年春入学分のみ。15校21学科。ISAKジャパンは日程が異なり県資料の対象外。','前期は推薦、後期は一般。専願・併願を合計。空欄の専願・併願区分は計上なしとして集計し、県全体の5項目の総数と照合。','一般合格者数・実入学者数・選抜別募集枠は公表表にないためnull。年間最終合格者計は算出しない。','内進者を含む学校あり。3月6日時点で今後の試験日程があり数字は変更されうる。私立の地域は所在地による便宜上の分類。'])
+previous=json.loads((root/'data/private-admissions.json').read_text()) if (root/'data/private-admissions.json').exists() else {}
+payload['records']=sorted([r for r in previous.get('records',[]) if r['year']!=2026]+payload['records'],key=lambda r:(r['year'],r['school'],r['department']))
+payload['sources']=[s for s in previous.get('sources',[]) if s['id']!='private2026']+payload['sources']
+if previous.get('checks'):payload['checks']=previous['checks'];payload['notes']=previous.get('notes',payload['notes'])
 (root/'data/private-admissions.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n')
-with (root/'data/private-admissions.csv').open('w',encoding='utf-8-sig',newline='') as f:
- w=csv.writer(f);w.writerow(['受験実施年度','入学年','学校','学科','地域','年間定員','推薦志願','推薦受験','推薦合格','一般志願','一般受験','調査時点','出典URL'])
- for r in records:w.writerow([2025,2026,r['school'],r['department'],r['region'],r['annual_capacity'],r['early']['applicants'],r['early']['examinees'],r['early']['accepted'],r['late']['applicants'],r['late']['examinees'],r['as_of'],payload['sources'][0]['url']])
-print(len(records),len(set(r['school'] for r in records)),sum(r['annual_capacity'] for r in records))
+from export_private_csv import export_private_csv
+export_private_csv(root,payload)
+print(len(payload['records']))
