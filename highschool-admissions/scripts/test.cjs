@@ -1,0 +1,23 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
+const root=path.resolve(__dirname,'..');
+const elements={};
+for(const id of ['year','compareYear','stage','compareStage','metric','metric2','metric3','region','schoolRegion','department','query','underOnly','tableMode','tableContext','tableAsOf','tableCaption','tableHead','rows','download','chart','legend','trendTable'])elements[id]={value:'',checked:false,innerHTML:'',textContent:''};
+Object.assign(elements.year,{value:'2026'});elements.stage.value='late';elements.region.value='南信';elements.metric.value='capacity';elements.metric2.value='applicants';elements.metric3.value='ratio';elements.tableMode.value='both';
+const ctx=vm.createContext({document:{getElementById:id=>elements[id]},payload:JSON.parse(fs.readFileSync(path.join(root,'data/admissions.json'),'utf8')),assert,console});
+vm.runInContext(fs.readFileSync(path.join(root,'app.js'),'utf8').replace(/init\(\);\s*$/,''),ctx);
+vm.runInContext(`
+data=payload;
+const ina=data.records.find(r=>r.year===2026&&r.school==='伊那北'&&r.department==='理数');
+assert.equal(ina.annual_capacity,40);assert.equal(value(ina,'capacity'),4);assert.equal(value(ina,'ratio'),4.75);assert.equal(value(ina,'capacity','early'),36);
+const whole=data.records.filter(r=>r.year===2026&&r.school==='伊那北');
+assert.equal(aggregate(whole,'capacity'),164);assert.ok(Math.abs(aggregate(whole,'ratio')-178/164)<1e-9);
+assert.equal(aggregate([],'applicants'),null);
+schools=new Set(['伊那北']);assert.ok(baseRows(2026).every(r=>r.school==='伊那北'));
+renderChart();assert.ok($('chart').innerHTML.includes('右軸：倍'));assert.ok($('chart').innerHTML.includes('左軸：人'));
+$('metric2').value='fill';renderChart();assert.ok($('chart').innerHTML.includes('右外軸：倍'));assert.ok($('chart').innerHTML.includes('右軸：%'));
+$('metric2').value='';$('metric3').value='';renderChart();assert.ok(!$('chart').innerHTML.includes('右軸：'));
+visible=[ina];renderTable();assert.ok($('tableHead').innerHTML.includes('前期選抜'));assert.ok($('tableHead').innerHTML.includes('後期選抜'));assert.ok($('tableContext').textContent.includes('2026年4月入学'));assert.ok($('tableAsOf').textContent.includes('2026年5月1日'));
+$('tableMode').value='early';renderTable();assert.ok(!$('tableHead').innerHTML.includes('後期選抜'));
+$('stage').value='early';assert.equal(value(ina,'capacity'),36);assert.ok(delta(ina,'applicantDelta')!==null);
+console.log('PASS: phase and annual values, weighted ratios, missing values, school filter, 1–3 units, table periods');
+`,ctx);
