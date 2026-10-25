@@ -1,0 +1,627 @@
+{
+  "records": [
+    {
+      "year": 2026,
+      "school": "長野清泉女学院",
+      "school_id": "private|長野清泉女学院",
+      "department": "普通",
+      "program_id": "private|長野清泉女学院|普通",
+      "region": "北信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 175,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 77,
+        "examinees": 77,
+        "accepted": 77,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 68,
+        "examinees": 68,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "文化学園長野",
+      "school_id": "private|文化学園長野",
+      "department": "普通",
+      "program_id": "private|文化学園長野|普通",
+      "region": "北信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 210,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 137,
+        "examinees": 137,
+        "accepted": 122,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 1177,
+        "examinees": 1140,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "長野日本大学",
+      "school_id": "private|長野日本大学",
+      "department": "普通",
+      "program_id": "private|長野日本大学|普通",
+      "region": "北信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 270,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 239,
+        "examinees": 239,
+        "accepted": 239,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 508,
+        "examinees": 505,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "長野日本大学",
+      "school_id": "private|長野日本大学",
+      "department": "探究創造",
+      "program_id": "private|長野日本大学|探究創造",
+      "region": "北信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 30,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 91,
+        "examinees": 90,
+        "accepted": 59,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 0,
+        "examinees": 0,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "長野俊英",
+      "school_id": "private|長野俊英",
+      "department": "普通",
+      "program_id": "private|長野俊英|普通",
+      "region": "北信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 215,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 324,
+        "examinees": 324,
+        "accepted": 316,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 211,
+        "examinees": 207,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "上田西",
+      "school_id": "private|上田西",
+      "department": "普通",
+      "program_id": "private|上田西|普通",
+      "region": "東信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 290,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 257,
+        "examinees": 257,
+        "accepted": 257,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 715,
+        "examinees": 704,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "佐久長聖",
+      "school_id": "private|佐久長聖",
+      "department": "普通",
+      "program_id": "private|佐久長聖|普通",
+      "region": "東信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 315,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 236,
+        "examinees": 236,
+        "accepted": 235,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 538,
+        "examinees": 535,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "東海大学付属諏訪",
+      "school_id": "private|東海大学付属諏訪",
+      "department": "普通",
+      "program_id": "private|東海大学付属諏訪|普通",
+      "region": "南信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 265,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 418,
+        "examinees": 416,
+        "accepted": 406,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 34,
+        "examinees": 33,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "東海大学付属諏訪",
+      "school_id": "private|東海大学付属諏訪",
+      "department": "理数",
+      "program_id": "private|東海大学付属諏訪|理数",
+      "region": "南信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 40,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 67,
+        "examinees": 66,
+        "accepted": 65,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 6,
+        "examinees": 6,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "伊那西",
+      "school_id": "private|伊那西",
+      "department": "普通",
+      "program_id": "private|伊那西|普通",
+      "region": "南信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 170,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 100,
+        "examinees": 100,
+        "accepted": 100,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 37,
+        "examinees": 37,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "飯田女子",
+      "school_id": "private|飯田女子",
+      "department": "普通",
+      "program_id": "private|飯田女子|普通",
+      "region": "南信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 210,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 145,
+        "examinees": 145,
+        "accepted": 131,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 101,
+        "examinees": 101,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "東京都市大学塩尻",
+      "school_id": "private|東京都市大学塩尻",
+      "department": "普通",
+      "program_id": "private|東京都市大学塩尻|普通",
+      "region": "中信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 255,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 736,
+        "examinees": 735,
+        "accepted": 687,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 977,
+        "examinees": 965,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "松商学園",
+      "school_id": "private|松商学園",
+      "department": "普通",
+      "program_id": "private|松商学園|普通",
+      "region": "中信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 340,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 1128,
+        "examinees": 1128,
+        "accepted": 1128,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 175,
+        "examinees": 166,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "松商学園",
+      "school_id": "private|松商学園",
+      "department": "商業",
+      "program_id": "private|松商学園|商業",
+      "region": "中信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 80,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 118,
+        "examinees": 118,
+        "accepted": 118,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 40,
+        "examinees": 39,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "松本国際",
+      "school_id": "private|松本国際",
+      "department": "普通",
+      "program_id": "private|松本国際|普通",
+      "region": "中信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 190,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 418,
+        "examinees": 418,
+        "accepted": 346,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 49,
+        "examinees": 47,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "松本第一",
+      "school_id": "private|松本第一",
+      "department": "普通",
+      "program_id": "private|松本第一|普通",
+      "region": "中信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 120,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 268,
+        "examinees": 268,
+        "accepted": 268,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 39,
+        "examinees": 38,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "松本第一",
+      "school_id": "private|松本第一",
+      "department": "食物",
+      "program_id": "private|松本第一|食物",
+      "region": "中信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 75,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 53,
+        "examinees": 53,
+        "accepted": 53,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 43,
+        "examinees": 43,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "エクセラン",
+      "school_id": "private|エクセラン",
+      "department": "普通",
+      "program_id": "private|エクセラン|普通",
+      "region": "中信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 90,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 77,
+        "examinees": 77,
+        "accepted": 80,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 15,
+        "examinees": 7,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "エクセラン",
+      "school_id": "private|エクセラン",
+      "department": "美術",
+      "program_id": "private|エクセラン|美術",
+      "region": "中信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 15,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 17,
+        "examinees": 17,
+        "accepted": 16,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 1,
+        "examinees": 1,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "エクセラン",
+      "school_id": "private|エクセラン",
+      "department": "福祉",
+      "program_id": "private|エクセラン|福祉",
+      "region": "中信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 15,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 15,
+        "examinees": 15,
+        "accepted": 11,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 3,
+        "examinees": 2,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    },
+    {
+      "year": 2026,
+      "school": "日本ウェルネス長野",
+      "school_id": "private|日本ウェルネス長野",
+      "department": "普通",
+      "program_id": "private|日本ウェルネス長野|普通",
+      "region": "中信",
+      "sector": "private",
+      "course": "全日制",
+      "annual_capacity": 30,
+      "enrolled": null,
+      "additional_accepted": null,
+      "early": {
+        "applicants": 21,
+        "examinees": 21,
+        "accepted": 21,
+        "capacity": null
+      },
+      "late": {
+        "applicants": 3,
+        "examinees": 3,
+        "capacity": null,
+        "accepted": null
+      },
+      "status": "private_snapshot",
+      "as_of": "2026-03-06 12:00",
+      "source_id": "private2026",
+      "source_page": 1
+    }
+  ],
+  "sources": [
+    {
+      "id": "private2026",
+      "title": "令和8年度 私立全日制高校入学者選抜の状況（2026年3月6日正午時点）",
+      "url": "https://www.pref.nagano.lg.jp/ken-manabi/press/documents/20260310_press_besshi.pdf",
+      "page_url": "https://www.pref.nagano.lg.jp/ken-manabi/press/20260310press-2.html"
+    }
+  ],
+  "notes": [
+    "私立は2025年度実施・2026年春入学分のみ。15校21学科。ISAKジャパンは日程が異なり県資料の対象外。",
+    "前期は推薦、後期は一般。専願・併願を合計。空欄の専願・併願区分は計上なしとして集計し、県全体の5項目の総数と照合。",
+    "一般合格者数・実入学者数・選抜別募集枠は公表表にないためnull。年間最終合格者計は算出しない。",
+    "内進者を含む学校あり。3月6日時点で今後の試験日程があり数字は変更されうる。私立の地域は所在地による便宜上の分類。"
+  ]
+}
