@@ -30,7 +30,7 @@ function metricLabel(key){const phase=$('stage').value;
 }
 function value(r,key,phase=$('stage').value){
  if(isProvisional(r)&&key!=='quota')return null;
- if(sectorOf(r)==='private'&&phase==='both'&&key==='accepted')return null;
+ if(sectorOf(r)==='private'&&phase==='both'&&(key==='accepted'||(['applicants','examinees'].includes(key)&&(r.early[key]==null||r.late[key]==null))))return null;
  if(key==='enrolled')return r.enrolled;
  if(key==='fill')return r.annual_capacity>0&&r.enrolled!=null?r.enrolled/r.annual_capacity*100:null;
  if(key==='quota')return phase==='both'?r.annual_capacity:r[phase].capacity;
@@ -39,7 +39,24 @@ function value(r,key,phase=$('stage').value){
  if(phase==='both')return sum([r.early[field],r.late[field],...(key==='accepted'?[r.additional_accepted]:[])]);
  return r[phase][field]??null;
 }
+function groupedApplicants(rows,phase){
+ let n=0;const used=new Set();
+ for(const r of rows){
+  if(sectorOf(r)!=='private'){const v=value(r,'applicants',phase);if(v!=null)n+=v;continue;}
+  if(phase==='early'){if(r.early.applicants==null)return null;n+=r.early.applicants;continue;}
+  if(phase==='both'){if(r.early.applicants==null)return null;n+=r.early.applicants;}
+  const g=r.late.applicant_group;
+  if(g){if(!g.program_ids.every(id=>rows.some(x=>x.year===r.year&&x.program_id===id)))return null;if(!used.has(g.id)){n+=g.applicants;used.add(g.id);}}
+  else{if(r.late.applicants==null)return null;n+=r.late.applicants;}
+ }
+ return rows.length?n:null;
+}
 function aggregate(rows,key,phase=$('stage').value){
+ if(rows.some(r=>sectorOf(r)==='private')){
+  if(key==='applicants')return groupedApplicants(rows,phase);
+  if(key==='ratio'){const n=groupedApplicants(rows,phase),d=aggregate(rows,'quota',phase);return d>0&&n!=null?n/d:null;}
+ }
+
  // 未公表の私立の値を欠いたまま全体合計・加重比率を作らない。
  if(rows.some(r=>sectorOf(r)==='private'&&value(r,key,phase)==null))return null;
  if(key==='ratio'){const valid=rows.filter(r=>value(r,'quota',phase)>0&&value(r,'applicants',phase)!=null),n=sum(valid.map(r=>value(r,'applicants',phase))),d=sum(valid.map(r=>value(r,'quota',phase)));return d>0&&n!=null?n/d:null;}
@@ -64,7 +81,7 @@ function targetColor(i){const first=['#087d79','#c36c31','#4e68bd','#a84d7b','#7
 function buildResults(){
  if($('groupMode').value==='schools')targets=[...state.schools].sort(sortJa).filter(s=>programCandidates().some(p=>p.school===s&&state.programs.has(p.program_id))).map((name,i)=>({name,school:name,color:targetColor(i)}));
  else targets=[{name:'選択対象の合計',school:null,color:targetColor(0)}];
- resultRows=targets.flatMap(target=>data.years.map(year=>{const rows=selectedRows(year,target.school);const missingPrivate=programCandidates().some(p=>p.sector==='private'&&state.programs.has(p.program_id)&&(!target.school||p.school===target.school)&&!rows.some(r=>r.program_id===p.program_id));return {year,target:target.name,count:rows.length,missingPrivate,privateSnapshot:rows.some(r=>r.status==='private_snapshot'),provisional:rows.some(isProvisional),values:Object.fromEntries([...state.metrics].map(key=>[key,missingPrivate?null:aggregate(rows,key)])),sourceIds:[...new Set(rows.map(r=>r.source_id))]};}));
+ resultRows=targets.flatMap(target=>data.years.map(year=>{const rows=selectedRows(year,target.school);const missingPrivate=programCandidates().some(p=>p.sector==='private'&&state.programs.has(p.program_id)&&(!target.school||p.school===target.school)&&!data.records.some(r=>r.year===year&&r.school===p.school));return {year,target:target.name,count:rows.length,missingPrivate,privateSnapshot:rows.some(r=>r.status==='private_snapshot'),provisional:rows.some(isProvisional),values:Object.fromEntries([...state.metrics].map(key=>[key,missingPrivate?null:aggregate(rows,key)])),sourceIds:[...new Set(rows.flatMap(r=>r.source_ids||[r.source_id]))]};}));
 }
 function renderChart(){const keys=[...state.metrics],units=[...new Set(keys.map(key=>metrics[key][1]))];if(units.includes('人')){units.splice(units.indexOf('人'),1);units.unshift('人');}
  const series=targets.flatMap(target=>keys.map((key,mi)=>({name:target.name,key,unit:metrics[key][1],color:target.color,dash:metricDashes[key],values:data.years.map(year=>resultRows.find(r=>r.year===year&&r.target===target.name)?.values[key]??null),provisional:data.years.map(year=>resultRows.find(r=>r.year===year&&r.target===target.name)?.provisional||false)})));
@@ -87,7 +104,7 @@ function renderChart(){const keys=[...state.metrics],units=[...new Set(keys.map(
 function renderTable(){const keys=[...state.metrics];$('tableCaption').textContent=`2020〜2026年度実施（2021〜2027年春入学） / ${stageName()} / グラフと同じ対象・集計方法`;
  $('tableHead').innerHTML='<tr><th>受験実施年度</th><th>入学年</th><th>対象</th>'+keys.map(k=>`<th>${esc(metricLabel(k))}<br>（${metrics[k][1]}）</th>`).join('')+'<th>元資料</th></tr>';
  const hasData=resultRows.some(r=>r.count>0);
- $('tableRows').innerHTML=hasData?resultRows.map(row=>`<tr><td>${examYear(row.year)}年度${row.provisional?'<span class="provisional-tag">仮募集枠のみ</span>':''}</td><td>${row.year}年春${row.missingPrivate?'<small>選択中の私立は未収録</small>':row.privateSnapshot?'<small>私立：3月6日時点</small>':''}</td><td>${esc(row.target)}<small>${row.count}募集単位</small></td>`+keys.map(k=>`<td>${fmt(row.values[k],['倍','%'].includes(metrics[k][1])?2:0)}</td>`).join('')+`<td>${row.sourceIds.map(id=>{const source=data.sources.find(s=>s.id===id);return `<a href="${source.url}" target="_blank" rel="noopener" aria-label="${examYear(row.year)}年度実施の公式資料">PDF ↗</a>`;}).join(' ')||'—'}</td></tr>`).join(''):`<tr><td colspan="${keys.length+4}" style="text-align:center">対象を選択してください。</td></tr>`;
+ $('tableRows').innerHTML=hasData?resultRows.map(row=>`<tr><td>${examYear(row.year)}年度${row.provisional?'<span class="provisional-tag">仮募集枠のみ</span>':''}</td><td>${row.year}年春${row.missingPrivate?'<small>選択中の私立は未収録</small>':row.privateSnapshot?'<small>私立：年度別公表時点</small>':''}</td><td>${esc(row.target)}<small>${row.count}募集単位</small></td>`+keys.map(k=>`<td>${fmt(row.values[k],['倍','%'].includes(metrics[k][1])?2:0)}</td>`).join('')+`<td>${row.sourceIds.map(id=>{const source=data.sources.find(s=>s.id===id);return `<a href="${source.url}" target="_blank" rel="noopener" aria-label="${examYear(row.year)}年度実施の公式資料">PDF ↗</a>`;}).join(' ')||'—'}</td></tr>`).join(''):`<tr><td colspan="${keys.length+4}" style="text-align:center">対象を選択してください。</td></tr>`;
  $('download').disabled=!hasData;
 }
 function initRanking(){
@@ -104,7 +121,7 @@ function renderRanking(){const rows=rankingRows(),year=Number($('rankYear').valu
  $('rankMetric').innerHTML=Object.keys(metrics).map(k=>`<option value="${k}">${esc(metricLabel(k))}</option>`).join('');$('rankMetric').value=metrics[key]?key:'applicants';
  $('rankingCaption').textContent=`${examYear(year)}年度実施・${year}年春入学 / ${stageName()} / 選択中の${rows.length}募集単位 / ${metricLabel($('rankMetric').value)}の${$('rankDirection').value==='asc'?'小さい':'大きい'}順`;
  $('rankingHead').innerHTML='<tr><th>順位</th><th>学校</th><th>学科・募集単位</th>'+Object.keys(metrics).map(k=>`<th${k===$('rankMetric').value?' class="sorted-column"':''}>${esc(metricLabel(k))}<br>（${metrics[k][1]}）</th>`).join('')+'<th>状態・出典</th></tr>';
- $('rankingRows').innerHTML=rows.map(r=>{const source=data.sources.find(s=>s.id===r.record?.source_id);return `<tr><td>${r.rank??'—'}</td><td>${esc(r.school)}${r.sector==='private'?'<small>私立</small>':''}</td><td>${esc(r.department)}</td>`+Object.keys(metrics).map(k=>`<td${k===$('rankMetric').value?' class="sorted-column"':''}>${fmt(r.values[k],['ratio','fill'].includes(k)?2:0)}</td>`).join('')+`<td>${!r.record?'この年度は未収録':isProvisional(r.record)?'仮募集枠のみ':r.sector==='private'?'3月6日時点':'実績'}${source?`<small><a href="${source.url}" target="_blank" rel="noopener">公式PDF ↗</a></small>`:''}</td></tr>`;}).join('')||'<tr><td colspan="11">上の1〜3で対象を選択してください。</td></tr>';
+ $('rankingRows').innerHTML=rows.map(r=>{const sources=data.sources.filter(s=>(r.record?.source_ids||[r.record?.source_id]).includes(s.id));return `<tr><td>${r.rank??'—'}</td><td>${esc(r.school)}${r.sector==='private'?'<small>私立</small>':''}</td><td>${esc(r.department)}</td>`+Object.keys(metrics).map(k=>`<td${k===$('rankMetric').value?' class="sorted-column"':''}>${fmt(r.values[k],['ratio','fill'].includes(k)?2:0)}</td>`).join('')+`<td>${!r.record?'この年度は未収録':isProvisional(r.record)?'仮募集枠のみ':r.sector==='private'?esc(r.record.as_of||'年度別公表時点'):'実績'}${sources.map(source=>`<small><a href="${source.url}" target="_blank" rel="noopener">公式PDF ↗</a></small>`).join('')}${r.record?.late.applicant_group&&$('stage').value!=='early'?'<small>一般志願は複数学科で一括公表</small>':''}</td></tr>`;}).join('')||'<tr><td colspan="11">上の1〜3で対象を選択してください。</td></tr>';
 }
 function renderDeviation(){
  const chosen=programCandidates().filter(p=>state.programs.has(p.program_id));
@@ -148,7 +165,7 @@ function bulk(action){$('status').textContent='';
  if(action==='program-all')state.programs=new Set(programCandidates().map(p=>p.program_id));if(action==='program-none')state.programs.clear();update();
 }
 function csvText(){const keys=[...state.metrics],head=['受験実施年度','入学年','データ状態','選抜区分','集計方法','対象','募集単位数',...keys.map(k=>metricLabel(k)+'（'+metrics[k][1]+'）'),'出典URL'];
- const rows=resultRows.map(row=>[examYear(row.year),row.year,row.missingPrivate?'選択中の私立は未収録':row.privateSnapshot?'私立は3月6日時点':row.provisional?'募集枠の仮値':'実績',stageName(),$('groupMode').value==='total'?'全体合計':'学校ごと',row.target,row.count,...keys.map(k=>row.values[k]),row.sourceIds.map(id=>data.sources.find(s=>s.id===id).url).join(' ')]);
+ const rows=resultRows.map(row=>[examYear(row.year),row.year,row.missingPrivate?'選択中の私立は未収録':row.privateSnapshot?'私立は年度別公表時点':row.provisional?'募集枠の仮値':'実績',stageName(),$('groupMode').value==='total'?'全体合計':'学校ごと',row.target,row.count,...keys.map(k=>row.values[k]),row.sourceIds.map(id=>data.sources.find(s=>s.id===id).url).join(' ')]);
  return '\uFEFF'+[head,...rows].map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');
 }
 function download(){const url=URL.createObjectURL(new Blob([csvText()],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='nagano-admissions-trend.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
