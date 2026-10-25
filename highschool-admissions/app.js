@@ -49,7 +49,7 @@ function renderChart(){const keys=metricKeys(),units=[...new Set(keys.map(k=>met
  else if(schools.size)targets=[...schools].map(name=>({name,rows:y=>baseRows(y).filter(r=>r.school===name)}));
  else targets=[{name:($('region').value||'県内')+'の合計（学校未選択）',rows:baseRows}];
  const series=targets.flatMap((t,ti)=>keys.map((k,ki)=>({name:t.name,key:k,unit:metrics[k][1],color:colors[ti],dash:['','8 4','2 4'][ki],values:data.years.map(y=>aggregate(t.rows(y),k))})));
- const W=1040,H=320,L=75,R=units.length>2?150:units.length>1?80:25,T=36,B=45,plotRight=W-R;
+ const W=Math.max(580,Math.min(1040,$('chart').clientWidth||1040)),H=320,L=75,R=units.length>2?150:units.length>1?80:25,T=36,B=45,plotRight=W-R;
  const maxes=units.map(u=>Math.max(1,...series.filter(s=>s.unit===u).flatMap(s=>s.values.filter(v=>v!=null)))*1.1);
  const x=i=>L+i*(plotRight-L)/(data.years.length-1),y=(v,u)=>H-B-v/maxes[units.indexOf(u)]*(H-T-B);
  const axisName=i=>i===0?'左軸':i===1?'右軸':'右外軸';
@@ -81,6 +81,6 @@ async function init(){try{const response=await fetch('data/admissions.json');if(
  $('region').onchange=()=>{$('schoolRegion').value=$('region').value;update();};$('schoolRegion').onchange=()=>{schoolPicker();saveURL();};$('compareStage').onchange=()=>{$('stage').value=$('compareStage').value;update();};$('compareYear').onchange=()=>{$('year').value=$('compareYear').value;update();};$('query').oninput=update;
  $('schoolList').onchange=e=>{if(e.target.dataset.school)changeSchools(e.target.dataset.school,e.target.checked);};$('schoolChips').onclick=e=>{if(e.target.dataset.schoolRemove)changeSchools(e.target.dataset.schoolRemove,false);};$('clearSchools').onclick=()=>{schools.clear();selected.clear();update();};
  $('rows').onchange=e=>{const id=e.target.dataset.id;if(!id)return;if(e.target.checked){if(selected.size>=6){e.target.checked=false;$('selectionStatus').textContent='学科の比較は最大6件です。';return;}selected.add(id);}else selected.delete(id);update();};
- $('chips').onclick=e=>{const id=e.target.dataset.remove;if(id){selected.delete(id);update();}};$('reset').onclick=()=>{['query','department'].forEach(k=>$(k).value='');$('region').value='南信';$('schoolRegion').value='南信';$('underOnly').checked=false;schools.clear();selected.clear();update();};$('download').onclick=download;update();
+ $('chips').onclick=e=>{const id=e.target.dataset.remove;if(id){selected.delete(id);update();}};$('reset').onclick=()=>{['query','department'].forEach(k=>$(k).value='');$('region').value='南信';$('schoolRegion').value='南信';$('underOnly').checked=false;schools.clear();selected.clear();update();};$('download').onclick=download;window.addEventListener('resize',renderChart);update();
  }catch(e){$('error').textContent='データを読み込めませんでした。再読み込みしてください。ローカルではHTTPサーバーで開いてください。';console.error(e);}}
 init();
