@@ -4,7 +4,7 @@
 
 ## 使い方
 
-操作は一つです。**学区 → 学校 → 学科・募集単位**を選び、同じ対象の年度推移をグラフと表で確認します。
+操作は一つです。**学区 → 学校 → 学科・募集単位**を選び、同じ対象の年度推移をグラフと表で確認します。表示年度は受験実施年度（4月〜翌年3月）です。
 
 - 第1通学区（北信）、第2（東信）、第3（南信）、第4（中信）を複数選択。
 - 学区を追加すると新しく対象になる学校・学科を全選択。そこからチェックを外して絞り込む。既に選んだ学区内の手動除外は維持。
@@ -33,7 +33,10 @@ highschool-admissions/
   data/admissions.json
   data/admissions.csv
   data/coverage.json
+  data/current-capacity.json
+  data/deviation-latest.json
   scripts/import_data.py
+  scripts/import_current.py
   scripts/validate.py
   scripts/test.cjs
   README.md
@@ -41,14 +44,14 @@ highschool-admissions/
 
 ## データと集計
 
-2021〜2026年度・775レコード。主資料は長野県教育委員会『高等学校要覧』各年度「15 学校別入学状況（公立）」。原データの人数をJSON/CSVで分離し、表示時に集計します。
+実績は2021〜2026年春入学（2020〜2025年度実施）・775レコード。主資料は長野県教育委員会『高等学校要覧』各年度「15 学校別入学状況（公立）」。原データの人数をJSON/CSVで分離し、表示時に集計します。
 
 - [令和8年度高校要覧](https://www.pref.nagano.lg.jp/kyoiku/koko/gyose/zenpan/tokei/ko/r08.html)
 - [令和8年度入試情報](https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/r8konyushi.html)
 - [過年度要覧一覧](https://www.pref.nagano.lg.jp/kyoiku/koko/gyose/zenpan/tokei/ko/koukouyouran.html)
 - [県公式・高校の通学区](https://www.pref.nagano.lg.jp/kyoiku/koko/jukense/nintei/ko-tsugakuku.html)
 
-年度は4月に入学する年です。2026年度は2026年4月入学者の実績で、実入学者は5月1日現在。2027年度速報は未収録。入試速報の「入学予定者」は要覧の合格者・実入学者と同じ数値として扱わず、初期データには混ぜていません。
+元データの `year` は入学年ですが、画面・CSVの受験実施年度は `year - 1` です。2026年春入学の実績は2025年度実施と表示し、入学年も併記。実入学者は入学年の5月1日現在です。今年度の正式な志願・受検・合格・入学実績は未実施として空欄にします。入試速報の「入学予定者」は要覧の合格者・実入学者と同じ数値として扱わず、初期データには混ぜていません。
 
 | 指標 | 前期／後期 | 両方 |
 | --- | --- | --- |
@@ -93,3 +96,21 @@ Python 3.10以降推奨。`pip install requests beautifulsoup4 pdfplumber` の�
 公式要覧一覧には平成13年度以降のリンクがあります。1990年代は[県立長野図書館の調査記録](https://crd.ndl.go.jp/reference/entry/index.php?id=1000324101&page=ref_view)で『長野県学事要覧』の募集定員の存在を確認できます。[平成2年度学校基本調査](https://tokei.pref.nagano.lg.jp/statistics/3989.html)の在籍統計を、学校別入試結果の代わりには使いません。
 
 追加時は推薦・一般・前期・後期等の制度、公表時点、学校の継承関係、学科・共同募集単位を確認し、違う定義の値を同じ系列へ自動接続しないでください。
+
+## 今年度・年度表示・基準線・偏差値
+
+2026年度実施（2027年春入学）の `current-capacity.json` は県の2026年10月23日公表資料にある**仮の募集人員**だけを収録。129募集単位、4通学区の合計を照合済み。11月の正式定員決定前のため、前年の募集定員と新しい募集枠に基づく仮値です。志願予定数調査の人数を確定志願者として取り込んでいません。内進枠等を含む枠の扱いも実績表と異なる場合があり、正式発表後に更新が必要です。
+
+- [県公式・令和9年度第1回予定数調査](https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r9/documents/r9_yotei1_kekka.pdf)
+- 公表日2026-10-23、確認日2026-10-25。正式定員は11月決定予定と資料内に明記。
+- `status=provisional_capacity`。年度キー `year=2027` は入学年のまま保持し、表示では2026年度実施に変換。
+- `annual_capacity` は資料の前後期の仮枠の合計。末尾列「令和8年度募集定員」を令和9年度の確定値として転記しない。
+- 志願・受検・合格・再募集・実入学者は `null`。表示時にも仮値のレコードは募集枠以外の全指標を強制的に欠測とする。
+- 仮募集枠は点線で接続し、表・ツールチップに「仮」と表示。結果の線は2025年度までで止める。
+- 元の `admissions.json` と `admissions.csv` は入学年度表記の原統計を維持。画面のCSVは受験実施年度・入学年・データ状態を別列で保存。
+
+倍率を選ぶと、赤い水平線を **100%=1.00倍** の位置に描きます。充足率では100%に描画。対象の単位・軸に合わせて計算し、データがすべて100%未満でも基準線が軸内に入るようにスケールを設定します。人数だけを表示しているときは倍率の基準線を描きません。
+
+参考偏差値は[家庭教師のあすなろ 北陸・甲信の独自調査](https://www.asunaro-kk.com/hokuriku/nagano-public/)で、今回確認できた最新掲載の「2026年度入学向け版」（2026-10-25確認）。普通・理数のうち学校・学科の対応を確認できた58件を `deviation-latest.json` に分離。提供元、掲載版、確認日、URLを保持。学校・学科の選択肢と最新値の別表に一度だけ表示し、年度推移の値・学校間の平均に使用しません。対応が不確かな学科や未掲載は「—」です。提供元の年度は入学向け版を指し、グラフの実施年度と同じ意味ではありません。県公式の統計ではない民間参考値と表示しています。
+
+`pip install requests beautifulsoup4 pdfplumber` の後に `python scripts/import_current.py` で補助資料を再取得可能。公式PDFは `scripts/cache/` へ保持（Git対象外）。合計照合と掲載版の確認に失敗したら中断します。`scripts/test.cjs`・`scripts/validate.py` には年度変換、仮値のみの未来年度、倍率・充足率の赤基準線、偏差値の出典と非集計を確認するチェックを含みます。
