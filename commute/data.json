@@ -1,62 +1,55 @@
 {
-  "verified": "2026-10-12",
+  "verified": "2026-10-27",
   "validUntil": "2026-10-31",
   "bus": [
     {
       "name": "武居線 1便",
-      "service": "weekday",
-      "station": "07:05",
-      "school": "07:14",
-      "return": "07:21"
-    },
-    {
-      "name": "武居線 2便",
       "service": "weekday",
       "station": "07:25",
       "school": "07:34",
       "return": "07:41"
     },
     {
+      "name": "武居線 2便",
+      "service": "daily",
+      "station": "07:50",
+      "school": "07:59",
+      "return": "08:07"
+    },
+    {
       "name": "武居線 3便",
       "service": "weekday",
-      "station": "07:45",
-      "school": "07:54",
-      "return": "08:02"
+      "station": "08:09",
+      "school": "08:18",
+      "return": "08:26"
     },
     {
       "name": "武居線 4便",
-      "service": "weekday",
-      "station": "08:05",
-      "school": "08:14",
-      "return": "08:22"
+      "service": "daily",
+      "station": "08:28",
+      "school": "08:37",
+      "return": "08:45"
     },
     {
       "name": "武居線 5便",
-      "service": "daily",
-      "station": "08:25",
-      "school": "08:34",
-      "return": "08:42"
+      "service": "holiday",
+      "station": "12:35",
+      "school": "12:42",
+      "return": "12:50"
     },
     {
       "name": "武居線 6便",
-      "service": "holiday",
-      "station": "12:41",
-      "school": "12:48",
-      "return": "12:56"
+      "service": "weekday",
+      "station": "16:00",
+      "school": "16:07",
+      "return": "16:15"
     },
     {
       "name": "武居線 7便",
       "service": "weekday",
-      "station": "15:51",
-      "school": "15:58",
-      "return": "16:06"
-    },
-    {
-      "name": "武居線 8便",
-      "service": "weekday",
-      "station": "18:27",
-      "school": "18:34",
-      "return": "18:42"
+      "station": "18:25",
+      "school": "18:32",
+      "return": "18:40"
     }
   ],
   "holidays": [
@@ -1203,6 +1196,7 @@
     2026,
     2027
   ],
-  "busSource": "https://www.town.shimosuwa.lg.jp/www/contents/1001000000461/simple/b.jpg",
-  "notes": "既存GTFS武居線の駅・高校時刻を公式画像と全8便照合。5便を毎日、6便を土日祝のみに修正。その他路線・GTFS座標は未使用。"
+  "busSource": "https://www.town.shimosuwa.lg.jp/www/contents/1001000000461/index.html",
+  "notes": "2026年10月20日改正。添付PDF6ページの武居線全7便を転記。高校の時刻はPDF記載の単一時刻を使用。",
+  "busValidFrom": "2026-10-20"
 }

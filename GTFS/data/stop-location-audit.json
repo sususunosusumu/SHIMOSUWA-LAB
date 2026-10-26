@@ -1,0 +1,1141 @@
+{
+  "gisPublished": "2024-09-05",
+  "gisUrl": "https://www2.wagmap.jp/shimosuwa/OpenDataDetail?lid=20&mids=20",
+  "note": "PDF路線図は模式図。全あざみ号の正確な乗降位置・移設有無は未検証。既存GIS点の平均化や測地系変換、新規座標の推定を行わない。",
+  "stops": [
+    {
+      "stop_id": "AZAMI_S0001",
+      "stop_name": "下諏訪駅",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "28-20",
+          "lat": 36.0690426296355,
+          "lon": 138.088300738923
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0002",
+      "stop_name": "大社通り",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "36-20",
+          "lat": 36.0714946697946,
+          "lon": 138.090188848732
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0003",
+      "stop_name": "諏訪大社秋宮前",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "57-20",
+          "lat": 36.0720331978929,
+          "lon": 138.092968564811
+        },
+        {
+          "uid": "105-20",
+          "lat": 36.0719912133464,
+          "lon": 138.093074554215
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0004",
+      "stop_name": "湯田坂上",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "59-20",
+          "lat": 36.0739458562493,
+          "lon": 138.092370793892
+        },
+        {
+          "uid": "113-20",
+          "lat": 36.0739357749814,
+          "lon": 138.092468616775
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0005",
+      "stop_name": "新町上",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "40-20",
+          "lat": 36.0765429602451,
+          "lon": 138.09053260638
+        },
+        {
+          "uid": "41-20",
+          "lat": 36.0765234613915,
+          "lon": 138.090434806218
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0006",
+      "stop_name": "宮の上",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "38-20",
+          "lat": 36.0781014036579,
+          "lon": 138.087424035722
+        },
+        {
+          "uid": "39-20",
+          "lat": 36.0781115970832,
+          "lon": 138.087242983215
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0007",
+      "stop_name": "山の神下",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "42-20",
+          "lat": 36.0813909317928,
+          "lon": 138.086609234453
+        },
+        {
+          "uid": "114-20",
+          "lat": 36.0813730115136,
+          "lon": 138.086680385296
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0008",
+      "stop_name": "山の神上",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "115-20",
+          "lat": 36.0845220994084,
+          "lon": 138.087262222369
+        },
+        {
+          "uid": "116-20",
+          "lat": 36.0845116409832,
+          "lon": 138.087341611556
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0009",
+      "stop_name": "注連掛南",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "45-20",
+          "lat": 36.0892265410781,
+          "lon": 138.088227714215
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0010",
+      "stop_name": "長坂団地前",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "48-20",
+          "lat": 36.0936291529419,
+          "lon": 138.089330940345
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0011",
+      "stop_name": "落合橋",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "49-20",
+          "lat": 36.0952600019823,
+          "lon": 138.0912405753
+        },
+        {
+          "uid": "64-20",
+          "lat": 36.0955364863947,
+          "lon": 138.091962189567
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0012",
+      "stop_name": "萩倉口下",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "67-20",
+          "lat": 36.0993194306187,
+          "lon": 138.096688751325
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0013",
+      "stop_name": "下屋敷",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "71-20",
+          "lat": 36.1029894330832,
+          "lon": 138.098822827108
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0014",
+      "stop_name": "町屋敷",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "69-20",
+          "lat": 36.1015546072758,
+          "lon": 138.098212390905
+        },
+        {
+          "uid": "70-20",
+          "lat": 36.101763369522,
+          "lon": 138.098642301978
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0015",
+      "stop_name": "鈴ヶ口",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "79-20",
+          "lat": 36.1053573422153,
+          "lon": 138.101779654359
+        },
+        {
+          "uid": "123-20",
+          "lat": 36.1054761531636,
+          "lon": 138.101653207258
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0016",
+      "stop_name": "樋橋",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "80-20",
+          "lat": 36.1182745237628,
+          "lon": 138.10578416984
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0017",
+      "stop_name": "町屋敷公園前",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "68-20",
+          "lat": 36.0994132954653,
+          "lon": 138.097486640431
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0018",
+      "stop_name": "木落し坂",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "65-20",
+          "lat": 36.0969575330531,
+          "lon": 138.097691556798
+        },
+        {
+          "uid": "124-20",
+          "lat": 36.0970154175483,
+          "lon": 138.097695987973
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0019",
+      "stop_name": "萩倉仲町",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "78-20",
+          "lat": 36.0971066647223,
+          "lon": 138.100235392671
+        },
+        {
+          "uid": "125-20",
+          "lat": 36.0970546716041,
+          "lon": 138.100222832612
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0020",
+      "stop_name": "萩倉",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "77-20",
+          "lat": 36.0970607351002,
+          "lon": 138.102143793674
+        },
+        {
+          "uid": "126-20",
+          "lat": 36.0971153243039,
+          "lon": 138.102162929674
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0021",
+      "stop_name": "萩倉上",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "84-20",
+          "lat": 36.0968932194061,
+          "lon": 138.107420083336
+        },
+        {
+          "uid": "127-20",
+          "lat": 36.0969360150413,
+          "lon": 138.107416195861
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0022",
+      "stop_name": "所沢",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "128-20",
+          "lat": 36.0974943299608,
+          "lon": 138.110560880497
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0023",
+      "stop_name": "萩倉口上",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "66-20",
+          "lat": 36.0988711265764,
+          "lon": 138.096719644211
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0024",
+      "stop_name": "注連掛北",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "46-20",
+          "lat": 36.0898266611603,
+          "lon": 138.088691031577
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0025",
+      "stop_name": "星が丘上",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "44-20",
+          "lat": 36.0880124375141,
+          "lon": 138.085375455389
+        },
+        {
+          "uid": "117-20",
+          "lat": 36.0879754539371,
+          "lon": 138.085406178561
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0026",
+      "stop_name": "星が丘公会所前",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "43-20",
+          "lat": 36.0860831790631,
+          "lon": 138.084694543702
+        },
+        {
+          "uid": "118-20",
+          "lat": 36.08605370112,
+          "lon": 138.084747375932
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0027",
+      "stop_name": "社中学校入口",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "18-20",
+          "lat": 36.084480424237,
+          "lon": 138.083460598132
+        },
+        {
+          "uid": "119-20",
+          "lat": 36.0845189083216,
+          "lon": 138.083473920458
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0028",
+      "stop_name": "北小校庭入口",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "17-20",
+          "lat": 36.0814961962172,
+          "lon": 138.079932823696
+        },
+        {
+          "uid": "120-20",
+          "lat": 36.0814851077707,
+          "lon": 138.079981273736
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0029",
+      "stop_name": "万治の石仏",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "16-20",
+          "lat": 36.0790001967736,
+          "lon": 138.083531424658
+        },
+        {
+          "uid": "37-20",
+          "lat": 36.0789226953273,
+          "lon": 138.083807497313
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0030",
+      "stop_name": "老人福祉センター",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "14-20",
+          "lat": 36.0771548784935,
+          "lon": 138.082732450662
+        },
+        {
+          "uid": "15-20",
+          "lat": 36.077097675176,
+          "lon": 138.082602325677
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0031",
+      "stop_name": "諏訪マタニティー前",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "9-20",
+          "lat": 36.0743939007637,
+          "lon": 138.082180609558
+        },
+        {
+          "uid": "10-20",
+          "lat": 36.0744981600909,
+          "lon": 138.082120835846
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0032",
+      "stop_name": "西友西",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "89-20",
+          "lat": 36.0725955419811,
+          "lon": 138.082194551479
+        },
+        {
+          "uid": "90-20",
+          "lat": 36.0725964983376,
+          "lon": 138.082126974783
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0033",
+      "stop_name": "春宮大門",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "32-20",
+          "lat": 36.0717686376658,
+          "lon": 138.083911811371
+        },
+        {
+          "uid": "33-20",
+          "lat": 36.0716165338579,
+          "lon": 138.084975435414
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0034",
+      "stop_name": "大社通り四ツ角①",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "26-20",
+          "lat": 36.0713876186748,
+          "lon": 138.087809042051
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0035",
+      "stop_name": "イオンスタイル諏訪",
+      "status": "position_unverified",
+      "reference_points": []
+    },
+    {
+      "stop_id": "AZAMI_S0036",
+      "stop_name": "文化センター前",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "91-20",
+          "lat": 36.0667639570581,
+          "lon": 138.083375016183
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0037",
+      "stop_name": "大社通り四ツ角②",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "27-20",
+          "lat": 36.0712384027087,
+          "lon": 138.087337966184
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0038",
+      "stop_name": "西友前",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "87-20",
+          "lat": 36.0727277409344,
+          "lon": 138.083686655779
+        },
+        {
+          "uid": "88-20",
+          "lat": 36.0726854436644,
+          "lon": 138.083697160422
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0039",
+      "stop_name": "注連掛西",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "47-20",
+          "lat": 36.0896511067766,
+          "lon": 138.088195967406
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0040",
+      "stop_name": "大社通り四ツ角③",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "29-20",
+          "lat": 36.0713075795725,
+          "lon": 138.088221205401
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0041",
+      "stop_name": "食祭館南",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "30-20",
+          "lat": 36.0708486713659,
+          "lon": 138.090170896504
+        },
+        {
+          "uid": "31-20",
+          "lat": 36.0707884791294,
+          "lon": 138.090049280409
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0042",
+      "stop_name": "秋宮南",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "55-20",
+          "lat": 36.0712705331852,
+          "lon": 138.094328703009
+        },
+        {
+          "uid": "56-20",
+          "lat": 36.0712160451636,
+          "lon": 138.094348182192
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0043",
+      "stop_name": "武居",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "60-20",
+          "lat": 36.0721744032865,
+          "lon": 138.095922110655
+        },
+        {
+          "uid": "61-20",
+          "lat": 36.072185534726,
+          "lon": 138.096166258988
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0044",
+      "stop_name": "向陽台入口",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "62-20",
+          "lat": 36.0729206833961,
+          "lon": 138.098463565267
+        },
+        {
+          "uid": "63-20",
+          "lat": 36.0729639797107,
+          "lon": 138.098472228007
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0045",
+      "stop_name": "武居北",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "85-20",
+          "lat": 36.074917833782,
+          "lon": 138.102704698537
+        },
+        {
+          "uid": "86-20",
+          "lat": 36.0749606853389,
+          "lon": 138.102680980526
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0046",
+      "stop_name": "下諏訪向陽高校",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "76-20",
+          "lat": 36.0746382011605,
+          "lon": 138.105901018487
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0047",
+      "stop_name": "今昔館前",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "58-20",
+          "lat": 36.0723268475197,
+          "lon": 138.092352245377
+        },
+        {
+          "uid": "106-20",
+          "lat": 36.0723655520677,
+          "lon": 138.092328533937
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0048",
+      "stop_name": "藤ノ木",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "75-20",
+          "lat": 36.0631638737507,
+          "lon": 138.107212054133
+        },
+        {
+          "uid": "102-20",
+          "lat": 36.0632283042708,
+          "lon": 138.107160846159
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0049",
+      "stop_name": "高木公民館前",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "82-20",
+          "lat": 36.0623597765558,
+          "lon": 138.109630374539
+        },
+        {
+          "uid": "104-20",
+          "lat": 36.0623883797563,
+          "lon": 138.10966033103
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0050",
+      "stop_name": "ユーペンハウス前",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "83-20",
+          "lat": 36.0604022043942,
+          "lon": 138.110824602679
+        },
+        {
+          "uid": "103-20",
+          "lat": 36.060381951518,
+          "lon": 138.110877762181
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0051",
+      "stop_name": "東高木",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "81-20",
+          "lat": 36.0596683936543,
+          "lon": 138.109694736279
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0052",
+      "stop_name": "高木下",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "72-20",
+          "lat": 36.0611376052964,
+          "lon": 138.107881507354
+        },
+        {
+          "uid": "73-20",
+          "lat": 36.0618616861004,
+          "lon": 138.10726478458
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0053",
+      "stop_name": "諏訪湖博物館・赤彦記念館",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "74-20",
+          "lat": 36.0637856393386,
+          "lon": 138.104904878478
+        },
+        {
+          "uid": "101-20",
+          "lat": 36.0637614750941,
+          "lon": 138.104970945391
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0054",
+      "stop_name": "ゆたん歩ﾟ",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "54-20",
+          "lat": 36.0650684492217,
+          "lon": 138.100096610666
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0055",
+      "stop_name": "高浜運動公園前",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "52-20",
+          "lat": 36.0644572327997,
+          "lon": 138.099217126188
+        },
+        {
+          "uid": "53-20",
+          "lat": 36.0646035613149,
+          "lon": 138.099104920101
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0056",
+      "stop_name": "信金湖浜東",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "50-20",
+          "lat": 36.0646045410534,
+          "lon": 138.096642853907
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0057",
+      "stop_name": "ポレスター前",
+      "status": "position_unverified",
+      "reference_points": []
+    },
+    {
+      "stop_id": "AZAMI_S0058",
+      "stop_name": "西大路南",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "1-20",
+          "lat": 36.064829568939,
+          "lon": 138.0785976703
+        },
+        {
+          "uid": "2-20",
+          "lat": 36.0649277009252,
+          "lon": 138.078694186359
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0059",
+      "stop_name": "下諏訪町役場",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "3-20",
+          "lat": 36.0661085471116,
+          "lon": 138.082561571714
+        },
+        {
+          "uid": "4-20",
+          "lat": 36.0661994130762,
+          "lon": 138.082511130105
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0060",
+      "stop_name": "下諏訪郵便局東",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "25-20",
+          "lat": 36.0689751023968,
+          "lon": 138.085734319548
+        },
+        {
+          "uid": "98-20",
+          "lat": 36.0690405559383,
+          "lon": 138.085723321218
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0061",
+      "stop_name": "信金湖浜前",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "51-20",
+          "lat": 36.0647281644889,
+          "lon": 138.096213161833
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0062",
+      "stop_name": "承知川",
+      "status": "position_unverified",
+      "reference_points": []
+    },
+    {
+      "stop_id": "AZAMI_S0063",
+      "stop_name": "富ヶ丘",
+      "status": "position_unverified",
+      "reference_points": []
+    },
+    {
+      "stop_id": "AZAMI_S0064",
+      "stop_name": "ハーモ美術館前",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "19-20",
+          "lat": 36.0618935000902,
+          "lon": 138.090968880909
+        },
+        {
+          "uid": "20-20",
+          "lat": 36.0617505340421,
+          "lon": 138.091007639597
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0065",
+      "stop_name": "AQUA未来",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "94-20",
+          "lat": 36.0600213897483,
+          "lon": 138.083503598938
+        },
+        {
+          "uid": "95-20",
+          "lat": 36.0601933324199,
+          "lon": 138.083567315861
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0066",
+      "stop_name": "赤砂崎公園ヘリポート前",
+      "status": "position_unverified",
+      "reference_points": []
+    },
+    {
+      "stop_id": "AZAMI_S0067",
+      "stop_name": "赤砂崎公園右岸広場",
+      "status": "position_unverified",
+      "reference_points": []
+    },
+    {
+      "stop_id": "AZAMI_S0068",
+      "stop_name": "東赤砂",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "92-20",
+          "lat": 36.0623510324891,
+          "lon": 138.083356189604
+        },
+        {
+          "uid": "93-20",
+          "lat": 36.0623529467213,
+          "lon": 138.083221053618
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0069",
+      "stop_name": "砥川西",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "107-20",
+          "lat": 36.0664168462359,
+          "lon": 138.078625531027
+        },
+        {
+          "uid": "108-20",
+          "lat": 36.0668897103202,
+          "lon": 138.078805150717
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0070",
+      "stop_name": "あざみクリニック前",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "5-20",
+          "lat": 36.0681800276928,
+          "lon": 138.078713483552
+        },
+        {
+          "uid": "6-20",
+          "lat": 36.0681598342385,
+          "lon": 138.078866810417
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0071",
+      "stop_name": "西大路北",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "7-20",
+          "lat": 36.070336206387,
+          "lon": 138.078977343798
+        },
+        {
+          "uid": "109-20",
+          "lat": 36.0703663130441,
+          "lon": 138.078862648357
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0072",
+      "stop_name": "社東町公民館",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "8-20",
+          "lat": 36.0738898732253,
+          "lon": 138.078655527869
+        },
+        {
+          "uid": "110-20",
+          "lat": 36.0739026749221,
+          "lon": 138.078609608303
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0073",
+      "stop_name": "信濃医療福祉センター",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "11-20",
+          "lat": 36.0770992793174,
+          "lon": 138.076379579501
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0074",
+      "stop_name": "社郵便局前",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "12-20",
+          "lat": 36.0788704987504,
+          "lon": 138.077202766757
+        },
+        {
+          "uid": "111-20",
+          "lat": 36.0788601200606,
+          "lon": 138.077236536165
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0075",
+      "stop_name": "山花前",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "13-20",
+          "lat": 36.0795192920623,
+          "lon": 138.077842379014
+        },
+        {
+          "uid": "112-20",
+          "lat": 36.0795529504059,
+          "lon": 138.077835689746
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0076",
+      "stop_name": "諏訪大社春宮前",
+      "status": "position_unverified",
+      "reference_points": []
+    },
+    {
+      "stop_id": "AZAMI_S0077",
+      "stop_name": "諏訪共立病院前",
+      "status": "existing_gis_position_unverified_202610",
+      "reference_points": [
+        {
+          "uid": "34-20",
+          "lat": 36.0739040046479,
+          "lon": 138.084587634566
+        },
+        {
+          "uid": "35-20",
+          "lat": 36.0741900424674,
+          "lon": 138.084500876918
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0078",
+      "stop_name": "中央通り",
+      "status": "position_unverified",
+      "reference_points": []
+    },
+    {
+      "stop_id": "AZAMI_S0079",
+      "stop_name": "新湯前",
+      "status": "position_unverified",
+      "reference_points": []
+    }
+  ]
+}
