@@ -45,13 +45,24 @@ print('PASS Swan-only archive byte-identical')
 
 # User-supplied coordinates must survive all exports exactly, without datum conversion or averaging.
 provided=json.loads((root/'data/stop-coordinates.json').read_text())['stops']
-assert len(provided)==9
+assert len(provided)==10
 for path in root.glob('*.zip'):
  if path.name=='ccby4_swan_only_gtfs.zip':continue
  with zipfile.ZipFile(path) as z:
   points={s['stop_name']:s for s in read(z,'stops.txt') if s['stop_id'].startswith('AZAMI_')}
-  assert sum(bool(s['stop_lat'] and s['stop_lon']) for s in points.values())==9
+  assert sum(bool(s['stop_lat'] and s['stop_lon']) for s in points.values())==79
   for name,point in provided.items():
    assert float(points[name]['stop_lat'])==point['lat'] and float(points[name]['stop_lon'])==point['lon']
    assert points[name]['location_source']=='user_google_maps_20261027'
-print('PASS all 9 user-supplied coordinates preserved exactly in all 3 archives')
+print('PASS all 10 user-supplied coordinates preserved exactly in all 3 archives')
+
+municipal=json.loads((root/'data/municipal-stop-coordinates.json').read_text())['stops']
+for path in root.glob('*.zip'):
+ if path.name=='ccby4_swan_only_gtfs.zip':continue
+ with zipfile.ZipFile(path) as z:
+  for stop in read(z,'stops.txt'):
+   if stop['location_source']=='official_kml_existing_representative':
+    assert json.loads(stop['location_points'])==municipal[stop['stop_name']]
+    assert float(stop['stop_lat'])==municipal[stop['stop_name']][0]['lat']
+    assert float(stop['stop_lon'])==municipal[stop['stop_name']][0]['lon']
+print('PASS official KML points preserved without conversion or averaging')
