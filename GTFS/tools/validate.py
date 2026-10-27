@@ -42,3 +42,16 @@ for path in root.glob('*.zip'):
 path=root/'ccby4_swan_only_gtfs.zip'
 assert path.read_bytes()==subprocess.check_output(['git','-C',str(root.parent),'show','HEAD:GTFS/'+path.name])
 print('PASS Swan-only archive byte-identical')
+
+# User-supplied coordinates must survive all exports exactly, without datum conversion or averaging.
+provided=json.loads((root/'data/stop-coordinates.json').read_text())['stops']
+assert len(provided)==9
+for path in root.glob('*.zip'):
+ if path.name=='ccby4_swan_only_gtfs.zip':continue
+ with zipfile.ZipFile(path) as z:
+  points={s['stop_name']:s for s in read(z,'stops.txt') if s['stop_id'].startswith('AZAMI_')}
+  assert sum(bool(s['stop_lat'] and s['stop_lon']) for s in points.values())==9
+  for name,point in provided.items():
+   assert float(points[name]['stop_lat'])==point['lat'] and float(points[name]['stop_lon'])==point['lon']
+   assert points[name]['location_source']=='user_google_maps_20261027'
+print('PASS all 9 user-supplied coordinates preserved exactly in all 3 archives')

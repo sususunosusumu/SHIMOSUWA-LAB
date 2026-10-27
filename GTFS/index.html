@@ -19,7 +19,7 @@
 <label>乗車日 <input type="date" id="travelDate" min="2026-10-20" max="2027-03-31"></label>
 <label style="display:block;margin-top:12px">路線 <select id="routeFilter"><option value="">すべての路線</option></select></label>
 <input id="search" class="search" aria-label="停留所名" placeholder="停留所名を検索 例：下諏訪駅" />
-<p class="warn">あざみ号の停留所位置は確認中です。一覧から時刻を検索できます。PDFの模式図から座標を推測せず、旧GIS位置も確定位置として表示していません。</p>
+<p class="warn">あざみ号の9停留所は、提供いただいたGoogle Mapsの座標で地図から選択できます。残る停留所は位置確認中のため一覧から検索してください。方向別の乗り場と道路経路は未確認です。</p>
 <details><summary>あざみ号の路線図・原本</summary><p><a href="data/azami-202610-source.pdf#page=4" target="_blank" rel="noopener">萩倉・星が丘線（4〜5ページ）</a></p><p><a href="data/azami-202610-source.pdf#page=6" target="_blank" rel="noopener">武居線（6ページ）</a></p><p><a href="data/azami-202610-source.pdf#page=7" target="_blank" rel="noopener">高木・高浜線（7ページ）</a></p><p><a href="data/azami-202610-source.pdf#page=8" target="_blank" rel="noopener">まちなか線（8〜9ページ）</a></p></details>
 <details open><summary>停留所一覧</summary><div id="stopList" style="max-height:240px;overflow:auto"></div></details></section>
 <section class="card"><h2 class="title" id="selectedTitle">停留所</h2><p class="small" id="summary" role="status">データ読込中です。</p><div id="departures" class="departures"></div></section>

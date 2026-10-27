@@ -1,7 +1,7 @@
 {
   "gisPublished": "2024-09-05",
   "gisUrl": "https://www2.wagmap.jp/shimosuwa/OpenDataDetail?lid=20&mids=20",
-  "note": "PDF路線図は模式図。全あざみ号の正確な乗降位置・移設有無は未検証。既存GIS点の平均化や測地系変換、新規座標の推定を行わない。",
+  "note": "PDF路線図は模式図。9停留所は利用者提供のGoogle Maps座標を採用。残る既存停留所の位置・移設有無は未検証。既存GIS点の平均化や測地系変換、新規座標の推定を行わない。",
   "stops": [
     {
       "stop_id": "AZAMI_S0001",
@@ -524,8 +524,14 @@
     {
       "stop_id": "AZAMI_S0035",
       "stop_name": "イオンスタイル諏訪",
-      "status": "position_unverified",
-      "reference_points": []
+      "status": "user_google_maps_20261027",
+      "reference_points": [],
+      "coordinates": {
+        "lat": 36.06697166006774,
+        "lon": 138.08792680463333
+      },
+      "coordinate_source": "利用者がGoogle Mapsで特定して提供",
+      "coordinate_date": "2026-10-27"
     },
     {
       "stop_id": "AZAMI_S0036",
@@ -847,8 +853,14 @@
     {
       "stop_id": "AZAMI_S0057",
       "stop_name": "ポレスター前",
-      "status": "position_unverified",
-      "reference_points": []
+      "status": "user_google_maps_20261027",
+      "reference_points": [],
+      "coordinates": {
+        "lat": 36.06636761029502,
+        "lon": 138.08134698637318
+      },
+      "coordinate_source": "利用者がGoogle Mapsで特定して提供",
+      "coordinate_date": "2026-10-27"
     },
     {
       "stop_id": "AZAMI_S0058",
@@ -916,14 +928,26 @@
     {
       "stop_id": "AZAMI_S0062",
       "stop_name": "承知川",
-      "status": "position_unverified",
-      "reference_points": []
+      "status": "user_google_maps_20261027",
+      "reference_points": [],
+      "coordinates": {
+        "lat": 36.071229007340385,
+        "lon": 138.0909217987009
+      },
+      "coordinate_source": "利用者がGoogle Mapsで特定して提供",
+      "coordinate_date": "2026-10-27"
     },
     {
       "stop_id": "AZAMI_S0063",
       "stop_name": "富ヶ丘",
-      "status": "position_unverified",
-      "reference_points": []
+      "status": "user_google_maps_20261027",
+      "reference_points": [],
+      "coordinates": {
+        "lat": 36.068863905843145,
+        "lon": 138.09691191049208
+      },
+      "coordinate_source": "利用者がGoogle Mapsで特定して提供",
+      "coordinate_date": "2026-10-27"
     },
     {
       "stop_id": "AZAMI_S0064",
@@ -962,14 +986,26 @@
     {
       "stop_id": "AZAMI_S0066",
       "stop_name": "赤砂崎公園ヘリポート前",
-      "status": "position_unverified",
-      "reference_points": []
+      "status": "user_google_maps_20261027",
+      "reference_points": [],
+      "coordinates": {
+        "lat": 36.06044129413114,
+        "lon": 138.0792031121575
+      },
+      "coordinate_source": "利用者がGoogle Mapsで特定して提供",
+      "coordinate_date": "2026-10-27"
     },
     {
       "stop_id": "AZAMI_S0067",
       "stop_name": "赤砂崎公園右岸広場",
-      "status": "position_unverified",
-      "reference_points": []
+      "status": "user_google_maps_20261027",
+      "reference_points": [],
+      "coordinates": {
+        "lat": 36.060194144164065,
+        "lon": 138.07642255378929
+      },
+      "coordinate_source": "利用者がGoogle Mapsで特定して提供",
+      "coordinate_date": "2026-10-27"
     },
     {
       "stop_id": "AZAMI_S0068",
@@ -1105,8 +1141,14 @@
     {
       "stop_id": "AZAMI_S0076",
       "stop_name": "諏訪大社春宮前",
-      "status": "position_unverified",
-      "reference_points": []
+      "status": "user_google_maps_20261027",
+      "reference_points": [],
+      "coordinates": {
+        "lat": 36.081054450610544,
+        "lon": 138.08200530973983
+      },
+      "coordinate_source": "利用者がGoogle Mapsで特定して提供",
+      "coordinate_date": "2026-10-27"
     },
     {
       "stop_id": "AZAMI_S0077",
@@ -1128,14 +1170,26 @@
     {
       "stop_id": "AZAMI_S0078",
       "stop_name": "中央通り",
-      "status": "position_unverified",
-      "reference_points": []
+      "status": "user_google_maps_20261027",
+      "reference_points": [],
+      "coordinates": {
+        "lat": 36.07607980869716,
+        "lon": 138.08288762644509
+      },
+      "coordinate_source": "利用者がGoogle Mapsで特定して提供",
+      "coordinate_date": "2026-10-27"
     },
     {
       "stop_id": "AZAMI_S0079",
       "stop_name": "新湯前",
-      "status": "position_unverified",
-      "reference_points": []
+      "status": "user_google_maps_20261027",
+      "reference_points": [],
+      "coordinates": {
+        "lat": 36.07631439579883,
+        "lon": 138.08604163628337
+      },
+      "coordinate_source": "利用者がGoogle Mapsで特定して提供",
+      "coordinate_date": "2026-10-27"
     }
   ]
 }

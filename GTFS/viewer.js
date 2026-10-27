@@ -5,7 +5,7 @@ const el=id=>document.getElementById(id);
 function csvParse(text){const rows=[];let row=[],cur='',q=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c==='"'){if(q&&n==='"'){cur+='"';i++;}else q=!q;}else if(c===','&&!q){row.push(cur);cur='';}else if((c==='\n'||c==='\r')&&!q){if(c==='\r'&&n==='\n')i++;row.push(cur);if(row.some(x=>x!==''))rows.push(row);row=[];cur='';}else cur+=c;}if(cur!==''||row.length){row.push(cur);rows.push(row);}const head=rows.shift().map(h=>h.replace(/^\uFEFF/,''));return rows.map(r=>Object.fromEntries(head.map((h,i)=>[h,r[i]??''])));}
 function timeKey(v){return v?v.split(':').reduce((n,x,i)=>n+Number(x)*[3600,60,1][i],0):999999;}
 function stopSystem(s){return s.stop_id.startsWith('AZAMI_')?'azami':'swan';}
-function validStop(s){return String(s.location_source||'').startsWith('real_json')&&s.stop_lat&&s.stop_lon&&Number.isFinite(+s.stop_lat)&&Number.isFinite(+s.stop_lon);}
+function validStop(s){return (String(s.location_source||'').startsWith('real_json')||s.location_source==='user_google_maps_20261027')&&s.stop_lat&&s.stop_lon&&Number.isFinite(+s.stop_lat)&&Number.isFinite(+s.stop_lon);}
 function clearTripLine(){if(tripLine){map.removeLayer(tripLine);tripLine=null;}}
 function running(trip){return BusCalendar.active(trip,el('travelDate').value,data.calendar,data.exceptions);}
 function routeMatches(trip){return !el('routeFilter').value||trip.route_id===el('routeFilter').value;}
@@ -29,10 +29,10 @@ function renderMarkers(){
  const shown=data.stops.filter(s=>currentFilter==='both'||stopSystem(s)===currentFilter).filter(s=>!q||s.stop_name.includes(q)).filter(s=>(data.timesByStop[s.stop_id]||[]).some(t=>routeMatches(data.tripById[t.trip_id])));
  const box=el('stopList');box.replaceChildren();
  for(const s of shown){
-  const button=document.createElement('button');button.className='stop-choice';button.textContent=s.stop_name+'（'+(stopSystem(s)==='azami'?'あざみ号・位置確認中':'スワンバス')+'）';button.onclick=()=>selectStop(s);box.append(button);
+  const button=document.createElement('button');button.className='stop-choice';button.textContent=s.stop_name+'（'+(stopSystem(s)==='azami'?(validStop(s)?'あざみ号・提供座標':'あざみ号・位置確認中'):'スワンバス')+'）';button.onclick=()=>selectStop(s);box.append(button);
   if(!validStop(s))continue;
   const icon=L.divIcon({className:'',html:`<div style="width:18px;height:18px;border-radius:50%;background:${stopSystem(s)==='azami'?'#2563eb':'#059669'};border:2px solid white"></div>`,iconSize:[18,18],iconAnchor:[9,9]});
-  const marker=L.marker([+s.stop_lat,+s.stop_lon],{icon}).addTo(map).bindTooltip(s.stop_name);marker.on('click',()=>selectStop(s));markers.push(marker);
+  const marker=L.marker([+s.stop_lat,+s.stop_lon],{icon,title:s.stop_name,alt:s.stop_name}).addTo(map).bindTooltip(s.stop_name+(stopSystem(s)==='azami'?'（利用者提供のGoogle Maps座標）':''));marker.on('click',()=>selectStop(s));markers.push(marker);
  }
  el('selectedTitle').textContent=`停留所：${shown.length}件（地図表示 ${markers.length}件）`;
  el('summary').textContent='一覧または地図から停留所を選択してください。';
@@ -54,7 +54,7 @@ function showTrip(id){
  for(const t of arr){const s=data.stopById[t.stop_id];const row=document.createElement('div');row.className='stopline';row.textContent=t.departure_time.slice(0,5)+'　'+s.stop_name+(t.pickup_type==='1'?'（到着・降車のみ）':'');box.append(row);if(validStop(s))points.push([+s.stop_lat,+s.stop_lon]);}
  clearTripLine();
  if(!trip.route_id.startsWith('AZAMI_')&&points.length>=2){tripLine=L.polyline(points,{color:'#111827',weight:4,opacity:.65}).addTo(map);map.fitBounds(tripLine.getBounds().pad(0.2));}
- if(trip.route_id.startsWith('AZAMI_')){const p=document.createElement('p');p.className='small';p.textContent='運行経路は下のPDF路線図でご確認ください。未確認の道路形状や停留所座標は地図に描いていません。';box.append(p);}
+ if(trip.route_id.startsWith('AZAMI_')){const p=document.createElement('p');p.className='small';p.textContent='運行経路はPDF路線図でご確認ください。提供座標の停留所は地図に表示しています。未確認の道路形状や停留所座標は描いていません。';box.append(p);}
 }
 el('travelDate').value=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo'}).format(new Date());
 el('travelDate').addEventListener('change',()=>selectedStop?selectStop(selectedStop):renderMarkers());
