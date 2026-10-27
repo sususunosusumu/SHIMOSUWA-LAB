@@ -24,7 +24,7 @@ async function load(){
 }
 function renderMarkers(){
  if(!data.stops)return;
- markers.forEach(m=>map.removeLayer(m));markers=[];clearTripLine();selectedStop=null;el('tripCard').hidden=true;el('departures').replaceChildren();
+ markers.forEach(m=>map.removeLayer(m));markers=[];clearTripLine();selectedStop=null;el('boardingNotice').hidden=true;el('tripCard').hidden=true;el('departures').replaceChildren();
  const q=el('search').value.trim();
  const shown=data.stops.filter(s=>currentFilter==='both'||stopSystem(s)===currentFilter).filter(s=>!q||s.stop_name.includes(q)).filter(s=>(data.timesByStop[s.stop_id]||[]).some(t=>routeMatches(data.tripById[t.trip_id])));
  const box=el('stopList');box.replaceChildren();
@@ -42,7 +42,7 @@ function renderMarkers(){
  if(q&&markers.length)map.fitBounds(L.featureGroup(markers).getBounds().pad(0.2));
 }
 function selectStop(s){
- selectedStop=s;clearTripLine();el('tripCard').hidden=true;
+ selectedStop=s;clearTripLine();el('tripCard').hidden=true;el('boardingNotice').hidden=stopSystem(s)!=='azami';
  el('selectedTitle').textContent=s.stop_name+'（'+(stopSystem(s)==='azami'?'あざみ号':'スワンバス')+'）';
  const list=(data.timesByStop[s.stop_id]||[]).filter(t=>t.pickup_type!=='1'&&running(data.tripById[t.trip_id])&&routeMatches(data.tripById[t.trip_id])).sort((a,b)=>timeKey(a.departure_time)-timeKey(b.departure_time));
  el('summary').textContent=el('travelDate').value+` の発車 ${list.length}件。時刻を選ぶと全行程を表示します。`;
@@ -57,7 +57,7 @@ function showTrip(id){
  for(const t of arr){const s=data.stopById[t.stop_id];const row=document.createElement('div');row.className='stopline';row.textContent=t.departure_time.slice(0,5)+'　'+s.stop_name+(t.pickup_type==='1'?'（到着・降車のみ）':'');box.append(row);if(validStop(s))points.push([+s.stop_lat,+s.stop_lon]);}
  clearTripLine();
  if(!trip.route_id.startsWith('AZAMI_')&&points.length>=2){tripLine=L.polyline(points,{color:'#111827',weight:4,opacity:.65}).addTo(map);map.fitBounds(tripLine.getBounds().pad(0.2));}
- if(trip.route_id.startsWith('AZAMI_')){const p=document.createElement('p');p.className='small';p.textContent='運行経路はPDF路線図でご確認ください。停留所の位置は地図に表示しています。町GISの既存点は方向別の乗り場や移設有無が未確認で、表示時刻は名称単位で共通です。道路に沿った経路は推測で描いていません。';box.append(p);}
+ if(trip.route_id.startsWith('AZAMI_')){const p=document.createElement('p');p.className='small';p.textContent='地図の点は停留所付近の目安です。右回り・左回りや行き先によって乗り場が異なる場合があります。この便の行き先・停留所の順序と、現地の標識・掲示時刻表を確認してご乗車ください。運行経路はPDF路線図でご確認ください。';box.append(p);}
 }
 el('travelDate').value=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo'}).format(new Date());
 el('travelDate').addEventListener('change',()=>selectedStop?selectStop(selectedStop):renderMarkers());

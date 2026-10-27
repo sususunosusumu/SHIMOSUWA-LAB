@@ -19,10 +19,10 @@
 <label>乗車日 <input type="date" id="travelDate" min="2026-10-20" max="2027-03-31"></label>
 <label style="display:block;margin-top:12px">路線 <select id="routeFilter"><option value="">すべての路線</option></select></label>
 <input id="search" class="search" aria-label="停留所名" placeholder="停留所名を検索 例：下諏訪駅" />
-<p class="warn">あざみ号は全79停留所を地図から選択できます。新規9停留所と下諏訪駅は提供座標、それ以外は町GISの既存点です。複数点は両方を表示し、時刻表は停留所名ごとに共通です。方向別の乗り場・移設有無と道路経路は未確認です。</p>
+<p class="warn"><strong>あざみ号の乗り場について</strong><br>地図の点は、停留所がある付近を示しています。右回り・左回りや行き先によって、実際の乗り場が異なる場合があります。利用する便の時刻表と行き先を確認し、現地の停留所標識・掲示時刻表で実際の乗り場をご確認ください。<br>同じ名前の停留所では、両方向の便をまとめて表示しています。</p>
 <details><summary>あざみ号の路線図・原本</summary><p><a href="data/azami-202610-source.pdf#page=4" target="_blank" rel="noopener">萩倉・星が丘線（4〜5ページ）</a></p><p><a href="data/azami-202610-source.pdf#page=6" target="_blank" rel="noopener">武居線（6ページ）</a></p><p><a href="data/azami-202610-source.pdf#page=7" target="_blank" rel="noopener">高木・高浜線（7ページ）</a></p><p><a href="data/azami-202610-source.pdf#page=8" target="_blank" rel="noopener">まちなか線（8〜9ページ）</a></p></details>
 <details open><summary>停留所一覧</summary><div id="stopList" style="max-height:240px;overflow:auto"></div></details></section>
-<section class="card"><h2 class="title" id="selectedTitle">停留所</h2><p class="small" id="summary" role="status">データ読込中です。</p><div id="departures" class="departures"></div></section>
+<section class="card"><h2 class="title" id="selectedTitle">停留所</h2><p class="small" id="summary" role="status">データ読込中です。</p><p id="boardingNotice" class="warn" hidden>地図の点は、停留所がある付近を示しています。右回り・左回りや行き先によって、実際の乗り場が異なる場合があります。利用する便の時刻表と行き先を確認し、現地の停留所標識・掲示時刻表で実際の乗り場をご確認ください。</p><div id="departures" class="departures"></div></section>
 <section class="card" id="tripCard" hidden><h2 class="title">便の全行程</h2><p class="small" id="tripTitle"></p><div id="tripStops" class="trip"></div></section>
 </aside></main>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
