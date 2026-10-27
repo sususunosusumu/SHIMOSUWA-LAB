@@ -1,0 +1,2350 @@
+{
+  "gisPublished": "2024-09-05",
+  "gisUrl": "https://www2.wagmap.jp/shimosuwa/OpenDataDetail?lid=20&mids=20",
+  "note": "PDF路線図は模式図。10停留所は利用者提供座標。残る69停留所は町公式KMLの既存点を採用。方向別乗り場・改正後の移設有無は未検証。既存GIS点の平均化や測地系変換、新規座標の推定を行わない。",
+  "stops": [
+    {
+      "stop_id": "AZAMI_S0001",
+      "stop_name": "下諏訪駅",
+      "status": "user_google_maps_20261027",
+      "reference_points": [
+        {
+          "uid": "28-20",
+          "lat": 36.0690426296355,
+          "lon": 138.088300738923
+        }
+      ],
+      "coordinates": {
+        "lat": 36.07219329872787,
+        "lon": 138.08514268031317
+      },
+      "coordinate_source": "利用者がGoogle Mapsで特定して提供",
+      "coordinate_date": "2026-10-27",
+      "map_points": [
+        {
+          "lat": 36.07219329872787,
+          "lon": 138.08514268031317
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0002",
+      "stop_name": "大社通り",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "36-20",
+          "lat": 36.0714946697946,
+          "lon": 138.090188848732
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0746451174081,
+        "lon": 138.087083139616
+      },
+      "map_points": [
+        {
+          "lat": 36.0746451174081,
+          "lon": 138.087083139616
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0003",
+      "stop_name": "諏訪大社秋宮前",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "57-20",
+          "lat": 36.0720331978929,
+          "lon": 138.092968564811
+        },
+        {
+          "uid": "105-20",
+          "lat": 36.0719912133464,
+          "lon": 138.093074554215
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0751836561257,
+        "lon": 138.089862593319
+      },
+      "map_points": [
+        {
+          "lat": 36.0751836561257,
+          "lon": 138.089862593319
+        },
+        {
+          "lat": 36.0751416791127,
+          "lon": 138.089968575177
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0004",
+      "stop_name": "湯田坂上",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "59-20",
+          "lat": 36.0739458562493,
+          "lon": 138.092370793892
+        },
+        {
+          "uid": "113-20",
+          "lat": 36.0739357749814,
+          "lon": 138.092468616775
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0770960809071,
+        "lon": 138.089264799075
+      },
+      "map_points": [
+        {
+          "lat": 36.0770960809071,
+          "lon": 138.089264799075
+        },
+        {
+          "lat": 36.0770860033236,
+          "lon": 138.089362613865
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0005",
+      "stop_name": "新町上",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "40-20",
+          "lat": 36.0765429602451,
+          "lon": 138.09053260638
+        },
+        {
+          "uid": "41-20",
+          "lat": 36.0765234613915,
+          "lon": 138.090434806218
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0796928411334,
+        "lon": 138.087426668962
+      },
+      "map_points": [
+        {
+          "lat": 36.0796928411334,
+          "lon": 138.087426668962
+        },
+        {
+          "lat": 36.079673341969,
+          "lon": 138.087328878054
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0006",
+      "stop_name": "宮の上",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "38-20",
+          "lat": 36.0781014036579,
+          "lon": 138.087424035722
+        },
+        {
+          "uid": "39-20",
+          "lat": 36.0781115970832,
+          "lon": 138.087242983215
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0812510262871,
+        "lon": 138.084318306795
+      },
+      "map_points": [
+        {
+          "lat": 36.0812510262871,
+          "lon": 138.084318306795
+        },
+        {
+          "lat": 36.0812612138588,
+          "lon": 138.084137269599
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0007",
+      "stop_name": "山の神下",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "42-20",
+          "lat": 36.0813909317928,
+          "lon": 138.086609234453
+        },
+        {
+          "uid": "114-20",
+          "lat": 36.0813730115136,
+          "lon": 138.086680385296
+        }
+      ],
+      "coordinates": {
+        "lat": 36.084540158186,
+        "lon": 138.083503446889
+      },
+      "map_points": [
+        {
+          "lat": 36.084540158186,
+          "lon": 138.083503446889
+        },
+        {
+          "lat": 36.0845222417941,
+          "lon": 138.08357459226
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0008",
+      "stop_name": "山の神上",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "115-20",
+          "lat": 36.0845220994084,
+          "lon": 138.087262222369
+        },
+        {
+          "uid": "116-20",
+          "lat": 36.0845116409832,
+          "lon": 138.087341611556
+        }
+      ],
+      "coordinates": {
+        "lat": 36.087670985644,
+        "lon": 138.084156254988
+      },
+      "map_points": [
+        {
+          "lat": 36.087670985644,
+          "lon": 138.084156254988
+        },
+        {
+          "lat": 36.0876605304689,
+          "lon": 138.084235637696
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0009",
+      "stop_name": "注連掛南",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "45-20",
+          "lat": 36.0892265410781,
+          "lon": 138.088227714215
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0923749158162,
+        "lon": 138.085121477978
+      },
+      "map_points": [
+        {
+          "lat": 36.0923749158162,
+          "lon": 138.085121477978
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0010",
+      "stop_name": "長坂団地前",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "48-20",
+          "lat": 36.0936291529419,
+          "lon": 138.089330940345
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0967770541522,
+        "lon": 138.086224435122
+      },
+      "map_points": [
+        {
+          "lat": 36.0967770541522,
+          "lon": 138.086224435122
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0011",
+      "stop_name": "落合橋",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "49-20",
+          "lat": 36.0952600019823,
+          "lon": 138.0912405753
+        },
+        {
+          "uid": "64-20",
+          "lat": 36.0955364863947,
+          "lon": 138.091962189567
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0984077666904,
+        "lon": 138.08813384014
+      },
+      "map_points": [
+        {
+          "lat": 36.0984077666904,
+          "lon": 138.08813384014
+        },
+        {
+          "lat": 36.0986842382759,
+          "lon": 138.08885538089
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0012",
+      "stop_name": "萩倉口下",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "67-20",
+          "lat": 36.0993194306187,
+          "lon": 138.096688751325
+        }
+      ],
+      "coordinates": {
+        "lat": 36.1024668735804,
+        "lon": 138.093581383473
+      },
+      "map_points": [
+        {
+          "lat": 36.1024668735804,
+          "lon": 138.093581383473
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0013",
+      "stop_name": "下屋敷",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "71-20",
+          "lat": 36.1029894330832,
+          "lon": 138.098822827108
+        }
+      ],
+      "coordinates": {
+        "lat": 36.1061365127875,
+        "lon": 138.09571512951
+      },
+      "map_points": [
+        {
+          "lat": 36.1061365127875,
+          "lon": 138.09571512951
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0014",
+      "stop_name": "町屋敷",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "69-20",
+          "lat": 36.1015546072758,
+          "lon": 138.098212390905
+        },
+        {
+          "uid": "70-20",
+          "lat": 36.101763369522,
+          "lon": 138.098642301978
+        }
+      ],
+      "coordinates": {
+        "lat": 36.1049105843906,
+        "lon": 138.095534668331
+      },
+      "map_points": [
+        {
+          "lat": 36.1049105843906,
+          "lon": 138.095534668331
+        },
+        {
+          "lat": 36.1047018348067,
+          "lon": 138.095104802794
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0015",
+      "stop_name": "鈴ヶ口",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "79-20",
+          "lat": 36.1053573422153,
+          "lon": 138.101779654359
+        },
+        {
+          "uid": "123-20",
+          "lat": 36.1054761531636,
+          "lon": 138.101653207258
+        }
+      ],
+      "coordinates": {
+        "lat": 36.1086230226357,
+        "lon": 138.098545166043
+      },
+      "map_points": [
+        {
+          "lat": 36.1086230226357,
+          "lon": 138.098545166043
+        },
+        {
+          "lat": 36.1085042285193,
+          "lon": 138.098671606848
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0016",
+      "stop_name": "樋橋",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "80-20",
+          "lat": 36.1182745237628,
+          "lon": 138.10578416984
+        }
+      ],
+      "coordinates": {
+        "lat": 36.1214200404758,
+        "lon": 138.102675265738
+      },
+      "map_points": [
+        {
+          "lat": 36.1214200404758,
+          "lon": 138.102675265738
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0017",
+      "stop_name": "町屋敷公園前",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "68-20",
+          "lat": 36.0994132954653,
+          "lon": 138.097486640431
+        }
+      ],
+      "coordinates": {
+        "lat": 36.1025607484112,
+        "lon": 138.094379199628
+      },
+      "map_points": [
+        {
+          "lat": 36.1025607484112,
+          "lon": 138.094379199628
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0018",
+      "stop_name": "木落し坂",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "65-20",
+          "lat": 36.0969575330531,
+          "lon": 138.097691556798
+        },
+        {
+          "uid": "124-20",
+          "lat": 36.0970154175483,
+          "lon": 138.097695987973
+        }
+      ],
+      "coordinates": {
+        "lat": 36.1001631494144,
+        "lon": 138.094588623403
+      },
+      "map_points": [
+        {
+          "lat": 36.1001631494144,
+          "lon": 138.094588623403
+        },
+        {
+          "lat": 36.1001052714063,
+          "lon": 138.094584194891
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0019",
+      "stop_name": "萩倉仲町",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "78-20",
+          "lat": 36.0971066647223,
+          "lon": 138.100235392671
+        },
+        {
+          "uid": "125-20",
+          "lat": 36.0970546716041,
+          "lon": 138.100222832612
+        }
+      ],
+      "coordinates": {
+        "lat": 36.100202464517,
+        "lon": 138.097115247182
+      },
+      "map_points": [
+        {
+          "lat": 36.100202464517,
+          "lon": 138.097115247182
+        },
+        {
+          "lat": 36.100254452031,
+          "lon": 138.097127804103
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0020",
+      "stop_name": "萩倉",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "77-20",
+          "lat": 36.0970607351002,
+          "lon": 138.102143793674
+        },
+        {
+          "uid": "126-20",
+          "lat": 36.0971153243039,
+          "lon": 138.102162929674
+        }
+      ],
+      "coordinates": {
+        "lat": 36.1002085771374,
+        "lon": 138.09903604128
+      },
+      "map_points": [
+        {
+          "lat": 36.1002085771374,
+          "lon": 138.09903604128
+        },
+        {
+          "lat": 36.1002631606113,
+          "lon": 138.09905517347
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0021",
+      "stop_name": "萩倉上",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "84-20",
+          "lat": 36.0968932194061,
+          "lon": 138.107420083336
+        },
+        {
+          "uid": "127-20",
+          "lat": 36.0969360150413,
+          "lon": 138.107416195861
+        }
+      ],
+      "coordinates": {
+        "lat": 36.1000412173903,
+        "lon": 138.104311879617
+      },
+      "map_points": [
+        {
+          "lat": 36.1000412173903,
+          "lon": 138.104311879617
+        },
+        {
+          "lat": 36.1000840080439,
+          "lon": 138.104307990793
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0022",
+      "stop_name": "所沢",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "128-20",
+          "lat": 36.0974943299608,
+          "lon": 138.110560880497
+        }
+      ],
+      "coordinates": {
+        "lat": 36.1006423408575,
+        "lon": 138.107452380532
+      },
+      "map_points": [
+        {
+          "lat": 36.1006423408575,
+          "lon": 138.107452380532
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0023",
+      "stop_name": "萩倉口上",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "66-20",
+          "lat": 36.0988711265764,
+          "lon": 138.096719644211
+        }
+      ],
+      "coordinates": {
+        "lat": 36.1020186214717,
+        "lon": 138.093612291327
+      },
+      "map_points": [
+        {
+          "lat": 36.1020186214717,
+          "lon": 138.093612291327
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0024",
+      "stop_name": "注連掛北",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "46-20",
+          "lat": 36.0898266611603,
+          "lon": 138.088691031577
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0929749794641,
+        "lon": 138.085584731515
+      },
+      "map_points": [
+        {
+          "lat": 36.0929749794641,
+          "lon": 138.085584731515
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0025",
+      "stop_name": "星が丘上",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "44-20",
+          "lat": 36.0880124375141,
+          "lon": 138.085375455389
+        },
+        {
+          "uid": "117-20",
+          "lat": 36.0879754539371,
+          "lon": 138.085406178561
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0911608767966,
+        "lon": 138.08226951448
+      },
+      "map_points": [
+        {
+          "lat": 36.0911608767966,
+          "lon": 138.08226951448
+        },
+        {
+          "lat": 36.0911238982337,
+          "lon": 138.08230023644
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0026",
+      "stop_name": "星が丘公会所前",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "43-20",
+          "lat": 36.0860831790631,
+          "lon": 138.084694543702
+        },
+        {
+          "uid": "118-20",
+          "lat": 36.08605370112,
+          "lon": 138.084747375932
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0892318207266,
+        "lon": 138.081588737779
+      },
+      "map_points": [
+        {
+          "lat": 36.0892318207266,
+          "lon": 138.081588737779
+        },
+        {
+          "lat": 36.0892023475145,
+          "lon": 138.081641566583
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0027",
+      "stop_name": "社中学校入口",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "18-20",
+          "lat": 36.084480424237,
+          "lon": 138.083460598132
+        },
+        {
+          "uid": "119-20",
+          "lat": 36.0845189083216,
+          "lon": 138.083473920458
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0876676967528,
+        "lon": 138.080368282001
+      },
+      "map_points": [
+        {
+          "lat": 36.0876676967528,
+          "lon": 138.080368282001
+        },
+        {
+          "lat": 36.0876292167118,
+          "lon": 138.080354962345
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0028",
+      "stop_name": "北小校庭入口",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "17-20",
+          "lat": 36.0814961962172,
+          "lon": 138.079932823696
+        },
+        {
+          "uid": "120-20",
+          "lat": 36.0814851077707,
+          "lon": 138.079981273736
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0846341516927,
+        "lon": 138.076876057721
+      },
+      "map_points": [
+        {
+          "lat": 36.0846341516927,
+          "lon": 138.076876057721
+        },
+        {
+          "lat": 36.0846452376194,
+          "lon": 138.076827611451
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0029",
+      "stop_name": "万治の石仏",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "16-20",
+          "lat": 36.0790001967736,
+          "lon": 138.083531424658
+        },
+        {
+          "uid": "37-20",
+          "lat": 36.0789226953273,
+          "lon": 138.083807497313
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0820721305964,
+        "lon": 138.080702049961
+      },
+      "map_points": [
+        {
+          "lat": 36.0820721305964,
+          "lon": 138.080702049961
+        },
+        {
+          "lat": 36.0821496160519,
+          "lon": 138.080425998219
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0030",
+      "stop_name": "老人福祉センター",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "14-20",
+          "lat": 36.0771548784935,
+          "lon": 138.082732450662
+        },
+        {
+          "uid": "15-20",
+          "lat": 36.077097675176,
+          "lon": 138.082602325677
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0803044875039,
+        "lon": 138.079627166112
+      },
+      "map_points": [
+        {
+          "lat": 36.0803044875039,
+          "lon": 138.079627166112
+        },
+        {
+          "lat": 36.0802472873383,
+          "lon": 138.079497054669
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0031",
+      "stop_name": "諏訪マタニティー前",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "9-20",
+          "lat": 36.0743939007637,
+          "lon": 138.082180609558
+        },
+        {
+          "uid": "10-20",
+          "lat": 36.0744981600909,
+          "lon": 138.082120835846
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0775438103194,
+        "lon": 138.079075481433
+      },
+      "map_points": [
+        {
+          "lat": 36.0775438103194,
+          "lon": 138.079075481433
+        },
+        {
+          "lat": 36.0776480562094,
+          "lon": 138.07901570881
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0032",
+      "stop_name": "西友西",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "89-20",
+          "lat": 36.0725955419811,
+          "lon": 138.082194551479
+        },
+        {
+          "uid": "90-20",
+          "lat": 36.0725964983376,
+          "lon": 138.082126974783
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0757456569639,
+        "lon": 138.079089492827
+      },
+      "map_points": [
+        {
+          "lat": 36.0757456569639,
+          "lon": 138.079089492827
+        },
+        {
+          "lat": 36.0757466114609,
+          "lon": 138.079021921958
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0033",
+      "stop_name": "春宮大門",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "32-20",
+          "lat": 36.0717686376658,
+          "lon": 138.083911811371
+        },
+        {
+          "uid": "33-20",
+          "lat": 36.0716165338579,
+          "lon": 138.084975435414
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0749188914224,
+        "lon": 138.080806636193
+      },
+      "map_points": [
+        {
+          "lat": 36.0749188914224,
+          "lon": 138.080806636193
+        },
+        {
+          "lat": 36.0747668325113,
+          "lon": 138.081870173913
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0034",
+      "stop_name": "大社通り四ツ角①",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "26-20",
+          "lat": 36.0713876186748,
+          "lon": 138.087809042051
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0745380168382,
+        "lon": 138.084703543652
+      },
+      "map_points": [
+        {
+          "lat": 36.0745380168382,
+          "lon": 138.084703543652
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0035",
+      "stop_name": "イオンスタイル諏訪",
+      "status": "user_google_maps_20261027",
+      "reference_points": [],
+      "coordinates": {
+        "lat": 36.06697166006774,
+        "lon": 138.08792680463333
+      },
+      "coordinate_source": "利用者がGoogle Mapsで特定して提供",
+      "coordinate_date": "2026-10-27",
+      "map_points": [
+        {
+          "lat": 36.06697166006774,
+          "lon": 138.08792680463333
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0036",
+      "stop_name": "文化センター前",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "91-20",
+          "lat": 36.0667639570581,
+          "lon": 138.083375016183
+        }
+      ],
+      "coordinates": {
+        "lat": 36.069914767556,
+        "lon": 138.080270084261
+      },
+      "map_points": [
+        {
+          "lat": 36.069914767556,
+          "lon": 138.080270084261
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0037",
+      "stop_name": "大社通り四ツ角②",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "27-20",
+          "lat": 36.0712384027087,
+          "lon": 138.087337966184
+        }
+      ],
+      "coordinates": {
+        "lat": 36.074388805682,
+        "lon": 138.084232514529
+      },
+      "map_points": [
+        {
+          "lat": 36.074388805682,
+          "lon": 138.084232514529
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0038",
+      "stop_name": "西友前",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "87-20",
+          "lat": 36.0727277409344,
+          "lon": 138.083686655779
+        },
+        {
+          "uid": "88-20",
+          "lat": 36.0726854436644,
+          "lon": 138.083697160422
+        }
+      ],
+      "coordinates": {
+        "lat": 36.075877879495,
+        "lon": 138.080581462444
+      },
+      "map_points": [
+        {
+          "lat": 36.075877879495,
+          "lon": 138.080581462444
+        },
+        {
+          "lat": 36.0758355873202,
+          "lon": 138.080591967837
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0039",
+      "stop_name": "注連掛西",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "47-20",
+          "lat": 36.0896511067766,
+          "lon": 138.088195967406
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0927994322707,
+        "lon": 138.085089717221
+      },
+      "map_points": [
+        {
+          "lat": 36.0927994322707,
+          "lon": 138.085089717221
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0040",
+      "stop_name": "大社通り四ツ角③",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "29-20",
+          "lat": 36.0713075795725,
+          "lon": 138.088221205401
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0744579975403,
+        "lon": 138.085115674382
+      },
+      "map_points": [
+        {
+          "lat": 36.0744579975403,
+          "lon": 138.085115674382
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0041",
+      "stop_name": "食祭館南",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "30-20",
+          "lat": 36.0708486713659,
+          "lon": 138.090170896504
+        },
+        {
+          "uid": "31-20",
+          "lat": 36.0707884791294,
+          "lon": 138.090049280409
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0739991921718,
+        "lon": 138.087065214339
+      },
+      "map_points": [
+        {
+          "lat": 36.0739991921718,
+          "lon": 138.087065214339
+        },
+        {
+          "lat": 36.0739390036476,
+          "lon": 138.086943611164
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0042",
+      "stop_name": "秋宮南",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "55-20",
+          "lat": 36.0712705331852,
+          "lon": 138.094328703009
+        },
+        {
+          "uid": "56-20",
+          "lat": 36.0712160451636,
+          "lon": 138.094348182192
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0744211136202,
+        "lon": 138.09122264348
+      },
+      "map_points": [
+        {
+          "lat": 36.0744211136202,
+          "lon": 138.09122264348
+        },
+        {
+          "lat": 36.074366632316,
+          "lon": 138.091242123115
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0043",
+      "stop_name": "武居",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "60-20",
+          "lat": 36.0721744032865,
+          "lon": 138.095922110655
+        },
+        {
+          "uid": "61-20",
+          "lat": 36.072185534726,
+          "lon": 138.096166258988
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0753249219527,
+        "lon": 138.09281587733
+      },
+      "map_points": [
+        {
+          "lat": 36.0753249219527,
+          "lon": 138.09281587733
+        },
+        {
+          "lat": 36.0753360584498,
+          "lon": 138.09306000404
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0044",
+      "stop_name": "向陽台入口",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "62-20",
+          "lat": 36.0729206833961,
+          "lon": 138.098463565267
+        },
+        {
+          "uid": "63-20",
+          "lat": 36.0729639797107,
+          "lon": 138.098472228007
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0760711828335,
+        "lon": 138.095357082079
+      },
+      "map_points": [
+        {
+          "lat": 36.0760711828335,
+          "lon": 138.095357082079
+        },
+        {
+          "lat": 36.0761144744359,
+          "lon": 138.095365742365
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0045",
+      "stop_name": "武居北",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "85-20",
+          "lat": 36.074917833782,
+          "lon": 138.102704698537
+        },
+        {
+          "uid": "86-20",
+          "lat": 36.0749606853389,
+          "lon": 138.102680980526
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0781110614848,
+        "lon": 138.09957405118
+      },
+      "map_points": [
+        {
+          "lat": 36.0781110614848,
+          "lon": 138.09957405118
+        },
+        {
+          "lat": 36.0780682154286,
+          "lon": 138.099597768818
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0046",
+      "stop_name": "下諏訪向陽高校",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "76-20",
+          "lat": 36.0746382011605,
+          "lon": 138.105901018487
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0777886975427,
+        "lon": 138.10279382244
+      },
+      "map_points": [
+        {
+          "lat": 36.0777886975427,
+          "lon": 138.10279382244
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0047",
+      "stop_name": "今昔館前",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "58-20",
+          "lat": 36.0723268475197,
+          "lon": 138.092352245377
+        },
+        {
+          "uid": "106-20",
+          "lat": 36.0723655520677,
+          "lon": 138.092328533937
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0754772563007,
+        "lon": 138.08924631582
+      },
+      "map_points": [
+        {
+          "lat": 36.0754772563007,
+          "lon": 138.08924631582
+        },
+        {
+          "lat": 36.0755159558211,
+          "lon": 138.089222604917
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0048",
+      "stop_name": "藤ノ木",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "75-20",
+          "lat": 36.0631638737507,
+          "lon": 138.107212054133
+        },
+        {
+          "uid": "102-20",
+          "lat": 36.0632283042708,
+          "lon": 138.107160846159
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0663157122768,
+        "lon": 138.104105195544
+      },
+      "map_points": [
+        {
+          "lat": 36.0663157122768,
+          "lon": 138.104105195544
+        },
+        {
+          "lat": 36.0663801341248,
+          "lon": 138.104053989479
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0049",
+      "stop_name": "高木公民館前",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "82-20",
+          "lat": 36.0623597765558,
+          "lon": 138.109630374539
+        },
+        {
+          "uid": "104-20",
+          "lat": 36.0623883797563,
+          "lon": 138.10966033103
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0655403701385,
+        "lon": 138.106553290546
+      },
+      "map_points": [
+        {
+          "lat": 36.0655403701385,
+          "lon": 138.106553290546
+        },
+        {
+          "lat": 36.0655117694224,
+          "lon": 138.106523337778
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0050",
+      "stop_name": "ユーペンハウス前",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "83-20",
+          "lat": 36.0604022043942,
+          "lon": 138.110824602679
+        },
+        {
+          "uid": "103-20",
+          "lat": 36.060381951518,
+          "lon": 138.110877762181
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0635342021748,
+        "lon": 138.107770694969
+      },
+      "map_points": [
+        {
+          "lat": 36.0635342021748,
+          "lon": 138.107770694969
+        },
+        {
+          "lat": 36.0635544513646,
+          "lon": 138.107717539281
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0051",
+      "stop_name": "東高木",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "81-20",
+          "lat": 36.0596683936543,
+          "lon": 138.109694736279
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0628206949917,
+        "lon": 138.106587799735
+      },
+      "map_points": [
+        {
+          "lat": 36.0628206949917,
+          "lon": 138.106587799735
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0052",
+      "stop_name": "高木下",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "72-20",
+          "lat": 36.0611376052964,
+          "lon": 138.107881507354
+        },
+        {
+          "uid": "73-20",
+          "lat": 36.0618616861004,
+          "lon": 138.10726478458
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0642896921613,
+        "lon": 138.104774670345
+      },
+      "map_points": [
+        {
+          "lat": 36.0642896921613,
+          "lon": 138.104774670345
+        },
+        {
+          "lat": 36.06501367444,
+          "lon": 138.104157972607
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0053",
+      "stop_name": "諏訪湖博物館・赤彦記念館",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "74-20",
+          "lat": 36.0637856393386,
+          "lon": 138.104904878478
+        },
+        {
+          "uid": "101-20",
+          "lat": 36.0637614750941,
+          "lon": 138.104970945391
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0669373471915,
+        "lon": 138.101798195595
+      },
+      "map_points": [
+        {
+          "lat": 36.0669373471915,
+          "lon": 138.101798195595
+        },
+        {
+          "lat": 36.0669131874139,
+          "lon": 138.101864257727
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0054",
+      "stop_name": "ゆたん歩ﾟ",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "54-20",
+          "lat": 36.0650684492217,
+          "lon": 138.100096610666
+        }
+      ],
+      "coordinates": {
+        "lat": 36.06821988623,
+        "lon": 138.096990294498
+      },
+      "map_points": [
+        {
+          "lat": 36.06821988623,
+          "lon": 138.096990294498
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0055",
+      "stop_name": "高浜運動公園前",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "52-20",
+          "lat": 36.0644572327997,
+          "lon": 138.099217126188
+        },
+        {
+          "uid": "53-20",
+          "lat": 36.0646035613149,
+          "lon": 138.099104920101
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0676087167015,
+        "lon": 138.096110910348
+      },
+      "map_points": [
+        {
+          "lat": 36.0676087167015,
+          "lon": 138.096110910348
+        },
+        {
+          "lat": 36.067755025627,
+          "lon": 138.095998708244
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0056",
+      "stop_name": "信金湖浜東",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "50-20",
+          "lat": 36.0646045410534,
+          "lon": 138.096642853907
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0677559414608,
+        "lon": 138.093536855619
+      },
+      "map_points": [
+        {
+          "lat": 36.0677559414608,
+          "lon": 138.093536855619
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0057",
+      "stop_name": "ポレスター前",
+      "status": "user_google_maps_20261027",
+      "reference_points": [],
+      "coordinates": {
+        "lat": 36.06636761029502,
+        "lon": 138.08134698637318
+      },
+      "coordinate_source": "利用者がGoogle Mapsで特定して提供",
+      "coordinate_date": "2026-10-27",
+      "map_points": [
+        {
+          "lat": 36.06636761029502,
+          "lon": 138.08134698637318
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0058",
+      "stop_name": "西大路南",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "1-20",
+          "lat": 36.064829568939,
+          "lon": 138.0785976703
+        },
+        {
+          "uid": "2-20",
+          "lat": 36.0649277009252,
+          "lon": 138.078694186359
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0679804762664,
+        "lon": 138.07549322894
+      },
+      "map_points": [
+        {
+          "lat": 36.0679804762664,
+          "lon": 138.07549322894
+        },
+        {
+          "lat": 36.0680785995632,
+          "lon": 138.075589732769
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0059",
+      "stop_name": "下諏訪町役場",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "3-20",
+          "lat": 36.0661085471116,
+          "lon": 138.082561571714
+        },
+        {
+          "uid": "4-20",
+          "lat": 36.0661994130762,
+          "lon": 138.082511130105
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0692594112699,
+        "lon": 138.079456736131
+      },
+      "map_points": [
+        {
+          "lat": 36.0692594112699,
+          "lon": 138.079456736131
+        },
+        {
+          "lat": 36.0693502655676,
+          "lon": 138.079406295329
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0060",
+      "stop_name": "下諏訪郵便局東",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "25-20",
+          "lat": 36.0689751023968,
+          "lon": 138.085734319548
+        },
+        {
+          "uid": "98-20",
+          "lat": 36.0690405559383,
+          "lon": 138.085723321218
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0721257218925,
+        "lon": 138.082629096005
+      },
+      "map_points": [
+        {
+          "lat": 36.0721257218925,
+          "lon": 138.082629096005
+        },
+        {
+          "lat": 36.0721911676862,
+          "lon": 138.082618096057
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0061",
+      "stop_name": "信金湖浜前",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "51-20",
+          "lat": 36.0647281644889,
+          "lon": 138.096213161833
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0678795396692,
+        "lon": 138.093107195967
+      },
+      "map_points": [
+        {
+          "lat": 36.0678795396692,
+          "lon": 138.093107195967
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0062",
+      "stop_name": "承知川",
+      "status": "user_google_maps_20261027",
+      "reference_points": [],
+      "coordinates": {
+        "lat": 36.071229007340385,
+        "lon": 138.0909217987009
+      },
+      "coordinate_source": "利用者がGoogle Mapsで特定して提供",
+      "coordinate_date": "2026-10-27",
+      "map_points": [
+        {
+          "lat": 36.071229007340385,
+          "lon": 138.0909217987009
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0063",
+      "stop_name": "富ヶ丘",
+      "status": "user_google_maps_20261027",
+      "reference_points": [],
+      "coordinates": {
+        "lat": 36.068863905843145,
+        "lon": 138.09691191049208
+      },
+      "coordinate_source": "利用者がGoogle Mapsで特定して提供",
+      "coordinate_date": "2026-10-27",
+      "map_points": [
+        {
+          "lat": 36.068863905843145,
+          "lon": 138.09691191049208
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0064",
+      "stop_name": "ハーモ美術館前",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "19-20",
+          "lat": 36.0618935000902,
+          "lon": 138.090968880909
+        },
+        {
+          "uid": "20-20",
+          "lat": 36.0617505340421,
+          "lon": 138.091007639597
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0650450625836,
+        "lon": 138.087863481444
+      },
+      "map_points": [
+        {
+          "lat": 36.0650450625836,
+          "lon": 138.087863481444
+        },
+        {
+          "lat": 36.0649021138387,
+          "lon": 138.087902242386
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0065",
+      "stop_name": "AQUA未来",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "94-20",
+          "lat": 36.0600213897483,
+          "lon": 138.083503598938
+        },
+        {
+          "uid": "95-20",
+          "lat": 36.0601933324199,
+          "lon": 138.083567315861
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0631729723241,
+        "lon": 138.080398920749
+      },
+      "map_points": [
+        {
+          "lat": 36.0631729723241,
+          "lon": 138.080398920749
+        },
+        {
+          "lat": 36.0633448970427,
+          "lon": 138.08046262539
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0066",
+      "stop_name": "赤砂崎公園ヘリポート前",
+      "status": "user_google_maps_20261027",
+      "reference_points": [],
+      "coordinates": {
+        "lat": 36.06044129413114,
+        "lon": 138.0792031121575
+      },
+      "coordinate_source": "利用者がGoogle Mapsで特定して提供",
+      "coordinate_date": "2026-10-27",
+      "map_points": [
+        {
+          "lat": 36.06044129413114,
+          "lon": 138.0792031121575
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0067",
+      "stop_name": "赤砂崎公園右岸広場",
+      "status": "user_google_maps_20261027",
+      "reference_points": [],
+      "coordinates": {
+        "lat": 36.060194144164065,
+        "lon": 138.07642255378929
+      },
+      "coordinate_source": "利用者がGoogle Mapsで特定して提供",
+      "coordinate_date": "2026-10-27",
+      "map_points": [
+        {
+          "lat": 36.060194144164065,
+          "lon": 138.07642255378929
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0068",
+      "stop_name": "東赤砂",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "92-20",
+          "lat": 36.0623510324891,
+          "lon": 138.083356189604
+        },
+        {
+          "uid": "93-20",
+          "lat": 36.0623529467213,
+          "lon": 138.083221053618
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0655023456426,
+        "lon": 138.080251432693
+      },
+      "map_points": [
+        {
+          "lat": 36.0655023456426,
+          "lon": 138.080251432693
+        },
+        {
+          "lat": 36.0655042561568,
+          "lon": 138.080116308358
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0069",
+      "stop_name": "砥川西",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "107-20",
+          "lat": 36.0664168462359,
+          "lon": 138.078625531027
+        },
+        {
+          "uid": "108-20",
+          "lat": 36.0668897103202,
+          "lon": 138.078805150717
+        }
+      ],
+      "coordinates": {
+        "lat": 36.069567573303,
+        "lon": 138.075521024893
+      },
+      "map_points": [
+        {
+          "lat": 36.069567573303,
+          "lon": 138.075521024893
+        },
+        {
+          "lat": 36.0700403881223,
+          "lon": 138.075700610417
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0070",
+      "stop_name": "あざみクリニック前",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "5-20",
+          "lat": 36.0681800276928,
+          "lon": 138.078713483552
+        },
+        {
+          "uid": "6-20",
+          "lat": 36.0681598342385,
+          "lon": 138.078866810417
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0713305559951,
+        "lon": 138.075608900511
+      },
+      "map_points": [
+        {
+          "lat": 36.0713305559951,
+          "lon": 138.075608900511
+        },
+        {
+          "lat": 36.0713103688143,
+          "lon": 138.075762214864
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0071",
+      "stop_name": "西大路北",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "7-20",
+          "lat": 36.070336206387,
+          "lon": 138.078977343798
+        },
+        {
+          "uid": "109-20",
+          "lat": 36.0703663130441,
+          "lon": 138.078862648357
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0735165959175,
+        "lon": 138.075757966466
+      },
+      "map_points": [
+        {
+          "lat": 36.0735165959175,
+          "lon": 138.075757966466
+        },
+        {
+          "lat": 36.073486495664,
+          "lon": 138.075872653137
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0072",
+      "stop_name": "社東町公民館",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "8-20",
+          "lat": 36.0738898732253,
+          "lon": 138.078655527869
+        },
+        {
+          "uid": "110-20",
+          "lat": 36.0739026749221,
+          "lon": 138.078609608303
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0770525479914,
+        "lon": 138.0755048094
+      },
+      "map_points": [
+        {
+          "lat": 36.0770525479914,
+          "lon": 138.0755048094
+        },
+        {
+          "lat": 36.0770397489439,
+          "lon": 138.075550725484
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0073",
+      "stop_name": "信濃医療福祉センター",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "11-20",
+          "lat": 36.0770992793174,
+          "lon": 138.076379579501
+        }
+      ],
+      "coordinates": {
+        "lat": 36.0802487300983,
+        "lon": 138.073274848506
+      },
+      "map_points": [
+        {
+          "lat": 36.0802487300983,
+          "lon": 138.073274848506
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0074",
+      "stop_name": "社郵便局前",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "12-20",
+          "lat": 36.0788704987504,
+          "lon": 138.077202766757
+        },
+        {
+          "uid": "111-20",
+          "lat": 36.0788601200606,
+          "lon": 138.077236536165
+        }
+      ],
+      "coordinates": {
+        "lat": 36.082019768866,
+        "lon": 138.074097894693
+      },
+      "map_points": [
+        {
+          "lat": 36.082019768866,
+          "lon": 138.074097894693
+        },
+        {
+          "lat": 36.0820093922346,
+          "lon": 138.074131661577
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0075",
+      "stop_name": "山花前",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "13-20",
+          "lat": 36.0795192920623,
+          "lon": 138.077842379014
+        },
+        {
+          "uid": "112-20",
+          "lat": 36.0795529504059,
+          "lon": 138.077835689746
+        }
+      ],
+      "coordinates": {
+        "lat": 36.082668504758,
+        "lon": 138.074737425929
+      },
+      "map_points": [
+        {
+          "lat": 36.082668504758,
+          "lon": 138.074737425929
+        },
+        {
+          "lat": 36.0827021590899,
+          "lon": 138.07473073592
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0076",
+      "stop_name": "諏訪大社春宮前",
+      "status": "user_google_maps_20261027",
+      "reference_points": [],
+      "coordinates": {
+        "lat": 36.081054450610544,
+        "lon": 138.08200530973983
+      },
+      "coordinate_source": "利用者がGoogle Mapsで特定して提供",
+      "coordinate_date": "2026-10-27",
+      "map_points": [
+        {
+          "lat": 36.081054450610544,
+          "lon": 138.08200530973983
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0077",
+      "stop_name": "諏訪共立病院前",
+      "status": "official_kml_existing_representative",
+      "reference_points": [
+        {
+          "uid": "34-20",
+          "lat": 36.0739040046479,
+          "lon": 138.084587634566
+        },
+        {
+          "uid": "35-20",
+          "lat": 36.0741900424674,
+          "lon": 138.084500876918
+        }
+      ],
+      "coordinates": {
+        "lat": 36.077054032422,
+        "lon": 138.081482316807
+      },
+      "map_points": [
+        {
+          "lat": 36.077054032422,
+          "lon": 138.081482316807
+        },
+        {
+          "lat": 36.0773400353774,
+          "lon": 138.081395555444
+        }
+      ],
+      "coordinate_source": "下諏訪町公式オープンデータKML",
+      "coordinate_date": "2025-02-06",
+      "position_note": "公式既存点・移設および方向別乗り場は未確認。時刻表は名称単位で共通。"
+    },
+    {
+      "stop_id": "AZAMI_S0078",
+      "stop_name": "中央通り",
+      "status": "user_google_maps_20261027",
+      "reference_points": [],
+      "coordinates": {
+        "lat": 36.07607980869716,
+        "lon": 138.08288762644509
+      },
+      "coordinate_source": "利用者がGoogle Mapsで特定して提供",
+      "coordinate_date": "2026-10-27",
+      "map_points": [
+        {
+          "lat": 36.07607980869716,
+          "lon": 138.08288762644509
+        }
+      ]
+    },
+    {
+      "stop_id": "AZAMI_S0079",
+      "stop_name": "新湯前",
+      "status": "user_google_maps_20261027",
+      "reference_points": [],
+      "coordinates": {
+        "lat": 36.07631439579883,
+        "lon": 138.08604163628337
+      },
+      "coordinate_source": "利用者がGoogle Mapsで特定して提供",
+      "coordinate_date": "2026-10-27",
+      "map_points": [
+        {
+          "lat": 36.07631439579883,
+          "lon": 138.08604163628337
+        }
+      ]
+    }
+  ]
+}

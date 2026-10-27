@@ -1,0 +1,12 @@
+{
+  "fetchedDate": "2026-10-27",
+  "officialKmlUrl": "https://www2.wagmap.jp/shimosuwa/shimosuwa/opendatafile/map/KML/opendata_20.kml",
+  "officialKmlSha256": "17268cdbf330299deb65636fc3959810383f8824c6e6d4c88ec88bfacc661d5c",
+  "kmlDocumentName": "2025/02/06 16:04:00",
+  "rawPoints": 128,
+  "kmlPoints": 128,
+  "matchedByName": 128,
+  "minDisplacementMeters": 350.7,
+  "maxDisplacementMeters": 448.2,
+  "warning": "同名候補中の最短距離で比較した診断用集計。方向別乗り場の対応や正しい座標系は未確定。数値差だけから全点の変換・移設を判断しない。"
+}

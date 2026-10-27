@@ -235,7 +235,7 @@ a{
 
 <p>
 停留所・路線・時間を指定すると、次に来るバスを一覧で表示します。
-GTFSデータを利用しており、実際の運行情報に基づいた検索が可能です。
+GTFSデータを利用しており、2026年10月20日改正のあざみ号4路線・全30便を収録しています。
 </p>
 
 <p>
@@ -271,12 +271,7 @@ JR下諏訪駅から利用できる、あざみ号・スワンバスの時刻確
 <div>
 <label for="serviceSelect">運行日</label>
 
-<select id="serviceSelect">
-<option value="ALL">すべて表示</option>
-<option value="WKD">平日扱い</option>
-<option value="SAT">土曜扱い</option>
-<option value="SUN">日曜・祝日扱い</option>
-</select>
+<input type="date" id="serviceSelect" min="2026-10-20" max="2027-03-31">
 
 </div>
 </div>
@@ -287,10 +282,10 @@ JR下諏訪駅から利用できる、あざみ号・スワンバスの時刻確
 
 <p class="note">
 実際の時刻表PDF：
-<a href="https://www.town.shimosuwa.lg.jp/www/contents/1001000000461/simple/a.pdf"
+<a href="data/azami-202610-source.pdf"
 target="_blank"
 rel="noopener">
-下諏訪町公式PDFを開く
+提供された改正PDFを開く
 </a>
 </p>
 
@@ -342,6 +337,7 @@ GTFSデータを読み込んでいます。
 
 </main>
 
+<script src="calendar.js"></script>
 <script>
 const GTFS_ZIP = "./ccby4_shimosuwa_suwa_all_routes_gtfs.zip";
 
@@ -349,6 +345,7 @@ let stops = [];
 let routes = [];
 let trips = [];
 let stopTimes = [];
+let calendars = [], exceptions = [];
 
 let stopMap = {};
 let routeMap = {};
@@ -406,9 +403,7 @@ function toMinutes(t){
 }
 
 function serviceMatch(serviceId){
-  const v = document.getElementById("serviceSelect").value;
-  if(v === "ALL") return true;
-  return String(serviceId || "").includes(v);
+ return BusCalendar.active({service_id:serviceId},document.getElementById('serviceSelect').value,calendars,exceptions);
 }
 
 async function loadGTFS(){
@@ -434,6 +429,8 @@ async function loadGTFS(){
     routes = await readFile("routes.txt");
     trips = await readFile("trips.txt");
     stopTimes = await readFile("stop_times.txt");
+    calendars = await readFile("calendar.txt");
+    exceptions = await readFile("calendar_dates.txt");
 
     stopMap = Object.fromEntries(stops.map(s => [s.stop_id, s]));
     routeMap = Object.fromEntries(routes.map(r => [r.route_id, r]));
@@ -531,24 +528,10 @@ function searchTrips(){
     if(trip.route_id !== routeId) return;
     if(!serviceMatch(trip.service_id)) return;
 
-    const st = stopTimes.find(
-      x => x.trip_id === trip.trip_id && x.stop_id === stopId
-    );
-
-    if(!st) return;
-
-    const depMin = toMinutes(st.departure_time);
-
-    if(depMin >= baseMin){
-
-      matched.push({
-        trip_id: trip.trip_id,
-        route_id: routeId,
-        service_id: trip.service_id,
-        departure_time: st.departure_time,
-        direction_id: trip.direction_id || "",
-        stop_sequence: st.stop_sequence
-      });
+    for(const st of stopTimes.filter(x => x.trip_id === trip.trip_id && x.stop_id === stopId && x.pickup_type !== '1')){
+      if(toMinutes(st.departure_time) >= baseMin){
+        matched.push({trip_id:trip.trip_id,route_id:routeId,service_id:trip.service_id,departure_time:st.departure_time,stop_sequence:st.stop_sequence});
+      }
     }
   });
 
@@ -579,7 +562,7 @@ function searchTrips(){
       <div>
         <div class="route-name">${routeLabel(r)}</div>
         <div class="small">
-          trip_id: ${m.trip_id} / service: ${m.service_id}
+          ${tripMap[m.trip_id].trip_headsign} / ${BusCalendar.label(m.service_id)}
         </div>
       </div>
 
@@ -663,7 +646,7 @@ button{
 <h1>${routeLabel(route)}</h1>
 
 <div class="meta">
-trip_id: ${tripId} / service: ${trip.service_id}
+${trip.trip_headsign} / ${BusCalendar.label(trip.service_id)}
 </div>
 
 <table>
@@ -701,6 +684,7 @@ ${rows.map(st => `
   w.document.close();
 }
 
+document.getElementById('serviceSelect').value=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo'}).format(new Date());
 loadGTFS();
 </script>
 
